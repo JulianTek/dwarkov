@@ -125,6 +125,31 @@ namespace WorldGeneration
         {
             tileMapVisualizer.Clear();
         }
+
+        public void SetIterations(int iterations)
+        {
+            this.iterations = iterations;
+        }
+
+        public void SetRoomLength(int roomLength)
+        {
+            this.roomLength = roomLength;
+        }
+
+        public void SetCorridorLenght(int corridorLength)
+        {
+            this.corridorLength = corridorLength;
+        }
+
+        public void SetCorridorAmount(int corridorAmount)
+        {
+            corridorCount = corridorAmount;
+        }
+
+        public void SetRoomFirstGeneration(bool isRoomFirst)
+        {
+            roomFirst = isRoomFirst;
+        }
     }
 }
 
