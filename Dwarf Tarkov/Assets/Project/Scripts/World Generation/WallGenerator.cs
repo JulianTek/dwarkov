@@ -16,7 +16,7 @@ namespace WorldGeneration
             }
         }
 
-        private static HashSet<Vector2Int> FindWallPositions(IEnumerable<Vector2Int> floorPositions, List<Vector2Int> directions)
+        public static HashSet<Vector2Int> FindWallPositions(IEnumerable<Vector2Int> floorPositions, List<Vector2Int> directions)
         {
             HashSet<Vector2Int> wallPositions = new HashSet<Vector2Int>();
             HashSet<Vector2Int> tempFloorPositions = floorPositions as HashSet<Vector2Int>;

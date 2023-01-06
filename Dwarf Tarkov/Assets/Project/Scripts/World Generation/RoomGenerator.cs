@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Random = UnityEngine.Random;
 using System;
+using EventSystem;
 
 namespace WorldGeneration
 {
@@ -69,6 +70,7 @@ namespace WorldGeneration
 
             tileMapVisualizer.PaintFloorTiles(floorPositions);
             WallGenerator.PaintWallTiles(tileMapVisualizer, floorPositions);
+            FindPlayerLocation(startPosition, floorPositions, WallGenerator.FindWallPositions(floorPositions, Direction.Directions));
         }
 
         private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> roomPositions)
@@ -121,6 +123,18 @@ namespace WorldGeneration
             }
         }
 
+        private void FindPlayerLocation(Vector2Int position, HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> wallPositions)
+        {
+            if (!CheckIfPlayerPositionValid(position, floorPositions, wallPositions))
+            {
+                FindPlayerLocation(GenerateRandomPosition(), floorPositions, wallPositions);
+            }
+            else
+            {
+                EventChannels.WorldGenerationEvents.OnMovePlayer?.Invoke(position);
+            }
+        }
+
         public void Clear()
         {
             tileMapVisualizer.Clear();
@@ -149,6 +163,16 @@ namespace WorldGeneration
         public void SetRoomFirstGeneration(bool isRoomFirst)
         {
             roomFirst = isRoomFirst;
+        }
+
+        public bool CheckIfPlayerPositionValid(Vector2Int playerPosition, HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> wallPositions)
+        {
+            return floorPositions.Contains(playerPosition) && !wallPositions.Contains(playerPosition);
+        }
+
+        public Vector2Int GenerateRandomPosition()
+        {
+            return new Vector2Int(Mathf.RoundToInt(Random.Range(-30f, 30f)), Mathf.RoundToInt(Random.Range(-30f, 30f)));
         }
     }
 }

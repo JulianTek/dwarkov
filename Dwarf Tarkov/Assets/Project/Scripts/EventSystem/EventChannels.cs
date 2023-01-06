@@ -6,7 +6,8 @@ namespace EventSystem
 {
     public static class EventChannels
     {
-        public static PlayerInputEvents PlayerInputEvents   = new PlayerInputEvents();
+        public static PlayerInputEvents PlayerInputEvents = new PlayerInputEvents();
+        public static WorldGenerationEvents WorldGenerationEvents = new WorldGenerationEvents();
     }
 }
 
