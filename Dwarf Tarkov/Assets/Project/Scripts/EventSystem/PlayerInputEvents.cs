@@ -19,6 +19,9 @@ namespace EventSystem
 
         public ItemEvent OnItemAddedToInventory;
         public ItemEvent OnItemRemovedFromInventory;
+
+        public ButtonEvent OnInventoryOpened;
+        public ButtonEvent OnInventoryClosed;
     }
 }
 

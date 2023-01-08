@@ -62,6 +62,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""c65f7937-f6e0-423f-a5ed-91692ccb40d8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,45 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5d8431c-05ec-4f88-a2ce-60faefe9fcc3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""HUD"",
+            ""id"": ""97488183-8e03-45e1-9395-1c74ba9fa66a"",
+            ""actions"": [
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""18d30156-da22-41e9-baf7-039378693d26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8d0f94ff-fb08-4c81-a495-3b1379068211"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +212,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Mine = m_Player.FindAction("Mine", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_OpenInventory = m_Player.FindAction("OpenInventory", throwIfNotFound: true);
+        // HUD
+        m_HUD = asset.FindActionMap("HUD", throwIfNotFound: true);
+        m_HUD_Close = m_HUD.FindAction("Close", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +279,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Mine;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_OpenInventory;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -235,6 +288,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Mine => m_Wrapper.m_Player_Mine;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @OpenInventory => m_Wrapper.m_Player_OpenInventory;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +310,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @OpenInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenInventory;
+                @OpenInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenInventory;
+                @OpenInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenInventory;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,15 +329,56 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @OpenInventory.started += instance.OnOpenInventory;
+                @OpenInventory.performed += instance.OnOpenInventory;
+                @OpenInventory.canceled += instance.OnOpenInventory;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // HUD
+    private readonly InputActionMap m_HUD;
+    private IHUDActions m_HUDActionsCallbackInterface;
+    private readonly InputAction m_HUD_Close;
+    public struct HUDActions
+    {
+        private @PlayerControls m_Wrapper;
+        public HUDActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Close => m_Wrapper.m_HUD_Close;
+        public InputActionMap Get() { return m_Wrapper.m_HUD; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(HUDActions set) { return set.Get(); }
+        public void SetCallbacks(IHUDActions instance)
+        {
+            if (m_Wrapper.m_HUDActionsCallbackInterface != null)
+            {
+                @Close.started -= m_Wrapper.m_HUDActionsCallbackInterface.OnClose;
+                @Close.performed -= m_Wrapper.m_HUDActionsCallbackInterface.OnClose;
+                @Close.canceled -= m_Wrapper.m_HUDActionsCallbackInterface.OnClose;
+            }
+            m_Wrapper.m_HUDActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Close.started += instance.OnClose;
+                @Close.performed += instance.OnClose;
+                @Close.canceled += instance.OnClose;
+            }
+        }
+    }
+    public HUDActions @HUD => new HUDActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnMine(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnOpenInventory(InputAction.CallbackContext context);
+    }
+    public interface IHUDActions
+    {
+        void OnClose(InputAction.CallbackContext context);
     }
 }
