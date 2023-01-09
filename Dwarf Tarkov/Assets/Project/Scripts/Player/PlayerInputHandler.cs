@@ -15,6 +15,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Enable();
         playerControls.Player.Mine.performed += Mine;
         playerControls.Player.Shoot.performed += Shoot;
+        playerControls.Player.Reload.performed += Reload;
         playerControls.Player.Sprint.started += Sprint;
         playerControls.Player.Sprint.canceled += StopSprint;
     }
@@ -22,6 +23,8 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         Vector2 movementVector = playerControls.Player.Movement.ReadValue<Vector2>();
+        Vector2 aimVector = playerControls.Player.Aim.ReadValue<Vector2>();
+        EventChannels.PlayerInputEvents.OnPlayerAim?.Invoke(aimVector);
         EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(movementVector);
     }
 
@@ -29,6 +32,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         playerControls.Player.Mine.performed -= Mine;
         playerControls.Player.Shoot.performed -= Shoot;
+        playerControls.Player.Reload.performed -= Reload;
         playerControls.Player.Sprint.started -= Sprint;
         playerControls.Player.Sprint.canceled -= StopSprint;
     }
@@ -56,5 +60,10 @@ public class PlayerInputHandler : MonoBehaviour
     private void ToggleSprint(bool isSprinting)
     {
         EventChannels.PlayerInputEvents.OnPlayerSprint?.Invoke(isSprinting);
+    }
+
+    private void Reload(InputAction.CallbackContext ctx)
+    {
+        EventChannels.PlayerInputEvents.OnPlayerReload?.Invoke();
     }
 }
