@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
   m_Name: MKM-14
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Damage: 0
-  IsAutoFire: 0
-  RateOfFire: 0
-  MagCapacity: 0
-  ReloadTime: 0
-  BaseSpreadAngle: 0
-  AmountOfBullets: 0
+  Damage: 4
+  IsAutoFire: 1
+  RateOfFire: 3
+  MagCapacity: 30
+  ReloadTime: 3
+  Sprite: {fileID: 21300000, guid: 6cafc837ec39b024baafef5f63de162f, type: 3}
+  WeaponEmptySprite: {fileID: 21300000, guid: 1bd91a3f57099b1439975f6acfefa549, type: 3}
+  MagazineSprite: {fileID: 21300000, guid: 742e1d2920700c5419dfa731a2691b1a, type: 3}
+  CaseSprite: {fileID: 0}
+  BaseSpreadAngle: 5
+  AmountOfBullets: 1
