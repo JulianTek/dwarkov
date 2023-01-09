@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 963977473}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -763,6 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d1edb55b05d704598e40327ee5e5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InventoryCapacity: 15
 --- !u!1 &1011547394
 GameObject:
   m_ObjectHideFlags: 0
@@ -9000,6 +9001,8 @@ GameObject:
   - component: {fileID: 1615637995}
   - component: {fileID: 1615637997}
   - component: {fileID: 1615637996}
+  - component: {fileID: 1615637998}
+  - component: {fileID: 1615637999}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -9065,6 +9068,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615637994}
   m_CullTransparentMesh: 1
+--- !u!114 &1615637998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615637994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 16
+    m_Right: 0
+    m_Top: 20
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 40, y: 20}
+  m_Constraint: 1
+  m_ConstraintCount: 5
+--- !u!114 &1615637999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615637994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b50d823b2d15540bf30d26fa1ee337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySlot: {fileID: 2466165504537894155, guid: 3873b4667503c5a47a10a05821c4eaba,
+    type: 3}
 --- !u!1 &1672100960
 GameObject:
   m_ObjectHideFlags: 0

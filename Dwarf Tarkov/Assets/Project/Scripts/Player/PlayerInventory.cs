@@ -5,11 +5,13 @@ using EventSystem;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField]
+    private int InventoryCapacity;
     private List<Item> items;
     // Start is called before the first frame update
     void Start()
     {
-        items = new List<Item>();
+        items = new List<Item>(InventoryCapacity);
         EventChannels.ItemEvents.OnAddItemToInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromInventory += RemoveItem;
     }
@@ -23,7 +25,7 @@ public class PlayerInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void AddItem(ItemData item, int amount)
@@ -55,7 +57,8 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-            items.Add(new Item(item));
+            if (items.Count < InventoryCapacity)
+                items.Add(new Item(item));
         }
     }
 
@@ -81,4 +84,13 @@ public class PlayerInventory : MonoBehaviour
             }
         }
     }
-} 
+    public int GetCapacity()
+    {
+        return InventoryCapacity;
+    }
+
+    public List<Item> GetItems()
+    {
+        return items;
+    }
+}
