@@ -34,4 +34,6 @@ public class WeaponData : ScriptableObject
     public float BaseSpreadAngle;
     [BoxGroup("Split2/Spread", LabelText = "Spread and other stats")]
     public int AmountOfBullets;
+    [BoxGroup("Split2/Spread", LabelText = "Spread and other stats")]
+    public float BulletSpeed;
 }

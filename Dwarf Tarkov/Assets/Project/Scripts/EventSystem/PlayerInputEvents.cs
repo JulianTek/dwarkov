@@ -12,7 +12,8 @@ namespace EventSystem
         public delegate void ItemEvent(Item item);
 
         public MoveEvent OnPlayerAim;
-        public ButtonEvent OnPlayerShoot;
+        public ButtonEvent OnPlayerShootStarted;
+        public ButtonEvent OnPlayerShootFinished;
         public ButtonEvent OnPlayerReload;
 
         public ButtonEvent OnPlayerMine;
