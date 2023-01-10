@@ -9,6 +9,8 @@ public class WeaponHandler : MonoBehaviour
     private WeaponData data;
     [SerializeField]
     private GameObject bulletPrefab;
+    [SerializeField]
+    private GameObject magazinePrefab;
 
     private int currentMagCount;
     private Vector2 pointer;
@@ -109,6 +111,9 @@ public class WeaponHandler : MonoBehaviour
     {
         if (canReload)
         {
+            GameObject mag = Instantiate(magazinePrefab, transform.position, transform.rotation);
+            mag.GetComponent<MagazineHandler>().SetData(data);
+            mag.GetComponent<Rigidbody2D>().AddForce(transform.right * .2f, ForceMode2D.Impulse);
             canReload = false;
             canFire = false;
             isAiming = false;
