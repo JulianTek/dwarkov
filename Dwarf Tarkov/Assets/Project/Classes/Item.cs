@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class Item
 {
+    public ItemData data;
+    public int amount;
+
     public Item(ItemData data)
     {
-        name = data.name;
-        sellValue = data.SellPrice;
-        type = data.Type;
+        this.data = data;
     }
-    private string name;
-    private int sellValue;
-    private ItemType type;
-
-    public ItemType Type { get => type;  }
-    public int SellValue { get => sellValue; }
-    public string Name { get => name; }
 }

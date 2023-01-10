@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56e4cb906b4852a489b3c43465ce4239, type: 3}
-  m_Name: Item
+  m_Name: Rock
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Name: 
-  SellPrice: 0
-  Type: 1
+  Sprite: {fileID: 21300000, guid: 642037c615f02474a90e58c4888b3eca, type: 3}
+  Name: Rock
+  SellPrice: 1
+  Type: 0
+  IsStackable: 1
+  MaxStackAmount: 10
+  Description: A simple rock; I've heard there's three types, but dwarves don't care
+    about that

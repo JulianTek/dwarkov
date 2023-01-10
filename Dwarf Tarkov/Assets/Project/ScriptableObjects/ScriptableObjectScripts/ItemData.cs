@@ -9,7 +9,7 @@ public class ItemData : ScriptableObject
     [HideLabel]
     [PreviewField(50)]
     public Sprite Sprite;
-    [HorizontalGroup("Split")]
+    [HorizontalGroup("Split", LabelWidth = 60, Title = "Basic item info")]
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public string Name;
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
@@ -17,4 +17,10 @@ public class ItemData : ScriptableObject
     [BoxGroup("Split/TypeInfo")]
     [EnumPaging]
     public ItemType Type;
+    [HorizontalGroup("StackSplit", LabelWidth = 80, Title = "Stacking Info", MarginRight = 20)]
+    public bool IsStackable;
+    [HorizontalGroup("StackSplit", LabelWidth = 85, Title = "Stacking Info")]
+    public int MaxStackAmount;
+    [TextArea]
+    public string Description;
 }
