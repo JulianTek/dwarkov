@@ -11,7 +11,11 @@ namespace EventSystem
         public delegate void SprintEvent(bool isSprinting);
         public delegate void ItemEvent(Item item);
 
-        public ButtonEvent OnPlayerShoot;
+        public MoveEvent OnPlayerAim;
+        public ButtonEvent OnPlayerShootStarted;
+        public ButtonEvent OnPlayerShootFinished;
+        public ButtonEvent OnPlayerReload;
+
         public ButtonEvent OnPlayerMine;
         public MoveEvent OnPlayerMove;
 

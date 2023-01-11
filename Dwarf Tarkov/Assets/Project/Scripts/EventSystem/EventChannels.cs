@@ -8,6 +8,7 @@ namespace EventSystem
     {
         public static PlayerInputEvents PlayerInputEvents = new PlayerInputEvents();
         public static WorldGenerationEvents WorldGenerationEvents = new WorldGenerationEvents();
+        public static WeaponEvents WeaponEvents = new WeaponEvents();
         public static ItemEvents ItemEvents = new ItemEvents();
     }
 }
