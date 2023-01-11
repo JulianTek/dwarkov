@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
   m_Name: MKM-14
   m_EditorClassIdentifier: 
-  Damage: 4
   IsAutoFire: 1
   RateOfFire: 0.2
+  AmmoType: {fileID: 11400000, guid: 88371131e5e13794d9f95aed111d4b3d, type: 2}
   MagCapacity: 30
   ReloadTime: 3
   Sprite: {fileID: 21300000, guid: 6cafc837ec39b024baafef5f63de162f, type: 3}
@@ -23,4 +23,3 @@ MonoBehaviour:
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 10
   AmountOfBullets: 1
-  BulletSpeed: 0

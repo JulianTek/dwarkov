@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe6cc394c2c9f84cbd79b6c04e0b5e3, type: 3}
   m_Name: 6by11
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: e5971fa9f305c394d9f7e62636b62b67, type: 3}
   Name: 6.11x54mm
   SellPrice: 2
   Type: 0
