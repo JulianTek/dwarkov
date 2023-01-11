@@ -27,7 +27,8 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnDestroy()
     {
         playerControls.Player.Mine.performed -= Mine;
-        playerControls.Player.Shoot.performed -= Shoot;
+        playerControls.Player.Shoot.started -= ShootStarted;
+        playerControls.Player.Shoot.canceled -= ShootEnded;
         playerControls.Player.Sprint.started -= Sprint;
         playerControls.Player.Sprint.canceled -= StopSprint;
         playerControls.Player.OpenInventory.performed -= OpenInventory;

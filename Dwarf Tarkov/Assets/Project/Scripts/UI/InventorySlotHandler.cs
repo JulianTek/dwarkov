@@ -26,7 +26,6 @@ public class InventorySlotHandler : MonoBehaviour
     private void SetSprite(Sprite sprite)
     {
         image.sprite = sprite;
-        image.enabled = true;
     }
 
     private void SetIsTaken(bool isNowTaken)
