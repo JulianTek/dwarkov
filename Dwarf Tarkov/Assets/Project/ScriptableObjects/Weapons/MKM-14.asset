@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 4
   IsAutoFire: 1
-  RateOfFire: 3
+  RateOfFire: 0.2
   MagCapacity: 30
   ReloadTime: 3
   Sprite: {fileID: 21300000, guid: 6cafc837ec39b024baafef5f63de162f, type: 3}
   WeaponEmptySprite: {fileID: 21300000, guid: 1bd91a3f57099b1439975f6acfefa549, type: 3}
   MagazineSprite: {fileID: 21300000, guid: 742e1d2920700c5419dfa731a2691b1a, type: 3}
   CaseSprite: {fileID: 0}
-  BaseSpreadAngle: 5
+  BaseSpreadAngle: 10
   AmountOfBullets: 1
+  BulletSpeed: 0

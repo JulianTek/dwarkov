@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using TMPro;
 
 public class WeaponHandler : MonoBehaviour
 {
@@ -11,8 +12,13 @@ public class WeaponHandler : MonoBehaviour
     private GameObject bulletPrefab;
     [SerializeField]
     private GameObject magazinePrefab;
+    [SerializeField]
+    private TextMeshProUGUI magText;
 
+
+    private int maxMagCount;
     private int currentMagCount;
+
     private Vector2 pointer;
     private float timeSinceLastShot = 0f;
 
@@ -27,6 +33,9 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
+
+        maxMagCount = data.MagCapacity;
+        currentMagCount = maxMagCount;
     }
 
     void OnDestroy()
@@ -44,6 +53,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
+        magText.text = $"{currentMagCount}/{maxMagCount}";
         if (isAiming)
         {
             Vector2 direction = (pointer - (Vector2)transform.position).normalized;
@@ -63,7 +73,14 @@ public class WeaponHandler : MonoBehaviour
 
         if (isFiring)
         {
-            Fire();
+            if (currentMagCount > 0)
+            {
+                Fire();
+            }
+            else
+            {
+                // play sound
+            }
         }
         else
         {
@@ -84,12 +101,12 @@ public class WeaponHandler : MonoBehaviour
 
             if (bulletPrefab != null)
             {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                GameObject bullet = Instantiate(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
                 float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
                 bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * bullet.GetComponent<BulletHandler>().GetBulletSpeed(), ForceMode2D.Impulse);
             }
             timeSinceLastShot = 0f;
-
+            currentMagCount--;
             Debug.DrawRay(transform.position, transform.right * 50f, Color.red, 0.1f);
         }
     }
@@ -134,8 +151,10 @@ public class WeaponHandler : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
         }
+        currentMagCount = maxMagCount;
         isAiming = true;
         canFire = true;
+        canReload = true;
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
     }
 
