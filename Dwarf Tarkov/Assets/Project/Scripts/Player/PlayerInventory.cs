@@ -93,4 +93,17 @@ public class PlayerInventory : MonoBehaviour
     {
         return items;
     }
+
+
+    public int GetAmountOfItem(ItemData itemToFind)
+    {
+        foreach (Item item in items)
+        {
+            if (item.data == itemToFind)
+            {
+                return item.amount;
+            }
+        }
+        return 0;
+    }
 }

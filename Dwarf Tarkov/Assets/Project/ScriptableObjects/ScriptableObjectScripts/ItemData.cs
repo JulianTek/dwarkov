@@ -9,12 +9,12 @@ public class ItemData : ScriptableObject
     [HideLabel]
     [PreviewField(50)]
     public Sprite Sprite;
-    [HorizontalGroup("Split", LabelWidth = 60, Title = "Basic item info")]
+    [HorizontalGroup("Split", LabelWidth = 80, Title = "Basic item info")]
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public string Name;
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public int SellPrice;
-    [BoxGroup("Split/TypeInfo")]
+    [BoxGroup("Split/TypeInfo", LabelText = "Type info")]
     [EnumPaging]
     public ItemType Type;
     [HorizontalGroup("StackSplit", LabelWidth = 80, Title = "Stacking Info", MarginRight = 20)]

@@ -7,8 +7,6 @@ public class BulletHandler : MonoBehaviour
 {
     [SerializeField]
     private float maxDistance;
-    [SerializeField]
-    private float bulletSpeed;
 
     private Vector3 startPos;
     private Vector3 currentPos;
@@ -26,10 +24,5 @@ public class BulletHandler : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    internal float GetBulletSpeed()
-    {
-        return bulletSpeed;
     }
 }
