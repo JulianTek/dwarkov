@@ -44,7 +44,7 @@ public class PlayerInventory : MonoBehaviour
                         }
                         else
                         {
-                            items.Add(new Item(item));
+                            items.Add(new Item(item, amount));
                         }
                         return;
                     }
@@ -52,13 +52,13 @@ public class PlayerInventory : MonoBehaviour
             }
             else
             {
-                items.Add(new Item(item));
+                items.Add(new Item(item, amount));
             }
         }
         else
         {
             if (items.Count < InventoryCapacity)
-                items.Add(new Item(item));
+                items.Add(new Item(item, amount));
         }
     }
 

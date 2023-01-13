@@ -35,7 +35,7 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
 
         maxMagCount = data.MagCapacity;
-        currentMagCount = maxMagCount;
+        currentMagCount = 0;
     }
 
     void OnDestroy()
@@ -144,11 +144,13 @@ public class WeaponHandler : MonoBehaviour
         {
             LaunchMag();
             currentMagCount = maxMagCount;
+            EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, maxMagCount);
         }
         else if (ammoInInventory > 0)
         {
             LaunchMag();
             currentMagCount = ammoInInventory;
+            EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, ammoInInventory);
         }
         else
         {
