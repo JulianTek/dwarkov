@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventorySlotHandler : MonoBehaviour
 {
     private bool isTaken = false;
     [SerializeField]
     private Image image;
+    [SerializeField]
+    private TextMeshProUGUI stackText;
 
     private void Start()
     {
@@ -20,6 +23,11 @@ public class InventorySlotHandler : MonoBehaviour
             SetSprite(item.data.Sprite);
             SetIsTaken(true);
             image.enabled = true;
+            if (item.data.IsStackable)
+            {
+                stackText.text = item.amount.ToString();
+                stackText.enabled = true;
+            }
         }
     }
     private void SetSprite(Sprite sprite)
@@ -43,5 +51,7 @@ public class InventorySlotHandler : MonoBehaviour
         SetSprite(null);
         SetIsTaken(false);
         image.enabled = false;
+        stackText.text = null;
+        stackText.enabled = false;
     }
 }
