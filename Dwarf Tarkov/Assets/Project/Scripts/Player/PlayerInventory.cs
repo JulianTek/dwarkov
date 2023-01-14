@@ -49,6 +49,7 @@ public class PlayerInventory : MonoBehaviour
                         return;
                     }
                 }
+                items.Add(new Item(item, amount));
             }
             else
             {

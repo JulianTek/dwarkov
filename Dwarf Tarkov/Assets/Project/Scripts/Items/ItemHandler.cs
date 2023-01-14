@@ -20,8 +20,11 @@ public class ItemHandler : MonoBehaviour
     }
     void AddItemToPlayerInventory(ItemData item)
     {
-        EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item, amountToAdd);
-        Destroy(gameObject);
+        if (item == itemData)
+        {
+            EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item, amountToAdd);
+            Destroy(gameObject);
+        }
     }
 
     public ItemData GetItemData()

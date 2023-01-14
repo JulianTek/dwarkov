@@ -26,15 +26,18 @@ public class InventoryGridHandler : MonoBehaviour
         List<Item> items = inventory.GetItems();
         if (items.Count > 0)
         {
-            foreach (Item item in items)
+            for (int i = 0; i < inventorySlots.Count; i++)
             {
-                foreach (GameObject slot in inventorySlots)
+                GameObject slot = inventorySlots[i];
+                if (i < items.Count)
                 {
-                    if (!slot.GetComponent<InventorySlotHandler>().GetIsTaken())
-                    {
-                        slot.GetComponent<InventorySlotHandler>().SetSlot(item);
-                        return;
-                    }
+                    Item item = items[i];
+                    slot.GetComponent<InventorySlotHandler>().SetSlot(item);
+                }
+                else
+                {
+                    // Clear the slot if there is no corresponding item
+                    slot.GetComponent<InventorySlotHandler>().ClearSlot();
                 }
             }
         }

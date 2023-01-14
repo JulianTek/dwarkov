@@ -11,7 +11,6 @@ public class InventorySlotHandler : MonoBehaviour
 
     private void Start()
     {
-        image.enabled = false;
     }
 
     public void SetSlot(Item item)
@@ -26,6 +25,7 @@ public class InventorySlotHandler : MonoBehaviour
     private void SetSprite(Sprite sprite)
     {
         image.sprite = sprite;
+
     }
 
     private void SetIsTaken(bool isNowTaken)
@@ -36,5 +36,12 @@ public class InventorySlotHandler : MonoBehaviour
     public bool GetIsTaken()
     {
         return isTaken;
+    }
+
+    public void ClearSlot()
+    {
+        SetSprite(null);
+        SetIsTaken(false);
+        image.enabled = false;
     }
 }

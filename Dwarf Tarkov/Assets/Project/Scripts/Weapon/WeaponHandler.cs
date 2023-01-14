@@ -140,33 +140,32 @@ public class WeaponHandler : MonoBehaviour
     {
         Debug.Log("Reloading");
         int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(data.AmmoType);
-        if (ammoInInventory >= maxMagCount)
+        if (ammoInInventory != 0)
         {
             LaunchMag();
-            currentMagCount = maxMagCount;
-            EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, maxMagCount);
+            if (currentMagCount > 0)
+            {
+                yield return new WaitForSecondsRealtime(data.ReloadTime);
+            }
+            else
+            {
+                yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
+            }
+            if (ammoInInventory >= maxMagCount)
+            {
+                currentMagCount = maxMagCount;
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, maxMagCount);
+            }
+            else if (ammoInInventory > 0)
+            {
+                currentMagCount = ammoInInventory;
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, ammoInInventory);
+            }
+            isAiming = true;
+            canFire = true;
+            canReload = true;
         }
-        else if (ammoInInventory > 0)
-        {
-            LaunchMag();
-            currentMagCount = ammoInInventory;
-            EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, ammoInInventory);
-        }
-        else
-        {
-            yield break;
-        }
-        if (currentMagCount > 0)
-        {
-            yield return new WaitForSecondsRealtime(data.ReloadTime);
-        }
-        else
-        {
-            yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
-        }
-        isAiming = true;
-        canFire = true;
-        canReload = true;
+
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
     }
 
