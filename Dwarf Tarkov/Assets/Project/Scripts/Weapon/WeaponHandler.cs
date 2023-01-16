@@ -35,7 +35,7 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
 
         maxMagCount = data.MagCapacity;
-        currentMagCount = maxMagCount;
+        currentMagCount = 0;
     }
 
     void OnDestroy()
@@ -103,7 +103,7 @@ public class WeaponHandler : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
                 float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
-                bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * bullet.GetComponent<BulletHandler>().GetBulletSpeed(), ForceMode2D.Impulse);
+                bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * data.AmmoType.BulletSpeed, ForceMode2D.Impulse);
             }
             timeSinceLastShot = 0f;
             currentMagCount--;
@@ -128,13 +128,9 @@ public class WeaponHandler : MonoBehaviour
     {
         if (canReload)
         {
-            GameObject mag = Instantiate(magazinePrefab, transform.position, transform.rotation);
-            mag.GetComponent<MagazineHandler>().SetData(data);
-            mag.GetComponent<Rigidbody2D>().AddForce(transform.right * .2f, ForceMode2D.Impulse);
             canReload = false;
             canFire = false;
             isAiming = false;
-            EventChannels.WeaponEvents.OnWeaponReload?.Invoke();
             Debug.Log("event hit");
             StartCoroutine(ReloadCoolDown());
         }
@@ -143,19 +139,41 @@ public class WeaponHandler : MonoBehaviour
     private IEnumerator ReloadCoolDown()
     {
         Debug.Log("Reloading");
-        if (currentMagCount > 0)
+        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(data.AmmoType);
+        if (ammoInInventory != 0)
         {
-            yield return new WaitForSecondsRealtime(data.ReloadTime);
+            LaunchMag();
+            if (currentMagCount > 0)
+            {
+                yield return new WaitForSecondsRealtime(data.ReloadTime);
+            }
+            else
+            {
+                yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
+            }
+            if (ammoInInventory >= maxMagCount)
+            {
+                currentMagCount = maxMagCount;
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, maxMagCount);
+            }
+            else if (ammoInInventory > 0)
+            {
+                currentMagCount = ammoInInventory;
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, ammoInInventory);
+            }
+            isAiming = true;
+            canFire = true;
+            canReload = true;
         }
-        else
-        {
-            yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
-        }
-        currentMagCount = maxMagCount;
-        isAiming = true;
-        canFire = true;
-        canReload = true;
+
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
+    }
+
+    void LaunchMag()
+    {
+        GameObject mag = Instantiate(magazinePrefab, transform.position, transform.rotation);
+        mag.GetComponent<MagazineHandler>().SetData(data);
+        mag.GetComponent<Rigidbody2D>().AddForce(transform.right * .2f, ForceMode2D.Impulse);
     }
 
     public WeaponData GetWeaponData()

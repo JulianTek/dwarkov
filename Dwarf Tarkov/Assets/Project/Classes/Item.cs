@@ -7,8 +7,9 @@ public class Item
     public ItemData data;
     public int amount;
 
-    public Item(ItemData data)
+    public Item(ItemData data, int amount)
     {
         this.data = data;
+        this.amount = amount;
     }
 }

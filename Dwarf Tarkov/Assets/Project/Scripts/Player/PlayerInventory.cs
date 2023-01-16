@@ -44,21 +44,22 @@ public class PlayerInventory : MonoBehaviour
                         }
                         else
                         {
-                            items.Add(new Item(item));
+                            items.Add(new Item(item, amount));
                         }
                         return;
                     }
                 }
+                items.Add(new Item(item, amount));
             }
             else
             {
-                items.Add(new Item(item));
+                items.Add(new Item(item, amount));
             }
         }
         else
         {
             if (items.Count < InventoryCapacity)
-                items.Add(new Item(item));
+                items.Add(new Item(item, amount));
         }
     }
 
@@ -92,5 +93,18 @@ public class PlayerInventory : MonoBehaviour
     public List<Item> GetItems()
     {
         return items;
+    }
+
+
+    public int GetAmountOfItem(ItemData itemToFind)
+    {
+        foreach (Item item in items)
+        {
+            if (item.data == itemToFind)
+            {
+                return item.amount;
+            }
+        }
+        return 0;
     }
 }

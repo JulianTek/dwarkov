@@ -8,11 +8,11 @@ public class WeaponData : ScriptableObject
 {
     [HorizontalGroup("Split")]
     [BoxGroup("Split/WeaponMechanics", LabelText = "Mechanics")]
-    public int Damage;
-    [BoxGroup("Split/WeaponMechanics", LabelText = "Mechanics")]
     public bool IsAutoFire;
     [BoxGroup("Split/WeaponMechanics", LabelText = "Mechanics")]
     public float RateOfFire;
+    [BoxGroup("Split/WeaponMechanics", LabelText = "Mechanics")]
+    public AmmoType AmmoType;
     [BoxGroup("Split/Ammo", LabelText = "Ammo Stats")]
     public int MagCapacity;
     [BoxGroup("Split/Ammo", LabelText = "Ammo Stats")]
@@ -34,6 +34,4 @@ public class WeaponData : ScriptableObject
     public float BaseSpreadAngle;
     [BoxGroup("Split2/Spread", LabelText = "Spread and other stats")]
     public int AmountOfBullets;
-    [BoxGroup("Split2/Spread", LabelText = "Spread and other stats")]
-    public float BulletSpeed;
 }
