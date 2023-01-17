@@ -6,22 +6,22 @@ namespace AI
 {
     public class StateMachine : MonoBehaviour
     {
-        protected GameState currentState;
-        protected GameState nextState;
-        protected bool exitStateNextFrame;
-
+        protected static GameState currentState;
+        protected static GameState nextState;
+        protected static bool exitStateNextFrame;
+         
         private void Start()
         {
             exitStateNextFrame = false;
         }
 
-        public void SwitchState(GameState state)
+        public static void SwitchState(GameState state)
         {
             exitStateNextFrame = true;
             nextState = state;
 
         }
-        public void SwitchState<T>() where T : GameState, new()
+        public static void SwitchState<T>() where T : GameState, new()
         {
             SwitchState(new T());
         }

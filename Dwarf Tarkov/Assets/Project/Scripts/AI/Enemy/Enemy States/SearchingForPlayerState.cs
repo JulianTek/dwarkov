@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using UnityEngine; 
 namespace AI
 {
-    public class SpottedPlayerState : GameState
+    public class SearchingForPlayerState : GameState
     {
         public override void Start()
         {
@@ -19,11 +18,6 @@ namespace AI
         public override void Update()
         {
             
-        }
-
-        public void SpottedPlayer(Vector3 playerPosition)
-        {
-
         }
     }
 }

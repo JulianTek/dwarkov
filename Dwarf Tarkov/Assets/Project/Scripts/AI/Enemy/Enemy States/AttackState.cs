@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI
 {
-    public class SpottedPlayerState : GameState
+    public class AttackState : GameState
     {
         public override void Start()
         {
@@ -19,11 +19,6 @@ namespace AI
         public override void Update()
         {
             
-        }
-
-        public void SpottedPlayer(Vector3 playerPosition)
-        {
-
         }
     }
 }
