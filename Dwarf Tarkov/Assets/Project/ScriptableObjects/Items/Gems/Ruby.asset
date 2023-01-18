@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e4cb906b4852a489b3c43465ce4239, type: 3}
   m_Name: Ruby
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Name: 
-  SellPrice: 0
-  Type: 0
-  IsStackable: 0
-  MaxStackAmount: 0
-  Description: 
+  Sprite: {fileID: 21300000, guid: 3c375bea8bb22a249a6045c0b00bcc70, type: 3}
+  Name: Ruby
+  SellPrice: 20
+  Type: 2
+  IsStackable: 1
+  MaxStackAmount: 10
+  Description: ah-ah ah-ah ah-ahhhh
