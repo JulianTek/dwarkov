@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using System;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerInventory : MonoBehaviour
         items = new List<Item>(InventoryCapacity);
         EventChannels.ItemEvents.OnAddItemToInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromInventory += RemoveItem;
+        EventChannels.ExtractionEvents.OnGetInventoryValue += ReturnInventoryValue;
     }
 
     private void OnDestroy()
@@ -106,5 +108,23 @@ public class PlayerInventory : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    private void ReturnInventoryValue()
+    {
+        EventChannels.ExtractionEvents.OnSetInventoryValue?.Invoke(GetInventoryValue());
+    }
+
+    private int GetInventoryValue()
+    {
+        int value = 0;
+        foreach (Item item in items)
+        {
+            for (int i = 0; i < item.amount; i++)
+            {
+                value += item.data.SellPrice;
+            }
+        }
+        return value;
     }
 }
