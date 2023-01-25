@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
+using EventSystem;
+using AI;
 
 public class EnemyFieldOfView : MonoBehaviour
 {
@@ -12,19 +13,19 @@ public class EnemyFieldOfView : MonoBehaviour
     [SerializeField]
     private float fov = 90f;
     [SerializeField]
-    private int rayCount = 2;
+    private int rayCount = 10;
     [SerializeField]
     private float angle = 0f;
     private float angleIncrease;
     [SerializeField]
-    private float viewDistance = 50f;
+    private float viewDistance = 5f;
 
     private Mesh mesh;
     // Start is called before the first frame update
     void Start()
     {
         mesh = new Mesh();
-        GetComponent<MeshFilter>().mesh = mesh;  
+        GetComponent<MeshFilter>().mesh = mesh;
     }
 
     private Vector3 GetVectorFromAngle(float angle)
@@ -36,8 +37,13 @@ public class EnemyFieldOfView : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        GenerateFOV();
+    }
+
+    void GenerateFOV()
+    {
         angle = 0f;
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.localPosition;
         angleIncrease = fov / rayCount;
 
 
@@ -52,16 +58,20 @@ public class EnemyFieldOfView : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            RaycastHit2D hit = Physics2D.Raycast(origin, GetVectorFromAngle(angle), viewDistance);
-            Debug.DrawRay(origin, GetVectorFromAngle(angle), Color.green);
-            Debug.Log(origin);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, GetVectorFromAngle(angle), viewDistance);
+            Debug.DrawRay(transform.position, GetVectorFromAngle(angle), Color.green);
             if (!hit.collider)
             {
-                vertex = origin + GetVectorFromAngle(angle) * viewDistance;
+                vertex = transform.localPosition + GetVectorFromAngle(angle) * viewDistance;
             }
             else
             {
-                vertex = hit.point; 
+                if (hit.transform.gameObject.GetComponent<PlayerInputHandler>())
+                {
+                    Debug.Log("Seeing player");
+                    EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new SpottedPlayerState());
+                }
+                vertex = hit.point.normalized;
             }
             vertices[vertexIndex] = vertex;
 
@@ -81,5 +91,25 @@ public class EnemyFieldOfView : MonoBehaviour
         mesh.vertices = vertices;
         mesh.uv = uv;
         mesh.triangles = triangles;
+    }
+
+    public float GetAngleFromVectorFloat(Vector3 dir)
+    {
+        dir = dir.normalized;
+        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (n < 0)
+            n += 360;
+
+        return n;
+    }
+
+    public float GetDistance()
+    {
+        return viewDistance;
+    }
+
+    public float GetFOVAngle()
+    {
+        return fov;
     }
 }
