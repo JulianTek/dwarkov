@@ -8,7 +8,7 @@ namespace AI
     {
         public override void Start()
         {
-            
+
         }
 
         public override void Stop()
@@ -19,11 +19,6 @@ namespace AI
         public override void Update()
         {
             
-        }
-
-        public void SpottedPlayer(Vector3 playerPosition)
-        {
-
         }
     }
 }

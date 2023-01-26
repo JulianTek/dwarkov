@@ -38,6 +38,11 @@ namespace AI
             currentState.Start();
 
         }
+
+        public GameState GetGameState()
+        {
+            return currentState;
+        }
     }
 }
 

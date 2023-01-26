@@ -70,6 +70,7 @@ public class EnemyFieldOfView : MonoBehaviour
                 {
                     Debug.Log("Seeing player");
                     EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new SpottedPlayerState());
+                    EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point);
                 }
                 vertex = hit.point.normalized;
             }
