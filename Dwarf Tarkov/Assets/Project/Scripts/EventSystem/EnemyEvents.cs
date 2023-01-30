@@ -8,10 +8,14 @@ public class EnemyEvents
     public delegate void StateEvent(GameState state);
     public delegate void EnemyPositionEvent(Vector3 position);
     public delegate void EnemyEvent();
+    public delegate void DamageEvent(float damage);
 
     public StateEvent OnSwitchEnemyState;
 
     public EnemyPositionEvent OnPlayerSpotted;
 
     public EnemyEvent OnEnemyStopMoving;
+
+    public DamageEvent OnEnemyAttack;
+    public DamageEvent OnEnemyTakesDamage;
 }

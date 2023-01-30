@@ -36,6 +36,7 @@ namespace AI
             currentState.Stop();
             currentState = nextState;
             currentState.Start();
+            exitStateNextFrame = false;
 
         }
 

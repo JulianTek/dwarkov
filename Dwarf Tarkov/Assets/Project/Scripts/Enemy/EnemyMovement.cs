@@ -14,6 +14,8 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false; 
+        agent.updateUpAxis = false;
         EventChannels.EnemyEvents.OnPlayerSpotted += MoveToPosition;
     }
 
@@ -38,7 +40,6 @@ public class EnemyMovement : MonoBehaviour
     void MoveToPosition(Vector3 pos)
     {
         positionToMoveTo = pos;
-        Debug.Log($"moving to {pos}");
         agent.SetDestination(pos);
     }
 

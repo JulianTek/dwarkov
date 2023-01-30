@@ -58,7 +58,7 @@ public class EnemyFieldOfView : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, GetVectorFromAngle(angle), viewDistance);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, GetVectorFromAngle(angle), viewDistance, layerMask);
             Debug.DrawRay(transform.position, GetVectorFromAngle(angle), Color.green);
             if (!hit.collider)
             {
@@ -68,7 +68,6 @@ public class EnemyFieldOfView : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<PlayerInputHandler>())
                 {
-                    Debug.Log("Seeing player");
                     EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new SpottedPlayerState());
                     EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point);
                 }

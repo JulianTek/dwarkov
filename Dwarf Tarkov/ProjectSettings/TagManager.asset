@@ -16,7 +16,7 @@ TagManager:
   - Walls
   - Water
   - UI
-  - 
+  - Colliders
   - 
   - Obstacles
   - Ground
