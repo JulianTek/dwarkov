@@ -52,6 +52,6 @@ public class EnemyMovement : MonoBehaviour
 
     void Wander()
     {
-        agent.SetDestination(new Vector3(transform.position.x + Random.Range(0.2f, 0.6f), transform.position.y + Random.Range(0.2f, 0.6f)));
+        agent.SetDestination(new Vector3(transform.position.x + Random.Range(-0.6f, 0.6f), transform.position.y + Random.Range(-0.6f, 0.6f)));
     }
 }

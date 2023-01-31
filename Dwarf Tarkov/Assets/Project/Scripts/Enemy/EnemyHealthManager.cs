@@ -1,3 +1,4 @@
+using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,12 @@ public class EnemyHealthManager : MonoBehaviour
     void Start()
     {
         enemyCurrentHealth = EnemyMaxHealth;
+        EventChannels.EnemyEvents.OnEnemyTakesDamage += TakeDamage;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.EnemyEvents.OnEnemyTakesDamage -= TakeDamage;
     }
 
     // Update is called once per frame
@@ -22,7 +29,7 @@ public class EnemyHealthManager : MonoBehaviour
     void TakeDamage(float value)
     {
         enemyCurrentHealth -= value;
-
+        Debug.Log(enemyCurrentHealth);
         if (enemyCurrentHealth <= 0)
         {
             Destroy(gameObject);
