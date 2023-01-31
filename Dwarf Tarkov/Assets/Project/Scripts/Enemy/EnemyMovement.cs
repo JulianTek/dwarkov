@@ -17,11 +17,13 @@ public class EnemyMovement : MonoBehaviour
         agent.updateRotation = false; 
         agent.updateUpAxis = false;
         EventChannels.EnemyEvents.OnPlayerSpotted += MoveToPosition;
+        EventChannels.EnemyEvents.OnEnemyWander += Wander;
     }
 
     private void OnDestroy()
     {
         EventChannels.EnemyEvents.OnPlayerSpotted -= MoveToPosition;
+        EventChannels.EnemyEvents.OnEnemyWander -= Wander;
     }
 
     // Update is called once per frame
@@ -46,5 +48,10 @@ public class EnemyMovement : MonoBehaviour
     void StopMoving()
     {
         agent.isStopped = true;
+    }
+
+    void Wander()
+    {
+        agent.SetDestination(new Vector3(transform.position.x + Random.Range(0.2f, 0.6f), transform.position.y + Random.Range(0.2f, 0.6f)));
     }
 }

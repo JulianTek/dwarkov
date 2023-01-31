@@ -15,6 +15,7 @@ public class EnemyEvents
     public EnemyPositionEvent OnPlayerSpotted;
 
     public EnemyEvent OnEnemyStopMoving;
+    public EnemyEvent OnEnemyWander;
 
     public DamageEvent OnEnemyAttack;
     public DamageEvent OnEnemyTakesDamage;

@@ -68,7 +68,11 @@ public class EnemyFieldOfView : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<PlayerInputHandler>())
                 {
-                    EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new SpottedPlayerState());
+                    var currentState = GetComponentInParent<EnemyStateMachine>().GetGameState().GetType();
+                    if (currentState == typeof(SpottedPlayerState) || currentState == typeof(WanderState))
+                    {
+                        EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new SpottedPlayerState());
+                    }
                     EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point);
                 }
                 vertex = hit.point.normalized;
