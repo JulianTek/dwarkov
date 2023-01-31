@@ -10,6 +10,7 @@ namespace EventSystem
         public static WorldGenerationEvents WorldGenerationEvents = new WorldGenerationEvents();
         public static WeaponEvents WeaponEvents = new WeaponEvents();
         public static ItemEvents ItemEvents = new ItemEvents();
+        public static ExtractionEvents ExtractionEvents = new ExtractionEvents();
         public static EnemyEvents EnemyEvents = new EnemyEvents();
         public static UIEvents UIEvents = new UIEvents();
     }
