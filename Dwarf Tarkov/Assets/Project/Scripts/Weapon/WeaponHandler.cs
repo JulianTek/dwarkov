@@ -104,6 +104,7 @@ public class WeaponHandler : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
                 float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
                 bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * data.AmmoType.BulletSpeed, ForceMode2D.Impulse);
+                bullet.GetComponent<BulletHandler>().ammoType = data.AmmoType;
             }
             timeSinceLastShot = 0f;
             currentMagCount--;

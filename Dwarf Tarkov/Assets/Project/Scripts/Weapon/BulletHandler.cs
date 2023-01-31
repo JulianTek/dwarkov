@@ -8,6 +8,7 @@ public class BulletHandler : MonoBehaviour
     [SerializeField]
     private float maxDistance;
 
+    public AmmoType ammoType;
     private Vector3 startPos;
     private Vector3 currentPos;
 

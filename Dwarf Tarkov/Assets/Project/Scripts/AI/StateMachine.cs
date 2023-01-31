@@ -36,7 +36,13 @@ namespace AI
             currentState.Stop();
             currentState = nextState;
             currentState.Start();
+            exitStateNextFrame = false;
 
+        }
+
+        public GameState GetGameState()
+        {
+            return currentState;
         }
     }
 }
