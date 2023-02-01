@@ -51,7 +51,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -61,7 +61,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  ignorePngGamma: 0
+  ignorePngGamma: 1
   applyGammaDecoding: 0
   cookieLightType: 0
   platformSettings:
@@ -6375,9 +6375,9 @@ TextureImporter:
       spr_outpost_115: 2057977615
       spr_outpost_176: 1672648414
       spr_outpost_141: 1916533553
-      spr_outpost_159: -654249996
       spr_outpost_104: 1634049942
       spr_outpost_190: -1451751990
+      spr_outpost_159: -654249996
       spr_outpost_253: 1769794247
       spr_outpost_272: -1035316594
       spr_outpost_177: -1117634411
@@ -6449,26 +6449,26 @@ TextureImporter:
       spr_outpost_258: 2060147217
       spr_outpost_131: 634242942
       spr_outpost_63: -1560226805
-      spr_outpost_114: 1387892818
-      spr_outpost_200: 543618265
       spr_outpost_215: -1812654054
+      spr_outpost_257: 31577199
+      spr_outpost_278: -1726756268
+      spr_outpost_114: 1387892818
       spr_outpost_168: -1190999665
       spr_outpost_91: -806124386
+      spr_outpost_200: 543618265
+      spr_outpost_287: -1597505737
       spr_outpost_148: -1313597367
-      spr_outpost_257: 31577199
-      spr_outpost_195: 900513568
       spr_outpost_233: 57445490
       spr_outpost_46: 928042392
-      spr_outpost_278: -1726756268
+      spr_outpost_291: -596574946
       spr_outpost_82: -2108657852
-      spr_outpost_287: -1597505737
-      spr_outpost_284: 1305489136
+      spr_outpost_195: 900513568
       spr_outpost_281: 424664695
       spr_outpost_196: 1767944636
-      spr_outpost_72: -1872068284
       spr_outpost_236: 1805676536
-      spr_outpost_291: -596574946
+      spr_outpost_72: -1872068284
       spr_outpost_57: 1859548095
+      spr_outpost_284: 1305489136
       spr_outpost_97: 361303486
       spr_outpost_153: -1843640817
       spr_outpost_45: 1425699122
