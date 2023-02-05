@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
-public class InventoryGridHandler : MonoBehaviour
+
+public class OutpostStorageGridHandler : MonoBehaviour
 {
     [SerializeField]
     private GameObject inventorySlot;
     private List<GameObject> inventorySlots = new List<GameObject>();
-    private PlayerInventory inventory;
+    private OutpostChestInventory inventory;
     // Start is called before the first frame update
     void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-        EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
+        inventory = GameObject.FindGameObjectWithTag("OutpostChest").GetComponent<OutpostChestInventory>();
         EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {

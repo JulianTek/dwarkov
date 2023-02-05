@@ -13,6 +13,7 @@ namespace EventSystem
         public static ExtractionEvents ExtractionEvents = new ExtractionEvents();
         public static EnemyEvents EnemyEvents = new EnemyEvents();
         public static UIEvents UIEvents = new UIEvents();
+        public static OutpostEvents OutpostEvents = new OutpostEvents();    
     }
 }
 

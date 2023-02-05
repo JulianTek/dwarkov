@@ -20,6 +20,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.Sprint.started += Sprint;
         playerControls.Player.Sprint.canceled += StopSprint;
         playerControls.Player.OpenInventory.performed += OpenInventory;
+        playerControls.Player.Interact.performed += Interact;
 
         playerControls.HUD.Close.performed += CloseInventory;
     }
@@ -32,6 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.Sprint.started -= Sprint;
         playerControls.Player.Sprint.canceled -= StopSprint;
         playerControls.Player.OpenInventory.performed -= OpenInventory;
+        playerControls.Player.Interact.performed -= Interact;
 
         playerControls.HUD.Close.performed -= CloseInventory;
     }
@@ -102,4 +104,9 @@ public class PlayerInputHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnPlayerReload?.Invoke();
     }
-}
+
+    private void Interact(InputAction.CallbackContext ctx)
+    {
+        EventChannels.PlayerInputEvents.OnInteract?.Invoke();
+    }
+} 
