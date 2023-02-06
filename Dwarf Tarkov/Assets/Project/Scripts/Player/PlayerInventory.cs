@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using System;
+using Data; 
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerInventory : MonoBehaviour
     private int InventoryCapacity;
     private List<Item> items;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         items = new List<Item>(InventoryCapacity);
         EventChannels.ItemEvents.OnAddItemToInventory += AddItem;

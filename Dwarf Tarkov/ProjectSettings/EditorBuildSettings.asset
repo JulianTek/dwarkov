@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/ExtractionSampleScene.unity
     guid: f55500e80cb8d9b448267c0f9646a993
+  - enabled: 1
+    path: Assets/Project/Scenes/Outpost.unity
+    guid: 72dd8b4c7fb8f1e429ef16561d261f71
   m_configObjects: {}
