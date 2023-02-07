@@ -9,10 +9,12 @@ public class InventoryGridHandler : MonoBehaviour
     private List<GameObject> inventorySlots = new List<GameObject>();
     private PlayerInventory inventory;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
+        EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);
@@ -21,6 +23,12 @@ public class InventoryGridHandler : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        EventChannels.PlayerInputEvents.OnInventoryOpened -= UpdateInventory;
+        EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
+    }
     void UpdateInventory()
     {
         List<Item> items = inventory.GetItems();

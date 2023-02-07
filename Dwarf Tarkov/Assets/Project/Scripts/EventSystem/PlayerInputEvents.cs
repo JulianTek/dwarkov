@@ -26,6 +26,8 @@ namespace EventSystem
 
         public ButtonEvent OnInventoryOpened;
         public ButtonEvent OnInventoryClosed;
+
+        public ButtonEvent OnInteract;
     }
 }
 

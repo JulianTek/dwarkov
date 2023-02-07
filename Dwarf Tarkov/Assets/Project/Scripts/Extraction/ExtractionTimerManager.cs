@@ -40,8 +40,9 @@ public class ExtractionTimerManager : MonoBehaviour
 
             if (timeLeft <= 0)
             {
-                EventChannels.ExtractionEvents.OnExtractionTimerFinished?.Invoke();
                 timerStarted = false;
+                EventChannels.ExtractionEvents.OnExtractionTimerFinished?.Invoke();
+                timeLeft = float.MaxValue;
             }
         }
     }

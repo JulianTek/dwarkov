@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - World
   - NoMask
+  - OutpostChest
   layers:
   - Default
   - TransparentFX
