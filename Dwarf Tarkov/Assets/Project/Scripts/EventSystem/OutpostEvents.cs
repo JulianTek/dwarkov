@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OutpostEvents
 {
-    public delegate void ItemEvent(Item item);
+    public delegate void ItemEvent(ItemData item, int amount);
     public delegate void OutpostEvent();
 
     public ItemEvent OnAddItemToOutpostInventory;

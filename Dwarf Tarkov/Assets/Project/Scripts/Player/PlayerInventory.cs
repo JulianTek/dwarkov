@@ -76,7 +76,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (item.IsStackable)
                 {
-                    if (amount <= item.MaxStackAmount)
+                    if (amount < item.MaxStackAmount)
                     {
                         itemInInventory.amount -= amount;
                         return;

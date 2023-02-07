@@ -9794,6 +9794,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Extraction spot
       objectReference: {fileID: 0}
+    - target: {fileID: 6702178252054343330, guid: b1911015acc421b468c0710a6372d7e8,
+        type: 3}
+      propertyPath: extractionTimeInSeconds
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6702178252054343331, guid: b1911015acc421b468c0710a6372d7e8,
         type: 3}
       propertyPath: m_RootOrder

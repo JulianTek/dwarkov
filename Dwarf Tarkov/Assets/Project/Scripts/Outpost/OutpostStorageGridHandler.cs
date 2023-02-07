@@ -14,12 +14,20 @@ public class OutpostStorageGridHandler : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("OutpostChest").GetComponent<OutpostChestInventory>();
         EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);
             inventorySlots.Add(slot);
             slot.SetActive(true);
+            slot.GetComponent<OutpostInventorySlotHandler>().SetIsPlayer(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
     }
 
     void UpdateInventory()
@@ -32,14 +40,25 @@ public class OutpostStorageGridHandler : MonoBehaviour
                 GameObject slot = inventorySlots[i];
                 if (i < items.Count)
                 {
+                    if (items[i] == null && slot.GetComponent<OutpostInventorySlotHandler>().GetIsTaken())
+                    {
+                        slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
+                    }
                     Item item = items[i];
-                    slot.GetComponent<InventorySlotHandler>().SetSlot(item);
+                    slot.GetComponent<OutpostInventorySlotHandler>().SetSlot(item);
                 }
                 else
                 {
                     // Clear the slot if there is no corresponding item
-                    slot.GetComponent<InventorySlotHandler>().ClearSlot();
+                    slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
                 }
+            }
+        }
+        else
+        {
+            foreach (GameObject slot in inventorySlots)
+            {
+                slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
             }
         }
     }
