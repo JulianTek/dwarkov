@@ -50,5 +50,6 @@ public class ExtractionTimerManager : MonoBehaviour
     private void StopTimer()
     {
         timerStarted = false;
+        timerText.enabled = false;
     }
 }
