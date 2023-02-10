@@ -9,4 +9,6 @@ public class Quest
     public List<Item> Rewards;
     public int UnlockLevel;
     public float ExpReward;
+    [TextArea(3, 10)]
+    public string CompletionText;
 }

@@ -4224,12 +4224,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests:
-  - Name: Introduction
-    Rewards:
-    - data: {fileID: 11400000, guid: 2272e009302d1f44e8ded99fe055ea6f, type: 2}
-      amount: 200
-    UnlockLevel: 1
-    ExpReward: 50
+  - rid: 1518805137164075014
+  references:
+    version: 2
+    RefIds:
+    - rid: 1518805137164075014
+      type: {class: ItemQuest, ns: , asm: Assembly-CSharp}
+      data:
+        Name: 
+        Rewards: []
+        UnlockLevel: 0
+        ExpReward: 0
+        CompletionText: 
+        RequiredItems: []
 --- !u!1 &1031808685
 GameObject:
   m_ObjectHideFlags: 0
