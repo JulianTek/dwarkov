@@ -15,4 +15,7 @@ public class UIEvents
     public DialogueEvent OnContinueDialogue;
     public UIEvent OnEncounterDialogueChoice;
     public UIEvent OnEndDialogue;
+
+    public UIEvent OnPlayerPressConfirm;
+    public UIEvent OnPlayerPressDeny;
 }

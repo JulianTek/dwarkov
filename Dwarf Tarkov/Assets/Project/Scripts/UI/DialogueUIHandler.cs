@@ -25,6 +25,8 @@ public class DialogueUIHandler : MonoBehaviour
     {
         EventChannels.UIEvents.OnInitiateDialogue += InitiateDialogue;
         EventChannels.NPCEvents.OnStartDialogue += SetName;
+        confirmChoiceButton.gameObject.SetActive(false);
+        denyChoiceButton.gameObject.SetActive(false);
     }
 
     void InitiateDialogue(DialogueLine[] lines)
@@ -46,7 +48,20 @@ public class DialogueUIHandler : MonoBehaviour
             EndDialogue();
             return;
         }
-        dialogueText.text = sentences.Dequeue().Sentence;
+        var sentence = sentences.Dequeue();
+        if (sentence.IsChoice)
+        {
+            confirmChoiceButton.gameObject.SetActive(true);
+            denyChoiceButton.gameObject.SetActive(true);
+            continueButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            confirmChoiceButton.gameObject.SetActive(false);
+            denyChoiceButton.gameObject.SetActive(false);
+            continueButton.gameObject.SetActive(true);
+        }
+        dialogueText.text = sentence.Sentence;
     }
 
     private void EndDialogue()
@@ -57,5 +72,17 @@ public class DialogueUIHandler : MonoBehaviour
     private void SetName(string name)
     {
         nameBox.text = name;
+    }
+
+    public void ConfirmQuest()
+    {
+        EventChannels.UIEvents.OnPlayerPressConfirm?.Invoke();
+        EndDialogue();
+    }
+
+    public void DenyQuest()
+    {
+        EventChannels.UIEvents.OnPlayerPressDeny?.Invoke();
+        EndDialogue();
     }
 }
