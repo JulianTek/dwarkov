@@ -18,6 +18,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnRemoveItemFromInventory += RemoveItem;
         EventChannels.ExtractionEvents.OnGetInventoryValue += ReturnInventoryValue;
         EventChannels.ItemEvents.OnCheckIfListFits += CanAddItems;
+        EventChannels.ItemEvents.OnCheckIfItemQuestCompleted += CheckIfItemQuestCompleted;
     }
 
     private void OnDestroy()
@@ -26,6 +27,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnRemoveItemFromInventory -= RemoveItem;
         EventChannels.ExtractionEvents.OnGetInventoryValue -= ReturnInventoryValue;
         EventChannels.ItemEvents.OnCheckIfListFits -= CanAddItems;
+        EventChannels.ItemEvents.OnCheckIfItemQuestCompleted -= CheckIfItemQuestCompleted;
     }
 
     // Update is called once per frame

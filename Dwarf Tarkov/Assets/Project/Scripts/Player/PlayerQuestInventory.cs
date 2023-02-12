@@ -14,6 +14,7 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.NPCEvents.OnPlayerFinishQuest += FinishQuest;
 
         EventChannels.NPCEvents.OnStartDialogue += CheckIfQuestsCompleted;
+        EventChannels.UIEvents.OnPlayerCompleteQuest += CompleteQuest;
     }
 
     private void OnDisable()
@@ -22,6 +23,7 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.NPCEvents.OnPlayerFinishQuest -= FinishQuest;
 
         EventChannels.NPCEvents.OnStartDialogue -= CheckIfQuestsCompleted;
+        EventChannels.UIEvents.OnPlayerCompleteQuest -= CompleteQuest;
     }
 
     // Update is called once per frame
@@ -45,16 +47,12 @@ public class PlayerQuestInventory : MonoBehaviour
     {
         foreach (Quest quest in quests)
         {
-            if (quest is ItemQuest)
-                if (CheckIfItemQuestCompleted(quest as ItemQuest))
-                    MarkQuestComplete(quest);
-        }
-
-        foreach (Quest quest in completedQuests)
-        {
-            if (quest is ItemQuest)
-                if (!CheckIfItemQuestCompleted(quest as ItemQuest))
-                    MarkQuestIncomplete(quest);
+            if (quest.QuestGiverName == name)
+            {
+                if (quest is ItemQuest)
+                    if (CheckIfItemQuestCompleted(quest as ItemQuest))
+                        EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
+            }
         }
     }
 
@@ -63,15 +61,25 @@ public class PlayerQuestInventory : MonoBehaviour
         return (bool)EventChannels.ItemEvents.OnCheckIfItemQuestCompleted?.Invoke(quest.RequiredItems);
     }
 
-    private void MarkQuestComplete(Quest quest)
+    private void CompleteQuest(Quest quest)
     {
-        quests.Remove(quest);
-        completedQuests.Add(quest);
+        if (quest is ItemQuest)
+        {
+            ItemQuest itemQuest = quest as ItemQuest;
+            CompleteItemQuest(itemQuest.RequiredItems);
+        }
+        foreach (Item item in quest.Rewards)
+        {
+            EventChannels.ItemEvents.OnAddItemToInventory(item.data, item.amount);
+        }
+            
     }
 
-    private void MarkQuestIncomplete(Quest quest)
+    private void CompleteItemQuest(List<Item> items)
     {
-        quests.Add(quest);
-        completedQuests.Remove(quest);
+        foreach (Item item in items)
+        {
+            EventChannels.ItemEvents.OnRemoveItemFromInventory?.Invoke(item.data, item.amount);
+        }
     }
 } 

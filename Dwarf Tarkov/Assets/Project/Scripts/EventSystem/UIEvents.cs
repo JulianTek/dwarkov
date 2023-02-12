@@ -8,6 +8,7 @@ public class UIEvents
     public delegate void DialogueInitEvent(DialogueLine[] line);
     public delegate void DialogueEvent(DialogueLine line);
     public delegate void UIEvent();
+    public delegate void QuestEvent(Quest quest);
 
     public HealthbarEvent OnUpdateHealthbar;
 
@@ -18,4 +19,6 @@ public class UIEvents
 
     public UIEvent OnPlayerPressConfirm;
     public UIEvent OnPlayerPressDeny;
+
+    public QuestEvent OnPlayerCompleteQuest; 
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class NPCQuestInventory : MonoBehaviour
 {
-    [SerializeField]
-    private List<Quest> quests = new List<Quest>();
-    private Quest NextQuest;
+    [SerializeReference]
+    public List<Quest> quests = new List<Quest>();
+    public Quest NextQuest;
 
     private void Start()
     {
@@ -23,5 +23,8 @@ public class NPCQuestInventory : MonoBehaviour
     void ConfirmQuest()
     {
         EventChannels.NPCEvents.OnPlayerAcceptQuest?.Invoke(NextQuest);
+        quests.Remove(NextQuest);
+        if (quests.Count > 0)
+            NextQuest = quests[0];
     }
 }
