@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class ShopkeepInventory : MonoBehaviour
 {
-    [SerializeField]
-    private List<ShopKeepItem> inventory;
+    public List<ShopKeepItem> inventory = new List<ShopKeepItem>();
     // Start is called before the first frame update
     void Start()
     {

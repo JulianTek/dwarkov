@@ -7,4 +7,10 @@ public class ShopKeepItem
 {
     public ItemData Data;
     public int CostPerItem;
+
+    public ShopKeepItem(ItemData data, int cost)
+    {
+        Data = data;
+        CostPerItem = cost;
+    }
 }

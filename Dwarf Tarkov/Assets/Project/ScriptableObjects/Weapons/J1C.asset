@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
   m_Name: J1C
   m_EditorClassIdentifier: 
-  IsAutoFire: 0
-  RateOfFire: 0
-  AmmoType: {fileID: 0}
-  MagCapacity: 0
-  ReloadTime: 0
-  Sprite: {fileID: 0}
-  WeaponEmptySprite: {fileID: 0}
-  MagazineSprite: {fileID: 0}
+  IsAutoFire: 1
+  RateOfFire: 0.4
+  AmmoType: {fileID: 11400000, guid: 88371131e5e13794d9f95aed111d4b3d, type: 2}
+  MagCapacity: 25
+  ReloadTime: 2
+  Sprite: {fileID: 21300000, guid: bb8d46c22e548a34386eb8d63a556ac8, type: 3}
+  WeaponEmptySprite: {fileID: 21300000, guid: 39e44f287e1452649b3abcf0ef3ca386, type: 3}
+  MagazineSprite: {fileID: 21300000, guid: 6eedc7ffa976efb4f9f436a6e3afdb59, type: 3}
   CaseSprite: {fileID: 0}
-  BaseSpreadAngle: 0
-  AmountOfBullets: 0
+  BaseSpreadAngle: 15
+  AmountOfBullets: 1
