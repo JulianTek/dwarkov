@@ -184,4 +184,38 @@ public class PlayerInventory : MonoBehaviour
         }
         return requirementsMet == requiredItems.Count;
     }
+
+    public bool CheckIfEnoughCredits(int requiredAmount)
+    {
+        int amountOfCredits = 0;
+
+        foreach (Item item in items)
+        {
+            if (item.data.Name == "Credit")
+            {
+                amountOfCredits += item.amount;
+            }
+        }
+        
+        return amountOfCredits >= requiredAmount;
+    }
+
+    public void BuyItem(int cost)
+    {
+        foreach (Item item in items)
+        {
+            if (item.data.Name == "Credit")
+            {
+                if (item.amount > cost)
+                {
+                    item.amount -= cost;
+                }
+                else
+                {
+                    items.Remove(item);
+                    cost -= item.amount;
+                }
+            }
+        }
+    }
 } 
