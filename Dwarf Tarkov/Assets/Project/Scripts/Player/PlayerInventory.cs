@@ -17,12 +17,17 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnAddItemToInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromInventory += RemoveItem;
         EventChannels.ExtractionEvents.OnGetInventoryValue += ReturnInventoryValue;
+        EventChannels.ItemEvents.OnCheckIfListFits += CanAddItems;
+        EventChannels.ItemEvents.OnCheckIfItemQuestCompleted += CheckIfItemQuestCompleted;
     }
 
     private void OnDestroy()
     {
         EventChannels.ItemEvents.OnAddItemToInventory -= AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromInventory -= RemoveItem;
+        EventChannels.ExtractionEvents.OnGetInventoryValue -= ReturnInventoryValue;
+        EventChannels.ItemEvents.OnCheckIfListFits -= CanAddItems;
+        EventChannels.ItemEvents.OnCheckIfItemQuestCompleted -= CheckIfItemQuestCompleted;
     }
 
     // Update is called once per frame
@@ -128,4 +133,55 @@ public class PlayerInventory : MonoBehaviour
         }
         return value;
     }
-}
+
+    public bool CanAddItems(List<Item> itemsToAdd)
+    {
+        int currentSize = items.Count;
+        foreach (Item itemToAdd in itemsToAdd)
+        {
+            bool added = false;
+            foreach (Item item in items)
+            {
+                if (item.amount < item.data.MaxStackAmount)
+                {
+                    int room = item.data.MaxStackAmount - item.amount;
+                    if (room >= itemToAdd.amount)
+                    {
+                        added = true;
+                        break;
+                    }
+                }
+            }
+            if (!added)
+            {
+                currentSize++;
+                if (currentSize > InventoryCapacity)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public bool CheckIfItemQuestCompleted(List<Item> requiredItems)
+    {
+        int requirementsMet = 0;
+        foreach (Item item in requiredItems)
+        {
+            int amountRequired = item.amount;
+            foreach (Item inventoryItem in items)
+            {
+                if (inventoryItem.data == item.data)
+                {
+                    amountRequired -= inventoryItem.amount;
+                    if (amountRequired <= 0)
+                    {
+                        requirementsMet++;
+                    }
+                }
+            }
+        }
+        return requirementsMet == requiredItems.Count;
+    }
+} 

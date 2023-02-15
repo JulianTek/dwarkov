@@ -14,5 +14,7 @@ public enum ItemType
     [Description("Biological matter")]
     BioMatter,
     [Description("Ammunition")]
-    Ammunition
+    Ammunition,
+    [Description("Valuable")]
+    Valuable,
 }
