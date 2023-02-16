@@ -10,6 +10,7 @@ public class UIEvents
     public delegate void UIEvent();
     public delegate void QuestEvent(Quest quest);
     public delegate void ShopkeepInventoryEvent(ShopkeepInventory inventory);
+    public delegate void ItemEvent(ItemData item);
 
     public HealthbarEvent OnUpdateHealthbar;
 
@@ -25,4 +26,6 @@ public class UIEvents
 
     public ShopkeepInventoryEvent OnOpenBarteringMenu;
     public UIEvent OnCloseBarteringMenu;
+
+    public ItemEvent OnPlayerSelectsItemToBuy;
 }

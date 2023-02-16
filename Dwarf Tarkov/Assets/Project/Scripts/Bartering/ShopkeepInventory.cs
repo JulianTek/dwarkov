@@ -9,7 +9,12 @@ public class ShopkeepInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventChannels.UIEvents.OnPlayerSelectsItemToBuy += BuyItem;
+    }
 
+    private void OnDestroy()
+    {
+        EventChannels.UIEvents.OnPlayerSelectsItemToBuy -= BuyItem;
     }
 
     // Update is called once per frame
@@ -22,9 +27,16 @@ public class ShopkeepInventory : MonoBehaviour
     {
         ShopKeepItem item = FindShopKeepItemInList(data);
         if (item != null)
+        {
             if (EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits(item.CostPerItem))
+            {
                 BuyItem(item);
-
+            }
+            else
+            {
+                Debug.Log("Not Enough credits");
+            }
+        }
     }
 
     public ShopKeepItem FindShopKeepItemInList(ItemData data)

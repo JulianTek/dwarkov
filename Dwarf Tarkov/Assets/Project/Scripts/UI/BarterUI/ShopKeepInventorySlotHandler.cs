@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EventSystem;
 
 public class ShopKeepInventorySlotHandler : MonoBehaviour
 {
@@ -32,5 +33,10 @@ public class ShopKeepInventorySlotHandler : MonoBehaviour
         image.sprite = null;
         image.enabled = false;
         isTaken = false;
+    }
+
+    public void BuyItem()
+    {
+        EventChannels.UIEvents.OnPlayerSelectsItemToBuy?.Invoke(item.Data);
     }
 } 

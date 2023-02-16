@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using System;
 
 public class ShopKeepInventoryGridHandler : MonoBehaviour
 {
@@ -33,12 +34,21 @@ public class ShopKeepInventoryGridHandler : MonoBehaviour
     void InitSlots()
     {
         if (slots.Count > 0)
-            slots.Clear();
+            ClearSlots();
         foreach (ShopKeepItem item in currentShopKeep.inventory)
         {
-            Instantiate(slot, transform);
-            slot.GetComponent<ShopKeepInventorySlotHandler>().SetSlot(item);
-            slots.Add(slot); 
+            GameObject itemSlot = Instantiate(slot, transform);
+            itemSlot.GetComponent<ShopKeepInventorySlotHandler>().SetSlot(item);
+            slots.Add(itemSlot); 
         }
+    }
+
+    private void ClearSlots()
+    {
+        foreach (GameObject slot in slots)
+        {
+            GameObject.Destroy(slot);
+        }
+        slots.Clear();
     }
 }

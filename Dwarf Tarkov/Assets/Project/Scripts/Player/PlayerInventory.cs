@@ -19,6 +19,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ExtractionEvents.OnGetInventoryValue += ReturnInventoryValue;
         EventChannels.ItemEvents.OnCheckIfListFits += CanAddItems;
         EventChannels.ItemEvents.OnCheckIfItemQuestCompleted += CheckIfItemQuestCompleted;
+        EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits += CheckIfEnoughCredits;
     }
 
     private void OnDestroy()
@@ -28,6 +29,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ExtractionEvents.OnGetInventoryValue -= ReturnInventoryValue;
         EventChannels.ItemEvents.OnCheckIfListFits -= CanAddItems;
         EventChannels.ItemEvents.OnCheckIfItemQuestCompleted -= CheckIfItemQuestCompleted;
+        EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits -= CheckIfEnoughCredits;
     }
 
     // Update is called once per frame
