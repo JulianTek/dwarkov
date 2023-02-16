@@ -36,7 +36,6 @@ public class OutpostInventorySlotHandler : MonoBehaviour
     private void SetSprite(Sprite sprite)
     {
         image.sprite = sprite;
-
     }
 
     private void SetIsTaken(bool isNowTaken)

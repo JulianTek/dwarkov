@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ShopKeepInventorySlot : MonoBehaviour
+public class ShopKeepInventorySlotHandler : MonoBehaviour
 {
     private ShopKeepItem item;
+    private bool isTaken;
+    [SerializeField]
+    private Image image;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +17,20 @@ public class ShopKeepInventorySlot : MonoBehaviour
 
     public void SetSlot(ShopKeepItem item)
     {
-        this.item = item;
-        GetComponent<SpriteRenderer>().sprite = item.Data.Sprite;
+        if (item != null)
+        {
+            this.item = item;
+            image.sprite = item.Data.Sprite;
+            image.enabled = true;
+            isTaken = true;
+        }
     }
-}
+
+    public void Clear()
+    {
+        item = null;
+        image.sprite = null;
+        image.enabled = false;
+        isTaken = false;
+    }
+} 
