@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField]
     private int InventoryCapacity;
+    [SerializeField]
     private List<Item> items;
     // Start is called before the first frame update
     void Awake()
@@ -38,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
-    void AddItem(ItemData item, int amount)
+    public void AddItem(ItemData item, int amount)
     {
         if (items.Count != 0)
         {
