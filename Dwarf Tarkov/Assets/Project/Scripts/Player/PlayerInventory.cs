@@ -10,11 +10,11 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     private int InventoryCapacity;
     [SerializeField]
-    private List<Item> items;
+    private List<Item> inventory;
     // Start is called before the first frame update
     void Awake()
     {
-        items = new List<Item>(InventoryCapacity);
+        inventory = new List<Item>(InventoryCapacity);
         EventChannels.ItemEvents.OnAddItemToInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromInventory += RemoveItem;
         EventChannels.ExtractionEvents.OnGetInventoryValue += ReturnInventoryValue;
@@ -41,11 +41,11 @@ public class PlayerInventory : MonoBehaviour
 
     public void AddItem(ItemData item, int amount)
     {
-        if (items.Count != 0)
+        if (inventory.Count != 0)
         {
             if (item.IsStackable)
             {
-                foreach (Item itemInInventory in items)
+                foreach (Item itemInInventory in inventory)
                 {
                     if (item == itemInInventory.data)
                     {
@@ -55,31 +55,32 @@ public class PlayerInventory : MonoBehaviour
                         }
                         else
                         {
-                            items.Add(new Item(item, amount));
+                            inventory.Add(new Item(item, amount));
                         }
                         return;
                     }
                 }
-                items.Add(new Item(item, amount));
+                inventory.Add(new Item(item, amount));
             }
             else
             {
-                items.Add(new Item(item, amount));
+                inventory.Add(new Item(item, amount));
             }
         }
         else
         {
-            if (items.Count < InventoryCapacity)
-                items.Add(new Item(item, amount));
+            if (inventory.Count < InventoryCapacity)
+                inventory.Add(new Item(item, amount));
         }
+        ClearEmptySlots();
     }
 
     void RemoveItem(ItemData item, int amount)
     {
         // make sure that 'amount' is never more than the total amount of items in a player's inventory
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 0; i < inventory.Count; i++)
         {
-            Item itemInInventory = items[i];
+            Item itemInInventory = inventory[i];
             if (itemInInventory.data == item)
             {
                 if (item.IsStackable)
@@ -90,11 +91,12 @@ public class PlayerInventory : MonoBehaviour
                         return;
                     }
                     amount -= item.MaxStackAmount;
-                    items.Remove(itemInInventory);
+                    inventory.Remove(itemInInventory);
                     RemoveItem(item, amount);
                 }
             }
         }
+        ClearEmptySlots();
     }
     public int GetCapacity()
     {
@@ -103,13 +105,13 @@ public class PlayerInventory : MonoBehaviour
 
     public List<Item> GetItems()
     {
-        return items;
+        return inventory;
     }
 
 
     public int GetAmountOfItem(ItemData itemToFind)
     {
-        foreach (Item item in items)
+        foreach (Item item in inventory)
         {
             if (item.data == itemToFind)
             {
@@ -127,7 +129,7 @@ public class PlayerInventory : MonoBehaviour
     private int GetInventoryValue()
     {
         int value = 0;
-        foreach (Item item in items)
+        foreach (Item item in inventory)
         {
             for (int i = 0; i < item.amount; i++)
             {
@@ -139,11 +141,11 @@ public class PlayerInventory : MonoBehaviour
 
     public bool CanAddItems(List<Item> itemsToAdd)
     {
-        int currentSize = items.Count;
+        int currentSize = inventory.Count;
         foreach (Item itemToAdd in itemsToAdd)
         {
             bool added = false;
-            foreach (Item item in items)
+            foreach (Item item in inventory)
             {
                 if (item.amount < item.data.MaxStackAmount)
                 {
@@ -173,7 +175,7 @@ public class PlayerInventory : MonoBehaviour
         foreach (Item item in requiredItems)
         {
             int amountRequired = item.amount;
-            foreach (Item inventoryItem in items)
+            foreach (Item inventoryItem in inventory)
             {
                 if (inventoryItem.data == item.data)
                 {
@@ -192,7 +194,7 @@ public class PlayerInventory : MonoBehaviour
     {
         int amountOfCredits = 0;
 
-        foreach (Item item in items)
+        foreach (Item item in inventory)
         {
             if (item.data.Name == "Credit")
             {
@@ -205,7 +207,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void BuyItem(int cost)
     {
-        foreach (Item item in items)
+        foreach (Item item in inventory)
         {
             if (item.data.Name == "Credit")
             {
@@ -215,10 +217,20 @@ public class PlayerInventory : MonoBehaviour
                 }
                 else
                 {
-                    items.Remove(item);
+                    inventory.Remove(item);
                     cost -= item.amount;
                 }
             }
+        }
+    }
+
+    private void ClearEmptySlots()
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            Item item = inventory[i];
+            if (item.amount <= 0)
+                inventory.Remove(item);
         }
     }
 } 
