@@ -9,6 +9,7 @@ public class BarteringEvents
     public delegate void CreditsEvent(int credits);
     public delegate void ItemEvent(Item item);
     public delegate void SlotEvent(GameObject slot);
+    public delegate void BarteringEvent();
 
     public HasEnoughCreditsEvent OnCheckIfPlayerHasEnoughCredits;
 
@@ -19,4 +20,6 @@ public class BarteringEvents
     public SlotEvent OnPlayerMovesItemFromSellBox;
 
     public IsSpaceInSellboxEvent OnPlayerTryToSellItem;
+
+    public BarteringEvent OnPlayerHasInsufficientCredits;
 }

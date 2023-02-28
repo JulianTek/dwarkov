@@ -34,7 +34,7 @@ public class ShopkeepInventory : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not Enough credits");
+                EventChannels.BarteringEvents.OnPlayerHasInsufficientCredits?.Invoke();
             }
         }
     }
