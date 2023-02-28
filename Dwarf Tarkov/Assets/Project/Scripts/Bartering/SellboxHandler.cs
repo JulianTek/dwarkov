@@ -2,20 +2,33 @@ using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SellboxHandler : MonoBehaviour
 {
+    [SerializeField]
+    private TextMeshProUGUI valueText;
+
     private const int capacity = 9;
     private int currentAmountInBox;
     private List<Item> itemsInBox = new List<Item>();
     private List<GameObject> slots = new List<GameObject>();
+    private int value;
     private void Start()
     {
         foreach (Transform g in transform.GetComponentsInChildren<Transform>())
         {
-            slots.Add(g.gameObject);
+            if (g.GetComponent<SellboxSlotHandler>())
+                slots.Add(g.gameObject);
         }
         EventChannels.BarteringEvents.OnPlayerMovesItemToSellBox += AddItemToBox;
+        EventChannels.BarteringEvents.OnPlayerTryToSellItem += CanAddItem;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.BarteringEvents.OnPlayerMovesItemToSellBox -= AddItemToBox;
+        EventChannels.BarteringEvents.OnPlayerTryToSellItem -= CanAddItem;
     }
 
     public bool CanAddItem()
@@ -27,6 +40,9 @@ public class SellboxHandler : MonoBehaviour
     {
         itemsInBox.Add(item);
         slots[GetFirstFreeIndex()].GetComponent<SellboxSlotHandler>().SetSlot(item);
+        currentAmountInBox++;
+        value += item.data.SellPrice * item.amount;
+        valueText.text = $"Value: {value} credits";
     }
 
     public void RemoveItemFromBox(GameObject slot)
@@ -36,6 +52,9 @@ public class SellboxHandler : MonoBehaviour
         {
             slots[slots.IndexOf(slot)].GetComponent<SellboxSlotHandler>().ClearSlot();
             itemsInBox.Remove(item);
+            currentAmountInBox--;
+            value -= item.data.SellPrice * item.amount;
+            valueText.text = $"Value: {value} credits";
         }
 
     }
@@ -49,5 +68,15 @@ public class SellboxHandler : MonoBehaviour
                 return i;
         }
         return int.MaxValue;
+    }
+
+    public void SellItems()
+    {
+        EventChannels.BarteringEvents.OnPlayerSellsItems?.Invoke(value);
+        for (int i = 0; i < capacity; i++)
+        {
+            slots[i].GetComponent<SellboxSlotHandler>().ClearSlot();
+        }
+        valueText.text = $"Value: 0 credits";
     }
 }

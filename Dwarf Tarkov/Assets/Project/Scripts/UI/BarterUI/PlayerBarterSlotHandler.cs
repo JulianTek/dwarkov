@@ -35,6 +35,7 @@ public class PlayerBarterSlotHandler : MonoBehaviour
             {
                 EventChannels.BarteringEvents.OnPlayerMovesItemToSellBox(item);
                 EventChannels.ItemEvents.OnRemoveItemFromInventory?.Invoke(item.data, item.amount);
+                ClearSlot();
             }
         }
     }

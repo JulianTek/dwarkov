@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarteringEvents : MonoBehaviour
+public class BarteringEvents
 {
     public delegate bool HasEnoughCreditsEvent(int credits);
     public delegate bool IsSpaceInSellboxEvent();
@@ -13,7 +13,7 @@ public class BarteringEvents : MonoBehaviour
     public HasEnoughCreditsEvent OnCheckIfPlayerHasEnoughCredits;
 
     public CreditsEvent OnPlayerBuysItem;
-    public CreditsEvent OnPlayerSellsItem;
+    public CreditsEvent OnPlayerSellsItems;
 
     public ItemEvent OnPlayerMovesItemToSellBox;
     public SlotEvent OnPlayerMovesItemFromSellBox;

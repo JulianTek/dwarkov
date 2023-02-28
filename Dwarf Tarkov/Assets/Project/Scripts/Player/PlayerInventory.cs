@@ -118,7 +118,7 @@ public class PlayerInventory : MonoBehaviour
                 return item.amount;
             }
         }
-        return 0;
+        return -1;
     }
 
     private void ReturnInventoryValue()

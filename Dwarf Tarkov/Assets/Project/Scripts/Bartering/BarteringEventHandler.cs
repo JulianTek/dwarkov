@@ -10,12 +10,12 @@ public class BarteringEventHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventChannels.BarteringEvents.OnPlayerSellsItem += AddCredits;
+        EventChannels.BarteringEvents.OnPlayerSellsItems += AddCredits;
     }
 
     private void OnDestroy()
     {
-        EventChannels.BarteringEvents.OnPlayerSellsItem -= AddCredits;
+        EventChannels.BarteringEvents.OnPlayerSellsItems -= AddCredits;
     }
 
     public void AddCredits(int amount)
