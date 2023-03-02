@@ -14,6 +14,7 @@ public class WeaponHandler : MonoBehaviour
     private GameObject magazinePrefab;
     [SerializeField]
     private TextMeshProUGUI magText;
+    private SpriteRenderer gunSprite;
 
 
     private int maxMagCount;
@@ -36,6 +37,7 @@ public class WeaponHandler : MonoBehaviour
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
+        gunSprite = GetComponentInChildren<SpriteRenderer>(); 
     }
 
     void OnDestroy()
@@ -56,19 +58,31 @@ public class WeaponHandler : MonoBehaviour
         magText.text = $"{currentMagCount}/{maxMagCount}";
         if (isAiming)
         {
-            Vector2 direction = (pointer - (Vector2)transform.position).normalized;
-            transform.right = direction;
+            // Get the position of the mouse cursor in world space
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
+            mousePos.z = 0f;
 
-            Vector2 scale = transform.localScale;
-            if (direction.x < 0)
+            // Calculate the direction the gun should face
+            Vector3 direction = (mousePos - transform.position).normalized;
+
+            // Calculate the angle the gun should rotate to face the mouse cursor
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // Rotate the gun to face the mouse cursor
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            Debug.Log(mousePos.x);
+            if (mousePos.x < 0)
             {
-                scale.y = -1;
+                Debug.Log("Mouse on left half of screen");
+                gunSprite.flipY = true;
             }
-            else if (direction.x > 0)
+            else
             {
-                scale.y = 1;
+                Debug.Log("Mouse on right half of screen");
+                gunSprite.flipY = false;
             }
-            transform.localScale = scale;
+
         }
 
         if (isFiring)
