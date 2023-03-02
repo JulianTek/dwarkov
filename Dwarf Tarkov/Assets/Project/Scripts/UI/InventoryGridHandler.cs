@@ -12,8 +12,8 @@ public class InventoryGridHandler : MonoBehaviour
     void Awake()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-        EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
-        EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
+        EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateOutpostInventory;
+        EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateOutpostInventory;
         EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
         EventChannels.UIEvents.OnOpenBarteringMenu += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
@@ -48,6 +48,28 @@ public class InventoryGridHandler : MonoBehaviour
                 {
                     // Clear the slot if there is no corresponding item
                     slot.GetComponent<InventorySlotHandler>().ClearSlot();
+                }
+            }
+        }
+    }
+
+    void UpdateOutpostInventory()
+    {
+        List<Item> items = inventory.GetItems();
+        if (items.Count > 0)
+        {
+            for (int i = 0; i < inventorySlots.Count; i++)
+            {
+                GameObject slot = inventorySlots[i];
+                if (i < items.Count)
+                {
+                    Item item = items[i];
+                    slot.GetComponent<OutpostInventorySlotHandler>().SetSlot(item);
+                }
+                else
+                {
+                    // Clear the slot if there is no corresponding item
+                    slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
                 }
             }
         }

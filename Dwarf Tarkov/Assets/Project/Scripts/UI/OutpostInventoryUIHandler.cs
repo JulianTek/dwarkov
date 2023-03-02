@@ -22,10 +22,12 @@ public class OutpostInventoryUIHandler : MonoBehaviour
     void ShowInventory()
     {
         gameObject.SetActive(true);
+        EventChannels.PlayerInputEvents.OnEnableHUDControls?.Invoke();
     }
 
     void HideInventory()
     {
         gameObject.SetActive(false);
+        EventChannels.PlayerInputEvents.OnDisableHUDControls?.Invoke();
     }
 }
