@@ -23,6 +23,9 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.Interact.performed += Interact;
 
         playerControls.HUD.Close.performed += CloseInventory;
+
+        EventChannels.PlayerInputEvents.OnDisableHUDControls += DisableHUDInput;
+        EventChannels.PlayerInputEvents.OnEnableHUDControls += EnableHUDInput;
     }
 
     private void OnDestroy()
@@ -108,5 +111,17 @@ public class PlayerInputHandler : MonoBehaviour
     private void Interact(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnInteract?.Invoke();
+    }
+
+    private void EnableHUDInput()
+    {
+        playerControls.Player.Disable();
+        playerControls.HUD.Enable();
+    }
+
+    private void DisableHUDInput()
+    {
+        playerControls.Player.Enable();
+        playerControls.HUD.Disable();
     }
 } 

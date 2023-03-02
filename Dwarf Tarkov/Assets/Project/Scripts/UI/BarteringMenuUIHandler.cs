@@ -9,5 +9,11 @@ public class BarteringMenuUIHandler : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
+        EventChannels.UIEvents.OnCloseBarteringMenu += CloseMenu;
+    }
+
+    void CloseMenu()
+    {
+        gameObject.SetActive(false);
     }
 }

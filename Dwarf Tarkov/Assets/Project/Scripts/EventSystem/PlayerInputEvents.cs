@@ -28,6 +28,9 @@ namespace EventSystem
         public ButtonEvent OnInventoryClosed;
 
         public ButtonEvent OnInteract;
+
+        public ButtonEvent OnEnableHUDControls;
+        public ButtonEvent OnDisableHUDControls;
     }
 }
 
