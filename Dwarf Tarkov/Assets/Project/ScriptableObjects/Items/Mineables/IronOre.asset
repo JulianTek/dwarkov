@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d39cb5020e3d0e45935fcfeb2d36603, type: 3}
-  m_Name: RubyOre
+  m_Name: IronOre
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 75ba192928cc7da4ba5264d66bda71cf, type: 3}
-  Name: Ruby Ore
+  Sprite: {fileID: 21300000, guid: a12009f03cc110f49a05b1d2779cf631, type: 3}
+  Name: Iron Ore
   SellPrice: 0
   Type: 1
   IsStackable: 0
   MaxStackAmount: 0
   Description: 
-  ItemYielded: {fileID: 11400000, guid: 06709f3c1435f1443b160afe0a7d8e9b, type: 2}
-  ItemAppearChanceMin: 51
-  ItemAppearChanceMax: 61
+  ItemYielded: {fileID: 11400000, guid: 001a6dfea4fd9964cb11853b503618da, type: 2}
+  ItemAppearChanceMin: 0
+  ItemAppearChanceMax: 20

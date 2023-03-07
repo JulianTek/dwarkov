@@ -8,4 +8,6 @@ public class Mineable : ItemData
 {
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public ItemData ItemYielded;
+    public float ItemAppearChanceMin;
+    public float ItemAppearChanceMax;
 }

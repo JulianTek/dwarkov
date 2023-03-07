@@ -13,6 +13,8 @@ namespace WorldGeneration
         private WalkGenerator walkGenerator;
         private CorridorGenerator corridorGenerator;
         [SerializeField]
+        private OreGenerator oreGenerator;
+        [SerializeField]
         private TileMapVisualizer tileMapVisualizer;
 
         [SerializeField]
@@ -71,6 +73,7 @@ namespace WorldGeneration
             tileMapVisualizer.PaintFloorTiles(floorPositions);
             WallGenerator.PaintWallTiles(tileMapVisualizer, floorPositions);
             FindPlayerLocation(startPosition, floorPositions, WallGenerator.FindWallPositions(floorPositions, Direction.Directions));
+            oreGenerator.GenerateOres(floorPositions);
         }
 
         private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> roomPositions)
