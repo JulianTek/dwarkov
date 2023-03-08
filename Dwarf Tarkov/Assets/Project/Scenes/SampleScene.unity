@@ -10641,6 +10641,7 @@ GameObject:
   - component: {fileID: 2055715629}
   - component: {fileID: 2055715628}
   - component: {fileID: 2055715630}
+  - component: {fileID: 2055715631}
   m_Layer: 0
   m_Name: WorldGenerator
   m_TagString: Untagged
@@ -10660,6 +10661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77996cc3b30428488f9b7353ee15566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oreGenerator: {fileID: 2055715631}
   tileMapVisualizer: {fileID: 2055715630}
   startPosition: {x: 0, y: 0}
   iterations: 100
@@ -10700,3 +10702,19 @@ MonoBehaviour:
   wallTileMap: {fileID: 1476623184}
   floorTile: {fileID: 11400000, guid: 24a40242fb8916b4995e726243a7aa5f, type: 2}
   wallTile: {fileID: 11400000, guid: b2851554cdd384a4894775ea014da4e5, type: 2}
+--- !u!114 &2055715631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055715627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0b3006bf60a43409143d85d54b9ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oreChance: 20
+  ores:
+  - {fileID: 5968737770648155444, guid: 19da135bad3605a41814e6f481eb77b5, type: 3}
+  - {fileID: 1509367041237378575, guid: a2f939ad5b3ca9e4f90df633f6fb7282, type: 3}
