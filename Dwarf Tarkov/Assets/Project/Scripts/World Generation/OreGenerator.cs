@@ -11,14 +11,21 @@ namespace WorldGeneration
         private float oreChance;
         [SerializeField]
         private List<GameObject> ores;
+        [SerializeField]
+        private int maxOres;
+        private int currentOres = 0;
         public void GenerateOres(HashSet<Vector2Int> floorPositions)
         {
             foreach (Vector2Int floorPosition in floorPositions)
             {
                 float value = Random.Range(0f, 100f);
                 GameObject oreToSpawn = CheckIfOreGenerated(value);
-                if (oreToSpawn != null)
+                if (oreToSpawn != null && currentOres < maxOres)
+                {
                     Instantiate(oreToSpawn, new Vector3(floorPosition.x, floorPosition.y), Quaternion.identity);
+                    currentOres++;
+                }
+
 
             }
         }
