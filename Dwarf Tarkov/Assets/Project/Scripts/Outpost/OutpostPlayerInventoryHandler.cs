@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-public class OutpostStorageGridHandler : MonoBehaviour
+public class OutpostPlayerInventoryHandler : MonoBehaviour
 {
     [SerializeField]
     private GameObject inventorySlot;
+    private PlayerInventory inventory;
     private List<GameObject> inventorySlots = new List<GameObject>();
-    private OutpostChestInventory inventory;
     // Start is called before the first frame update
     void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("OutpostChest").GetComponent<OutpostChestInventory>();
-        EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
+        EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateOutpostInventory;
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);
             inventorySlots.Add(slot);
             slot.SetActive(true);
-            slot.GetComponent<OutpostInventorySlotHandler>().SetIsPlayer(false);
+            slot.GetComponent<OutpostInventorySlotHandler>().SetIsPlayer(true);
         }
     }
 
     private void OnDestroy()
     {
-        EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
+        EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateOutpostInventory;
     }
 
-    void UpdateInventory()
+    void UpdateOutpostInventory()
     {
         List<Item> items = inventory.GetItems();
         if (items.Count > 0)
@@ -38,10 +38,6 @@ public class OutpostStorageGridHandler : MonoBehaviour
                 GameObject slot = inventorySlots[i];
                 if (i < items.Count)
                 {
-                    if (items[i] == null && slot.GetComponent<OutpostInventorySlotHandler>().GetIsTaken())
-                    {
-                        slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
-                    }
                     Item item = items[i];
                     slot.GetComponent<OutpostInventorySlotHandler>().SetSlot(item);
                 }
@@ -50,13 +46,6 @@ public class OutpostStorageGridHandler : MonoBehaviour
                     // Clear the slot if there is no corresponding item
                     slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
                 }
-            }
-        }
-        else
-        {
-            foreach (GameObject slot in inventorySlots)
-            {
-                slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
             }
         }
     }
