@@ -14,7 +14,7 @@ public class OutpostInventoryGridHandler : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
         EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
-        EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);

@@ -13,6 +13,7 @@ public class OutpostPlayerInventoryHandler : MonoBehaviour
     void Start()
     {
         EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateOutpostInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateOutpostInventory;
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
@@ -26,6 +27,7 @@ public class OutpostPlayerInventoryHandler : MonoBehaviour
     private void OnDestroy()
     {
         EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateOutpostInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory -= UpdateOutpostInventory;
     }
 
     void UpdateOutpostInventory()
@@ -47,6 +49,11 @@ public class OutpostPlayerInventoryHandler : MonoBehaviour
                     slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
                 }
             }
+        }
+        else
+        {
+            foreach (GameObject slot in inventorySlots)
+                slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
         }
     }
 }
