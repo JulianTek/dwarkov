@@ -45,7 +45,6 @@ namespace WorldGeneration
         {
             walkGenerator = new WalkGenerator();
             corridorGenerator = new CorridorGenerator();
-            tileMapVisualizer.Clear();
             if (roomFirst)
             {
                 // Will generate room-first-based world
@@ -78,6 +77,7 @@ namespace WorldGeneration
 
         private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> roomPositions)
         {
+            GenerateFirstRoom();
             HashSet<Vector2Int> rooms = new HashSet<Vector2Int>();
             int amountOfRooms = Mathf.RoundToInt(roomPositions.Count * roomChance);
 
@@ -91,6 +91,33 @@ namespace WorldGeneration
 
             return rooms;
         }
+
+        private void GenerateFirstRoom()
+        {
+            HashSet<Vector2Int> positions = new HashSet<Vector2Int>()
+            {
+                new Vector2Int(0, 0),
+                new Vector2Int(0, 1),
+                new Vector2Int(0, 2),
+                new Vector2Int(0, 3),
+                new Vector2Int(-1, 0),
+                new Vector2Int(-1, 1),
+                new Vector2Int(-1, 2),
+                new Vector2Int(-1, 3),
+                new Vector2Int(-1, 4),
+                new Vector2Int(-2, 0),
+                new Vector2Int(-2, 1),
+                new Vector2Int(-2, 2),
+                new Vector2Int(-2, 3),
+                new Vector2Int(-3, 0),
+                new Vector2Int(-3, 1),
+                new Vector2Int(-3, 2),
+                new Vector2Int(-3, 3),
+                new Vector2Int(-3, 4),
+            };
+            tileMapVisualizer.PaintFloorTiles(positions);
+        }
+
 
         private void GenerateRoom()
         {
