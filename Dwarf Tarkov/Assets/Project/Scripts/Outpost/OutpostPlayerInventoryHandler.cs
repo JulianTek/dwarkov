@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
-public class OutpostInventoryGridHandler : MonoBehaviour
+
+public class OutpostPlayerInventoryHandler : MonoBehaviour
 {
     [SerializeField]
     private GameObject inventorySlot;
-    private List<GameObject> inventorySlots = new List<GameObject>();
     private PlayerInventory inventory;
+    private List<GameObject> inventorySlots = new List<GameObject>();
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
+        EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateOutpostInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateOutpostInventory;
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-        EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
-        EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
-        EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);
@@ -26,11 +26,11 @@ public class OutpostInventoryGridHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventChannels.PlayerInputEvents.OnInventoryOpened -= UpdateInventory;
-        EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
-        EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
+        EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateOutpostInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory -= UpdateOutpostInventory;
     }
-    void UpdateInventory()
+
+    void UpdateOutpostInventory()
     {
         List<Item> items = inventory.GetItems();
         if (items.Count > 0)
@@ -40,10 +40,6 @@ public class OutpostInventoryGridHandler : MonoBehaviour
                 GameObject slot = inventorySlots[i];
                 if (i < items.Count)
                 {
-                    if (items[i] == null && slot.GetComponent<OutpostInventorySlotHandler>().GetIsTaken())
-                    {
-                        slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
-                    }
                     Item item = items[i];
                     slot.GetComponent<OutpostInventorySlotHandler>().SetSlot(item);
                 }
@@ -57,9 +53,7 @@ public class OutpostInventoryGridHandler : MonoBehaviour
         else
         {
             foreach (GameObject slot in inventorySlots)
-            {
                 slot.GetComponent<OutpostInventorySlotHandler>().ClearSlot();
-            }
         }
     }
 }

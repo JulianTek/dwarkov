@@ -20,10 +20,12 @@ public class DialogueUIHandler1 : MonoBehaviour
     void ShowDialogueBox(DialogueLine[] lines)
     {
         gameObject.SetActive(true);
+        EventChannels.PlayerInputEvents.OnEnableHUDControls?.Invoke();
     }
 
     void HideDialogueBox()
     {
         gameObject.SetActive(false);
+        EventChannels.PlayerInputEvents.OnDisableHUDControls?.Invoke();
     }
 }

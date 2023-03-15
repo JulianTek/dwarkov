@@ -36,7 +36,6 @@ public class OutpostInventorySlotHandler : MonoBehaviour
     private void SetSprite(Sprite sprite)
     {
         image.sprite = sprite;
-
     }
 
     private void SetIsTaken(bool isNowTaken)
@@ -72,7 +71,7 @@ public class OutpostInventorySlotHandler : MonoBehaviour
                 EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory?.Invoke(item.data, item.amount);
                 EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item.data, item.amount);
             }
-            EventChannels.ItemEvents.OnUpdateInventory?.Invoke();
+            EventChannels.ItemEvents.OnUpdateOutpostInventory?.Invoke();
         }
     }
 

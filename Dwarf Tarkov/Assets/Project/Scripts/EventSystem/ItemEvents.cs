@@ -19,7 +19,10 @@ public class ItemEvents
     public ItemEvent OnPlayerCollidesWithItem;
 
     public InventoryEvent OnUpdateInventory;
+    public InventoryEvent OnUpdateOutpostInventory;
 
     public ItemListEvent OnCheckIfListFits;
     public ItemListEvent OnCheckIfItemQuestCompleted;
+
+
 }

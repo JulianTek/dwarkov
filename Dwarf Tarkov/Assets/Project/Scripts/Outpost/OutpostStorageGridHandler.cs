@@ -13,8 +13,7 @@ public class OutpostStorageGridHandler : MonoBehaviour
     void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("OutpostChest").GetComponent<OutpostChestInventory>();
-        EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
-        EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);
@@ -26,8 +25,7 @@ public class OutpostStorageGridHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
-        EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory -= UpdateInventory;
     }
 
     void UpdateInventory()
