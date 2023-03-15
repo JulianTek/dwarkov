@@ -34,7 +34,11 @@ public class ShopkeepInteractionHandler : MonoBehaviour
     private void Interact()
     {
         if (playerIsInTrigger)
+        {
             EventChannels.UIEvents.OnOpenBarteringMenu?.Invoke(inventory);
+            EventChannels.PlayerInputEvents.OnEnableHUDControls?.Invoke();
+        }
+
     }
 }
  

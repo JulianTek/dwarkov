@@ -55,5 +55,6 @@ public class ShopkeepInventory : MonoBehaviour
     {
         EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item.Data, 1);
         EventChannels.BarteringEvents.OnPlayerBuysItem?.Invoke(item.CostPerItem);
+        EventChannels.UIEvents.OnCloseBarteringMenu?.Invoke();
     }
 }

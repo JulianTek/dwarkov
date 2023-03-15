@@ -15,5 +15,6 @@ public class BarteringMenuUIHandler : MonoBehaviour
     void CloseMenu()
     {
         gameObject.SetActive(false);
+        EventChannels.PlayerInputEvents.OnDisableHUDControls?.Invoke();
     }
 }
