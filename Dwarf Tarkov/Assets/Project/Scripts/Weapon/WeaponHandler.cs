@@ -16,6 +16,7 @@ public class WeaponHandler : MonoBehaviour
     private TextMeshProUGUI magText;
     private SpriteRenderer gunSprite;
 
+    private AmmoSubtype ammoTypeLoaded;
 
     private int maxMagCount;
     private int currentMagCount;
@@ -117,8 +118,8 @@ public class WeaponHandler : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
                 float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
-                bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * data.AmmoType.BulletSpeed, ForceMode2D.Impulse);
-                bullet.GetComponent<BulletHandler>().ammoType = data.AmmoType;
+                bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * ammoTypeLoaded.BulletSpeed, ForceMode2D.Impulse);
+                bullet.GetComponent<BulletHandler>().ammoType = ammoTypeLoaded;
             }
             timeSinceLastShot = 0f;
             currentMagCount--;
@@ -154,7 +155,7 @@ public class WeaponHandler : MonoBehaviour
     private IEnumerator ReloadCoolDown()
     {
         Debug.Log("Reloading");
-        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(data.AmmoType);
+        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(ammoTypeLoaded);
         if (ammoInInventory != 0)
         {
             LaunchMag();
@@ -169,12 +170,12 @@ public class WeaponHandler : MonoBehaviour
             if (ammoInInventory >= maxMagCount)
             {
                 currentMagCount = maxMagCount;
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, maxMagCount);
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, maxMagCount);
             }
             else if (ammoInInventory > 0)
             {
                 currentMagCount = ammoInInventory;
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, ammoInInventory);
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, ammoInInventory);
             }
             isAiming = true;
             canFire = true;
