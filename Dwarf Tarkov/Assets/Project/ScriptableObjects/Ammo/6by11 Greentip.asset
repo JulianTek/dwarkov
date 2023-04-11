@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37accbad2dac5c24988edf7f4c6b44e5, type: 3}
   m_Name: 6by11 Greentip
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Name: 
-  SellPrice: 0
-  Type: 0
-  IsStackable: 0
-  MaxStackAmount: 0
-  Description: 
-  BuyPrice: 0
-  PriceModifier: 0
-  BulletSpeed: 0
-  Damage: 0
+  Sprite: {fileID: 21300000, guid: af2501f6556fb164bb3e693f2b33ec4f, type: 3}
+  Name: 6.11x54mm Green-tip
+  SellPrice: 4
+  Type: 4
+  IsStackable: 1
+  MaxStackAmount: 99
+  Description: A more powerful version of the 6.11 cartridge, with a shiny coat of
+    paint!
+  BuyPrice: 7
+  BulletSpeed: 10
+  Damage: 20

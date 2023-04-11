@@ -31,6 +31,8 @@ namespace EventSystem
 
         public ButtonEvent OnEnableHUDControls;
         public ButtonEvent OnDisableHUDControls;
+
+        public ButtonEvent OnToggleAmmoTypes;
     }
 }
 

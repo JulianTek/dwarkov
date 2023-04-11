@@ -6,6 +6,7 @@ using System;
 public class ItemEvents
 {
     public delegate void ItemEvent(ItemData item);
+    public delegate bool ItemBoolEvent(ItemData item);
     public delegate void ItemQuantityEvent(ItemData item, int quantity);
     public delegate void InventoryEvent();
     public delegate bool ItemListEvent(List<Item> items);
@@ -24,5 +25,5 @@ public class ItemEvents
     public ItemListEvent OnCheckIfListFits;
     public ItemListEvent OnCheckIfItemQuestCompleted;
 
-
+    public ItemBoolEvent OnCheckIfItemInInventory;
 }

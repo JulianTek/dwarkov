@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsAutoFire: 1
   RateOfFire: 0.2
-  AmmoType: {fileID: 11400000, guid: 88371131e5e13794d9f95aed111d4b3d, type: 2}
+  AmmoSubtypes:
+  - {fileID: 11400000, guid: ef70df9bd8f6e184b9242c5b3f594bc9, type: 2}
+  - {fileID: 11400000, guid: 5af40b46e436d1740af5cdbc365eff0b, type: 2}
   MagCapacity: 30
   ReloadTime: 3
   Sprite: {fileID: 21300000, guid: 6cafc837ec39b024baafef5f63de162f, type: 3}

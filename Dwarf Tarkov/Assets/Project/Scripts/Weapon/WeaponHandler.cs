@@ -17,6 +17,7 @@ public class WeaponHandler : MonoBehaviour
     private SpriteRenderer gunSprite;
 
     private AmmoSubtype ammoTypeLoaded;
+    private int ammoTypeIndex;
 
     private int maxMagCount;
     private int currentMagCount;
@@ -35,10 +36,12 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
+        EventChannels.PlayerInputEvents.OnToggleAmmoTypes += ToggleAmmoTypes;
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
-        gunSprite = GetComponentInChildren<SpriteRenderer>(); 
+        gunSprite = GetComponentInChildren<SpriteRenderer>();
+        SetIndexAndAmmoType();
     }
 
     void OnDestroy()
@@ -47,6 +50,7 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootFinished -= StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload -= Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim -= Aim;
+        EventChannels.PlayerInputEvents.OnToggleAmmoTypes -= ToggleAmmoTypes;
     }
 
     private void Aim(Vector2 aimVector)
@@ -127,6 +131,19 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
+    public void SetIndexAndAmmoType()
+    {
+        foreach (AmmoSubtype ammoType in data.AmmoSubtypes)
+        {
+            if (EventChannels.ItemEvents.OnCheckIfItemInInventory(ammoType))
+            {
+                ammoTypeLoaded = ammoType;
+                ammoTypeIndex = data.AmmoSubtypes.IndexOf(ammoType);
+                return;
+            }
+        }
+    }
+
     void StartShooting()
     {
         if (canFire)
@@ -195,5 +212,19 @@ public class WeaponHandler : MonoBehaviour
     public WeaponData GetWeaponData()
     {
         return data;
+    }
+
+    public void ToggleAmmoTypes()
+    {
+        if (ammoTypeIndex == data.AmmoSubtypes.Count - 1)
+        {
+            ammoTypeIndex = 0;
+        }
+        else
+        {
+            ammoTypeIndex++;
+        }
+        ammoTypeLoaded = data.AmmoSubtypes[ammoTypeIndex];
+        Debug.Log($"Current loaded type is {ammoTypeLoaded}");
     }
 }
