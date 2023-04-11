@@ -13,6 +13,7 @@ public class InventoryGridHandler : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
+        EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
         EventChannels.UIEvents.OnOpenBarteringMenu += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
