@@ -29,6 +29,7 @@ public class WeaponHandler : MonoBehaviour
     private bool isFiring = false;
     private bool canFire = true;
     private bool canReload = true;
+    private bool currentlyTogglingAmmoTypes;
 
     private void Start()
     {
@@ -37,6 +38,8 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes += ToggleAmmoTypes;
+        EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo += GetCurrentlyLoadedAmmoType;
+        EventChannels.ItemEvents.OnGetSubtypesInInventory += GetAmmoTypesInInventory;
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
@@ -51,6 +54,8 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerReload -= Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim -= Aim;
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes -= ToggleAmmoTypes;
+        EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo -= GetCurrentlyLoadedAmmoType;
+        EventChannels.ItemEvents.OnGetSubtypesInInventory -= GetAmmoTypesInInventory;
     }
 
     private void Aim(Vector2 aimVector)
@@ -63,28 +68,19 @@ public class WeaponHandler : MonoBehaviour
         magText.text = $"{currentMagCount}/{maxMagCount}";
         if (isAiming)
         {
-            // Get the position of the mouse cursor in world space
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
             mousePos.z = 0f;
-
-            // Calculate the direction the gun should face
             Vector3 direction = (mousePos - transform.position).normalized;
 
-            // Calculate the angle the gun should rotate to face the mouse cursor
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            // Rotate the gun to face the mouse cursor
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            Debug.Log(mousePos.x);
             if (mousePos.x < 0)
             {
-                Debug.Log("Mouse on left half of screen");
                 gunSprite.flipY = true;
             }
             else
             {
-                Debug.Log("Mouse on right half of screen");
                 gunSprite.flipY = false;
             }
 
@@ -216,15 +212,38 @@ public class WeaponHandler : MonoBehaviour
 
     public void ToggleAmmoTypes()
     {
-        if (ammoTypeIndex == data.AmmoSubtypes.Count - 1)
+        if (currentlyTogglingAmmoTypes)
         {
-            ammoTypeIndex = 0;
+            if (ammoTypeIndex == data.AmmoSubtypes.Count - 1)
+            {
+                ammoTypeIndex = 0;
+            }
+            else
+            {
+                ammoTypeIndex++;
+            }
+            ammoTypeLoaded = data.AmmoSubtypes[ammoTypeIndex];
         }
         else
         {
-            ammoTypeIndex++;
+            EventChannels.UIEvents.OnShowAmmoTypes?.Invoke();
         }
-        ammoTypeLoaded = data.AmmoSubtypes[ammoTypeIndex];
-        Debug.Log($"Current loaded type is {ammoTypeLoaded}");
+    }
+
+    public AmmoSubtype GetCurrentlyLoadedAmmoType()
+    {
+        return ammoTypeLoaded;
+    }
+
+    public List<AmmoSubtype> GetAmmoTypesInInventory()
+    {
+        List<AmmoSubtype> typesInInventory = new List<AmmoSubtype>();
+        foreach (AmmoSubtype ammoSubtype in data.AmmoSubtypes)
+        {
+            if (EventChannels.ItemEvents.OnCheckIfItemInInventory(ammoSubtype)) {
+                typesInInventory.Add(ammoSubtype);
+            }
+        }
+        return typesInInventory;
     }
 }

@@ -10,6 +10,8 @@ public class ItemEvents
     public delegate void ItemQuantityEvent(ItemData item, int quantity);
     public delegate void InventoryEvent();
     public delegate bool ItemListEvent(List<Item> items);
+    public delegate AmmoSubtype GetAmmoTypeEvent();
+    public delegate List<AmmoSubtype> GetAmmoListEvent();
 
     public ItemQuantityEvent OnAddItemToInventory;
     public ItemQuantityEvent OnRemoveItemFromInventory;
@@ -26,4 +28,7 @@ public class ItemEvents
     public ItemListEvent OnCheckIfItemQuestCompleted;
 
     public ItemBoolEvent OnCheckIfItemInInventory;
+
+    public GetAmmoTypeEvent OnGetCurrentlyLoadedAmmo;
+    public GetAmmoListEvent OnGetSubtypesInInventory;
 }

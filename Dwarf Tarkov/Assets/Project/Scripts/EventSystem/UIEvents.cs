@@ -28,4 +28,6 @@ public class UIEvents
     public UIEvent OnCloseBarteringMenu;
 
     public ItemEvent OnPlayerSelectsItemToBuy;
+
+    public UIEvent OnShowAmmoTypes;
 }
