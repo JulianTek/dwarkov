@@ -40,6 +40,7 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes += ToggleAmmoTypes;
         EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo += GetCurrentlyLoadedAmmoType;
         EventChannels.ItemEvents.OnGetSubtypesInInventory += GetAmmoTypesInInventory;
+        EventChannels.WeaponEvents.OnGetAmmoType += GetCurrentAmmoType;
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
@@ -56,6 +57,7 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes -= ToggleAmmoTypes;
         EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo -= GetCurrentlyLoadedAmmoType;
         EventChannels.ItemEvents.OnGetSubtypesInInventory -= GetAmmoTypesInInventory;
+        EventChannels.WeaponEvents.OnGetAmmoType -= GetCurrentAmmoType;
     }
 
     private void Aim(Vector2 aimVector)
@@ -137,6 +139,10 @@ public class WeaponHandler : MonoBehaviour
                 ammoTypeIndex = data.AmmoSubtypes.IndexOf(ammoType);
                 return;
             }
+        }
+        if (ammoTypeLoaded == null)
+        {
+            ammoTypeIndex = int.MaxValue;
         }
     }
 
@@ -245,5 +251,10 @@ public class WeaponHandler : MonoBehaviour
             }
         }
         return typesInInventory;
+    }
+
+    private AmmoSubtype GetCurrentAmmoType()
+    {
+        return ammoTypeLoaded;
     }
 }

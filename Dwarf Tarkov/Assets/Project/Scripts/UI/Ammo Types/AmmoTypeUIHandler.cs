@@ -9,7 +9,7 @@ public class AmmoTypeUIHandler : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI text;
     private List<AmmoSubtype> ammoSubtypes = new List<AmmoSubtype>();
-    private int ammoIndex = 0;
+    private AmmoSubtype currentlyLoadedType;
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +45,18 @@ public class AmmoTypeUIHandler : MonoBehaviour
     {
         gameObject.SetActive(true);
         ammoSubtypes = EventChannels.ItemEvents.OnGetSubtypesInInventory();
+        currentlyLoadedType = EventChannels.WeaponEvents.OnGetAmmoType?.Invoke();
         foreach (AmmoSubtype subtype in ammoSubtypes)
         {
-            text.text += $"{subtype.Name} <br>";
+            if (subtype == currentlyLoadedType)
+            {
+                text.color = Color.yellow;
+                text.text += $">{subtype.Name} <br>";
+            }
+            else
+            {
+                text.text += $"{subtype.Name} <br>";
+            }
         }
     }
 
