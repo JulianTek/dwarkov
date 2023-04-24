@@ -30,4 +30,5 @@ public class UIEvents
     public ItemEvent OnPlayerSelectsItemToBuy;
 
     public UIEvent OnShowAmmoTypes;
+    public UIEvent OnHideAmmoTypes;
 }

@@ -54,5 +54,6 @@ public class AmmoTypeUIHandler : MonoBehaviour
     private void HideHUD()
     {
         gameObject.SetActive(false);
+        EventChannels.UIEvents.OnHideAmmoTypes?.Invoke();
     } 
 }
