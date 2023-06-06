@@ -16,6 +16,8 @@ public class WeaponHandler : MonoBehaviour
     private TextMeshProUGUI magText;
     private SpriteRenderer gunSprite;
 
+    private AmmoSubtype ammoTypeLoaded;
+    private int ammoTypeIndex;
 
     private int maxMagCount;
     private int currentMagCount;
@@ -27,6 +29,7 @@ public class WeaponHandler : MonoBehaviour
     private bool isFiring = false;
     private bool canFire = true;
     private bool canReload = true;
+    private bool currentlyTogglingAmmoTypes;
 
     private void Start()
     {
@@ -34,10 +37,15 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
+        EventChannels.PlayerInputEvents.OnToggleAmmoTypes += ToggleAmmoTypes;
+        EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo += GetCurrentlyLoadedAmmoType;
+        EventChannels.ItemEvents.OnGetSubtypesInInventory += GetAmmoTypesInInventory;
+        EventChannels.WeaponEvents.OnGetAmmoType += GetCurrentAmmoType;
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
-        gunSprite = GetComponentInChildren<SpriteRenderer>(); 
+        gunSprite = GetComponentInChildren<SpriteRenderer>();
+        SetIndexAndAmmoType();
     }
 
     void OnDestroy()
@@ -46,6 +54,10 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootFinished -= StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload -= Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim -= Aim;
+        EventChannels.PlayerInputEvents.OnToggleAmmoTypes -= ToggleAmmoTypes;
+        EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo -= GetCurrentlyLoadedAmmoType;
+        EventChannels.ItemEvents.OnGetSubtypesInInventory -= GetAmmoTypesInInventory;
+        EventChannels.WeaponEvents.OnGetAmmoType -= GetCurrentAmmoType;
     }
 
     private void Aim(Vector2 aimVector)
@@ -58,28 +70,19 @@ public class WeaponHandler : MonoBehaviour
         magText.text = $"{currentMagCount}/{maxMagCount}";
         if (isAiming)
         {
-            // Get the position of the mouse cursor in world space
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
             mousePos.z = 0f;
-
-            // Calculate the direction the gun should face
             Vector3 direction = (mousePos - transform.position).normalized;
 
-            // Calculate the angle the gun should rotate to face the mouse cursor
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            // Rotate the gun to face the mouse cursor
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            Debug.Log(mousePos.x);
             if (mousePos.x < 0)
             {
-                Debug.Log("Mouse on left half of screen");
                 gunSprite.flipY = true;
             }
             else
             {
-                Debug.Log("Mouse on right half of screen");
                 gunSprite.flipY = false;
             }
 
@@ -117,12 +120,29 @@ public class WeaponHandler : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
                 float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
-                bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * data.AmmoType.BulletSpeed, ForceMode2D.Impulse);
-                bullet.GetComponent<BulletHandler>().ammoType = data.AmmoType;
+                bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * ammoTypeLoaded.BulletSpeed, ForceMode2D.Impulse);
+                bullet.GetComponent<BulletHandler>().ammoType = ammoTypeLoaded;
             }
             timeSinceLastShot = 0f;
             currentMagCount--;
             Debug.DrawRay(transform.position, transform.right * 50f, Color.red, 0.1f);
+        }
+    }
+
+    public void SetIndexAndAmmoType()
+    {
+        foreach (AmmoSubtype ammoType in data.AmmoSubtypes)
+        {
+            if (EventChannels.ItemEvents.OnCheckIfItemInInventory(ammoType))
+            {
+                ammoTypeLoaded = ammoType;
+                ammoTypeIndex = data.AmmoSubtypes.IndexOf(ammoType);
+                return;
+            }
+        }
+        if (ammoTypeLoaded == null)
+        {
+            ammoTypeIndex = int.MaxValue;
         }
     }
 
@@ -143,10 +163,10 @@ public class WeaponHandler : MonoBehaviour
     {
         if (canReload)
         {
+            currentlyTogglingAmmoTypes = false;
             canReload = false;
             canFire = false;
             isAiming = false;
-            Debug.Log("event hit");
             StartCoroutine(ReloadCoolDown());
         }
     }
@@ -154,7 +174,7 @@ public class WeaponHandler : MonoBehaviour
     private IEnumerator ReloadCoolDown()
     {
         Debug.Log("Reloading");
-        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(data.AmmoType);
+        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(ammoTypeLoaded);
         if (ammoInInventory != 0)
         {
             LaunchMag();
@@ -169,16 +189,17 @@ public class WeaponHandler : MonoBehaviour
             if (ammoInInventory >= maxMagCount)
             {
                 currentMagCount = maxMagCount;
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, maxMagCount);
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, maxMagCount);
             }
             else if (ammoInInventory > 0)
             {
                 currentMagCount = ammoInInventory;
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(data.AmmoType, ammoInInventory);
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, ammoInInventory);
             }
             isAiming = true;
             canFire = true;
             canReload = true;
+            Debug.Log(GetCurrentlyLoadedAmmoType());
         }
 
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
@@ -194,5 +215,48 @@ public class WeaponHandler : MonoBehaviour
     public WeaponData GetWeaponData()
     {
         return data;
+    }
+
+    public void ToggleAmmoTypes()
+    {
+        canFire = false;
+        if (currentlyTogglingAmmoTypes)
+        {
+            if (ammoTypeIndex == data.AmmoSubtypes.Count - 1)
+                ammoTypeIndex = 0;
+            else if (ammoTypeIndex > data.AmmoSubtypes.Count)
+                ammoTypeIndex = 1;
+            else
+                ammoTypeIndex++;
+            ammoTypeLoaded = data.AmmoSubtypes[ammoTypeIndex];
+        }
+        else
+        {
+            EventChannels.UIEvents.OnShowAmmoTypes?.Invoke();
+            currentlyTogglingAmmoTypes = true;
+        }
+    }
+
+    public AmmoSubtype GetCurrentlyLoadedAmmoType()
+    {
+        return ammoTypeLoaded;
+    }
+
+    public List<AmmoSubtype> GetAmmoTypesInInventory()
+    {
+        List<AmmoSubtype> typesInInventory = new List<AmmoSubtype>();
+        foreach (AmmoSubtype ammoSubtype in data.AmmoSubtypes)
+        {
+            if (EventChannels.ItemEvents.OnCheckIfItemInInventory(ammoSubtype))
+            {
+                typesInInventory.Add(ammoSubtype);
+            }
+        }
+        return typesInInventory;
+    }
+
+    private AmmoSubtype GetCurrentAmmoType()
+    {
+        return ammoTypeLoaded;
     }
 }

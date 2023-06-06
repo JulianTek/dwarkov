@@ -21,6 +21,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.Sprint.canceled += StopSprint;
         playerControls.Player.OpenInventory.performed += OpenInventory;
         playerControls.Player.Interact.performed += Interact;
+        playerControls.Player.ToggleAmmoTypes.performed += ToggleAmmoTypes;
 
         playerControls.HUD.Close.performed += CloseInventory;
 
@@ -37,6 +38,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.Sprint.canceled -= StopSprint;
         playerControls.Player.OpenInventory.performed -= OpenInventory;
         playerControls.Player.Interact.performed -= Interact;
+        playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
 
         playerControls.HUD.Close.performed -= CloseInventory;
     }
@@ -123,5 +125,10 @@ public class PlayerInputHandler : MonoBehaviour
     {
         playerControls.Player.Enable();
         playerControls.HUD.Disable();
+    }
+
+    private void ToggleAmmoTypes(InputAction.CallbackContext ctx)
+    {
+        EventChannels.PlayerInputEvents.OnToggleAmmoTypes?.Invoke();
     }
 } 

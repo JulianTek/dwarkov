@@ -12,7 +12,7 @@ public class WeaponData : ScriptableObject
     [BoxGroup("Split/WeaponMechanics", LabelText = "Mechanics")]
     public float RateOfFire;
     [BoxGroup("Split/WeaponMechanics", LabelText = "Mechanics")]
-    public AmmoType AmmoType;
+    public List<AmmoSubtype> AmmoSubtypes;
     [BoxGroup("Split/Ammo", LabelText = "Ammo Stats")]
     public int MagCapacity;
     [BoxGroup("Split/Ammo", LabelText = "Ammo Stats")]

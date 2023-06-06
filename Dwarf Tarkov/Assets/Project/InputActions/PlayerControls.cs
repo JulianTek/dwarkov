@@ -98,6 +98,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleAmmoTypes"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab267093-b965-4f2b-a1e5-f1c880060047"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07cc3fdb-df62-4409-b881-a44cfec75aaf"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleAmmoTypes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -276,6 +296,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_ToggleAmmoTypes = m_Player.FindAction("ToggleAmmoTypes", throwIfNotFound: true);
         // HUD
         m_HUD = asset.FindActionMap("HUD", throwIfNotFound: true);
         m_HUD_Close = m_HUD.FindAction("Close", throwIfNotFound: true);
@@ -346,6 +367,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_ToggleAmmoTypes;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -358,6 +380,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @ToggleAmmoTypes => m_Wrapper.m_Player_ToggleAmmoTypes;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -391,6 +414,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @ToggleAmmoTypes.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleAmmoTypes;
+                @ToggleAmmoTypes.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleAmmoTypes;
+                @ToggleAmmoTypes.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleAmmoTypes;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -419,6 +445,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ToggleAmmoTypes.started += instance.OnToggleAmmoTypes;
+                @ToggleAmmoTypes.performed += instance.OnToggleAmmoTypes;
+                @ToggleAmmoTypes.canceled += instance.OnToggleAmmoTypes;
             }
         }
     }
@@ -466,6 +495,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnToggleAmmoTypes(InputAction.CallbackContext context);
     }
     public interface IHUDActions
     {
