@@ -42,6 +42,7 @@ public class InventoryGridHandler : MonoBehaviour
                 {
                     Item item = items[i];
                     slot.GetComponent<InventorySlotHandler>().SetSlot(item);
+                    slot.GetComponent<InventorySlotHandler>().SetItem(item.data);
                 }
                 else
                 {

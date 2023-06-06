@@ -11,9 +11,24 @@ public class InventorySlotHandler : MonoBehaviour
     private Image image;
     [SerializeField]
     private TextMeshProUGUI stackText;
+    private ItemData item;
+
+    [SerializeField]
+    private GameObject descriptionBox;
 
     private void Start()
     {
+        descriptionBox.SetActive(false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (item != null)
+        {
+            descriptionBox.SetActive(true);
+            TextMeshProUGUI descriptionText = descriptionBox.GetComponentInChildren<TextMeshProUGUI>();
+            descriptionText.SetText(item.Description);
+        }
     }
 
     public void SetSlot(Item item)
@@ -50,8 +65,14 @@ public class InventorySlotHandler : MonoBehaviour
     {
         SetSprite(null);
         SetIsTaken(false);
+        item = null;
         image.enabled = false;
         stackText.text = null;
         stackText.enabled = false;
+    }
+
+    public void SetItem(ItemData data)
+    {
+        item = data;
     }
 }
