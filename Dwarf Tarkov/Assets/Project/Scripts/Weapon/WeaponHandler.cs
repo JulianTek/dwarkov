@@ -163,10 +163,10 @@ public class WeaponHandler : MonoBehaviour
     {
         if (canReload)
         {
+            currentlyTogglingAmmoTypes = false;
             canReload = false;
             canFire = false;
             isAiming = false;
-            Debug.Log("event hit");
             StartCoroutine(ReloadCoolDown());
         }
     }
@@ -199,6 +199,7 @@ public class WeaponHandler : MonoBehaviour
             isAiming = true;
             canFire = true;
             canReload = true;
+            Debug.Log(GetCurrentlyLoadedAmmoType());
         }
 
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
@@ -218,21 +219,21 @@ public class WeaponHandler : MonoBehaviour
 
     public void ToggleAmmoTypes()
     {
+        canFire = false;
         if (currentlyTogglingAmmoTypes)
         {
             if (ammoTypeIndex == data.AmmoSubtypes.Count - 1)
-            {
                 ammoTypeIndex = 0;
-            }
+            else if (ammoTypeIndex > data.AmmoSubtypes.Count)
+                ammoTypeIndex = 1;
             else
-            {
                 ammoTypeIndex++;
-            }
             ammoTypeLoaded = data.AmmoSubtypes[ammoTypeIndex];
         }
         else
         {
             EventChannels.UIEvents.OnShowAmmoTypes?.Invoke();
+            currentlyTogglingAmmoTypes = true;
         }
     }
 
@@ -246,7 +247,8 @@ public class WeaponHandler : MonoBehaviour
         List<AmmoSubtype> typesInInventory = new List<AmmoSubtype>();
         foreach (AmmoSubtype ammoSubtype in data.AmmoSubtypes)
         {
-            if (EventChannels.ItemEvents.OnCheckIfItemInInventory(ammoSubtype)) {
+            if (EventChannels.ItemEvents.OnCheckIfItemInInventory(ammoSubtype))
+            {
                 typesInInventory.Add(ammoSubtype);
             }
         }
