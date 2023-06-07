@@ -13,22 +13,12 @@ public class InventorySlotHandler : MonoBehaviour
     private TextMeshProUGUI stackText;
     private ItemData item;
 
-    [SerializeField]
-    private GameObject descriptionBox;
+
+    private TooltipHandler tooltip;
 
     private void Start()
     {
-        descriptionBox.SetActive(false);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (item != null)
-        {
-            descriptionBox.SetActive(true);
-            TextMeshProUGUI descriptionText = descriptionBox.GetComponentInChildren<TextMeshProUGUI>();
-            descriptionText.SetText(item.Description);
-        }
+        tooltip = GetComponent<TooltipHandler>();
     }
 
     public void SetSlot(Item item)
@@ -74,5 +64,7 @@ public class InventorySlotHandler : MonoBehaviour
     public void SetItem(ItemData data)
     {
         item = data;
+        tooltip.header = data.Name;
+        tooltip.desc = data.Description;
     }
 }
