@@ -13,8 +13,15 @@ public class TooltipInstance : MonoBehaviour
     [SerializeField]
     private LayoutElement layoutElement;
 
+    private RectTransform rectTransform;
+
     [SerializeField]
     private int charWrapLimit;
+
+    private void Start()
+    {
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     public void SetText(string headerText, string descText)
     {
@@ -28,5 +35,12 @@ public class TooltipInstance : MonoBehaviour
         int descLength = descText.text.Length;
 
         layoutElement.enabled = (headerLength > charWrapLimit || descLength > charWrapLimit) ? true : false;
+        Vector2 mousePos = Input.mousePosition;
+
+        float posX = mousePos.x / Screen.width;
+        float posY = mousePos.y / Screen.height;
+
+        rectTransform.pivot = new Vector2(posX, posY);
+        transform.position = mousePos;
     }
 }
