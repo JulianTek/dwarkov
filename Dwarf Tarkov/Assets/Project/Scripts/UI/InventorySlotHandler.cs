@@ -11,9 +11,14 @@ public class InventorySlotHandler : MonoBehaviour
     private Image image;
     [SerializeField]
     private TextMeshProUGUI stackText;
+    private ItemData item;
+
+
+    private TooltipHandler tooltip;
 
     private void Start()
     {
+        tooltip = GetComponent<TooltipHandler>();
     }
 
     public void SetSlot(Item item)
@@ -50,8 +55,16 @@ public class InventorySlotHandler : MonoBehaviour
     {
         SetSprite(null);
         SetIsTaken(false);
+        item = null;
         image.enabled = false;
         stackText.text = null;
         stackText.enabled = false;
+    }
+
+    public void SetItem(ItemData data)
+    {
+        item = data;
+        tooltip.header = data.Name;
+        tooltip.desc = data.Description;
     }
 }
