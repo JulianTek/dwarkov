@@ -61,6 +61,11 @@ public class InventorySlotHandler : MonoBehaviour
         stackText.enabled = false;
     }
 
+    public ItemData GetItem()
+    {
+        return item;
+    }
+
     public void SetItem(ItemData data)
     {
         item = data;

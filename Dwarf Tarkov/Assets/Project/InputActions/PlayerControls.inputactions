@@ -245,6 +245,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SplitStack",
+                    "type": "Button",
+                    "id": "0632896d-d65f-4383-8cbf-bee84ca8fe14",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -256,6 +265,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "697b021b-8f89-475d-a109-5972fbea7b74",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SplitStack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

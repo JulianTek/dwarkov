@@ -8,7 +8,7 @@ namespace EventSystem
     {
         public delegate void MoveEvent(Vector2 pos);
         public delegate void ButtonEvent();
-        public delegate void SprintEvent(bool isSprinting);
+        public delegate void BoolEvent(bool boolean);
         public delegate void ItemEvent(Item item);
 
         public MoveEvent OnPlayerAim;
@@ -19,13 +19,14 @@ namespace EventSystem
         public ButtonEvent OnPlayerMine;
         public MoveEvent OnPlayerMove;
 
-        public SprintEvent OnPlayerSprint;
+        public BoolEvent OnPlayerSprint;
 
         public ItemEvent OnItemAddedToInventory;
         public ItemEvent OnItemRemovedFromInventory;
 
         public ButtonEvent OnInventoryOpened;
         public ButtonEvent OnInventoryClosed;
+        public BoolEvent OnToggleStackSplit;
 
         public ButtonEvent OnInteract;
 

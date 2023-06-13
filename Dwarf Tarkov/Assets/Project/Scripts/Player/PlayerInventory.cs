@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using System;
-using Data; 
+using Data;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -75,6 +75,11 @@ public class PlayerInventory : MonoBehaviour
                 inventory.Add(new Item(item, amount));
         }
         ClearEmptySlots();
+    }
+
+    public void CreateNewStack(ItemData item, int amount)
+    {
+
     }
 
     void RemoveItem(ItemData item, int amount)
@@ -192,6 +197,24 @@ public class PlayerInventory : MonoBehaviour
         return requirementsMet == requiredItems.Count;
     }
 
+    public bool CheckIfSlotFree()
+    {
+        for (int i = 0; i < InventoryCapacity; i++)
+        {
+            try
+            {
+                Item item = inventory[i];
+                if (item.data != null)
+                    continue;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool CheckIfEnoughCredits(int requiredAmount)
     {
         int amountOfCredits = 0;
@@ -203,7 +226,7 @@ public class PlayerInventory : MonoBehaviour
                 amountOfCredits += item.amount;
             }
         }
-        
+
         return amountOfCredits >= requiredAmount;
     }
 
@@ -245,4 +268,4 @@ public class PlayerInventory : MonoBehaviour
         }
         return false;
     }
-} 
+}

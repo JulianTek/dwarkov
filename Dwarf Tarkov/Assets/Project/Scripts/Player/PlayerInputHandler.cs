@@ -24,6 +24,8 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.ToggleAmmoTypes.performed += ToggleAmmoTypes;
 
         playerControls.HUD.Close.performed += CloseInventory;
+        playerControls.HUD.SplitStack.started += EnableStackSplit;
+        playerControls.HUD.SplitStack.canceled += DisableStackSplit;
 
         EventChannels.PlayerInputEvents.OnDisableHUDControls += DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls += EnableHUDInput;
@@ -103,6 +105,17 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.Enable();
         playerControls.HUD.Disable();
         EventChannels.PlayerInputEvents.OnInventoryClosed?.Invoke();
+        EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
+    }
+
+    private void EnableStackSplit(InputAction.CallbackContext ctx)
+    {
+        EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(true);
+    }
+
+    private void DisableStackSplit(InputAction.CallbackContext ctx)
+    {
+        EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
     }
 
     private void Reload(InputAction.CallbackContext ctx)
@@ -131,4 +144,4 @@ public class PlayerInputHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes?.Invoke();
     }
-} 
+}
