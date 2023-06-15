@@ -267,6 +267,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SplitStack"",
+                    ""type"": ""Button"",
+                    ""id"": ""0632896d-d65f-4383-8cbf-bee84ca8fe14"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -278,6 +287,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""697b021b-8f89-475d-a109-5972fbea7b74"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SplitStack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -300,6 +320,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // HUD
         m_HUD = asset.FindActionMap("HUD", throwIfNotFound: true);
         m_HUD_Close = m_HUD.FindAction("Close", throwIfNotFound: true);
+        m_HUD_SplitStack = m_HUD.FindAction("SplitStack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -457,11 +478,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_HUD;
     private IHUDActions m_HUDActionsCallbackInterface;
     private readonly InputAction m_HUD_Close;
+    private readonly InputAction m_HUD_SplitStack;
     public struct HUDActions
     {
         private @PlayerControls m_Wrapper;
         public HUDActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Close => m_Wrapper.m_HUD_Close;
+        public InputAction @SplitStack => m_Wrapper.m_HUD_SplitStack;
         public InputActionMap Get() { return m_Wrapper.m_HUD; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -474,6 +497,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Close.started -= m_Wrapper.m_HUDActionsCallbackInterface.OnClose;
                 @Close.performed -= m_Wrapper.m_HUDActionsCallbackInterface.OnClose;
                 @Close.canceled -= m_Wrapper.m_HUDActionsCallbackInterface.OnClose;
+                @SplitStack.started -= m_Wrapper.m_HUDActionsCallbackInterface.OnSplitStack;
+                @SplitStack.performed -= m_Wrapper.m_HUDActionsCallbackInterface.OnSplitStack;
+                @SplitStack.canceled -= m_Wrapper.m_HUDActionsCallbackInterface.OnSplitStack;
             }
             m_Wrapper.m_HUDActionsCallbackInterface = instance;
             if (instance != null)
@@ -481,6 +507,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Close.started += instance.OnClose;
                 @Close.performed += instance.OnClose;
                 @Close.canceled += instance.OnClose;
+                @SplitStack.started += instance.OnSplitStack;
+                @SplitStack.performed += instance.OnSplitStack;
+                @SplitStack.canceled += instance.OnSplitStack;
             }
         }
     }
@@ -500,5 +529,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IHUDActions
     {
         void OnClose(InputAction.CallbackContext context);
+        void OnSplitStack(InputAction.CallbackContext context);
     }
 }
