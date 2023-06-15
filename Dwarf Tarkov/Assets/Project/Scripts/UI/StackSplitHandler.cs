@@ -32,10 +32,11 @@ public class StackSplitHandler : MonoBehaviour
         Debug.Log(canStack);
         if (canStack && inventory.CheckIfSlotFree())
         {
-            int amount = inventory.GetAmountOfItem(slotHandler.GetItem());
+            Item itemToSplit = slotHandler.GetItem();
+            int amount = itemToSplit.amount;
             int split = amount / 2;
-            EventChannels.ItemEvents.OnRemoveItemFromInventory?.Invoke(slotHandler.GetItem(), split);
-            EventChannels.ItemEvents.OnCreateStack?.Invoke(slotHandler.GetItem(), split);
+            EventChannels.ItemEvents.OnRemoveItemFromInventory?.Invoke(itemToSplit.data, split);
+            EventChannels.ItemEvents.OnCreateStack?.Invoke(itemToSplit.data, split);
             EventChannels.ItemEvents.OnUpdateInventory?.Invoke();
         }
     }

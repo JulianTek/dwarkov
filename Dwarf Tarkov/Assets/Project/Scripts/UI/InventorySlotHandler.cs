@@ -11,7 +11,7 @@ public class InventorySlotHandler : MonoBehaviour
     private Image image;
     [SerializeField]
     private TextMeshProUGUI stackText;
-    private ItemData item;
+    private Item item;
 
 
     private TooltipHandler tooltip;
@@ -33,6 +33,7 @@ public class InventorySlotHandler : MonoBehaviour
                 stackText.text = item.amount.ToString();
                 stackText.enabled = true;
             }
+            this.item = item;
         }
     }
     private void SetSprite(Sprite sprite)
@@ -61,15 +62,8 @@ public class InventorySlotHandler : MonoBehaviour
         stackText.enabled = false;
     }
 
-    public ItemData GetItem()
+    public Item GetItem()
     {
         return item;
-    }
-
-    public void SetItem(ItemData data)
-    {
-        item = data;
-        tooltip.header = data.Name;
-        tooltip.desc = data.Description;
     }
 }
