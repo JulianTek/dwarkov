@@ -27,6 +27,8 @@ public class ItemEvents
     public ItemListEvent OnCheckIfListFits;
     public ItemListEvent OnCheckIfItemQuestCompleted;
 
+    public ItemQuantityEvent OnCreateStack;
+
     public ItemBoolEvent OnCheckIfItemInInventory;
 
     public GetAmmoTypeEvent OnGetCurrentlyLoadedAmmo;

@@ -22,6 +22,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCheckIfItemQuestCompleted += CheckIfItemQuestCompleted;
         EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits += CheckIfEnoughCredits;
         EventChannels.ItemEvents.OnCheckIfItemInInventory += CheckIfItemInInventory;
+        EventChannels.ItemEvents.OnCreateStack += CreateNewStack;
     }
 
     private void OnDestroy()
@@ -33,6 +34,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCheckIfItemQuestCompleted -= CheckIfItemQuestCompleted;
         EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits -= CheckIfEnoughCredits;
         EventChannels.ItemEvents.OnCheckIfItemInInventory -= CheckIfItemInInventory;
+        EventChannels.ItemEvents.OnCreateStack -= CreateNewStack;
     }
 
     // Update is called once per frame
@@ -79,7 +81,8 @@ public class PlayerInventory : MonoBehaviour
 
     public void CreateNewStack(ItemData item, int amount)
     {
-
+        inventory.Add(new Item(item, amount));
+        ClearEmptySlots();
     }
 
     void RemoveItem(ItemData item, int amount)

@@ -35,7 +35,7 @@ public class StackSplitHandler : MonoBehaviour
             int amount = inventory.GetAmountOfItem(slotHandler.GetItem());
             int split = amount / 2;
             EventChannels.ItemEvents.OnRemoveItemFromInventory?.Invoke(slotHandler.GetItem(), split);
-            EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(slotHandler.GetItem(), split);
+            EventChannels.ItemEvents.OnCreateStack?.Invoke(slotHandler.GetItem(), split);
             EventChannels.ItemEvents.OnUpdateInventory?.Invoke();
         }
     }
