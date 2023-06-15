@@ -23,6 +23,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits += CheckIfEnoughCredits;
         EventChannels.ItemEvents.OnCheckIfItemInInventory += CheckIfItemInInventory;
         EventChannels.ItemEvents.OnCreateStack += CreateNewStack;
+        EventChannels.ItemEvents.OnRemoveFromStack += RemoveSpecificItem;
     }
 
     private void OnDestroy()
@@ -35,6 +36,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits -= CheckIfEnoughCredits;
         EventChannels.ItemEvents.OnCheckIfItemInInventory -= CheckIfItemInInventory;
         EventChannels.ItemEvents.OnCreateStack -= CreateNewStack;
+        EventChannels.ItemEvents.OnRemoveFromStack -= RemoveSpecificItem;
     }
 
     // Update is called once per frame
@@ -104,6 +106,19 @@ public class PlayerInventory : MonoBehaviour
                     inventory.Remove(itemInInventory);
                     RemoveItem(item, amount);
                 }
+            }
+        }
+        ClearEmptySlots();
+    }
+    
+    void RemoveSpecificItem(ItemData item, int amount, int amountToRemove)
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            Item itemInInventory = inventory[i];
+            if (itemInInventory.data == item && itemInInventory.amount == amount)
+            {
+                itemInInventory.amount -= amountToRemove;
             }
         }
         ClearEmptySlots();
