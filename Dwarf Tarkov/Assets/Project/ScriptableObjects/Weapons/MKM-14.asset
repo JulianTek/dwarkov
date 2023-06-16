@@ -25,3 +25,9 @@ MonoBehaviour:
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 10
   AmountOfBullets: 1
+  firingEventName: Weap_Fire_Mk14
+  ammoEmptyFiringEventName: Weap_Empty_Mk14
+  reloadEventName: Weap_Reload_Mk14
+  firingEventRadius: 0
+  ammoEmptyEventRadius: 0
+  reloadEventRadius: 0

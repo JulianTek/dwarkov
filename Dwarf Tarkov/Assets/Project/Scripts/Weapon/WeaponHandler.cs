@@ -30,6 +30,7 @@ public class WeaponHandler : MonoBehaviour
     private bool canFire = true;
     private bool canReload = true;
     private bool currentlyTogglingAmmoTypes;
+    private bool clickPlayed;
 
     private void Start()
     {
@@ -93,10 +94,17 @@ public class WeaponHandler : MonoBehaviour
             if (currentMagCount > 0)
             {
                 Fire();
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);
+                Physics2D.CircleCast(transform.position, data.firingEventRadius, Vector2.zero, 0f);
             }
             else
             {
-                // play sound
+                if (!clickPlayed)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
+                    clickPlayed = true;
+                }
+                
             }
         }
         else
@@ -157,6 +165,7 @@ public class WeaponHandler : MonoBehaviour
     void StopShooting()
     {
         isFiring = false;
+        clickPlayed = false;
     }
 
     void Reload()
@@ -178,13 +187,16 @@ public class WeaponHandler : MonoBehaviour
         if (ammoInInventory != 0)
         {
             LaunchMag();
+            FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Start", transform.position);
             if (currentMagCount > 0)
             {
                 yield return new WaitForSecondsRealtime(data.ReloadTime);
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Tact");
             }
             else
             {
                 yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Empty");
             }
             if (ammoInInventory >= maxMagCount)
             {
