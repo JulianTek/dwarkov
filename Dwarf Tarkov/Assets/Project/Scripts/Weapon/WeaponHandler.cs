@@ -93,7 +93,7 @@ public class WeaponHandler : MonoBehaviour
             if (currentMagCount > 0)
             {
                 Fire();
-                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);    
             }
             else
             {
@@ -179,13 +179,16 @@ public class WeaponHandler : MonoBehaviour
         if (ammoInInventory != 0)
         {
             LaunchMag();
+            FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Start", transform.position);
             if (currentMagCount > 0)
             {
                 yield return new WaitForSecondsRealtime(data.ReloadTime);
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Tact");
             }
             else
             {
                 yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Empty");
             }
             if (ammoInInventory >= maxMagCount)
             {
