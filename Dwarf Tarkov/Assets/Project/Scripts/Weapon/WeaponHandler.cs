@@ -93,10 +93,11 @@ public class WeaponHandler : MonoBehaviour
             if (currentMagCount > 0)
             {
                 Fire();
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);
             }
             else
             {
-                // play sound
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
             }
         }
         else
