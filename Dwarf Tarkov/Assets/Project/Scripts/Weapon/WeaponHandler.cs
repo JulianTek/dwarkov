@@ -30,6 +30,7 @@ public class WeaponHandler : MonoBehaviour
     private bool canFire = true;
     private bool canReload = true;
     private bool currentlyTogglingAmmoTypes;
+    private bool clickPlayed;
 
     private void Start()
     {
@@ -97,7 +98,12 @@ public class WeaponHandler : MonoBehaviour
             }
             else
             {
-                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
+                if (!clickPlayed)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
+                    clickPlayed = true;
+                }
+                
             }
         }
         else
@@ -158,6 +164,7 @@ public class WeaponHandler : MonoBehaviour
     void StopShooting()
     {
         isFiring = false;
+        clickPlayed = false;
     }
 
     void Reload()
