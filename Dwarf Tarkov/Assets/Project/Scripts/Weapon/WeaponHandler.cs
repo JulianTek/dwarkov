@@ -94,7 +94,8 @@ public class WeaponHandler : MonoBehaviour
             if (currentMagCount > 0)
             {
                 Fire();
-                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);    
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);
+                Physics2D.CircleCast(transform.position, data.firingEventRadius, Vector2.zero, 0f);
             }
             else
             {
