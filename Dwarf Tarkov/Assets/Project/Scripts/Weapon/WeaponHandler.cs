@@ -170,13 +170,17 @@ public class WeaponHandler : MonoBehaviour
 
     void Reload()
     {
+        currentlyTogglingAmmoTypes = false;
+        List<AmmoSubtype> subtypes = GetAmmoTypesInInventory();
+        if (ammoTypeLoaded == null)
+            ammoTypeLoaded = subtypes[0];
         if (canReload)
         {
-            currentlyTogglingAmmoTypes = false;
             canReload = false;
             canFire = false;
             isAiming = false;
             StartCoroutine(ReloadCoolDown());
+            return;
         }
     }
 
