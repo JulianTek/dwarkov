@@ -36,6 +36,11 @@ namespace WorldGeneration
         [SerializeField]
         private bool roomFirst;
 
+        [SerializeField]
+        private int amountOfExtractionZones;
+        [SerializeField]
+        private GameObject extractionZoneGameObject;
+
         private void Start()
         {
             Generate();
@@ -73,6 +78,16 @@ namespace WorldGeneration
             WallGenerator.PaintWallTiles(tileMapVisualizer, floorPositions);
             FindPlayerLocation(startPosition, floorPositions, WallGenerator.FindWallPositions(floorPositions, Direction.Directions));
             oreGenerator.GenerateOres(floorPositions);
+            GenerateExtractionZones(floorPositions);
+        }
+
+        private void GenerateExtractionZones(HashSet<Vector2Int> floorPositions)
+        {
+            for (int i = 0; i < amountOfExtractionZones; i++)
+            {
+                Vector2Int pos = ExtractionPointsGenerator.GenerateExtractionSpots(floorPositions);
+                Instantiate(extractionZoneGameObject, new Vector3(pos.x + 0.5f, pos.y + 0.5f), Quaternion.identity);
+            }
         }
 
         private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> roomPositions)

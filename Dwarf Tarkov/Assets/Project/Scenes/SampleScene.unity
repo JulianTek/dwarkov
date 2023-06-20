@@ -10939,6 +10939,9 @@ MonoBehaviour:
   corridorLength: 15
   corridorCount: 5
   roomFirst: 0
+  amountOfExtractionZones: 2
+  extractionZoneGameObject: {fileID: 6702178252054343329, guid: b1911015acc421b468c0710a6372d7e8,
+    type: 3}
 --- !u!4 &2055715629
 Transform:
   m_ObjectHideFlags: 0
