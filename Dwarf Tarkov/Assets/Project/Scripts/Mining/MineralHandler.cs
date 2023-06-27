@@ -12,10 +12,13 @@ public class MineralHandler : MonoBehaviour
     private int amountMineable;
     [SerializeField]
     private int amountPerMine;
+
+    private OreSpriteHandler spriteHandler;
     // Start is called before the first frame update
     void Start()
     {
         EventChannels.PlayerInputEvents.OnPlayerMine += Mine;
+        spriteHandler = GetComponentInChildren<OreSpriteHandler>();
     }
 
     private void OnDestroy()
@@ -50,6 +53,7 @@ public class MineralHandler : MonoBehaviour
         {
             EventChannels.ItemEvents.OnAddItemToInventory(materialData.ItemYielded, amountPerMine);
             amountMineable--;
+            spriteHandler.SetSprite(3-amountMineable);
             if (amountMineable == 0)
             {
                 Destroy(gameObject);
