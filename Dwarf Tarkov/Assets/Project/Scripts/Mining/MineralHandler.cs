@@ -12,6 +12,9 @@ public class MineralHandler : MonoBehaviour
     private int amountMineable;
     [SerializeField]
     private int amountPerMine;
+
+    [SerializeField]
+    private float eventRadius;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +54,7 @@ public class MineralHandler : MonoBehaviour
             EventChannels.ItemEvents.OnAddItemToInventory(materialData.ItemYielded, amountPerMine);
             amountMineable--;
             FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerEvents/MiningEvents/Mine_Pick");
+            Physics2D.CircleCast(transform.position, eventRadius, Vector2.zero, 0f);
             if (amountMineable == 0)
             {
                 Destroy(gameObject);
