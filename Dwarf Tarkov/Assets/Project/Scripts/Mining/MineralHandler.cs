@@ -15,10 +15,13 @@ public class MineralHandler : MonoBehaviour
 
     [SerializeField]
     private float eventRadius;
+
+    private OreSpriteHandler spriteHandler;
     // Start is called before the first frame update
     void Start()
     {
         EventChannels.PlayerInputEvents.OnPlayerMine += Mine;
+        spriteHandler = GetComponentInChildren<OreSpriteHandler>();
     }
 
     private void OnDestroy()
@@ -53,6 +56,7 @@ public class MineralHandler : MonoBehaviour
         {
             EventChannels.ItemEvents.OnAddItemToInventory(materialData.ItemYielded, amountPerMine);
             amountMineable--;
+            spriteHandler.SetSprite(3-amountMineable);
             FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerEvents/MiningEvents/Mine_Pick");
             Physics2D.CircleCast(transform.position, eventRadius, Vector2.zero, 0f);
             if (amountMineable == 0)

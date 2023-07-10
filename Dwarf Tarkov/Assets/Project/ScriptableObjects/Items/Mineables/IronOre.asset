@@ -22,3 +22,5 @@ MonoBehaviour:
   ItemYielded: {fileID: 11400000, guid: 001a6dfea4fd9964cb11853b503618da, type: 2}
   ItemAppearChanceMin: 0
   ItemAppearChanceMax: 20
+  Stage2Sprite: {fileID: 21300000, guid: b52b81883bf568741840ae6abfa80234, type: 3}
+  Stage3Sprite: {fileID: 21300000, guid: 45c32cbd41528cf4e8c7db4afc353364, type: 3}
