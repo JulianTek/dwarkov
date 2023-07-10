@@ -31,4 +31,7 @@ public class UIEvents
 
     public UIEvent OnShowAmmoTypes;
     public UIEvent OnHideAmmoTypes;
+
+    public UIEvent OnShowSubmenu;
+    public UIEvent OnHideSubmenu;
 }
