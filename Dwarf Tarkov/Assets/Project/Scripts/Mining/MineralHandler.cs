@@ -50,6 +50,7 @@ public class MineralHandler : MonoBehaviour
         {
             EventChannels.ItemEvents.OnAddItemToInventory(materialData.ItemYielded, amountPerMine);
             amountMineable--;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerEvents/MiningEvents/Mine_Pick");
             if (amountMineable == 0)
             {
                 Destroy(gameObject);
