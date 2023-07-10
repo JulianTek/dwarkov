@@ -10989,4 +10989,4 @@ MonoBehaviour:
   ores:
   - {fileID: 5968737770648155444, guid: 19da135bad3605a41814e6f481eb77b5, type: 3}
   - {fileID: 1509367041237378575, guid: a2f939ad5b3ca9e4f90df633f6fb7282, type: 3}
-  maxOres: 0
+  maxOres: 20

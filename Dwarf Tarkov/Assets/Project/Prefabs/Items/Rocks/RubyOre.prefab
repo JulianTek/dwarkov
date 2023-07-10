@@ -146,6 +146,7 @@ MonoBehaviour:
   materialData: {fileID: 11400000, guid: b63101dcebd912346aafa074542464f6, type: 2}
   amountMineable: 3
   amountPerMine: 1
+  eventRadius: 1
 --- !u!61 &5968737770648155441
 BoxCollider2D:
   m_ObjectHideFlags: 0

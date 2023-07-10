@@ -144,8 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: bfd67b60dbf45d7489995c8903cdf263, type: 2}
-  amountMineable: 0
-  amountPerMine: 0
+  amountMineable: 5
+  amountPerMine: 1
+  eventRadius: 2
 --- !u!61 &1509367041237378570
 BoxCollider2D:
   m_ObjectHideFlags: 0
