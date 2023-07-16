@@ -23,12 +23,14 @@ public class SellboxHandler : MonoBehaviour
         }
         EventChannels.BarteringEvents.OnPlayerMovesItemToSellBox += AddItemToBox;
         EventChannels.BarteringEvents.OnPlayerTryToSellItem += CanAddItem;
+        EventChannels.BarteringEvents.OnPlayerMovesQuantityToSellbox += AddQuantityToBox;
     }
 
     private void OnDestroy()
     {
         EventChannels.BarteringEvents.OnPlayerMovesItemToSellBox -= AddItemToBox;
         EventChannels.BarteringEvents.OnPlayerTryToSellItem -= CanAddItem;
+        EventChannels.BarteringEvents.OnPlayerMovesQuantityToSellbox -= AddQuantityToBox;
     }
 
     public bool CanAddItem()
@@ -42,6 +44,15 @@ public class SellboxHandler : MonoBehaviour
         slots[GetFirstFreeIndex()].GetComponent<SellboxSlotHandler>().SetSlot(item);
         currentAmountInBox++;
         value += item.data.SellPrice * item.amount;
+        valueText.text = $"Value: {value} credits";
+    }
+
+    public void AddQuantityToBox(ItemData item, int amount)
+    {
+        itemsInBox.Add(new Item(item, amount));
+        slots[GetFirstFreeIndex()].GetComponent<SellboxSlotHandler>().SetSlot(new Item(item, amount));
+        currentAmountInBox++;
+        value += item.SellPrice * amount;
         valueText.text = $"Value: {value} credits";
     }
 

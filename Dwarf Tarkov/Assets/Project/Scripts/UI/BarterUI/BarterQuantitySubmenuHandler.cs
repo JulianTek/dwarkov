@@ -15,6 +15,7 @@ public class BarterQuantitySubmenuHandler : MonoBehaviour
     {
         EventChannels.UIEvents.OnShowSubmenu += ShowSubmenu;
         EventChannels.UIEvents.OnHideSubmenu += HideSubmenu;
+        stackSubmenu.SetActive(false);
     }
 
     private void OnDestroy()
