@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerBarterSlotHandler : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerBarterSlotHandler : MonoBehaviour
     [SerializeField]
     private Image image;
     private bool isTaken;
+    [SerializeField]
+    private TextMeshProUGUI amountText;
 
     public void SetSlot(Item item)
     {
@@ -17,6 +20,11 @@ public class PlayerBarterSlotHandler : MonoBehaviour
         image.sprite = item.data.Sprite;
         image.enabled = true;
         isTaken = true;
+        if (item.data.IsStackable)
+        {
+            amountText.enabled = true;
+            amountText.SetText(item.amount.ToString());
+        }
     }
 
     public void ClearSlot()
@@ -25,6 +33,7 @@ public class PlayerBarterSlotHandler : MonoBehaviour
         image.sprite = null;
         image.enabled = false;
         isTaken = false;
+        amountText.enabled = false;
     }
 
     public void SellItem()
