@@ -33,9 +33,10 @@ public class PlayerBarterSlotHandler : MonoBehaviour
         {
             if (item.data.IsStackable)
             {
+                EventChannels.BarteringEvents.OnSetItemInSubmenu?.Invoke(item);
                 EventChannels.UIEvents.OnShowSubmenu?.Invoke();
             }
-            if ((bool)EventChannels.BarteringEvents.OnPlayerTryToSellItem?.Invoke())
+            else if ((bool)EventChannels.BarteringEvents.OnPlayerTryToSellItem?.Invoke())
             {
                 EventChannels.BarteringEvents.OnPlayerMovesItemToSellBox(item);
                 EventChannels.ItemEvents.OnRemoveItemFromInventory?.Invoke(item.data, item.amount);

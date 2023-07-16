@@ -25,4 +25,6 @@ public class BarteringEvents
     public BarteringEvent OnPlayerHasInsufficientCredits;
 
     public ItemQuantityEvent OnPlayerMovesQuantityToSellbox;
+
+    public ItemEvent OnSetItemInSubmenu;
 }
