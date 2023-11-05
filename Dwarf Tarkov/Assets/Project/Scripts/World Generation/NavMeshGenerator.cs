@@ -5,11 +5,13 @@ using NavMeshPlus.Components;
 
 public class NavMeshGenerator : MonoBehaviour
 {
+    [SerializeField]
+    private NavMeshSurface surface;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<NavMeshSurface>().RemoveData();
-        GetComponent<NavMeshSurface>().BuildNavMesh();
+        surface.RemoveData();
+        surface.BuildNavMesh();
     }
 
     // Update is called once per frame
