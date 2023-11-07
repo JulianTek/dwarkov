@@ -26,9 +26,15 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 4294967295
+    - id: 63926a87-0560-4e6b-a32e-2be43e3f1249
+      name: Player
+      color:
+        serializedVersion: 2
+        rgba: 4279148808
     orderedIds:
     - 3825ae0d-d08f-4f29-996b-0c316c6970c3
     - bfc44a63-6b84-469f-80f7-ab195360f57e
+    - 63926a87-0560-4e6b-a32e-2be43e3f1249
   serializedNames: []
   serializedColors: []
   serializedLinkedSets: []
