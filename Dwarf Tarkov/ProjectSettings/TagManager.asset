@@ -9,15 +9,14 @@ TagManager:
   - Enemy
   - World
   - NoMask
-  - OutpostChest
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Walls
+  - 
   - Water
   - UI
-  - Colliders
+  - 
   - 
   - Obstacles
   - Ground

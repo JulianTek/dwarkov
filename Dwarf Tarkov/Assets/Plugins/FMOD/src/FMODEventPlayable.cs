@@ -37,8 +37,6 @@ namespace FMODUnity
         [NonSerialized]
         public bool CachedParameters = false;
 
-        public static event System.EventHandler<EventArgs> OnCreatePlayable;
-
         private FMODEventPlayableBehavior behavior;
 
         public GameObject TrackTargetObject { get; set; }
@@ -65,7 +63,7 @@ namespace FMODUnity
 
         public TimelineClip OwningClip { get; set; }
 
-        public void LinkParameters(FMOD.Studio.EventDescription eventDescription)
+        public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
 #if UNITY_EDITOR
             if (!EventReference.IsNull)
@@ -73,6 +71,8 @@ namespace FMODUnity
             if (!CachedParameters && !EventReference.IsNull)
 #endif
             {
+                FMOD.Studio.EventDescription eventDescription = RuntimeManager.GetEventDescription(EventReference);
+
                 for (int i = 0; i < Parameters.Length; i++)
                 {
                     FMOD.Studio.PARAMETER_DESCRIPTION parameterDescription;
@@ -90,20 +90,6 @@ namespace FMODUnity
                 }
 
                 CachedParameters = true;
-            }
-        }
-
-        public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
-        {
-            if (Application.isPlaying)
-            {
-                LinkParameters(RuntimeManager.GetEventDescription(EventReference));
-            }
-            else
-            {
-                // Handled by the editor auditioning system.
-                EventArgs args = new EventArgs();
-                OnCreatePlayable.Invoke(this, args);
             }
 
             var playable = ScriptPlayable<FMODEventPlayableBehavior>.Create(graph, Template);
