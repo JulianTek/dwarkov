@@ -22,6 +22,11 @@ public class WorldGeneratorEditor : Editor
         {
             generator.Generate();
         }
+
+        if (GUILayout.Button("Clear inspector"))
+        {
+            generator.Clear();
+        }
     }
 
 }

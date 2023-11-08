@@ -12,7 +12,7 @@ namespace WorldGeneration
         /// <param name="startPosition">The position the algorithm will start</param>
         /// <param name="length">The length of the generated floor</param>
         /// <returns>Positions of the floor</returns>
-        public HashSet<Vector2Int> Generate(Vector2Int startPosition, int length)
+        public IEnumerable<Vector2Int> Generate(Vector2Int startPosition, int length)
         {
             HashSet<Vector2Int> path = new HashSet<Vector2Int>();
             path.Add(startPosition);

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
+  m_Name: MKM-14
+  m_EditorClassIdentifier: 
+  IsAutoFire: 1
+  RateOfFire: 0.2
+  AmmoSubtypes:
+  - {fileID: 11400000, guid: ef70df9bd8f6e184b9242c5b3f594bc9, type: 2}
+  - {fileID: 11400000, guid: 5af40b46e436d1740af5cdbc365eff0b, type: 2}
+  MagCapacity: 30
+  ReloadTime: 3
+  Sprite: {fileID: 21300000, guid: 6cafc837ec39b024baafef5f63de162f, type: 3}
+  WeaponEmptySprite: {fileID: 21300000, guid: 1bd91a3f57099b1439975f6acfefa549, type: 3}
+  MagazineSprite: {fileID: 21300000, guid: 742e1d2920700c5419dfa731a2691b1a, type: 3}
+  CaseSprite: {fileID: 0}
+  BaseSpreadAngle: 10
+  AmountOfBullets: 1
+  firingEventName: Weap_Fire_Mk14
+  ammoEmptyFiringEventName: Weap_Empty_Mk14
+  reloadEventName: Weap_Reload_Mk14
+  firingEventRadius: 0
+  ammoEmptyEventRadius: 0
+  reloadEventRadius: 0
