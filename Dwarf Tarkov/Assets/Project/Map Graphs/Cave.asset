@@ -31,10 +31,16 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 4279148808
+    - id: 62261d38-bc56-4424-8c0b-b8b9e6ca4a9a
+      name: Ores
+      color:
+        serializedVersion: 2
+        rgba: 4278203121
     orderedIds:
     - 3825ae0d-d08f-4f29-996b-0c316c6970c3
     - bfc44a63-6b84-469f-80f7-ab195360f57e
     - 63926a87-0560-4e6b-a32e-2be43e3f1249
+    - 62261d38-bc56-4424-8c0b-b8b9e6ca4a9a
   serializedNames: []
   serializedColors: []
   serializedLinkedSets: []
