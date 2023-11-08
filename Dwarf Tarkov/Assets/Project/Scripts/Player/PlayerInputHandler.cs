@@ -56,11 +56,15 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Player.Mine.performed -= Mine;
-        playerControls.Player.Shoot.performed -= ShootStarted;
-        playerControls.Player.Reload.performed -= Reload;
+        playerControls.Player.Shoot.started -= ShootStarted;
+        playerControls.Player.Shoot.canceled -= ShootEnded;
         playerControls.Player.Sprint.started -= Sprint;
         playerControls.Player.Sprint.canceled -= StopSprint;
-        playerControls.Player.Shoot.canceled -= ShootEnded;
+        playerControls.Player.OpenInventory.performed -= OpenInventory;
+        playerControls.Player.Interact.performed -= Interact;
+        playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
+
+        playerControls.HUD.Close.performed -= CloseInventory;
     }
 
     void ShootStarted(InputAction.CallbackContext ctx)
