@@ -35,7 +35,7 @@ public class EnemySpawnerHandler : MonoBehaviour
             timerElapsed += Time.deltaTime;
             if (timerElapsed >= maxInterval)
             {
-                // spawn enemy
+                ObjectPoolHandler.SpawnObject(enemyToSpawn, transform.position, Quaternion.identity);
                 SetTimer(false);
             }
         }
