@@ -15,36 +15,36 @@ MonoBehaviour:
   serializedObjectVersion:
     version: 1.15
   nodes:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
-  - id: 7
-  - id: 8
-  - id: 9
+  - rid: 0
+  - rid: 1
+  - rid: 2
+  - rid: 3
+  - rid: 4
+  - rid: 5
+  - rid: 6
+  - rid: 7
+  - rid: 8
+  - rid: 9
   consumerNodes:
-  - id: 0
-  - id: 4
-  - id: 6
+  - rid: 0
+  - rid: 4
+  - rid: 6
   processorNodes:
-  - id: 0
-  - id: 6
+  - rid: 0
+  - rid: 6
   inputNodes:
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 5
-  - id: 7
-  - id: 8
-  - id: 9
+  - rid: 1
+  - rid: 2
+  - rid: 3
+  - rid: 5
+  - rid: 7
+  - rid: 8
+  - rid: 9
   outputNodes:
-  - id: 4
+  - rid: 4
   sortedProcessorNodes:
-  - id: 0
-  - id: 6
+  - rid: 0
+  - rid: 6
   inputParameters:
     elements:
     - id: 5473d846-a48c-4a35-89a8-551d797d9b47
@@ -86,6 +86,7 @@ MonoBehaviour:
     - a0412ad2-33c0-4bca-9510-0b81c39d7c04
     names: []
     typeNames: []
+  notes: []
   referenceNodeConnections: []
   referenceNodes: []
   groupNodes: []
@@ -94,8 +95,11 @@ MonoBehaviour:
   serializedCustomPreviewBehaviourType: 
   namedColorSet: {fileID: 0}
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 0
       type: {class: ProcessGraphNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -108,12 +112,12 @@ MonoBehaviour:
         note: 
         id: d7f8a380-07ea-458f-97ed-ea28c446266a
         providerNode:
-          id: 10
+          rid: 10
         consumerNode:
-          id: 11
+          rid: 11
         subGraph: {fileID: 11400000, guid: e6f13355178cad942adbb4efa672b459, type: 2}
         isNamed: 1
-    00000001:
+    - rid: 1
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -126,11 +130,11 @@ MonoBehaviour:
         note: 
         id: 1cd04c42-85ad-41d9-b978-684fb708e984
         outPorts:
-        - id: 12
+        - rid: 12
         inputParameterId: 5473d846-a48c-4a35-89a8-551d797d9b47
         inputTypeName: InsaneScatterbrain.MapGraph.TextureData, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    00000002:
+    - rid: 2
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -143,11 +147,11 @@ MonoBehaviour:
         note: 
         id: 9c575f7d-f09c-4b6d-bfd7-2c48c752cf41
         outPorts:
-        - id: 13
+        - rid: 13
         inputParameterId: d1841345-1ba1-4604-99d1-611f4ef11dbe
         inputTypeName: UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-    00000003:
+    - rid: 3
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -160,11 +164,11 @@ MonoBehaviour:
         note: 
         id: 4bf952d2-8abb-4197-8f18-750de8808a76
         outPorts:
-        - id: 14
+        - rid: 14
         inputParameterId: d1841345-1ba1-4604-99d1-611f4ef11dbe
         inputTypeName: UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-    00000004:
+    - rid: 4
       type: {class: OutputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -177,11 +181,11 @@ MonoBehaviour:
         note: 
         id: 6f09000a-e2be-40bf-8288-e923e3152253
         inPorts:
-        - id: 15
+        - rid: 15
         outputParameterId: a0412ad2-33c0-4bca-9510-0b81c39d7c04
         outputTypeName: InsaneScatterbrain.MapGraph.TextureData, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    00000005:
+    - rid: 5
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -194,11 +198,11 @@ MonoBehaviour:
         note: 
         id: 4feead18-8543-4067-8083-62e3d09e89c2
         outPorts:
-        - id: 16
+        - rid: 16
         inputParameterId: 847022bd-56c6-48b0-8c46-5b5dc1674d41
         inputTypeName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-    00000006:
+    - rid: 6
       type: {class: DrawConnectionsBiasedRandomWalkNode, ns: InsaneScatterbrain.MapGraph,
         asm: InsaneScatterbrain.MapGraph}
       data:
@@ -212,24 +216,24 @@ MonoBehaviour:
         note: 
         id: 248c399a-daf2-443f-b5d2-1f3d8e4dec52
         providerNode:
-          id: 17
+          rid: 17
         consumerNode:
-          id: 18
+          rid: 18
         textureIn:
-          id: 19
+          rid: 19
         connectionsIn:
-          id: 20
+          rid: 20
         drawColorIn:
-          id: 21
+          rid: 21
         radiusIn:
-          id: 22
+          rid: 22
         biasIn:
-          id: 23
+          rid: 23
         randomnessIn:
-          id: 24
+          rid: 24
         textureOut:
-          id: 25
-    00000007:
+          rid: 25
+    - rid: 7
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -242,11 +246,11 @@ MonoBehaviour:
         note: 
         id: ea54dbe0-e91b-4116-a3e2-1ee8fe71931c
         outPorts:
-        - id: 26
+        - rid: 26
         inputParameterId: 3321dcfc-ad04-4db7-989d-d52a7158780e
         inputTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-    00000008:
+    - rid: 8
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -259,11 +263,11 @@ MonoBehaviour:
         note: 
         id: a94b9385-56ee-4f3e-a87e-b2166b61558f
         outPorts:
-        - id: 27
+        - rid: 27
         inputParameterId: 12de1d81-2ec1-493a-8b6e-cc7a6d862603
         inputTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-    00000009:
+    - rid: 9
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         graph: {fileID: 11400000}
@@ -276,11 +280,11 @@ MonoBehaviour:
         note: 
         id: 1e5154fe-fab7-4098-aece-5a9ef5a1c549
         outPorts:
-        - id: 28
+        - rid: 28
         inputParameterId: a428ca41-fb53-4b20-99f2-459fa4eb2cc6
         inputTypeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-    0000000A:
+    - rid: 10
       type: {class: ProcessorNode/ProcessorProviderNode, ns: InsaneScatterbrain.ScriptGraph,
         asm: InsaneScatterbrain.ScriptGraph}
       data:
@@ -294,10 +298,10 @@ MonoBehaviour:
         note: 
         id: 
         outPorts:
-        - id: 29
-        - id: 30
-        - id: 31
-    0000000B:
+        - rid: 29
+        - rid: 30
+        - rid: 31
+    - rid: 11
       type: {class: ProcessorNode/ProcessorConsumerNode, ns: InsaneScatterbrain.ScriptGraph,
         asm: InsaneScatterbrain.ScriptGraph}
       data:
@@ -311,63 +315,63 @@ MonoBehaviour:
         note: 
         id: 
         inPorts:
-        - id: 32
-        - id: 33
-        - id: 34
-        - id: 35
-        - id: 36
-    0000000C:
+        - rid: 32
+        - rid: 33
+        - rid: 34
+        - rid: 35
+        - rid: 36
+    - rid: 12
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 1
+          rid: 1
         typeName: InsaneScatterbrain.MapGraph.TextureData, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts:
-        - id: 32
-        - id: 19
-    0000000D:
+        - rid: 32
+        - rid: 19
+    - rid: 13
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 2
+          rid: 2
         typeName: UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         connectedInPorts:
-        - id: 33
-    0000000E:
+        - rid: 33
+    - rid: 14
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 3
+          rid: 3
         typeName: UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         connectedInPorts:
-        - id: 21
-    0000000F:
+        - rid: 21
+    - rid: 15
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 4
+          rid: 4
         typeName: InsaneScatterbrain.MapGraph.TextureData, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedOut:
-          id: 25
+          rid: 25
         isConnectionRequired: 0
-    00000010:
+    - rid: 16
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 5
+          rid: 5
         typeName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedInPorts:
-        - id: 34
-    00000011:
+        - rid: 34
+    - rid: 17
       type: {class: ProcessorNode/ProcessorProviderNode, ns: InsaneScatterbrain.ScriptGraph,
         asm: InsaneScatterbrain.ScriptGraph}
       data:
@@ -381,8 +385,8 @@ MonoBehaviour:
         note: 
         id: 
         outPorts:
-        - id: 25
-    00000012:
+        - rid: 25
+    - rid: 18
       type: {class: ProcessorNode/ProcessorConsumerNode, ns: InsaneScatterbrain.ScriptGraph,
         asm: InsaneScatterbrain.ScriptGraph}
       data:
@@ -396,193 +400,191 @@ MonoBehaviour:
         note: 
         id: 
         inPorts:
-        - id: 19
-        - id: 20
-        - id: 21
-        - id: 22
-        - id: 23
-        - id: 24
-    00000013:
+        - rid: 19
+        - rid: 20
+        - rid: 21
+        - rid: 22
+        - rid: 23
+        - rid: 24
+    - rid: 19
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Texture
         owner:
-          id: 6
+          rid: 6
         typeName: InsaneScatterbrain.MapGraph.TextureData, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedOut:
-          id: 12
+          rid: 12
         isConnectionRequired: 1
-    00000014:
+    - rid: 20
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Connected Points
         owner:
-          id: 6
+          rid: 6
         typeName: InsaneScatterbrain.DataStructures.Pair`1[[UnityEngine.Vector2Int,
           UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],
           InsaneScatterbrain.Common, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedOut:
-          id: 31
+          rid: 31
         isConnectionRequired: 1
-    00000015:
+    - rid: 21
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Draw Color
         owner:
-          id: 6
+          rid: 6
         typeName: UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         connectedOut:
-          id: 14
+          rid: 14
         isConnectionRequired: 0
-    00000016:
+    - rid: 22
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Carve Radius
         owner:
-          id: 6
+          rid: 6
         typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedOut:
-          id: 28
+          rid: 28
         isConnectionRequired: 0
-    00000017:
+    - rid: 23
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Direction Bias (%)
         owner:
-          id: 6
+          rid: 6
         typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedOut:
-          id: 26
+          rid: 26
         isConnectionRequired: 0
-    00000018:
+    - rid: 24
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Randomness (%)
         owner:
-          id: 6
+          rid: 6
         typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedOut:
-          id: 27
+          rid: 27
         isConnectionRequired: 0
-    00000019:
+    - rid: 25
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Texture
         owner:
-          id: 6
+          rid: 6
         typeName: InsaneScatterbrain.MapGraph.TextureData, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts:
-        - id: 15
-    0000001A:
+        - rid: 15
+    - rid: 26
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 7
+          rid: 7
         typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedInPorts:
-        - id: 23
-    0000001B:
+        - rid: 23
+    - rid: 27
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 8
+          rid: 8
         typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedInPorts:
-        - id: 24
-    0000001C:
+        - rid: 24
+    - rid: 28
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: 
         owner:
-          id: 9
+          rid: 9
         typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedInPorts:
-        - id: 22
-    0000001D:
+        - rid: 22
+    - rid: 29
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Area Graph
         owner:
-          id: 0
+          rid: 0
         typeName: InsaneScatterbrain.MapGraph.AreaGraph, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts: []
-    0000001E:
+    - rid: 30
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Unused Edges
         owner:
-          id: 0
+          rid: 0
         typeName: InsaneScatterbrain.MapGraph.AreaGraphEdge[], InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts: []
-    0000001F:
+    - rid: 31
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Connected Points
         owner:
-          id: 0
+          rid: 0
         typeName: InsaneScatterbrain.DataStructures.Pair`1[[UnityEngine.Vector2Int,
           UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],
           InsaneScatterbrain.Common, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts:
-        - id: 20
-    00000020:
+        - rid: 20
+    - rid: 32
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Texture
         owner:
-          id: 0
+          rid: 0
         typeName: InsaneScatterbrain.MapGraph.TextureData, InsaneScatterbrain.MapGraph,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedOut:
-          id: 12
+          rid: 12
         isConnectionRequired: 1
-    00000021:
+    - rid: 33
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Color To Extract
         owner:
-          id: 0
+          rid: 0
         typeName: UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         connectedOut:
-          id: 13
+          rid: 13
         isConnectionRequired: 0
-    00000022:
+    - rid: 34
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Precise?
         owner:
-          id: 0
+          rid: 0
         typeName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedOut:
-          id: 16
+          rid: 16
         isConnectionRequired: 0
-    00000023:
+    - rid: 35
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Max. Area Size
         owner:
-          id: 0
+          rid: 0
         typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedOut:
-          id: 37
+          rid: -2
         isConnectionRequired: 0
-    00000024:
+    - rid: 36
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         name: Connect Diagonals?
         owner:
-          id: 0
+          rid: 0
         typeName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedOut:
-          id: 37
+          rid: -2
         isConnectionRequired: 0
-    00000025:
-      type: {class: , ns: , asm: }
