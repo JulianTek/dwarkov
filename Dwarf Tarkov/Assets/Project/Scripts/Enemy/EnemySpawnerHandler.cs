@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
+using EventSystem;
 public class EnemySpawnerHandler : MonoBehaviour
 {
     [SerializeField]
@@ -21,32 +21,51 @@ public class EnemySpawnerHandler : MonoBehaviour
     private bool cooldownTimerStarted;
     private bool timerStarted;
 
+    private bool canSpawnEnemies;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        canSpawnEnemies = true;
+        timerStarted = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timerStarted)
+        if (canSpawnEnemies)
         {
-            timerElapsed += Time.deltaTime;
-            if (timerElapsed >= maxInterval)
+            if (timerStarted)
             {
-                ObjectPoolHandler.SpawnObject(enemyToSpawn, transform.position, Quaternion.identity);
-                SetTimer(false);
+                timerElapsed += Time.deltaTime;
+                if (timerElapsed >= maxInterval)
+                {
+                    StartCoroutine(SpawnEnemy());
+                }
+            }
+            else if (cooldownTimerStarted)
+            {
+                timerElapsed += Time.deltaTime;
+                if (timerElapsed >= maxInterval)
+                {
+                    SetTimer(true);
+                }
             }
         }
-        else if (cooldownTimerStarted)
+    }
+
+    IEnumerator SpawnEnemy()
+    {
+        if ((bool)(EventChannels.EnemyEvents.OnSpawnEnemy?.Invoke()))
         {
-            timerElapsed += Time.deltaTime;
-            if (timerElapsed >= maxInterval)
-            {
-                SetTimer(true);
-            }
+            ObjectPoolHandler.SpawnObject(enemyToSpawn, transform.position, Quaternion.identity);
+            SetTimer(false);
         }
+        else
+        {
+            canSpawnEnemies = false;
+        }
+        yield return null;
     }
 
     void SetTimer(bool isStart)

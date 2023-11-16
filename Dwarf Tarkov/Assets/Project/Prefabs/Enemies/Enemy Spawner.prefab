@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dfb1ddfb537464bba575968216d1e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 0}
+  enemyToSpawn: {fileID: 4615416272692253855, guid: d1576a006218c574b9c57481a0b712e3,
+    type: 3}
   maxInterval: 10
-  cooldownTimer: 0
+  cooldownTimer: 5
