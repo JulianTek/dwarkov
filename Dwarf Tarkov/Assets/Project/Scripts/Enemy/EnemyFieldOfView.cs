@@ -19,6 +19,11 @@ public class EnemyFieldOfView : MonoBehaviour
     private float angleIncrease;
     [SerializeField]
     private float viewDistance = 5f;
+    private Vector3 origin;
+    private float startingAngle;
+
+    // int is -1 if mesh should be flipped
+    private int isFlipped;
 
     private Mesh mesh;
     // Start is called before the first frame update
@@ -26,12 +31,17 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        origin = Vector3.zero;
     }
 
     private Vector3 GetVectorFromAngle(float angle)
     {
         float angleRad = angle * (Mathf.PI / 180f);
         return new Vector3(MathF.Cos(angleRad), MathF.Sin(angleRad));
+    }
+
+    private void OnDisable()
+    {
     }
 
     // Update is called once per frame
@@ -42,8 +52,8 @@ public class EnemyFieldOfView : MonoBehaviour
 
     void GenerateFOV()
     {
-        angle = 0f;
-        Vector3 origin = transform.localPosition;
+        angle = startingAngle;
+        origin = transform.localPosition;
         angleIncrease = fov / rayCount;
 
 
@@ -77,6 +87,7 @@ public class EnemyFieldOfView : MonoBehaviour
                 }
                 vertex = hit.point.normalized;
             }
+            //vertex.x *= isFlipped;
             vertices[vertexIndex] = vertex;
 
             if (i > 0)
@@ -115,5 +126,15 @@ public class EnemyFieldOfView : MonoBehaviour
     public float GetFOVAngle()
     {
         return fov;
+    }
+
+    public void SetOrigin(Vector3 origin)
+    {
+        this.origin = origin;
+    }
+
+    public void SetAimDirection(Vector3 dir)
+    {
+        startingAngle = GetAngleFromVectorFloat(dir) - fov / 2f;
     }
 }

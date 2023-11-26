@@ -2379,7 +2379,7 @@ MonoBehaviour:
         - rid: 956839380879409189
         constTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-        serializedVal: 10
+        serializedVal: 100
         serializedObj: {fileID: 0}
     - rid: 956839380879409163
       type: {class: NamedColorNode, ns: InsaneScatterbrain.MapGraph, asm: InsaneScatterbrain.MapGraph}
@@ -2395,7 +2395,7 @@ MonoBehaviour:
         id: fca5097a-ecd2-437e-84ad-27c271aa30aa
         outPorts:
         - rid: 956839380879409190
-        namedColorId: 
+        namedColorId: 99984ce5-88cb-4025-9b6e-b1b14b7ac3a3
         colorOut:
           rid: 956839380879409190
     - rid: 956839380879409164
@@ -3831,7 +3831,7 @@ MonoBehaviour:
         - rid: 8233059705155223577
         constTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-        serializedVal: 10
+        serializedVal: 100
         serializedObj: {fileID: 0}
     - rid: 8233059705155223577
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}

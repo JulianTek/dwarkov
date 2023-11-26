@@ -7,13 +7,16 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     private Vector3 positionToMoveTo;
+    private Vector3 lastMoveDir;
     private NavMeshAgent agent;
     [SerializeField]
     private float distanceThreshold;
+    private EnemyFieldOfView fieldOfView;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        fieldOfView = GetComponentInChildren<EnemyFieldOfView>();
         agent.updateRotation = false; 
         agent.updateUpAxis = false;
         EventChannels.EnemyEvents.OnPlayerSpotted += MoveToPosition;
@@ -37,6 +40,8 @@ public class EnemyMovement : MonoBehaviour
                 StopMoving();
             }
         }
+        fieldOfView.SetAimDirection(GetAimDir());
+        fieldOfView.SetOrigin(transform.position);
     }
 
     void MoveToPosition(Vector3 pos)
@@ -52,6 +57,15 @@ public class EnemyMovement : MonoBehaviour
 
     void Wander()
     {
-        agent.SetDestination(new Vector3(transform.position.x + Random.Range(-0.6f, 0.6f), transform.position.y + Random.Range(-0.6f, 0.6f)));
+        float xOffset = Random.Range(-2f, 2f);
+        var yOffset = Random.Range(-2f, 2f);
+        Vector3 dir = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset);
+        lastMoveDir = new Vector3(xOffset, yOffset);
+        agent.SetDestination(dir);
+    }
+
+    Vector3 GetAimDir()
+    {
+        return lastMoveDir;
     }
 }
