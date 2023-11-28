@@ -40,8 +40,6 @@ public class EnemyMovement : MonoBehaviour
                 StopMoving();
             }
         }
-        fieldOfView.SetAimDirection(GetAimDir());
-        fieldOfView.SetOrigin(transform.position);
     }
 
     void MoveToPosition(Vector3 pos)
@@ -59,9 +57,12 @@ public class EnemyMovement : MonoBehaviour
     {
         float xOffset = Random.Range(-2f, 2f);
         var yOffset = Random.Range(-2f, 2f);
-        Vector3 dir = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset);
-        lastMoveDir = new Vector3(xOffset, yOffset);
-        agent.SetDestination(dir);
+        Vector3 endPoint = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset);
+        lastMoveDir = (transform.position - endPoint).normalized;
+        agent.SetDestination(endPoint);
+
+        fieldOfView.SetAimDirection(GetAimDir());
+        fieldOfView.SetOrigin(transform.position);
     }
 
     Vector3 GetAimDir()

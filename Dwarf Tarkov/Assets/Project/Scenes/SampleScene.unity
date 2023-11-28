@@ -42215,7 +42215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ed5b14885f2a44180fe707c2f2103c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmountOfEnemies: 5
+  maxAmountOfEnemies: 1
 --- !u!4 &1725958237
 Transform:
   m_ObjectHideFlags: 0

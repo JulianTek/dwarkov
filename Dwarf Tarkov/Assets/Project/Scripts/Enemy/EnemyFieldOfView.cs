@@ -37,7 +37,8 @@ public class EnemyFieldOfView : MonoBehaviour
     private Vector3 GetVectorFromAngle(float angle)
     {
         float angleRad = angle * (Mathf.PI / 180f);
-        return new Vector3(MathF.Cos(angleRad), MathF.Sin(angleRad));
+        Vector3 vector = new Vector3(MathF.Cos(angleRad), MathF.Sin(angleRad));
+        return RotateVector(vector, -90f);
     }
 
     private void OnDisable()
@@ -136,5 +137,17 @@ public class EnemyFieldOfView : MonoBehaviour
     public void SetAimDirection(Vector3 dir)
     {
         startingAngle = GetAngleFromVectorFloat(dir) - fov / 2f;
+    }
+
+    Vector3 RotateVector(Vector3 vector, float angle)
+    {
+        float radians = angle * Mathf.Deg2Rad;
+        float cos = Mathf.Cos(radians);
+        float sin = Mathf.Sin(radians);
+
+        float x = vector.x * cos - vector.y * sin;
+        float y = vector.x * sin + vector.y * cos;
+
+        return new Vector3(x, y, 0f); // Assuming your vectors are in 2D space
     }
 }
