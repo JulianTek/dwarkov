@@ -82,13 +82,12 @@ public class EnemyFieldOfView : MonoBehaviour
                     var currentState = GetComponentInParent<EnemyStateMachine>().GetGameState().GetType();
                     if (currentState == typeof(SpottedPlayerState) || currentState == typeof(WanderState))
                     {
-                        EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new SpottedPlayerState());
+                        transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(transform.parent.gameObject);
                     }
                     EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point);
                 }
                 vertex = hit.point.normalized;
             }
-            //vertex.x *= isFlipped;
             vertices[vertexIndex] = vertex;
 
             if (i > 0)

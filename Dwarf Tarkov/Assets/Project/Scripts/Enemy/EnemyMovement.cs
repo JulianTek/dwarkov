@@ -53,16 +53,19 @@ public class EnemyMovement : MonoBehaviour
         agent.isStopped = true;
     }
 
-    void Wander()
+    void Wander(GameObject go)
     {
-        float xOffset = Random.Range(-2f, 2f);
-        var yOffset = Random.Range(-2f, 2f);
-        Vector3 endPoint = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset);
-        lastMoveDir = (transform.position - endPoint).normalized;
-        agent.SetDestination(endPoint);
+        if (gameObject == go)
+        {
+            float xOffset = Random.Range(-2f, 2f);
+            var yOffset = Random.Range(-2f, 2f);
+            Vector3 endPoint = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset);
+            lastMoveDir = (transform.position - endPoint).normalized;
+            agent.SetDestination(endPoint);
 
-        fieldOfView.SetAimDirection(GetAimDir());
-        fieldOfView.SetOrigin(transform.position);
+            fieldOfView.SetAimDirection(GetAimDir());
+            fieldOfView.SetOrigin(transform.position);
+        }
     }
 
     Vector3 GetAimDir()

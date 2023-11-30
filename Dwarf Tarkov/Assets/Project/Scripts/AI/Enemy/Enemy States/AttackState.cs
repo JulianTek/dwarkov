@@ -9,6 +9,11 @@ namespace AI
     {
         private float attackCooldown = 3f;
         private float timeLeft;
+
+        public AttackState(GameObject owner) : base(owner)
+        {
+        }
+
         public override void Start()
         {
             timeLeft = attackCooldown;

@@ -1,29 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace AI
 {
     public class StateMachine : MonoBehaviour
     {
-        protected static GameState currentState;
-        protected static GameState nextState;
-        protected static bool exitStateNextFrame;
-         
+        protected GameState currentState;
+        protected GameState nextState;
+        protected bool exitStateNextFrame;
+
         private void Start()
         {
             exitStateNextFrame = false;
         }
 
-        public static void SwitchState(GameState state)
+        private void SwitchState(GameState state)
         {
             exitStateNextFrame = true;
             nextState = state;
-
         }
-        public static void SwitchState<T>() where T : GameState, new()
+        public void SwitchState<T>(GameObject owner) where T : GameState
         {
-            SwitchState(new T());
+            SwitchState((T)Activator.CreateInstance(typeof(T), owner));
         }
 
         protected void Update()
