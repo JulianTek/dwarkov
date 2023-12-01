@@ -9,6 +9,11 @@ namespace AI
     {
         private float spotCooldown = 7f;
         private float timeLeft;
+
+        public SpottedPlayerState(GameObject owner) : base(owner)
+        {
+        }
+
         public override void Start()
         {
             timeLeft = spotCooldown;
@@ -24,8 +29,6 @@ namespace AI
             timeLeft -= Time.deltaTime;
             if (timeLeft > 0)
                 return;
-
-            EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new WanderState());
         }
     }
 }

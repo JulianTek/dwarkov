@@ -9,7 +9,7 @@ public class InventoryGridHandler : MonoBehaviour
     private List<GameObject> inventorySlots = new List<GameObject>();
     private PlayerInventory inventory;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;

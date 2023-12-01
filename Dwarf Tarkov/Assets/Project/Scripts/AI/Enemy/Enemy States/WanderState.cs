@@ -8,6 +8,11 @@ namespace AI
     public class WanderState : GameState
     {
         private float wanderCooldown;
+
+        public WanderState(GameObject owner) : base(owner)
+        {
+        }
+
         public override void Start()
         {
             wanderCooldown = Random.Range(1f, 7f);
@@ -24,7 +29,7 @@ namespace AI
             if (wanderCooldown > 0)
                 return;
 
-            EventChannels.EnemyEvents.OnEnemyWander?.Invoke();
+            EventChannels.EnemyEvents.OnEnemyWander?.Invoke(this.owner);
             wanderCooldown = Random.Range(1f, 7f);
         }
 

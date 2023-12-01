@@ -10,13 +10,7 @@ namespace AI
     {
         public void Start()
         {
-            currentState = new WanderState();
-            EventChannels.EnemyEvents.OnSwitchEnemyState += SwitchState;
-        }
-
-        private void OnDestroy()
-        {
-            EventChannels.EnemyEvents.OnSwitchEnemyState -= SwitchState;
+            currentState = new WanderState(gameObject);
         }
     }
 }

@@ -19,6 +19,11 @@ public class EnemyFieldOfView : MonoBehaviour
     private float angleIncrease;
     [SerializeField]
     private float viewDistance = 5f;
+    private Vector3 origin;
+    private float startingAngle;
+
+    // int is -1 if mesh should be flipped
+    private int isFlipped;
 
     private Mesh mesh;
     // Start is called before the first frame update
@@ -26,12 +31,18 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        origin = Vector3.zero;
     }
 
     private Vector3 GetVectorFromAngle(float angle)
     {
         float angleRad = angle * (Mathf.PI / 180f);
-        return new Vector3(MathF.Cos(angleRad), MathF.Sin(angleRad));
+        Vector3 vector = new Vector3(MathF.Cos(angleRad), MathF.Sin(angleRad));
+        return RotateVector(vector, -90f);
+    }
+
+    private void OnDisable()
+    {
     }
 
     // Update is called once per frame
@@ -42,8 +53,8 @@ public class EnemyFieldOfView : MonoBehaviour
 
     void GenerateFOV()
     {
-        angle = 0f;
-        Vector3 origin = transform.localPosition;
+        angle = startingAngle;
+        origin = transform.localPosition;
         angleIncrease = fov / rayCount;
 
 
@@ -71,7 +82,7 @@ public class EnemyFieldOfView : MonoBehaviour
                     var currentState = GetComponentInParent<EnemyStateMachine>().GetGameState().GetType();
                     if (currentState == typeof(SpottedPlayerState) || currentState == typeof(WanderState))
                     {
-                        EventChannels.EnemyEvents.OnSwitchEnemyState?.Invoke(new SpottedPlayerState());
+                        transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(transform.parent.gameObject);
                     }
                     EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point);
                 }
@@ -115,5 +126,27 @@ public class EnemyFieldOfView : MonoBehaviour
     public float GetFOVAngle()
     {
         return fov;
+    }
+
+    public void SetOrigin(Vector3 origin)
+    {
+        this.origin = origin;
+    }
+
+    public void SetAimDirection(Vector3 dir)
+    {
+        startingAngle = GetAngleFromVectorFloat(dir) - fov / 2f;
+    }
+
+    Vector3 RotateVector(Vector3 vector, float angle)
+    {
+        float radians = angle * Mathf.Deg2Rad;
+        float cos = Mathf.Cos(radians);
+        float sin = Mathf.Sin(radians);
+
+        float x = vector.x * cos - vector.y * sin;
+        float y = vector.x * sin + vector.y * cos;
+
+        return new Vector3(x, y, 0f); // Assuming your vectors are in 2D space
     }
 }
