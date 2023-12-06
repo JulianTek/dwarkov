@@ -42,6 +42,7 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo += GetCurrentlyLoadedAmmoType;
         EventChannels.ItemEvents.OnGetSubtypesInInventory += GetAmmoTypesInInventory;
         EventChannels.WeaponEvents.OnGetAmmoType += GetCurrentAmmoType;
+        EventChannels.WeaponEvents.OnSwitchWeapon += SetWeaponData;
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
@@ -59,6 +60,17 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo -= GetCurrentlyLoadedAmmoType;
         EventChannels.ItemEvents.OnGetSubtypesInInventory -= GetAmmoTypesInInventory;
         EventChannels.WeaponEvents.OnGetAmmoType -= GetCurrentAmmoType;
+        EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeaponData;
+    }
+
+    public WeaponData GetWeaponData()
+    {
+        return data;
+    }
+
+    private void SetWeaponData(WeaponData weapon)
+    {
+        data = weapon;
     }
 
     private void Aim(Vector2 aimVector)
@@ -228,10 +240,6 @@ public class WeaponHandler : MonoBehaviour
         mag.GetComponent<Rigidbody2D>().AddForce(transform.right * .2f, ForceMode2D.Impulse);
     }
 
-    public WeaponData GetWeaponData()
-    {
-        return data;
-    }
 
     public void ToggleAmmoTypes()
     {
@@ -275,4 +283,6 @@ public class WeaponHandler : MonoBehaviour
     {
         return ammoTypeLoaded;
     }
+
+
 }

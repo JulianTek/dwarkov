@@ -15,6 +15,7 @@ namespace EventSystem
         public ButtonEvent OnPlayerShootStarted;
         public ButtonEvent OnPlayerShootFinished;
         public ButtonEvent OnPlayerReload;
+        public ButtonEvent OnPlayerSwitchWeapon;
 
         public ButtonEvent OnPlayerMine;
         public MoveEvent OnPlayerMove;

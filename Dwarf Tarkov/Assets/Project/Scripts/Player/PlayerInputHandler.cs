@@ -41,6 +41,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.OpenInventory.performed -= OpenInventory;
         playerControls.Player.Interact.performed -= Interact;
         playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
+        playerControls.Player.SwitchWeapons.performed += SwitchWeapon;
 
         playerControls.HUD.Close.performed -= CloseInventory;
     }
@@ -63,6 +64,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.OpenInventory.performed -= OpenInventory;
         playerControls.Player.Interact.performed -= Interact;
         playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
+        playerControls.Player.SwitchWeapons.performed -= SwitchWeapon;
 
         playerControls.HUD.Close.performed -= CloseInventory;
     }
@@ -125,6 +127,11 @@ public class PlayerInputHandler : MonoBehaviour
     private void Reload(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnPlayerReload?.Invoke();
+    }
+
+    private void SwitchWeapon(InputAction.CallbackContext ctx)
+    {
+        EventChannels.PlayerInputEvents.OnPlayerSwitchWeapon?.Invoke();
     }
 
     private void Interact(InputAction.CallbackContext ctx)
