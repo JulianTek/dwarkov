@@ -31,6 +31,9 @@ public class WeaponHandler : MonoBehaviour
     private bool currentlyTogglingAmmoTypes;
     private bool clickPlayed;
 
+    // saves the mag count of the primary/secondary weapon when switching to the other
+    private int cachedMagCount;
+
     private void Start()
     {
         data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
@@ -70,8 +73,12 @@ public class WeaponHandler : MonoBehaviour
 
     private void SetWeaponData(WeaponData weapon)
     {
-        data = weapon;
-        gunSprite.sprite = data.Sprite;
+        if (data != weapon)
+        {
+            (currentMagCount, cachedMagCount) = (cachedMagCount, currentMagCount);
+            data = weapon;
+            gunSprite.sprite = data.Sprite;
+        }
     }
 
     private void Aim(Vector2 aimVector)
@@ -117,7 +124,7 @@ public class WeaponHandler : MonoBehaviour
                     FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
                     clickPlayed = true;
                 }
-                
+
             }
         }
         else
