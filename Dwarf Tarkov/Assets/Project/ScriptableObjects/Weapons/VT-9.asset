@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsAutoFire: 0
   RateOfFire: 0.7
-  AmmoSubtypes: []
+  AmmoSubtypes:
+  - {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
+  IsPrimary: 0
   MagCapacity: 8
   ReloadTime: 2
   Sprite: {fileID: 21300000, guid: 6784798941bdd434d8cf8f0c664b0b7a, type: 3}
   WeaponEmptySprite: {fileID: 21300000, guid: 6784798941bdd434d8cf8f0c664b0b7a, type: 3}
   MagazineSprite: {fileID: 0}
   CaseSprite: {fileID: 0}
-  BaseSpreadAngle: 0
-  AmountOfBullets: 0
+  BaseSpreadAngle: 6
+  AmountOfBullets: 1
   firingEventName: 
   ammoEmptyFiringEventName: 
   reloadEventName: 
