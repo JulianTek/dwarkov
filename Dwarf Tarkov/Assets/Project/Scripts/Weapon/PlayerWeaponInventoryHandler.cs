@@ -10,11 +10,17 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     [SerializeField]
     private WeaponData secondaryWeapon;
 
-    private bool primaryIsSelected;
     // Start is called before the first frame update
     void Start()
     {
-        primaryIsSelected = true;
+        EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon += SelectPrimary;
+        EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon += SelectSecondary;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon -= SelectPrimary;
+        EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon -= SelectSecondary;
     }
 
     // Update is called once per frame
@@ -23,16 +29,22 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
         
     }
 
-    private void SwitchWeapon()
+    private void SelectPrimary()
     {
-        if (primaryIsSelected)
-        {
-            EventChannels.WeaponEvents.OnSwitchWeapon?.Invoke(secondaryWeapon);
-            primaryIsSelected = false;
-        }
-        else
-        {
-            EventChannels.WeaponEvents.OnSwitchWeapon?.Invoke(primaryWeapon);
-        }
+        EventChannels.WeaponEvents.OnSwitchWeapon?.Invoke(primaryWeapon);
+    }
+
+    private void SelectSecondary()
+    {
+        EventChannels.WeaponEvents.OnSwitchWeapon?.Invoke(secondaryWeapon);
+    }
+
+    public WeaponData GetPrimaryWeapon()
+    {
+        return primaryWeapon;
+    }
+    public WeaponData GetSecondaryWeapon()
+    {
+        return secondaryWeapon;
     }
 }

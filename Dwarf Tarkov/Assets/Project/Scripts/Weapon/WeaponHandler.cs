@@ -6,7 +6,6 @@ using TMPro;
 
 public class WeaponHandler : MonoBehaviour
 {
-    [SerializeField]
     private WeaponData data;
     [SerializeField]
     private GameObject bulletPrefab;
@@ -34,6 +33,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Start()
     {
+        data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
         EventChannels.PlayerInputEvents.OnPlayerShootStarted += StartShooting;
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
@@ -71,6 +71,7 @@ public class WeaponHandler : MonoBehaviour
     private void SetWeaponData(WeaponData weapon)
     {
         data = weapon;
+        gunSprite.sprite = data.Sprite;
     }
 
     private void Aim(Vector2 aimVector)

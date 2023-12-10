@@ -109,13 +109,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwitchWeapons"",
-                    ""type"": ""Value"",
+                    ""name"": ""SelectPrimaryWeapon"",
+                    ""type"": ""Button"",
                     ""id"": ""c1b59d11-6a76-4c21-8082-6424bd0e0ef4"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectSecondaryWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""2af9b941-3b2a-437e-af62-8cf07313a29d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -265,11 +274,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""573a1946-0bea-4a34-9386-2944a59e80e4"",
-                    ""path"": ""<Mouse>/scroll/down"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwitchWeapons"",
+                    ""action"": ""SelectPrimaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf6fecb9-c4be-4df4-b6d0-fcfe032e5781"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectSecondaryWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -337,7 +357,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_ToggleAmmoTypes = m_Player.FindAction("ToggleAmmoTypes", throwIfNotFound: true);
-        m_Player_SwitchWeapons = m_Player.FindAction("SwitchWeapons", throwIfNotFound: true);
+        m_Player_SelectPrimaryWeapon = m_Player.FindAction("SelectPrimaryWeapon", throwIfNotFound: true);
+        m_Player_SelectSecondaryWeapon = m_Player.FindAction("SelectSecondaryWeapon", throwIfNotFound: true);
         // HUD
         m_HUD = asset.FindActionMap("HUD", throwIfNotFound: true);
         m_HUD_Close = m_HUD.FindAction("Close", throwIfNotFound: true);
@@ -412,7 +433,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_ToggleAmmoTypes;
-    private readonly InputAction m_Player_SwitchWeapons;
+    private readonly InputAction m_Player_SelectPrimaryWeapon;
+    private readonly InputAction m_Player_SelectSecondaryWeapon;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -426,7 +448,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @ToggleAmmoTypes => m_Wrapper.m_Player_ToggleAmmoTypes;
-        public InputAction @SwitchWeapons => m_Wrapper.m_Player_SwitchWeapons;
+        public InputAction @SelectPrimaryWeapon => m_Wrapper.m_Player_SelectPrimaryWeapon;
+        public InputAction @SelectSecondaryWeapon => m_Wrapper.m_Player_SelectSecondaryWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -463,9 +486,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleAmmoTypes.started += instance.OnToggleAmmoTypes;
             @ToggleAmmoTypes.performed += instance.OnToggleAmmoTypes;
             @ToggleAmmoTypes.canceled += instance.OnToggleAmmoTypes;
-            @SwitchWeapons.started += instance.OnSwitchWeapons;
-            @SwitchWeapons.performed += instance.OnSwitchWeapons;
-            @SwitchWeapons.canceled += instance.OnSwitchWeapons;
+            @SelectPrimaryWeapon.started += instance.OnSelectPrimaryWeapon;
+            @SelectPrimaryWeapon.performed += instance.OnSelectPrimaryWeapon;
+            @SelectPrimaryWeapon.canceled += instance.OnSelectPrimaryWeapon;
+            @SelectSecondaryWeapon.started += instance.OnSelectSecondaryWeapon;
+            @SelectSecondaryWeapon.performed += instance.OnSelectSecondaryWeapon;
+            @SelectSecondaryWeapon.canceled += instance.OnSelectSecondaryWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -497,9 +523,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleAmmoTypes.started -= instance.OnToggleAmmoTypes;
             @ToggleAmmoTypes.performed -= instance.OnToggleAmmoTypes;
             @ToggleAmmoTypes.canceled -= instance.OnToggleAmmoTypes;
-            @SwitchWeapons.started -= instance.OnSwitchWeapons;
-            @SwitchWeapons.performed -= instance.OnSwitchWeapons;
-            @SwitchWeapons.canceled -= instance.OnSwitchWeapons;
+            @SelectPrimaryWeapon.started -= instance.OnSelectPrimaryWeapon;
+            @SelectPrimaryWeapon.performed -= instance.OnSelectPrimaryWeapon;
+            @SelectPrimaryWeapon.canceled -= instance.OnSelectPrimaryWeapon;
+            @SelectSecondaryWeapon.started -= instance.OnSelectSecondaryWeapon;
+            @SelectSecondaryWeapon.performed -= instance.OnSelectSecondaryWeapon;
+            @SelectSecondaryWeapon.canceled -= instance.OnSelectSecondaryWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -582,7 +611,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnToggleAmmoTypes(InputAction.CallbackContext context);
-        void OnSwitchWeapons(InputAction.CallbackContext context);
+        void OnSelectPrimaryWeapon(InputAction.CallbackContext context);
+        void OnSelectSecondaryWeapon(InputAction.CallbackContext context);
     }
     public interface IHUDActions
     {

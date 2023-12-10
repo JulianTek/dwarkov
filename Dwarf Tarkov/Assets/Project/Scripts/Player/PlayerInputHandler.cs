@@ -22,6 +22,8 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.OpenInventory.performed += OpenInventory;
         playerControls.Player.Interact.performed += Interact;
         playerControls.Player.ToggleAmmoTypes.performed += ToggleAmmoTypes;
+        playerControls.Player.SelectPrimaryWeapon.performed += SelectPrimaryWeapon;
+        playerControls.Player.SelectSecondaryWeapon.performed += SelectSecondaryWeapon;
 
         playerControls.HUD.Close.performed += CloseInventory;
         playerControls.HUD.SplitStack.started += EnableStackSplit;
@@ -41,10 +43,12 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.OpenInventory.performed -= OpenInventory;
         playerControls.Player.Interact.performed -= Interact;
         playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
-        playerControls.Player.SwitchWeapons.performed += SwitchWeapon;
+        playerControls.Player.SelectPrimaryWeapon.performed -= SelectPrimaryWeapon;
+        playerControls.Player.SelectSecondaryWeapon.performed -= SelectSecondaryWeapon;
 
         playerControls.HUD.Close.performed -= CloseInventory;
     }
+
 
     private void Update()
     {
@@ -64,7 +68,6 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.OpenInventory.performed -= OpenInventory;
         playerControls.Player.Interact.performed -= Interact;
         playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
-        playerControls.Player.SwitchWeapons.performed -= SwitchWeapon;
 
         playerControls.HUD.Close.performed -= CloseInventory;
     }
@@ -77,6 +80,15 @@ public class PlayerInputHandler : MonoBehaviour
     void ShootEnded(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnPlayerShootFinished?.Invoke();
+    }
+
+    private void SelectPrimaryWeapon(InputAction.CallbackContext obj)
+    {
+        EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon?.Invoke();
+    }
+    private void SelectSecondaryWeapon(InputAction.CallbackContext obj)
+    {
+        EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon?.Invoke();
     }
 
     void Mine(InputAction.CallbackContext ctx)
@@ -129,10 +141,6 @@ public class PlayerInputHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerReload?.Invoke();
     }
 
-    private void SwitchWeapon(InputAction.CallbackContext ctx)
-    {
-        EventChannels.PlayerInputEvents.OnPlayerSwitchWeapon?.Invoke();
-    }
 
     private void Interact(InputAction.CallbackContext ctx)
     {
