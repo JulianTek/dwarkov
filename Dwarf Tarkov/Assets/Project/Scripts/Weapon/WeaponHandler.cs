@@ -78,6 +78,8 @@ public class WeaponHandler : MonoBehaviour
             (currentMagCount, cachedMagCount) = (cachedMagCount, currentMagCount);
             data = weapon;
             gunSprite.sprite = data.Sprite;
+            maxMagCount = data.MagCapacity;
+            SetIndexAndAmmoType();
         }
     }
 
@@ -206,6 +208,7 @@ public class WeaponHandler : MonoBehaviour
 
     private IEnumerator ReloadCoolDown()
     {
+        EventChannels.WeaponEvents.OnWeaponReload?.Invoke();
         Debug.Log("Reloading");
         int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(ammoTypeLoaded);
         if (ammoInInventory != 0)
@@ -291,6 +294,4 @@ public class WeaponHandler : MonoBehaviour
     {
         return ammoTypeLoaded;
     }
-
-
 }
