@@ -227,8 +227,8 @@ public class WeaponHandler : MonoBehaviour
             }
             if (ammoInInventory >= maxMagCount)
             {
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, maxMagCount - currentMagCount);
                 currentMagCount = maxMagCount;
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, maxMagCount);
             }
             else if (ammoInInventory > 0)
             {
