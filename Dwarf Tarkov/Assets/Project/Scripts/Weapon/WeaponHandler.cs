@@ -71,10 +71,12 @@ public class WeaponHandler : MonoBehaviour
         return data;
     }
 
+    // This handles switching between your primary and secondary weapon
     private void SetWeaponData(WeaponData weapon)
     {
         if (data != weapon)
         {
+            // This switches currentMagCount and cachedMagCount
             (currentMagCount, cachedMagCount) = (cachedMagCount, currentMagCount);
             data = weapon;
             gunSprite.sprite = data.Sprite;
@@ -93,6 +95,7 @@ public class WeaponHandler : MonoBehaviour
         magText.text = $"{currentMagCount}/{maxMagCount}";
         if (isAiming)
         {
+            // Translate mouse position to on screen point and turn weapon to there
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
             mousePos.z = 0f;
             Vector3 direction = (mousePos - transform.position).normalized;
@@ -100,6 +103,7 @@ public class WeaponHandler : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+            // Flip gun sprite if aiming left of center
             if (mousePos.x < 0)
             {
                 gunSprite.flipY = true;
@@ -111,6 +115,7 @@ public class WeaponHandler : MonoBehaviour
 
         }
 
+        // Weapon firing logic
         if (isFiring)
         {
             if (currentMagCount > 0)
@@ -121,6 +126,7 @@ public class WeaponHandler : MonoBehaviour
             }
             else
             {
+                // This prevents the click event from playing every frame
                 if (!clickPlayed)
                 {
                     FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
@@ -141,14 +147,16 @@ public class WeaponHandler : MonoBehaviour
         timeSinceLastShot += Time.deltaTime;
         if (timeSinceLastShot >= data.RateOfFire)
         {
+            // Stops firing after one shot on semi automatic weapons
             if (!data.IsAutoFire)
             {
                 isFiring = false;
             }
 
+            // Spawns a bullet using object pooling
             if (bulletPrefab != null)
             {
-                GameObject bullet = Instantiate(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
+                GameObject bullet = ObjectPoolHandler.SpawnObject(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
                 float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
                 bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * ammoTypeLoaded.BulletSpeed, ForceMode2D.Impulse);
                 bullet.GetComponent<BulletHandler>().ammoType = ammoTypeLoaded;
@@ -163,6 +171,7 @@ public class WeaponHandler : MonoBehaviour
     {
         foreach (AmmoSubtype ammoType in data.AmmoSubtypes)
         {
+            // Checks if ammo subtype looping through is in player inventory
             if (EventChannels.ItemEvents.OnCheckIfItemInInventory(ammoType))
             {
                 ammoTypeLoaded = ammoType;
@@ -170,6 +179,7 @@ public class WeaponHandler : MonoBehaviour
                 return;
             }
         }
+        // Since it is pretty much impossible to create billions of ammo types, this serves as a good way to check in other methods
         if (ammoTypeLoaded == null)
         {
             ammoTypeIndex = int.MaxValue;
@@ -187,17 +197,23 @@ public class WeaponHandler : MonoBehaviour
     void StopShooting()
     {
         isFiring = false;
+        // When the mouse button is released, this function is called. This therefore will make the click be played again
+        // when the mouse is pressed next
         clickPlayed = false;
     }
 
     void Reload()
     {
+        // Hides the sub ammo type UI
         currentlyTogglingAmmoTypes = false;
+        // Gets all subtypes in inventory
         List<AmmoSubtype> subtypes = GetAmmoTypesInInventory();
+        // If no ammo type is currently loaded, load the first subtype in the list
         if (ammoTypeLoaded == null)
             ammoTypeLoaded = subtypes[0];
         if (canReload)
         {
+            // Prevent the player from triggering another reload, firing or aiming while the reload is going on
             canReload = false;
             canFire = false;
             isAiming = false;
@@ -208,12 +224,15 @@ public class WeaponHandler : MonoBehaviour
 
     private IEnumerator ReloadCoolDown()
     {
+        // This event handles sprite logic
         EventChannels.WeaponEvents.OnWeaponReload?.Invoke();
         Debug.Log("Reloading");
+        // Gets ammo in inventory, if it's 0 then nothing will happen
         int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(ammoTypeLoaded);
         if (ammoInInventory != 0)
         {
             LaunchMag();
+            // Reload sound events are split into 3, this is so I don't have to make sound events the exact same length as the weapon data's reload
             FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Start", transform.position);
             if (currentMagCount > 0)
             {
@@ -222,9 +241,11 @@ public class WeaponHandler : MonoBehaviour
             }
             else
             {
+                // Reload from empty takes longer
                 yield return new WaitForSecondsRealtime(data.ReloadTime + 2f);
                 FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Empty");
             }
+            // If there is more or the same amount of ammo in the player's inventory as the max mag count no 'complex' calculation has to be done
             if (ammoInInventory >= maxMagCount)
             {
                 EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, maxMagCount - currentMagCount);
@@ -232,21 +253,24 @@ public class WeaponHandler : MonoBehaviour
             }
             else if (ammoInInventory > 0)
             {
+                // Otherwise, use up all the ammo
                 currentMagCount = ammoInInventory;
                 EventChannels.ItemEvents.OnRemoveItemFromInventory(ammoTypeLoaded, ammoInInventory);
             }
+            // Make the player aim, be able to fire and trigger the reload mechanic again again
             isAiming = true;
             canFire = true;
             canReload = true;
             Debug.Log(GetCurrentlyLoadedAmmoType());
         }
-
+        // Weapon sprite logic
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
     }
 
     void LaunchMag()
     {
-        GameObject mag = Instantiate(magazinePrefab, transform.position, transform.rotation);
+        GameObject mag = ObjectPoolHandler.SpawnObject(magazinePrefab, transform.position, transform.rotation);
+        // Sets the sprite to the weapon data magazine
         mag.GetComponent<MagazineHandler>().SetData(data);
         mag.GetComponent<Rigidbody2D>().AddForce(transform.right * .2f, ForceMode2D.Impulse);
     }
@@ -255,6 +279,7 @@ public class WeaponHandler : MonoBehaviour
     public void ToggleAmmoTypes()
     {
         canFire = false;
+        // If toggling ammo types already, loop between all available ammo types
         if (currentlyTogglingAmmoTypes)
         {
             if (ammoTypeIndex == data.AmmoSubtypes.Count - 1)
@@ -267,6 +292,7 @@ public class WeaponHandler : MonoBehaviour
         }
         else
         {
+            // If not toggling ammo types already, open the UI for it
             EventChannels.UIEvents.OnShowAmmoTypes?.Invoke();
             currentlyTogglingAmmoTypes = true;
         }
