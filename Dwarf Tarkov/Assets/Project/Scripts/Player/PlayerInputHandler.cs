@@ -22,6 +22,8 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.OpenInventory.performed += OpenInventory;
         playerControls.Player.Interact.performed += Interact;
         playerControls.Player.ToggleAmmoTypes.performed += ToggleAmmoTypes;
+        playerControls.Player.SelectPrimaryWeapon.performed += SelectPrimaryWeapon;
+        playerControls.Player.SelectSecondaryWeapon.performed += SelectSecondaryWeapon;
 
         playerControls.HUD.Close.performed += CloseInventory;
         playerControls.HUD.SplitStack.started += EnableStackSplit;
@@ -41,9 +43,12 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.OpenInventory.performed -= OpenInventory;
         playerControls.Player.Interact.performed -= Interact;
         playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
+        playerControls.Player.SelectPrimaryWeapon.performed -= SelectPrimaryWeapon;
+        playerControls.Player.SelectSecondaryWeapon.performed -= SelectSecondaryWeapon;
 
         playerControls.HUD.Close.performed -= CloseInventory;
     }
+
 
     private void Update()
     {
@@ -51,20 +56,6 @@ public class PlayerInputHandler : MonoBehaviour
         Vector2 aimVector = playerControls.Player.Aim.ReadValue<Vector2>();
         EventChannels.PlayerInputEvents.OnPlayerAim?.Invoke(aimVector);
         EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(movementVector);
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Player.Mine.performed -= Mine;
-        playerControls.Player.Shoot.started -= ShootStarted;
-        playerControls.Player.Shoot.canceled -= ShootEnded;
-        playerControls.Player.Sprint.started -= Sprint;
-        playerControls.Player.Sprint.canceled -= StopSprint;
-        playerControls.Player.OpenInventory.performed -= OpenInventory;
-        playerControls.Player.Interact.performed -= Interact;
-        playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
-
-        playerControls.HUD.Close.performed -= CloseInventory;
     }
 
     void ShootStarted(InputAction.CallbackContext ctx)
@@ -75,6 +66,15 @@ public class PlayerInputHandler : MonoBehaviour
     void ShootEnded(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnPlayerShootFinished?.Invoke();
+    }
+
+    private void SelectPrimaryWeapon(InputAction.CallbackContext obj)
+    {
+        EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon?.Invoke();
+    }
+    private void SelectSecondaryWeapon(InputAction.CallbackContext obj)
+    {
+        EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon?.Invoke();
     }
 
     void Mine(InputAction.CallbackContext ctx)
@@ -126,6 +126,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnPlayerReload?.Invoke();
     }
+
 
     private void Interact(InputAction.CallbackContext ctx)
     {

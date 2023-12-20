@@ -16,12 +16,14 @@ public class WeaponSpriteHandler : MonoBehaviour
 
         EventChannels.WeaponEvents.OnWeaponReload += Reload;
         EventChannels.WeaponEvents.OnWeaponReloaded += Reloaded;
+        EventChannels.WeaponEvents.OnSwitchWeapon += SetWeaponData;
     }
 
     private void OnDestroy()
     {
         EventChannels.WeaponEvents.OnWeaponReload -= Reload;
         EventChannels.WeaponEvents.OnWeaponReloaded -= Reloaded;
+        EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeaponData;
     }
 
     void Reload()
@@ -32,5 +34,10 @@ public class WeaponSpriteHandler : MonoBehaviour
     void Reloaded()
     {
         spriteRenderer.sprite = weaponData.Sprite;
+    }
+
+    void SetWeaponData(WeaponData weaponData)
+    {
+        this.weaponData = weaponData;
     }
 }

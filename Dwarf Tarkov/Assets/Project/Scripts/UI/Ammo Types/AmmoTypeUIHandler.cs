@@ -18,6 +18,9 @@ public class AmmoTypeUIHandler : MonoBehaviour
         EventChannels.UIEvents.OnShowAmmoTypes += ShowHUD;
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes += CycleAmmoType;
         EventChannels.PlayerInputEvents.OnPlayerReload += HideHUD;
+        EventChannels.UIEvents.OnShowNoAmmoTypes += ShowNoAmmoTypes;
+        EventChannels.UIEvents.OnHideAmmoTypes += HideNoAmmoTypes;
+        text.fontSize = 0.1f;
         gameObject.SetActive(false);
     }
 
@@ -26,6 +29,8 @@ public class AmmoTypeUIHandler : MonoBehaviour
         EventChannels.UIEvents.OnShowAmmoTypes -= ShowHUD;
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes -= CycleAmmoType;
         EventChannels.PlayerInputEvents.OnPlayerReload -= HideHUD;
+        EventChannels.UIEvents.OnShowNoAmmoTypes -= ShowNoAmmoTypes;
+        EventChannels.UIEvents.OnHideAmmoTypes -= HideNoAmmoTypes;
     }
 
     // Update is called once per frame
@@ -101,5 +106,16 @@ public class AmmoTypeUIHandler : MonoBehaviour
                 text.text += "> ";
             text.text += $"{ammoSubtypes[i].Name} <br>";
         }
+    }
+
+    private void ShowNoAmmoTypes()
+    {
+        text.SetText("No ammo types available!");
+        gameObject.SetActive(true);
+    }
+
+    private void HideNoAmmoTypes()
+    {
+        gameObject.SetActive(false);
     }
 }

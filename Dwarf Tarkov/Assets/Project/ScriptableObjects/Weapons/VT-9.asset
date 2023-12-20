@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
-  m_Name: J1C
+  m_Name: VT-9
   m_EditorClassIdentifier: 
-  IsAutoFire: 1
-  RateOfFire: 0.4
-  AmmoSubtypes: []
-  IsPrimary: 1
-  MagCapacity: 25
+  IsAutoFire: 0
+  RateOfFire: 0.7
+  AmmoSubtypes:
+  - {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
+  IsPrimary: 0
+  MagCapacity: 8
   ReloadTime: 2
-  Sprite: {fileID: 21300000, guid: bb8d46c22e548a34386eb8d63a556ac8, type: 3}
-  WeaponEmptySprite: {fileID: 21300000, guid: 39e44f287e1452649b3abcf0ef3ca386, type: 3}
-  MagazineSprite: {fileID: 21300000, guid: 6eedc7ffa976efb4f9f436a6e3afdb59, type: 3}
+  Sprite: {fileID: 21300000, guid: 6784798941bdd434d8cf8f0c664b0b7a, type: 3}
+  WeaponEmptySprite: {fileID: 21300000, guid: da2f219991dd55641a6a79f9f62ca158, type: 3}
+  MagazineSprite: {fileID: 0}
   CaseSprite: {fileID: 0}
-  BaseSpreadAngle: 15
+  BaseSpreadAngle: 6
   AmountOfBullets: 1
   firingEventName: 
   ammoEmptyFiringEventName: 
