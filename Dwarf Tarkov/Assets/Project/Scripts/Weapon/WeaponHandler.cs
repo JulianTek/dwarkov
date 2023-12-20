@@ -293,8 +293,15 @@ public class WeaponHandler : MonoBehaviour
         else
         {
             // If not toggling ammo types already, open the UI for it
-            EventChannels.UIEvents.OnShowAmmoTypes?.Invoke();
-            currentlyTogglingAmmoTypes = true;
+            if (GetAmmoTypesInInventory().Count != 0)
+            {
+                EventChannels.UIEvents.OnShowAmmoTypes?.Invoke();
+                currentlyTogglingAmmoTypes = true;
+            }
+            else
+            {
+                EventChannels.UIEvents.OnShowNoAmmoTypes?.Invoke();
+            }
         }
     }
 
