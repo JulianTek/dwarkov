@@ -24,6 +24,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCheckIfItemInInventory += CheckIfItemInInventory;
         EventChannels.ItemEvents.OnCreateStack += CreateNewStack;
         EventChannels.ItemEvents.OnRemoveFromStack += RemoveSpecificItem;
+        EventChannels.PlayerEvents.OnPlayerDeath += SetLostItems;
     }
 
     private void OnDestroy()
@@ -37,6 +38,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCheckIfItemInInventory -= CheckIfItemInInventory;
         EventChannels.ItemEvents.OnCreateStack -= CreateNewStack;
         EventChannels.ItemEvents.OnRemoveFromStack -= RemoveSpecificItem;
+        EventChannels.PlayerEvents.OnPlayerDeath -= SetLostItems;
     }
 
     // Update is called once per frame
@@ -246,6 +248,11 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return amountOfCredits >= requiredAmount;
+    }
+
+    private void SetLostItems()
+    {
+        EventChannels.ItemEvents.OnSetLostItems?.Invoke(inventory);
     }
 
     public void BuyItem(int cost)
