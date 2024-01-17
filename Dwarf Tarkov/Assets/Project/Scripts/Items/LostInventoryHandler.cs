@@ -9,7 +9,7 @@ public class LostInventoryHandler : MonoBehaviour
     private List<Item> items = new List<Item>();
     void Start()
     {
-        items = ItemDataHandler.LoadInventory("items.dkd");
+        items = ItemDataHandler.LoadInventory("items");
         if (items.Count == 0)
             gameObject.SetActive(false);
 
@@ -19,5 +19,6 @@ public class LostInventoryHandler : MonoBehaviour
     void SetLostItems(List<Item> items)
     {
         this.items = items;
+        ItemDataHandler.SaveInventory("items", this.items);
     }
 }

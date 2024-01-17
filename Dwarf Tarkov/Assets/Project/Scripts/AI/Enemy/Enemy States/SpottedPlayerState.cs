@@ -10,9 +10,8 @@ namespace AI
         private float spotCooldown = 7f;
         private float timeLeft;
 
-        public SpottedPlayerState(GameObject owner) : base(owner)
-        {
-        }
+        public SpottedPlayerState() : base() { }
+        public SpottedPlayerState(GameObject owner) : base(owner) { }
 
         public override void Start()
         {

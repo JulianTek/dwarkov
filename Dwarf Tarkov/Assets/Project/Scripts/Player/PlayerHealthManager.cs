@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerHealthManager : MonoBehaviour
         if (playerHealth <= 0)
         {
             EventChannels.PlayerEvents.OnPlayerDeath?.Invoke();
+            SceneManager.LoadScene(3);
         }
         EventChannels.UIEvents.OnUpdateHealthbar?.Invoke(playerHealth);
     }
