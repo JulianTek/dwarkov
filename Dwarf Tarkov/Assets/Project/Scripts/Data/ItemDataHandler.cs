@@ -44,6 +44,8 @@ namespace Data
         {
             List<ItemDTO> dtos = DataSaver<List<ItemDTO>>.Load(name);
             List<Item> items = new List<Item>();
+            if (items == null || items.Count == 0)
+                return null;
             foreach (ItemDTO itemDTO in dtos)
             {
                 items.Add(ConvertDTOToItem(itemDTO));

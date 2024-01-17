@@ -30,9 +30,14 @@ public class PlayerHealthManager : MonoBehaviour
         playerHealth -= damage;
         if (playerHealth <= 0)
         {
-            EventChannels.PlayerEvents.OnPlayerDeath?.Invoke();
-            SceneManager.LoadScene(3);
+            Die();
+            return;
         }
         EventChannels.UIEvents.OnUpdateHealthbar?.Invoke(playerHealth);
+    }
+
+    void Die()
+    {
+        EventChannels.PlayerEvents.OnPlayerDeath?.Invoke();
     }
 }

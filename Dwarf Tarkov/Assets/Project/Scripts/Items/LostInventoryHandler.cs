@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using UnityEngine.SceneManagement;
 
 public class LostInventoryHandler : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class LostInventoryHandler : MonoBehaviour
     void Start()
     {
         items = ItemDataHandler.LoadInventory("items");
-        if (items.Count == 0)
+        if (items == null || items.Count == 0 )
             gameObject.SetActive(false);
 
         EventChannels.ItemEvents.OnSetLostItems += SetLostItems;
@@ -20,5 +21,6 @@ public class LostInventoryHandler : MonoBehaviour
     {
         this.items = items;
         ItemDataHandler.SaveInventory("items", this.items);
+        SceneManager.LoadScene(3);
     }
 }
