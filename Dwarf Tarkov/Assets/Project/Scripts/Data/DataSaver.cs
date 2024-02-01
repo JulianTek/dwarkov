@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 namespace Data
 {
@@ -17,12 +18,12 @@ namespace Data
             stream.Close();
         }
 
-        public static T Load(string name)
+        public static T? Load(string name)
         {
             if (!File.Exists($"{path}/{name}.dk"))
             {
                 Debug.Log($"No {name} data exists!");
-                return default(T);
+                return default;
             }
 
             BinaryFormatter formatter = new BinaryFormatter();

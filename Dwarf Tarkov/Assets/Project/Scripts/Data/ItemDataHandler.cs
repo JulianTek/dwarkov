@@ -2,6 +2,7 @@ using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Data
 {
@@ -42,15 +43,19 @@ namespace Data
 
         public static List<Item> LoadInventory(string name)
         {
-            List<ItemDTO> dtos = DataSaver<List<ItemDTO>>.Load(name);
-            List<Item> items = new List<Item>();
-            if (items == null || items.Count == 0)
-                return null;
-            foreach (ItemDTO itemDTO in dtos)
+            var dtos = DataSaver<IEnumerable<ItemDTO>>.Load(name);
+            if (dtos != null)
             {
-                items.Add(ConvertDTOToItem(itemDTO));
+                List<Item> items = new List<Item>();
+                if (items == null || items.Count == 0)
+                    return null;
+                foreach (ItemDTO itemDTO in dtos)
+                {
+                    items.Add(ConvertDTOToItem(itemDTO));
+                }
+                return items;
             }
-            return items;
+            return null;
         }
     }
 }
