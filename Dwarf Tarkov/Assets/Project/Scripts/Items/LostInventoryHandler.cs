@@ -24,4 +24,20 @@ public class LostInventoryHandler : MonoBehaviour
         ItemDataHandler.SaveInventory("items", this.items);
         SceneManager.LoadScene(3);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PlayerInputHandler>())
+        {
+            if (EventChannels.ItemEvents.OnCheckIfListFits(items))
+            {
+                foreach (var item in items)
+                {
+                    EventChannels.ItemEvents.OnAddItemToInventory(item.data, item.amount);
+                }
+                Destroy(gameObject);
+            }
+            DataSaver<List<Item>>.Delete("items");
+        }
+    }
 }

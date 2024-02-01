@@ -34,5 +34,13 @@ namespace Data
             stream.Close();
             return data;
         }
+
+        public static void Delete(string name)
+        {
+            if (File.Exists($"{path}/{name}.dk"))
+                File.Delete($"{path}/{name}.dk");
+            else
+                Debug.Log("No File to delete");
+        }
     }
 }
