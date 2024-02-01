@@ -46,10 +46,11 @@ namespace Data
             var dtos = DataSaver<IEnumerable<ItemDTO>>.Load(name);
             if (dtos != null)
             {
+                List<ItemDTO> dtosList = dtos.ToList();
                 List<Item> items = new List<Item>();
-                if (items == null || items.Count == 0)
+                if (dtosList == null || dtosList.Count == 0)
                     return null;
-                foreach (ItemDTO itemDTO in dtos)
+                foreach (ItemDTO itemDTO in dtosList)
                 {
                     items.Add(ConvertDTOToItem(itemDTO));
                 }

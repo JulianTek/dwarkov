@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LostInventoryHandler : MonoBehaviour
 {
+    [SerializeField]
     private List<Item> items = new List<Item>();
     void Start()
     {
