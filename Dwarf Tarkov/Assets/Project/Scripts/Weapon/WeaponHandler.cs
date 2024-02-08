@@ -31,11 +31,13 @@ public class WeaponHandler : MonoBehaviour
     private bool currentlyTogglingAmmoTypes;
     private bool clickPlayed;
 
+    private bool isPaused;
     // saves the mag count of the primary/secondary weapon when switching to the other
     private int cachedMagCount;
 
     private void Start()
     {
+        isPaused = false;
         data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
         EventChannels.PlayerInputEvents.OnPlayerShootStarted += StartShooting;
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
@@ -46,6 +48,9 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.ItemEvents.OnGetSubtypesInInventory += GetAmmoTypesInInventory;
         EventChannels.WeaponEvents.OnGetAmmoType += GetCurrentAmmoType;
         EventChannels.WeaponEvents.OnSwitchWeapon += SetWeaponData;
+
+        EventChannels.PlayerInputEvents.OnPlayerPauses += PauseGame;
+        EventChannels.GameplayEvents.OnPlayerResumesGame += ResumeGame;
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
@@ -64,6 +69,9 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.ItemEvents.OnGetSubtypesInInventory -= GetAmmoTypesInInventory;
         EventChannels.WeaponEvents.OnGetAmmoType -= GetCurrentAmmoType;
         EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeaponData;
+
+        EventChannels.PlayerInputEvents.OnPlayerPauses -= PauseGame;
+        EventChannels.GameplayEvents.OnPlayerResumesGame -= ResumeGame;
     }
 
     public WeaponData GetWeaponData()
@@ -93,51 +101,54 @@ public class WeaponHandler : MonoBehaviour
     private void Update()
     {
         magText.text = $"{currentMagCount}/{maxMagCount}";
-        if (isAiming)
+        if (!isPaused)
         {
-            // Translate mouse position to on screen point and turn weapon to there
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
-            mousePos.z = 0f;
-            Vector3 direction = (mousePos - transform.position).normalized;
-
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            // Flip gun sprite if aiming left of center
-            if (mousePos.x < 0)
+            if (isAiming)
             {
-                gunSprite.flipY = true;
-            }
-            else
-            {
-                gunSprite.flipY = false;
-            }
+                // Translate mouse position to on screen point and turn weapon to there
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
+                mousePos.z = 0f;
+                Vector3 direction = (mousePos - transform.position).normalized;
 
-        }
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        // Weapon firing logic
-        if (isFiring)
-        {
-            if (currentMagCount > 0)
-            {
-                Fire();
-                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);
-                Physics2D.CircleCast(transform.position, data.firingEventRadius, Vector2.zero, 0f);
-            }
-            else
-            {
-                // This prevents the click event from playing every frame
-                if (!clickPlayed)
+                // Flip gun sprite if aiming left of center
+                if (mousePos.x < 0)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
-                    clickPlayed = true;
+                    gunSprite.flipY = true;
+                }
+                else
+                {
+                    gunSprite.flipY = false;
                 }
 
             }
-        }
-        else
-        {
-            timeSinceLastShot = data.RateOfFire;
+
+            // Weapon firing logic
+            if (isFiring)
+            {
+                if (currentMagCount > 0)
+                {
+                    Fire();
+                    FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);
+                    Physics2D.CircleCast(transform.position, data.firingEventRadius, Vector2.zero, 0f);
+                }
+                else
+                {
+                    // This prevents the click event from playing every frame
+                    if (!clickPlayed)
+                    {
+                        FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Empty/{data.ammoEmptyFiringEventName}", transform.position);
+                        clickPlayed = true;
+                    }
+
+                }
+            }
+            else
+            {
+                timeSinceLastShot = data.RateOfFire;
+            }
         }
     }
 
@@ -326,5 +337,15 @@ public class WeaponHandler : MonoBehaviour
     private AmmoSubtype GetCurrentAmmoType()
     {
         return ammoTypeLoaded;
+    }
+
+    private void PauseGame()
+    {
+        isPaused = true;
+    }
+
+    private void ResumeGame()
+    {
+        isPaused = false; ;
     }
 }
