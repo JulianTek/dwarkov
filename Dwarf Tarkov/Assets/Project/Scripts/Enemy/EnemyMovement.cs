@@ -42,10 +42,13 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void MoveToPosition(Vector3 pos)
+    void MoveToPosition(Vector3 pos, GameObject go)
     {
-        positionToMoveTo = pos;
-        agent.SetDestination(pos);
+        if (gameObject == go)
+        {
+            positionToMoveTo = pos;
+            agent.SetDestination(pos);
+        }
     }
 
     void StopMoving()

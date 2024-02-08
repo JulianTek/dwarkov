@@ -7,6 +7,7 @@ public class EnemyEvents
 {
     public delegate void StateEvent(GameState state, GameObject go);
     public delegate void EnemyPositionEvent(Vector3 position);
+    public delegate void EnemyPositionStateEvent(Vector3 position, GameObject owner);
     public delegate void EnemyEvent();
     public delegate void EnemyObjectEvent(GameObject go);
     public delegate void DamageEvent(float damage);
@@ -14,7 +15,7 @@ public class EnemyEvents
 
     public StateEvent OnSwitchEnemyState;
 
-    public EnemyPositionEvent OnPlayerSpotted;
+    public EnemyPositionStateEvent OnPlayerSpotted;
 
     public EnemyEvent OnEnemyStopMoving;
     public EnemyObjectEvent OnEnemyWander;

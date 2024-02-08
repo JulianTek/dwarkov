@@ -84,7 +84,7 @@ public class EnemyFieldOfView : MonoBehaviour
                     {
                         transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(transform.parent.gameObject);
                     }
-                    EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point);
+                    EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point, transform.parent.gameObject);
                 }
                 vertex = hit.point.normalized;
             }
