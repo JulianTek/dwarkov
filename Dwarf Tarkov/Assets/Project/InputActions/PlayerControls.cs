@@ -125,6 +125,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""dba3f9dc-e85d-4d88-9593-c01dac276f30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -292,6 +301,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SelectSecondaryWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29725d09-dcfb-4e6e-bc4f-77872f9d3c41"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -359,6 +379,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_ToggleAmmoTypes = m_Player.FindAction("ToggleAmmoTypes", throwIfNotFound: true);
         m_Player_SelectPrimaryWeapon = m_Player.FindAction("SelectPrimaryWeapon", throwIfNotFound: true);
         m_Player_SelectSecondaryWeapon = m_Player.FindAction("SelectSecondaryWeapon", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // HUD
         m_HUD = asset.FindActionMap("HUD", throwIfNotFound: true);
         m_HUD_Close = m_HUD.FindAction("Close", throwIfNotFound: true);
@@ -435,6 +456,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ToggleAmmoTypes;
     private readonly InputAction m_Player_SelectPrimaryWeapon;
     private readonly InputAction m_Player_SelectSecondaryWeapon;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -450,6 +472,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @ToggleAmmoTypes => m_Wrapper.m_Player_ToggleAmmoTypes;
         public InputAction @SelectPrimaryWeapon => m_Wrapper.m_Player_SelectPrimaryWeapon;
         public InputAction @SelectSecondaryWeapon => m_Wrapper.m_Player_SelectSecondaryWeapon;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -492,6 +515,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SelectSecondaryWeapon.started += instance.OnSelectSecondaryWeapon;
             @SelectSecondaryWeapon.performed += instance.OnSelectSecondaryWeapon;
             @SelectSecondaryWeapon.canceled += instance.OnSelectSecondaryWeapon;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -529,6 +555,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SelectSecondaryWeapon.started -= instance.OnSelectSecondaryWeapon;
             @SelectSecondaryWeapon.performed -= instance.OnSelectSecondaryWeapon;
             @SelectSecondaryWeapon.canceled -= instance.OnSelectSecondaryWeapon;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -613,6 +642,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnToggleAmmoTypes(InputAction.CallbackContext context);
         void OnSelectPrimaryWeapon(InputAction.CallbackContext context);
         void OnSelectSecondaryWeapon(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IHUDActions
     {

@@ -36,6 +36,8 @@ namespace EventSystem
         public ButtonEvent OnDisableHUDControls;
 
         public ButtonEvent OnToggleAmmoTypes;
+
+        public ButtonEvent OnPlayerPauses;
     }
 }
 
