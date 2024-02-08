@@ -41,6 +41,7 @@ public class PauseMenuHandler : MonoBehaviour
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
         isPaused = false;
+        EventChannels.GameplayEvents.OnPlayerResumesGame?.Invoke();
     }
 
     void HandleInput()
@@ -49,5 +50,10 @@ public class PauseMenuHandler : MonoBehaviour
             PauseGame();
         else
             ResumeGame();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

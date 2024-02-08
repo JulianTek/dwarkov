@@ -37,6 +37,8 @@ public class PlayerInputHandler : MonoBehaviour
 
         EventChannels.PlayerInputEvents.OnDisableHUDControls += DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls += EnableHUDInput;
+
+        EventChannels.GameplayEvents.OnPlayerResumesGame += ResumeGame;
     }
 
 
@@ -62,6 +64,8 @@ public class PlayerInputHandler : MonoBehaviour
 
         EventChannels.PlayerInputEvents.OnDisableHUDControls -= DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls -= EnableHUDInput;
+
+        EventChannels.GameplayEvents.OnPlayerResumesGame -= ResumeGame;
     }
 
 
@@ -173,5 +177,10 @@ public class PlayerInputHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnPlayerPauses?.Invoke();
         isPaused = !isPaused;
+    }
+
+    private void ResumeGame()
+    {
+        isPaused = false;
     }
 }

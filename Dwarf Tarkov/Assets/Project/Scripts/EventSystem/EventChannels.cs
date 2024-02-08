@@ -17,6 +17,7 @@ namespace EventSystem
         public static NPCEvents NPCEvents = new NPCEvents();
         public static BarteringEvents BarteringEvents = new BarteringEvents();
         public static PlayerEvents PlayerEvents = new PlayerEvents();
+        public static GameplayEvents GameplayEvents = new GameplayEvents();
 
         public delegate void IntEvent(int index);
 
