@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 namespace Data
 {
@@ -17,12 +18,12 @@ namespace Data
             stream.Close();
         }
 
-        public static T Load(string name)
+        public static T? Load(string name)
         {
             if (!File.Exists($"{path}/{name}.dk"))
             {
                 Debug.Log($"No {name} data exists!");
-                return default(T);
+                return default;
             }
 
             BinaryFormatter formatter = new BinaryFormatter();
@@ -32,6 +33,14 @@ namespace Data
             Debug.Log($"Loaded {name} data successfully");
             stream.Close();
             return data;
+        }
+
+        public static void Delete(string name)
+        {
+            if (File.Exists($"{path}/{name}.dk"))
+                File.Delete($"{path}/{name}.dk");
+            else
+                Debug.Log("No File to delete");
         }
     }
 }

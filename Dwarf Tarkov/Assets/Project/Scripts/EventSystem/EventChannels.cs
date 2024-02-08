@@ -16,6 +16,7 @@ namespace EventSystem
         public static OutpostEvents OutpostEvents = new OutpostEvents();
         public static NPCEvents NPCEvents = new NPCEvents();
         public static BarteringEvents BarteringEvents = new BarteringEvents();
+        public static PlayerEvents PlayerEvents = new PlayerEvents();
 
         public delegate void IntEvent(int index);
 

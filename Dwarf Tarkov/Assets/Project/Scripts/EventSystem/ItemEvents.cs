@@ -10,7 +10,8 @@ public class ItemEvents
     public delegate void ItemQuantityEvent(ItemData item, int quantity);
     public delegate void ItemStackEvent(ItemData item, int quantity, int quantityToRemove);
     public delegate void InventoryEvent();
-    public delegate bool ItemListEvent(List<Item> items);
+    public delegate bool ItemListBoolEvent(List<Item> items);
+    public delegate void ItemListEvent(List<Item> items);
     public delegate AmmoSubtype GetAmmoTypeEvent();
     public delegate List<AmmoSubtype> GetAmmoListEvent();
 
@@ -25,8 +26,8 @@ public class ItemEvents
     public InventoryEvent OnUpdateInventory;
     public InventoryEvent OnUpdateOutpostInventory;
 
-    public ItemListEvent OnCheckIfListFits;
-    public ItemListEvent OnCheckIfItemQuestCompleted;
+    public ItemListBoolEvent OnCheckIfListFits;
+    public ItemListBoolEvent OnCheckIfItemQuestCompleted;
 
     public ItemQuantityEvent OnCreateStack;
     public ItemStackEvent OnRemoveFromStack;
@@ -35,4 +36,6 @@ public class ItemEvents
 
     public GetAmmoTypeEvent OnGetCurrentlyLoadedAmmo;
     public GetAmmoListEvent OnGetSubtypesInInventory;
+
+    public ItemListEvent OnSetLostItems;
 }

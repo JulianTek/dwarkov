@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : MonoBehaviour
 {
@@ -29,9 +30,14 @@ public class PlayerHealthManager : MonoBehaviour
         playerHealth -= damage;
         if (playerHealth <= 0)
         {
-            // invoke death event;
-            Debug.Log("dead");
+            Die();
+            return;
         }
         EventChannels.UIEvents.OnUpdateHealthbar?.Invoke(playerHealth);
+    }
+
+    void Die()
+    {
+        EventChannels.PlayerEvents.OnPlayerDeath?.Invoke();
     }
 }

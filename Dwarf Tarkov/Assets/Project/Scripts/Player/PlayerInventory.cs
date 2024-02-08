@@ -24,6 +24,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCheckIfItemInInventory += CheckIfItemInInventory;
         EventChannels.ItemEvents.OnCreateStack += CreateNewStack;
         EventChannels.ItemEvents.OnRemoveFromStack += RemoveSpecificItem;
+        EventChannels.PlayerEvents.OnPlayerDeath += SetLostItems;
     }
 
     private void OnDestroy()
@@ -37,6 +38,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCheckIfItemInInventory -= CheckIfItemInInventory;
         EventChannels.ItemEvents.OnCreateStack -= CreateNewStack;
         EventChannels.ItemEvents.OnRemoveFromStack -= RemoveSpecificItem;
+        EventChannels.PlayerEvents.OnPlayerDeath -= SetLostItems;
     }
 
     // Update is called once per frame
@@ -166,24 +168,34 @@ public class PlayerInventory : MonoBehaviour
 
     public bool CanAddItems(List<Item> itemsToAdd)
     {
+        // get amount of items
         int currentSize = inventory.Count;
         foreach (Item itemToAdd in itemsToAdd)
         {
+            // check items to add and compare to items in inventory
             bool added = false;
             foreach (Item item in inventory)
             {
-                if (item.amount < item.data.MaxStackAmount)
+                if (item.data == itemToAdd.data)
                 {
-                    int room = item.data.MaxStackAmount - item.amount;
-                    if (room >= itemToAdd.amount)
+                    // if data is the same and is not at max capacity
+                    if (item.amount < item.data.MaxStackAmount)
                     {
-                        added = true;
-                        break;
+                        // if adding items fits
+                        int room = item.data.MaxStackAmount - item.amount;
+                        if (room >= itemToAdd.amount)
+                        {
+                            // swap added to true, meaning it can safely be added to the inventory
+                            added = true;
+                            break;
+                        }
                     }
                 }
             }
+            // if the game has to check if there is a free slot
             if (!added)
             {
+                // return true if adding to a new slot does not override capacity
                 currentSize++;
                 if (currentSize > InventoryCapacity)
                 {
@@ -246,6 +258,11 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return amountOfCredits >= requiredAmount;
+    }
+
+    private void SetLostItems()
+    {
+        EventChannels.ItemEvents.OnSetLostItems?.Invoke(inventory);
     }
 
     public void BuyItem(int cost)

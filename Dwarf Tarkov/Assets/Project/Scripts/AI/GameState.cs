@@ -5,6 +5,10 @@ namespace AI
     {
         protected GameObject owner;
 
+        public GameState()
+        {
+        }
+
         public GameState(GameObject owner)
         {
             this.owner = owner;

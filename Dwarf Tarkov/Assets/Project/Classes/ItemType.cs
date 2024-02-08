@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
+[System.Serializable]
 public enum ItemType
 {
     [Description("Rock")]

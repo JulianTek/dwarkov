@@ -9,9 +9,8 @@ namespace AI
     {
         private float wanderCooldown;
 
-        public WanderState(GameObject owner) : base(owner)
-        {
-        }
+        public WanderState() : base() { }
+        public WanderState(GameObject owner) : base(owner) { }
 
         public override void Start()
         {
