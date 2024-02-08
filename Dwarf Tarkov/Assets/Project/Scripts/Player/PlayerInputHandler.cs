@@ -8,11 +8,15 @@ using System;
 public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerControls playerControls;
+    private bool isPaused;
     // Start is called before the first frame update
     void Start()
     {
         playerControls = new PlayerControls();
         playerControls.Player.Enable();
+
+        isPaused = false;
+
         playerControls.Player.Mine.performed += Mine;
         playerControls.Player.Shoot.started += ShootStarted;
         playerControls.Player.Shoot.canceled += ShootEnded;
@@ -29,15 +33,19 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.HUD.SplitStack.started += EnableStackSplit;
         playerControls.HUD.SplitStack.canceled += DisableStackSplit;
 
+        playerControls.Player.Pause.performed += PauseGame;
+
         EventChannels.PlayerInputEvents.OnDisableHUDControls += DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls += EnableHUDInput;
     }
+
 
     private void OnDestroy()
     {
         playerControls.Player.Mine.performed -= Mine;
         playerControls.Player.Shoot.started -= ShootStarted;
         playerControls.Player.Shoot.canceled -= ShootEnded;
+        playerControls.Player.Reload.performed -= Reload;
         playerControls.Player.Sprint.started -= Sprint;
         playerControls.Player.Sprint.canceled -= StopSprint;
         playerControls.Player.OpenInventory.performed -= OpenInventory;
@@ -47,15 +55,25 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.SelectSecondaryWeapon.performed -= SelectSecondaryWeapon;
 
         playerControls.HUD.Close.performed -= CloseInventory;
+        playerControls.HUD.SplitStack.started -= EnableStackSplit;
+        playerControls.HUD.SplitStack.canceled -= DisableStackSplit;
+
+        playerControls.Player.Pause.performed -= PauseGame;
+
+        EventChannels.PlayerInputEvents.OnDisableHUDControls -= DisableHUDInput;
+        EventChannels.PlayerInputEvents.OnEnableHUDControls -= EnableHUDInput;
     }
 
 
     private void Update()
     {
-        Vector2 movementVector = playerControls.Player.Movement.ReadValue<Vector2>();
-        Vector2 aimVector = playerControls.Player.Aim.ReadValue<Vector2>();
-        EventChannels.PlayerInputEvents.OnPlayerAim?.Invoke(aimVector);
-        EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(movementVector);
+        if (!isPaused)
+        {
+            Vector2 movementVector = playerControls.Player.Movement.ReadValue<Vector2>();
+            Vector2 aimVector = playerControls.Player.Aim.ReadValue<Vector2>();
+            EventChannels.PlayerInputEvents.OnPlayerAim?.Invoke(aimVector);
+            EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(movementVector);
+        }
     }
 
     void ShootStarted(InputAction.CallbackContext ctx)
@@ -148,5 +166,12 @@ public class PlayerInputHandler : MonoBehaviour
     private void ToggleAmmoTypes(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes?.Invoke();
+    }
+
+
+    private void PauseGame(InputAction.CallbackContext obj)
+    {
+        EventChannels.PlayerInputEvents.OnPlayerPauses?.Invoke();
+        isPaused = !isPaused;
     }
 }
