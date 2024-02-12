@@ -5,12 +5,16 @@ using EventSystem;
 public class WeaponBenchToggler : MonoBehaviour
 {
     private bool playerIsInTrigger;
-    [SerializeField]
-    private GameObject weaponBenchUI;
     // Start is called before the first frame update
     void Start()
     {
         playerIsInTrigger = false;
+        EventChannels.PlayerInputEvents.OnInteract += OpenWeaponBench;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.PlayerInputEvents.OnInteract -= OpenWeaponBench;
     }
 
     // Update is called once per frame
