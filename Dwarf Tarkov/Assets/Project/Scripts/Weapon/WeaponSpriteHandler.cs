@@ -11,8 +11,9 @@ public class WeaponSpriteHandler : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        weaponData = GetComponentInParent<WeaponHandler>().GetWeaponData();
-        spriteRenderer.sprite = weaponData.Sprite;
+        weaponData = GetComponentsInParent<WeaponHandler>()[0].GetWeaponData();
+        if (weaponData != null)
+            spriteRenderer.sprite = weaponData.Sprite;
 
         EventChannels.WeaponEvents.OnWeaponReload += Reload;
         EventChannels.WeaponEvents.OnWeaponReloaded += Reloaded;
