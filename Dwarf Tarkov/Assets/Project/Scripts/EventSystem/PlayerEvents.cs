@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerEvents
 {
     public delegate void PlayerEvent();
+    public delegate void ExperienceEvent(int experience);
 
     public PlayerEvent OnPlayerDeath;
+    
+    // use this to pool experience on raids
+    public ExperienceEvent OnExperienceGained;
+    // use this to award experience at the end of a raid
+    public ExperienceEvent OnExperienceGiven;
 }
