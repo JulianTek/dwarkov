@@ -35,6 +35,7 @@ public class WeaponBenchUIHandler : MonoBehaviour
     {
         WeaponBenchUI.SetActive(true);
         GetComponentInChildren<WeaponBenchSlotListHandler>().UpdateList();
+        EventChannels.PlayerInputEvents.OnEnableHUDControls?.Invoke();
     }
 
     void HideWeaponBench()

@@ -21,7 +21,7 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
     
     public void UpdateList()
     {
-        // To do: clear list when opening/closing
+        ClearList();
         var weapons = Resources.FindObjectsOfTypeAll(typeof(WeaponData)) as WeaponData[];
         foreach (var weapon in weapons)
         {
@@ -30,6 +30,14 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
                 GameObject weaponSlot = Instantiate(slot, gameObject.transform);
                 weaponSlot.GetComponent<WeaponBenchSlotHandler>().SetWeaponData(weapon);
             }
+        }
+    }
+
+    void ClearList()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
         }
     }
 }
