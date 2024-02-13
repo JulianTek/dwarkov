@@ -9,5 +9,6 @@ public class OutpostEventsInvoker : MonoBehaviour
     void Start()
     {
         EventChannels.OutpostEvents.OnEnterOutpost?.Invoke();
+        EventChannels.WeaponEvents.OnSetCanFire?.Invoke(false);
     }
 }

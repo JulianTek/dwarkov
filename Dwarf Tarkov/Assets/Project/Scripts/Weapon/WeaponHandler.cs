@@ -54,6 +54,8 @@ public class WeaponHandler : MonoBehaviour
 
         EventChannels.WeaponEvents.OnGetWeaponData += GetWeaponData;
 
+        EventChannels.WeaponEvents.OnSetCanFire += SetCanFire;
+
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
         gunSprite = GetComponentInChildren<SpriteRenderer>();
@@ -76,6 +78,8 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.GameplayEvents.OnPlayerResumesGame -= ResumeGame;
 
         EventChannels.WeaponEvents.OnGetWeaponData -= GetWeaponData;
+
+        EventChannels.WeaponEvents.OnSetCanFire -= SetCanFire;
     }
 
     public WeaponData GetWeaponData()
@@ -351,5 +355,10 @@ public class WeaponHandler : MonoBehaviour
     private void ResumeGame()
     {
         isPaused = false; ;
+    }
+
+    private void SetCanFire(bool canFire)
+    {
+        this.canFire = canFire;
     }
 }

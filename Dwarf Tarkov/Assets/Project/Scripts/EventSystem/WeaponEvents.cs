@@ -8,6 +8,7 @@ public class WeaponEvents
     public delegate void WeaponEvent(WeaponData weapon);
     public delegate AmmoSubtype AmmoSubtypeEvent();
     public delegate WeaponData WeaponDataEvent();
+    public delegate void WeaponBoolEvent(bool boolean);
 
     public WeaponActionEvent OnWeaponFired;
     public WeaponActionEvent OnWeaponReload;
@@ -18,4 +19,6 @@ public class WeaponEvents
     public WeaponEvent OnSwitchWeapon;
 
     public WeaponDataEvent OnGetWeaponData;
+
+    public WeaponBoolEvent OnSetCanFire;
 }
