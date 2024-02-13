@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class WeaponBenchSlotHandler : MonoBehaviour
 {
+    [SerializeField]
     private Image slotSprite;
     private WeaponData weaponData;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        slotSprite = GetComponentInChildren<Image>();
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class WeaponBenchSlotHandler : MonoBehaviour
     void SetSprite(Sprite sprite)
     {
         slotSprite.sprite = sprite;
+        slotSprite.SetNativeSize();
     }
 
     public void SetWeaponData(WeaponData data)

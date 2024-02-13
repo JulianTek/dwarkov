@@ -52,6 +52,8 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerPauses += PauseGame;
         EventChannels.GameplayEvents.OnPlayerResumesGame += ResumeGame;
 
+        EventChannels.WeaponEvents.OnGetWeaponData += GetWeaponData;
+
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
         gunSprite = GetComponentInChildren<SpriteRenderer>();
@@ -72,6 +74,8 @@ public class WeaponHandler : MonoBehaviour
 
         EventChannels.PlayerInputEvents.OnPlayerPauses -= PauseGame;
         EventChannels.GameplayEvents.OnPlayerResumesGame -= ResumeGame;
+
+        EventChannels.WeaponEvents.OnGetWeaponData -= GetWeaponData;
     }
 
     public WeaponData GetWeaponData()

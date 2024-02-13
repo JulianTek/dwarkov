@@ -7,7 +7,6 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
 {
     [SerializeField]
     private GameObject slot;
-    private List<WeaponData> weapons = new List<WeaponData>();
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +21,15 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
     
     public void UpdateList()
     {
-        var array = Resources.FindObjectsOfTypeAll(typeof(WeaponData)) as WeaponData[];
-        weapons = array.ToList();
+        // To do: clear list when opening/closing
+        var weapons = Resources.FindObjectsOfTypeAll(typeof(WeaponData)) as WeaponData[];
         foreach (var weapon in weapons)
         {
-            GameObject weaponSlot = Instantiate(slot, gameObject.transform);
-            weaponSlot.GetComponent<WeaponBenchSlotHandler>().SetWeaponData(weapon);
+            if (weapon.IsPrimary)
+            {
+                GameObject weaponSlot = Instantiate(slot, gameObject.transform);
+                weaponSlot.GetComponent<WeaponBenchSlotHandler>().SetWeaponData(weapon);
+            }
         }
     }
 }
