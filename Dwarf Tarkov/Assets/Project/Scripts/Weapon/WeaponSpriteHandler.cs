@@ -11,7 +11,7 @@ public class WeaponSpriteHandler : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        weaponData = GetComponentsInParent<WeaponHandler>()[0].GetWeaponData();
+        weaponData = GetComponentInParent<WeaponHandler>().GetWeaponData();
         if (weaponData != null)
             spriteRenderer.sprite = weaponData.Sprite;
 

@@ -35,7 +35,7 @@ public class WeaponHandler : MonoBehaviour
     // saves the mag count of the primary/secondary weapon when switching to the other
     private int cachedMagCount;
 
-    private void Start()
+    private void Awake()
     {
         isPaused = false;
         data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
