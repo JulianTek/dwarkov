@@ -13,6 +13,13 @@ public class LoadoutSlotHandler : MonoBehaviour
     void OnEnable()
     {
         SetWeapon(EventChannels.WeaponEvents.OnGetWeaponData?.Invoke());
+
+        EventChannels.WeaponEvents.OnSwitchWeapon += SetWeapon;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeapon;
     }
 
     // Update is called once per frame

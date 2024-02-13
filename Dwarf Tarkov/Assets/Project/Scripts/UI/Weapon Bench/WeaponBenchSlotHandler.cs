@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EventSystem;
 
 public class WeaponBenchSlotHandler : MonoBehaviour
 {
@@ -29,5 +30,10 @@ public class WeaponBenchSlotHandler : MonoBehaviour
     {
         weaponData = data;
         SetSprite(data.Sprite);
+    }
+
+    public void SetWeapon()
+    {
+        EventChannels.WeaponEvents.OnSwitchWeapon?.Invoke(weaponData);
     }
 }
