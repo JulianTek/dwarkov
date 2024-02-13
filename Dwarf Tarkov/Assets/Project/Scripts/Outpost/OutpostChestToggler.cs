@@ -6,10 +6,12 @@ using EventSystem;
 public class OutpostChestToggler : MonoBehaviour
 {
     private bool playerIsInTrigger;
+    private bool inventoryIsOpen;
     // Start is called before the first frame update
     void Start()
     {
         playerIsInTrigger = false;
+        inventoryIsOpen = false;
         EventChannels.PlayerInputEvents.OnInteract += OpenInventory;
     }
 
@@ -33,7 +35,8 @@ public class OutpostChestToggler : MonoBehaviour
     {
         if (playerIsInTrigger)
         {
-            EventChannels.OutpostEvents.OnShowOutpostInventory?.Invoke();
+            if (!inventoryIsOpen)
+                EventChannels.OutpostEvents.OnShowOutpostInventory?.Invoke();
         }
     }
 }

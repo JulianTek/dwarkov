@@ -14,4 +14,7 @@ public class OutpostEvents
     public OutpostEvent OnHideOutpostInventory;
 
     public OutpostEvent OnEnterOutpost;
+
+    public OutpostEvent OnShowWeaponBench;
+    public OutpostEvent OnHideWeaponBench;
 }

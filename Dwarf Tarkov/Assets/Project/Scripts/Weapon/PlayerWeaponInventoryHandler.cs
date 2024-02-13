@@ -15,6 +15,7 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon += SelectPrimary;
         EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon += SelectSecondary;
+        SelectPrimary();
     }
 
     private void OnDestroy()

@@ -35,7 +35,7 @@ public class WeaponHandler : MonoBehaviour
     // saves the mag count of the primary/secondary weapon when switching to the other
     private int cachedMagCount;
 
-    private void Start()
+    private void Awake()
     {
         isPaused = false;
         data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
@@ -51,6 +51,10 @@ public class WeaponHandler : MonoBehaviour
 
         EventChannels.PlayerInputEvents.OnPlayerPauses += PauseGame;
         EventChannels.GameplayEvents.OnPlayerResumesGame += ResumeGame;
+
+        EventChannels.WeaponEvents.OnGetWeaponData += GetWeaponData;
+
+        EventChannels.WeaponEvents.OnSetCanFire += SetCanFire;
 
         maxMagCount = data.MagCapacity;
         currentMagCount = 0;
@@ -72,6 +76,10 @@ public class WeaponHandler : MonoBehaviour
 
         EventChannels.PlayerInputEvents.OnPlayerPauses -= PauseGame;
         EventChannels.GameplayEvents.OnPlayerResumesGame -= ResumeGame;
+
+        EventChannels.WeaponEvents.OnGetWeaponData -= GetWeaponData;
+
+        EventChannels.WeaponEvents.OnSetCanFire -= SetCanFire;
     }
 
     public WeaponData GetWeaponData()
@@ -347,5 +355,10 @@ public class WeaponHandler : MonoBehaviour
     private void ResumeGame()
     {
         isPaused = false; ;
+    }
+
+    private void SetCanFire(bool canFire)
+    {
+        this.canFire = canFire;
     }
 }
