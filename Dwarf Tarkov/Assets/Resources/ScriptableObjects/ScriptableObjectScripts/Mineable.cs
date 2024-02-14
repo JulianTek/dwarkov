@@ -10,6 +10,7 @@ public class Mineable : ItemData
     public ItemData ItemYielded;
     public float ItemAppearChanceMin;
     public float ItemAppearChanceMax;
+    public int ExperienceGainedOnMine;
     [HorizontalGroup("Sprites")]
     [BoxGroup("Sprites/SpriteInfo", LabelText = "Sprite Info")]
     [PreviewField]
