@@ -6,6 +6,7 @@ using EventSystem;
 
 public class PlayerExperienceHandler : MonoBehaviour
 {
+    [SerializeField]
     private int experiencePoints;
     private int playerLevel;
     [SerializeField]
