@@ -12,6 +12,7 @@ public class PauseMenuHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         isPaused = false;
         pauseMenu.SetActive(false);
 

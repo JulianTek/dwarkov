@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIEvents
 {
     public delegate void HealthbarEvent(float vallue);
+    public delegate void XPPointsEvent(int value);
     public delegate void DialogueInitEvent(DialogueLine[] line);
     public delegate void DialogueEvent(DialogueLine line);
     public delegate void UIEvent();
@@ -36,4 +37,6 @@ public class UIEvents
 
     public UIEvent OnShowSubmenu;
     public UIEvent OnHideSubmenu;
+
+    public XPPointsEvent OnSetXPPoints;
 }

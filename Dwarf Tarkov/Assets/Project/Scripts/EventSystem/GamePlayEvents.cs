@@ -7,4 +7,6 @@ public class GameplayEvents
     public delegate void GameplayEvent();
 
     public GameplayEvent OnPlayerResumesGame;
+
+    public GameplayEvent OnPlayerExtracted;
 }

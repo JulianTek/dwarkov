@@ -39,6 +39,6 @@ public class PlayerExperienceHandler : MonoBehaviour
     private void LevelUp()
     {
         playerLevel++;
-        xpNeededToLevelUp += 50 * playerLevel;
+        xpNeededToLevelUp += 50 * (playerLevel + 1);
     }
 }

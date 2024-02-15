@@ -10,8 +10,14 @@ public class ExperiencePointsPoolHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         EventChannels.PlayerEvents.OnExperienceGained += AddExperiencePointsToPool;
-        EventChannels.ExtractionEvents.OnExtractionTimerFinished += AwardPooledExperience;
+        EventChannels.GameplayEvents.OnPlayerExtracted += SetXPPoolText;
+    }
+    private void OnDestroy()
+    {
+        EventChannels.PlayerEvents.OnExperienceGained -= AddExperiencePointsToPool;
+        EventChannels.GameplayEvents.OnPlayerExtracted -= SetXPPoolText;
     }
 
     // Update is called once per frame
@@ -28,11 +34,22 @@ public class ExperiencePointsPoolHandler : MonoBehaviour
     void AwardPooledExperience()
     {
         EventChannels.PlayerEvents.OnExperienceGiven?.Invoke(experiencePointsPooled);
-        experiencePointsPooled = 0;
     }
 
     public int GetPooledXP()
     {
         return experiencePointsPooled;
+    }
+
+    public void ResetXPPool()
+    {
+        experiencePointsPooled = 0;
+    }
+
+    private void SetXPPoolText()
+    {
+        EventChannels.UIEvents.OnSetXPPoints?.Invoke(experiencePointsPooled);
+        AwardPooledExperience();
+        ResetXPPool();
     }
 }
