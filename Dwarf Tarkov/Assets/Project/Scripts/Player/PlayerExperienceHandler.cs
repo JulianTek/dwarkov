@@ -15,12 +15,15 @@ public class PlayerExperienceHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerLevel = 1;
         EventChannels.PlayerEvents.OnExperienceGiven += AddExperience;
+        EventChannels.PlayerEvents.OnGetPlayerLevel += GetPlayerLevel;
     }
 
     private void OnDestroy()
     {
         EventChannels.PlayerEvents.OnExperienceGiven -= AddExperience;
+        EventChannels.PlayerEvents.OnGetPlayerLevel -= GetPlayerLevel;
     }
 
     // Update is called once per frame
@@ -36,9 +39,14 @@ public class PlayerExperienceHandler : MonoBehaviour
             LevelUp();
     }
 
-    private void LevelUp()
+    public void LevelUp()
     {
         playerLevel++;
         xpNeededToLevelUp += 50 * (playerLevel + 1);
+    }
+
+    private int GetPlayerLevel()
+    {
+        return playerLevel;
     }
 }

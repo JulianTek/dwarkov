@@ -6,6 +6,7 @@ public class PlayerEvents
 {
     public delegate void PlayerEvent();
     public delegate void ExperienceEvent(int experience);
+    public delegate int PlayerLevelEvent();
 
     public PlayerEvent OnPlayerDeath;
     
@@ -13,4 +14,6 @@ public class PlayerEvents
     public ExperienceEvent OnExperienceGained;
     // use this to award experience at the end of a raid
     public ExperienceEvent OnExperienceGiven;
+
+    public PlayerLevelEvent OnGetPlayerLevel;
 }

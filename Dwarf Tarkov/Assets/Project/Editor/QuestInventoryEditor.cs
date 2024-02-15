@@ -20,5 +20,10 @@ public class QuestInventoryEditor : Editor
             NPCQuestInventory inventory = (NPCQuestInventory)target;
             inventory.quests.Add(new EnemyQuest());
         }
+        if (GUILayout.Button("Refresh unlocked quests"))
+        {
+            NPCQuestInventory inventory = (NPCQuestInventory)target;
+            inventory.RefreshQuests();
+        }
     }
 }
