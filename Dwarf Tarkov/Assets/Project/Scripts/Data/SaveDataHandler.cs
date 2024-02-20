@@ -11,7 +11,7 @@ public class SaveDataHandler : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-
+        EventChannels.DataEvents.OnGetSaveData += GetData;
     }
 
     // Update is called once per frame
@@ -23,5 +23,10 @@ public class SaveDataHandler : MonoBehaviour
     void SetSlotNumber(int number)
     {
         slotNumber = number;
+    }
+
+    public SaveData GetData()
+    {
+        return data;
     }
 }
