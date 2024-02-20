@@ -59,6 +59,7 @@ public class MineralHandler : MonoBehaviour
             spriteHandler.SetSprite(3-amountMineable);
             FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerEvents/MiningEvents/Mine_Pick");
             Physics2D.CircleCast(transform.position, eventRadius, Vector2.zero, 0f);
+            EventChannels.PlayerEvents.OnExperienceGained?.Invoke(materialData.ExperienceGainedOnMine);
             if (amountMineable == 0)
             {
                 Destroy(gameObject);

@@ -29,10 +29,17 @@ public class NPCDialogueManager : MonoBehaviour
     public void InitDialogue()
     {
         EventChannels.NPCEvents.OnStartDialogue?.Invoke(npcName);
-        if (questInventory.quests.Count > 0)
+        if (questInventory.unlockedQuests.Count > 0)
         {
             InvokeDialogue(questInventory.NextQuest.IntroText);
         }
+        else
+        {
+            InvokeDialogue(new DialogueLine[]
+            {
+                idleLine
+            }) ;
+        } 
     }
 
     public void PlayerCompletedQuest(Quest quest)

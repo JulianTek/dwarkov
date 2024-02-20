@@ -26,13 +26,19 @@ public class EnemyHealthManager : MonoBehaviour
         
     }
 
-    void TakeDamage(float value)
+    public void TakeDamage(float value)
     {
         enemyCurrentHealth -= value;
         Debug.Log(enemyCurrentHealth);
         if (enemyCurrentHealth <= 0)
         {
             Destroy(gameObject);
+            EventChannels.EnemyEvents.OnEnemyDeath?.Invoke();
         }
+    }
+
+    public float GetEnemyHealth()
+    {
+        return enemyCurrentHealth;
     }
 }

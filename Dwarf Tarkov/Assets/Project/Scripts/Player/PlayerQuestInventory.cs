@@ -15,6 +15,8 @@ public class PlayerQuestInventory : MonoBehaviour
 
         EventChannels.NPCEvents.OnStartDialogue += CheckIfQuestsCompleted;
         EventChannels.UIEvents.OnPlayerCompleteQuest += CompleteQuest;
+
+        EventChannels.GameplayEvents.OnGetPlayerQuests += GetQuests;
     }
 
     private void OnDisable()
@@ -24,6 +26,8 @@ public class PlayerQuestInventory : MonoBehaviour
 
         EventChannels.NPCEvents.OnStartDialogue -= CheckIfQuestsCompleted;
         EventChannels.UIEvents.OnPlayerCompleteQuest -= CompleteQuest;
+
+        EventChannels.GameplayEvents.OnGetPlayerQuests -= GetQuests;
     }
 
     // Update is called once per frame
@@ -72,7 +76,7 @@ public class PlayerQuestInventory : MonoBehaviour
         {
             EventChannels.ItemEvents.OnAddItemToInventory(item.data, item.amount);
         }
-            
+        EventChannels.GameplayEvents.OnCompleteQuest?.Invoke(quest);  
     }
 
     private void CompleteItemQuest(List<Item> items)
@@ -81,5 +85,10 @@ public class PlayerQuestInventory : MonoBehaviour
         {
             EventChannels.ItemEvents.OnRemoveItemFromInventory?.Invoke(item.data, item.amount);
         }
+    }
+
+    private List<Quest> GetQuests()
+    {
+        return quests;
     }
 } 
