@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCreateStack += CreateNewStack;
         EventChannels.ItemEvents.OnRemoveFromStack += RemoveSpecificItem;
         EventChannels.PlayerEvents.OnPlayerDeath += SetLostItems;
+        EventChannels.DataEvents.OnGetPlayerInventory += GetItemsAsDtos;
     }
 
     private void OnDestroy()
@@ -39,6 +40,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnCreateStack -= CreateNewStack;
         EventChannels.ItemEvents.OnRemoveFromStack -= RemoveSpecificItem;
         EventChannels.PlayerEvents.OnPlayerDeath -= SetLostItems;
+        EventChannels.DataEvents.OnGetPlayerInventory -= GetItemsAsDtos;
     }
 
     // Update is called once per frame
@@ -302,5 +304,15 @@ public class PlayerInventory : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    private List<ItemDTO> GetItemsAsDtos()
+    {
+        List<ItemDTO> dtos = new List<ItemDTO>();
+        foreach (Item item in inventory)
+        {
+            dtos.Add(new ItemDTO(item));
+        }
+        return dtos;
     }
 }

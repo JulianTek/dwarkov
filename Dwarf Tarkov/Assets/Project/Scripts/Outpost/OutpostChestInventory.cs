@@ -94,4 +94,14 @@ public class OutpostChestInventory : MonoBehaviour
     {
         return inventoryCapacity;
     }
+
+    public  List<ItemDTO> GetItemsAsDTOs()
+    {
+        List<ItemDTO> dtos = new List<ItemDTO>();
+        foreach (Item item in items)
+        {
+            dtos.Add(new ItemDTO(item));
+        }
+        return dtos;
+    }
 }

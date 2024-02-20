@@ -17,6 +17,8 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.UIEvents.OnPlayerCompleteQuest += CompleteQuest;
 
         EventChannels.GameplayEvents.OnGetPlayerQuests += GetQuests;
+
+        EventChannels.DataEvents.OnGetPlayerQuests += GetQuests;
     }
 
     private void OnDisable()
@@ -28,6 +30,8 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.UIEvents.OnPlayerCompleteQuest -= CompleteQuest;
 
         EventChannels.GameplayEvents.OnGetPlayerQuests -= GetQuests;
+
+        EventChannels.DataEvents.OnGetPlayerQuests -= GetQuests;
     }
 
     // Update is called once per frame

@@ -18,12 +18,20 @@ public class NPCQuestInventory : MonoBehaviour
         NextQuest = unlockedQuests[0];
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;
         EventChannels.GameplayEvents.OnCompleteQuest += CompleteQuest;
+
+        EventChannels.DataEvents.OnGetAllQuests += GetAllQuests;
+        EventChannels.DataEvents.OnGetUnlockedQuests += GetUnlockedQuests;
+        EventChannels.DataEvents.OnGetCompletedQuests += GetCompletedQuests;
     }
 
     private void OnDestroy()
     {
         EventChannels.UIEvents.OnPlayerPressConfirm -= ConfirmQuest;
         EventChannels.GameplayEvents.OnCompleteQuest -= CompleteQuest;
+
+        EventChannels.DataEvents.OnGetAllQuests -= GetAllQuests;
+        EventChannels.DataEvents.OnGetUnlockedQuests -= GetUnlockedQuests;
+        EventChannels.DataEvents.OnGetCompletedQuests -= GetCompletedQuests;
     }
 
     void ConfirmQuest()
@@ -52,5 +60,20 @@ public class NPCQuestInventory : MonoBehaviour
     void CompleteQuest(Quest quest)
     {
         completedQuests.Add(quest);
+    }
+
+    public List<Quest> GetCompletedQuests()
+    {
+        return completedQuests;
+    }
+
+    public List<Quest> GetAllQuests()
+    {
+        return quests;
+    }
+
+    public List<Quest> GetUnlockedQuests()
+    {
+        return unlockedQuests;
     }
 }

@@ -18,12 +18,16 @@ public class PlayerExperienceHandler : MonoBehaviour
         playerLevel = 1;
         EventChannels.PlayerEvents.OnExperienceGiven += AddExperience;
         EventChannels.PlayerEvents.OnGetPlayerLevel += GetPlayerLevel;
+        EventChannels.DataEvents.OnGetPlayerLevel += GetPlayerLevel;
+        EventChannels.DataEvents.OnGetPlayerExperience += GetExperience;
     }
 
     private void OnDestroy()
     {
         EventChannels.PlayerEvents.OnExperienceGiven -= AddExperience;
         EventChannels.PlayerEvents.OnGetPlayerLevel -= GetPlayerLevel;
+        EventChannels.DataEvents.OnGetPlayerLevel -= GetPlayerLevel;
+        EventChannels.DataEvents.OnGetPlayerExperience -= GetExperience;
     }
 
     // Update is called once per frame
@@ -48,5 +52,10 @@ public class PlayerExperienceHandler : MonoBehaviour
     private int GetPlayerLevel()
     {
         return playerLevel;
+    }
+
+    private int GetExperience()
+    {
+        return experiencePoints;
     }
 }
