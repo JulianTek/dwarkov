@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using Data;
 
 public class PlayerExperienceHandler : MonoBehaviour
 {
@@ -15,9 +16,17 @@ public class PlayerExperienceHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        playerLevel = (int)EventChannels.DataEvents.OnGetSaveData?.Invoke().PlayerLevel;
-        experiencePoints = (int)EventChannels.DataEvents.OnGetSaveData?.Invoke().PlayerExperience;
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null)
+        {
+            playerLevel = data.PlayerLevel;
+            experiencePoints = data.PlayerExperience;
+        }
+        else
+        {
+            playerLevel = 1;
+            experiencePoints = 0;
+        }
         EventChannels.PlayerEvents.OnExperienceGiven += AddExperience;
         EventChannels.PlayerEvents.OnGetPlayerLevel += GetPlayerLevel;
         EventChannels.DataEvents.OnGetPlayerLevel += GetPlayerLevel;
