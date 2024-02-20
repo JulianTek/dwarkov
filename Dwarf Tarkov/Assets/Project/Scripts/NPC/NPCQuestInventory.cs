@@ -2,6 +2,7 @@ using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
 
 public class NPCQuestInventory : MonoBehaviour
 {
@@ -14,6 +15,13 @@ public class NPCQuestInventory : MonoBehaviour
 
     private void Start()
     {
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null)
+        {
+            completedQuests = data.CompletedQuests;
+            quests = data.Quests;
+            unlockedQuests = data.UnlockedQuests;
+        }
         RefreshQuests();
         NextQuest = unlockedQuests[0];
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;

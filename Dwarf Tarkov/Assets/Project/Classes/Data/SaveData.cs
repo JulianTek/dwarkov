@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using EventSystem;  
+using EventSystem;
+using System.Linq;
 
 namespace Data
 {
@@ -56,6 +57,17 @@ namespace Data
             // Save all data
             DataSaver<SaveData>.Save(this, $"save_{SlotNumber}");
         }
-    }
 
+        public List<Item> ConvertDTOsToItems(List<ItemDTO> dtos)
+        {
+            var allItems  = Resources.FindObjectsOfTypeAll(typeof(ItemData)) as ItemData[];
+            List<Item> items = new List<Item>();
+            foreach (ItemDTO dto in dtos)
+            {
+                items.Add(new Item(allItems.FirstOrDefault(item => item.Name == dto.Data.Name), dto.Amount));
+            }
+            return items;
+        }
+    }
+ 
 }

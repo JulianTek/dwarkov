@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using Data;
 public class OutpostChestInventory : MonoBehaviour
 {
     [SerializeField]
@@ -10,6 +11,11 @@ public class OutpostChestInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null)
+        {
+            items = data.ConvertDTOsToItems(data.OutpostInventory);
+        }
         items = new List<Item>(inventoryCapacity);
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory += RemoveItem;

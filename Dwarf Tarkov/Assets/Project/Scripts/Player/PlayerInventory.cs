@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        inventory = new List<Item>(InventoryCapacity);
+        LoadItems();
         EventChannels.ItemEvents.OnAddItemToInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromInventory += RemoveItem;
         EventChannels.ExtractionEvents.OnGetInventoryValue += ReturnInventoryValue;
@@ -314,5 +314,18 @@ public class PlayerInventory : MonoBehaviour
             dtos.Add(new ItemDTO(item));
         }
         return dtos;
+    }
+
+    void LoadItems()
+    {
+        var data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null)
+        {
+            inventory = data.ConvertDTOsToItems(data.PlayerInventory);
+        }
+        else
+        {
+            inventory = new List<Item>(GetCapacity());
+        }
     }
 }
