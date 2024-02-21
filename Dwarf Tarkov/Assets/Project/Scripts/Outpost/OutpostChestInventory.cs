@@ -7,6 +7,7 @@ public class OutpostChestInventory : MonoBehaviour
 {
     [SerializeField]
     private int inventoryCapacity = 30;
+    [SerializeField]
     private List<Item> items = new List<Item>();
     // Start is called before the first frame update
     void Start()

@@ -2,14 +2,21 @@ using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
 
 public class PlayerQuestInventory : MonoBehaviour
 {
     private List<Quest> quests = new List<Quest>();
-    private List<Quest> completedQuests = new List<Quest>();
     // Start is called before the first frame update
     void Start()
     {
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null)
+            quests = data.Quests;
+        else
+            quests = new List<Quest>();
+
+
         EventChannels.NPCEvents.OnPlayerAcceptQuest += AddQuestToInventory;
         EventChannels.NPCEvents.OnPlayerFinishQuest += FinishQuest;
 
