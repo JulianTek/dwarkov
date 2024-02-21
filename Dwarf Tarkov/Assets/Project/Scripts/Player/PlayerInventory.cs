@@ -319,7 +319,7 @@ public class PlayerInventory : MonoBehaviour
     void LoadItems()
     {
         var data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null && data.PlayerInventory != null)
+        if (data != null && data.PlayerInventory != null && data.PlayerInventory.Count > 0)
         {
             inventory = data.ConvertDTOsToItems(data.PlayerInventory);
         }

@@ -16,14 +16,13 @@ public class NPCQuestInventory : MonoBehaviour
     private void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null && data.CompletedQuests != null && data.Quests != null && data.UnlockedQuests != null)
+        if (data != null && data.Quests != null && data.Quests.Count > 0)
         {
             completedQuests = data.CompletedQuests;
             quests = data.Quests;
             unlockedQuests = data.UnlockedQuests;
         }
         RefreshQuests();
-        NextQuest = unlockedQuests[0];
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;
         EventChannels.GameplayEvents.OnCompleteQuest += CompleteQuest;
 
