@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using Data;
+using System.Linq;
 public class OutpostChestInventory : MonoBehaviour
 {
     [SerializeField]
     private int inventoryCapacity = 30;
     [SerializeField]
-    private List<Item> items = new List<Item>();
+    private List<Item> items;
     // Start is called before the first frame update
     void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null)
+        if (data != null && data.OutpostInventory != null)
         {
             items = data.ConvertDTOsToItems(data.OutpostInventory);
+        }
+        else
+        {
+            items = new List<Item>()
+            {
+                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6by11 FMJ"), 99)
+            };
         }
         items = new List<Item>(inventoryCapacity);
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;

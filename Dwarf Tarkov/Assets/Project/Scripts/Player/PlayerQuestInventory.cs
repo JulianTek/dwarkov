@@ -11,7 +11,7 @@ public class PlayerQuestInventory : MonoBehaviour
     void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null)
+        if (data != null && data.PlayerQuests != null)
             quests = data.Quests;
         else
             quests = new List<Quest>();

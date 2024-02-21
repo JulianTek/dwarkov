@@ -16,7 +16,7 @@ public class NPCQuestInventory : MonoBehaviour
     private void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null)
+        if (data != null && data.CompletedQuests != null && data.Quests != null && data.UnlockedQuests != null)
         {
             completedQuests = data.CompletedQuests;
             quests = data.Quests;
@@ -62,7 +62,12 @@ public class NPCQuestInventory : MonoBehaviour
             if (playerLevel >= quest.UnlockLevel && !unlockedQuests.Contains(quest) && !completedQuests.Contains(quest) && (bool)!EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke().Contains(quest))
                 unlockedQuests.Add(quest);
         }
-        NextQuest = unlockedQuests[0];
+        if (unlockedQuests.Count > 0)
+            NextQuest = unlockedQuests[0];
+        else
+        {
+            NextQuest = null;
+        }
     }
 
     void CompleteQuest(Quest quest)

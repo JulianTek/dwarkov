@@ -17,7 +17,7 @@ public class PlayerExperienceHandler : MonoBehaviour
     void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null)
+        if (data != null && data.PlayerLevel != 1 && data.PlayerExperience != 0)
         {
             playerLevel = data.PlayerLevel;
             experiencePoints = data.PlayerExperience;

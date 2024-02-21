@@ -10,6 +10,7 @@ public class DataEvents
     public delegate List<Quest> QuestEvent();
     public delegate void SetIntEvent(int number);
     public delegate SaveData DataEvent();
+    public delegate void SaveDataEvent(SaveData saveData);
 
     public ItemDTOEvent OnGetPlayerInventory;
     public ItemDTOEvent OnGetOutpostInventory;
@@ -25,4 +26,6 @@ public class DataEvents
     public SetIntEvent OnSetSaveSlotNumber;
 
     public DataEvent OnGetSaveData;
+
+    public SaveDataEvent OnSetSaveData;
 }

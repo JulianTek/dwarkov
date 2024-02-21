@@ -6,12 +6,19 @@ using EventSystem;
 public class SaveDataHandler : MonoBehaviour
 {
     private SaveData data;
-    private int slotNumber;
+    public int slotNumber { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         EventChannels.DataEvents.OnGetSaveData += GetData;
+        EventChannels.DataEvents.OnSetSaveData += SetData;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.DataEvents.OnGetSaveData -= GetData;
+        EventChannels.DataEvents.OnSetSaveData -= SetData;
     }
 
     // Update is called once per frame
@@ -20,7 +27,7 @@ public class SaveDataHandler : MonoBehaviour
         
     }
 
-    void SetSlotNumber(int number)
+    public void SetSlotNumber(int number)
     {
         slotNumber = number;
     }
@@ -28,5 +35,10 @@ public class SaveDataHandler : MonoBehaviour
     public SaveData GetData()
     {
         return data;
+    }
+
+    void SetData(SaveData data)
+    {
+        this.data = data;
     }
 }
