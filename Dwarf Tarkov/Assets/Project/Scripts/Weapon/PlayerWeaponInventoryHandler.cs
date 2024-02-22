@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using Data;
 
 public class PlayerWeaponInventoryHandler : MonoBehaviour
 {
@@ -15,6 +16,16 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon += SelectPrimary;
         EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon += SelectSecondary;
+        EventChannels.DataEvents.OnGetPrimaryWeapon += GetPrimaryWeapon;
+        EventChannels.DataEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
+
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null && data.PrimaryWeapon != null && data.SecondaryWeapon != null)
+        {
+            primaryWeapon = data.GetWeaponDataFromDTO(data.PrimaryWeapon);
+            secondaryWeapon = data.GetWeaponDataFromDTO(data.SecondaryWeapon);
+
+        }
         SelectPrimary();
     }
 

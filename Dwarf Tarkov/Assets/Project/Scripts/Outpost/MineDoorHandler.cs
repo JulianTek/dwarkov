@@ -36,7 +36,7 @@ public class MineDoorHandler : MonoBehaviour
         if (timerTime > 0)
             return;
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        data.Save();
+        StartCoroutine(data.Save());
         SceneManager.LoadScene(0);
     }
 

@@ -14,10 +14,15 @@ public class ItemDataDTO
         MaxStackAmount = item.MaxStackAmount;
         Description = item.Description;
     }
-    public string Name { get; private set; }
-    public int SellPrice { get; private set; }
-    public ItemType Type { get; private set; }
-    public bool IsStackable { get; private set; }
-    public int MaxStackAmount { get; private set; }
-    public string Description { get; private set; }
+
+    public ItemDataDTO()
+    {
+
+    }
+    public string Name { get; protected set; }
+    public int SellPrice { get; protected set; }
+    public ItemType Type { get; protected set; }
+    public bool IsStackable { get; protected set; }
+    public int MaxStackAmount { get; protected set; }
+    public string Description { get; protected set; }
 }

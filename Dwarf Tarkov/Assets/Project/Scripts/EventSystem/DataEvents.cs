@@ -11,6 +11,7 @@ public class DataEvents
     public delegate void SetIntEvent(int number);
     public delegate SaveData DataEvent();
     public delegate void SaveDataEvent(SaveData saveData);
+    public delegate WeaponData WeaponDataEvent();
 
     public ItemDTOEvent OnGetPlayerInventory;
     public ItemDTOEvent OnGetOutpostInventory;
@@ -28,4 +29,7 @@ public class DataEvents
     public DataEvent OnGetSaveData;
 
     public SaveDataEvent OnSetSaveData;
+
+    public WeaponDataEvent OnGetPrimaryWeapon;
+    public WeaponDataEvent OnGetSecondaryWeapon;
 }

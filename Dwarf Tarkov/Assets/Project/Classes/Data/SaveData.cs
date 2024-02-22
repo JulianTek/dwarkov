@@ -33,13 +33,16 @@ namespace Data
         public List<Quest> UnlockedQuests { get; private set; } = new List<Quest>();
         public List<Quest> CompletedQuests { get; private set; } = new List<Quest>();
 
+        // Player Weapons
+        public WeaponDTO PrimaryWeapon { get; private set; }
+        public WeaponDTO SecondaryWeapon { get; private set; }
 
         public void SetLastSaved()
         {
             LastSaved = DateTime.Now;
         }
 
-        public void Save()
+        public IEnumerator Save()
         {
             // Set last saved to now
             SetLastSaved();
@@ -53,9 +56,11 @@ namespace Data
             Quests = EventChannels.DataEvents.OnGetAllQuests?.Invoke();
             UnlockedQuests = EventChannels.DataEvents.OnGetUnlockedQuests?.Invoke();
             CompletedQuests = EventChannels.DataEvents.OnGetCompletedQuests?.Invoke();
-
+            PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
+            SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke()); 
             // Save all data
             DataSaver<SaveData>.Save(this, $"save_{SlotNumber}");
+            yield return new WaitForEndOfFrame();
         }
 
         public List<Item> ConvertDTOsToItems(List<ItemDTO> dtos)
@@ -67,6 +72,12 @@ namespace Data
                 items.Add(new Item(allItems.FirstOrDefault(item => item.Name == dto.Data.Name), dto.Amount));
             }
             return items;
+        }
+
+        public WeaponData GetWeaponDataFromDTO(WeaponDTO dto)
+        {
+            WeaponData[] weapons = Resources.FindObjectsOfTypeAll<WeaponData>();
+            return weapons.FirstOrDefault<WeaponData>(weapon => weapon.firingEventName == dto.FiringEventName);
         }
     }
  
