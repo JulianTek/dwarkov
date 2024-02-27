@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Data;
+using System.Linq;
 
 public class PlayerQuestInventory : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerQuestInventory : MonoBehaviour
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PlayerQuests != null)
-            quests = data.Quests;
+            quests = ConvertDTOsToQuests(data.Quests);
         else
             quests = new List<Quest>();
 
@@ -100,6 +101,13 @@ public class PlayerQuestInventory : MonoBehaviour
 
     private List<Quest> GetQuests()
     {
+        return quests;
+    }
+
+    private List<Quest> ConvertDTOsToQuests(List<QuestDTO> dtos)
+    {
+        List<Quest> quests = new List<Quest>();
+        quests.AddRange(dtos.Select(quest => new Quest()));
         return quests;
     }
 } 

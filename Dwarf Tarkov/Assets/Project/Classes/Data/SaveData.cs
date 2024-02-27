@@ -26,12 +26,12 @@ namespace Data
         // Player stats
         public int PlayerLevel { get; private set; }
         public int PlayerExperience { get; private set; }
-        public List<Quest> PlayerQuests { get; private set; }
+        public List<QuestDTO> PlayerQuests { get; private set; }
 
         // Quest stuff
-        public List<Quest> Quests { get; private set; } = new List<Quest>();
-        public List<Quest> UnlockedQuests { get; private set; } = new List<Quest>();
-        public List<Quest> CompletedQuests { get; private set; } = new List<Quest>();
+        public List<QuestDTO> Quests { get; private set; } = new List<QuestDTO>();
+        public List<QuestDTO> UnlockedQuests { get; private set; } = new List<QuestDTO>();
+        public List<QuestDTO> CompletedQuests { get; private set; } = new List<QuestDTO>();
 
         // Player Weapons
         public WeaponDTO PrimaryWeapon { get; private set; }
@@ -52,10 +52,10 @@ namespace Data
             PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
-            PlayerQuests = EventChannels.DataEvents.OnGetPlayerQuests?.Invoke();
-            Quests = EventChannels.DataEvents.OnGetAllQuests?.Invoke();
-            UnlockedQuests = EventChannels.DataEvents.OnGetUnlockedQuests?.Invoke();
-            CompletedQuests = EventChannels.DataEvents.OnGetCompletedQuests?.Invoke();
+            PlayerQuests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
+            Quests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetAllQuests?.Invoke());
+            UnlockedQuests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetUnlockedQuests?.Invoke());
+            CompletedQuests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetCompletedQuests?.Invoke());
             PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
             SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke()); 
             // Save all data
@@ -78,6 +78,13 @@ namespace Data
         {
             WeaponData[] weapons = Resources.FindObjectsOfTypeAll<WeaponData>();
             return weapons.FirstOrDefault<WeaponData>(weapon => weapon.firingEventName == dto.FiringEventName);
+        }
+
+        public List<QuestDTO> ConvertQuestsToDTOs(List<Quest> quests)
+        {
+            List<QuestDTO> dtos = new List<QuestDTO>();
+            dtos.AddRange(quests.Select(dto => new QuestDTO()));
+            return dtos;
         }
     }
  

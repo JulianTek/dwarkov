@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Data;
+using System.Linq;
 
 public class NPCQuestInventory : MonoBehaviour
 {
@@ -18,9 +19,9 @@ public class NPCQuestInventory : MonoBehaviour
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.Quests != null && data.Quests.Count > 0)
         {
-            completedQuests = data.CompletedQuests;
-            quests = data.Quests;
-            unlockedQuests = data.UnlockedQuests;
+            completedQuests = ConvertQuestDTOsToEntity(data.CompletedQuests);
+            quests = ConvertQuestDTOsToEntity(data.Quests);
+            unlockedQuests = ConvertQuestDTOsToEntity(data.UnlockedQuests);
         }
         RefreshQuests();
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;
@@ -87,5 +88,12 @@ public class NPCQuestInventory : MonoBehaviour
     public List<Quest> GetUnlockedQuests()
     {
         return unlockedQuests;
+    }
+
+    public List<Quest> ConvertQuestDTOsToEntity(List<QuestDTO> dtos)
+    {
+        List<Quest> quests = new List<Quest>();
+        quests.AddRange(dtos.Select(quest => new Quest()));
+        return quests;
     }
 }
