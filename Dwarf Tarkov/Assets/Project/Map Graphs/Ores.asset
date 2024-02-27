@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedObjectVersion:
     version: 1.24.3
-  prefabWidth: 16
-  prefabHeight: 16
+  prefabWidth: 1
+  prefabHeight: 1
   prefabTypes: []
   openPrefabSet:
     elements:
-    - id: c4f8907c-a99e-4d1c-b61b-a3eca50ab39e
+    - id: 9d9bf5e8-36cd-416a-abfb-ffd98f4ddb8c
       name: Ores
       isWeightEnabled: 1
-      totalWeight: 1.3
+      totalWeight: 1.33
       prefabs:
-      - weight: 0.3
+      - weight: 0.33
         prefab: {fileID: 5968737770648155444, guid: 19da135bad3605a41814e6f481eb77b5,
           type: 3}
       - weight: 1
         prefab: {fileID: 1509367041237378575, guid: a2f939ad5b3ca9e4f90df633f6fb7282,
           type: 3}
     orderedIds:
-    - c4f8907c-a99e-4d1c-b61b-a3eca50ab39e
+    - 9d9bf5e8-36cd-416a-abfb-ffd98f4ddb8c

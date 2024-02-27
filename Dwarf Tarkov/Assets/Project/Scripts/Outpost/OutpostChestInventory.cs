@@ -14,7 +14,7 @@ public class OutpostChestInventory : MonoBehaviour
     void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null && data.OutpostInventory.Count > 0 && data.OutpostInventory != null)
+        if (data != null && data.OutpostInventory != null)
         {
             items = data.ConvertDTOsToItems(data.OutpostInventory);
         }
@@ -22,17 +22,19 @@ public class OutpostChestInventory : MonoBehaviour
         {
             items = new List<Item>()
             {
-                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6.11x54mm Full Metal Jacket"), 99)
+                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6.11x54mm Green-tip"), 99)
             };
         }
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory += RemoveItem;
+        EventChannels.DataEvents.OnGetOutpostInventory += GetItemsAsDTOs;
     }
 
     private void OnDestroy()
     {
         EventChannels.ItemEvents.OnAddItemToOutpostInventory -= AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory -= RemoveItem;
+        EventChannels.DataEvents.OnGetOutpostInventory -= GetItemsAsDTOs;
     }
 
     // Update is called once per frame
