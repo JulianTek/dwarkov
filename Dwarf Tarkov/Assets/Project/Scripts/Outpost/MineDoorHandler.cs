@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Data;
+using EventSystem;
 
 public class MineDoorHandler : MonoBehaviour
 {
@@ -33,6 +35,8 @@ public class MineDoorHandler : MonoBehaviour
         }
         if (timerTime > 0)
             return;
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        StartCoroutine(data.Save());
         SceneManager.LoadScene(0);
     }
 

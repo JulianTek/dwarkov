@@ -2,23 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using Data;
+using System.Linq;
 public class OutpostChestInventory : MonoBehaviour
 {
     [SerializeField]
     private int inventoryCapacity = 30;
-    private List<Item> items = new List<Item>();
+    [SerializeField]
+    private List<Item> items;
     // Start is called before the first frame update
     void Start()
     {
-        items = new List<Item>(inventoryCapacity);
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null && data.OutpostInventory != null)
+        {
+            items = data.ConvertDTOsToItems(data.OutpostInventory);
+        }
+        else
+        {
+            items = new List<Item>()
+            {
+                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6.11x54mm Green-tip"), 99)
+            };
+        }
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory += RemoveItem;
+        EventChannels.DataEvents.OnGetOutpostInventory += GetItemsAsDTOs;
     }
 
     private void OnDestroy()
     {
         EventChannels.ItemEvents.OnAddItemToOutpostInventory -= AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory -= RemoveItem;
+        EventChannels.DataEvents.OnGetOutpostInventory -= GetItemsAsDTOs;
     }
 
     // Update is called once per frame
@@ -93,5 +109,15 @@ public class OutpostChestInventory : MonoBehaviour
     public int GetCapacity()
     {
         return inventoryCapacity;
+    }
+
+    public  List<ItemDTO> GetItemsAsDTOs()
+    {
+        List<ItemDTO> dtos = new List<ItemDTO>();
+        foreach (Item item in items)
+        {
+            dtos.Add(new ItemDTO(item));
+        }
+        return dtos;
     }
 }

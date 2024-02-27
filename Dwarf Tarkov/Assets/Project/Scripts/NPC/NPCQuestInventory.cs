@@ -2,6 +2,8 @@ using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
+using System.Linq;
 
 public class NPCQuestInventory : MonoBehaviour
 {
@@ -14,16 +16,30 @@ public class NPCQuestInventory : MonoBehaviour
 
     private void Start()
     {
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null && data.Quests != null && data.Quests.Count > 0)
+        {
+            completedQuests = ConvertQuestDTOsToEntity(data.CompletedQuests);
+            quests = ConvertQuestDTOsToEntity(data.Quests);
+            unlockedQuests = ConvertQuestDTOsToEntity(data.UnlockedQuests);
+        }
         RefreshQuests();
-        NextQuest = unlockedQuests[0];
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;
         EventChannels.GameplayEvents.OnCompleteQuest += CompleteQuest;
+
+        EventChannels.DataEvents.OnGetAllQuests += GetAllQuests;
+        EventChannels.DataEvents.OnGetUnlockedQuests += GetUnlockedQuests;
+        EventChannels.DataEvents.OnGetCompletedQuests += GetCompletedQuests;
     }
 
     private void OnDestroy()
     {
         EventChannels.UIEvents.OnPlayerPressConfirm -= ConfirmQuest;
         EventChannels.GameplayEvents.OnCompleteQuest -= CompleteQuest;
+
+        EventChannels.DataEvents.OnGetAllQuests -= GetAllQuests;
+        EventChannels.DataEvents.OnGetUnlockedQuests -= GetUnlockedQuests;
+        EventChannels.DataEvents.OnGetCompletedQuests -= GetCompletedQuests;
     }
 
     void ConfirmQuest()
@@ -46,11 +62,38 @@ public class NPCQuestInventory : MonoBehaviour
             if (playerLevel >= quest.UnlockLevel && !unlockedQuests.Contains(quest) && !completedQuests.Contains(quest) && (bool)!EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke().Contains(quest))
                 unlockedQuests.Add(quest);
         }
-        NextQuest = unlockedQuests[0];
+        if (unlockedQuests.Count > 0)
+            NextQuest = unlockedQuests[0];
+        else
+        {
+            NextQuest = null;
+        }
     }
 
     void CompleteQuest(Quest quest)
     {
         completedQuests.Add(quest);
+    }
+
+    public List<Quest> GetCompletedQuests()
+    {
+        return completedQuests;
+    }
+
+    public List<Quest> GetAllQuests()
+    {
+        return quests;
+    }
+
+    public List<Quest> GetUnlockedQuests()
+    {
+        return unlockedQuests;
+    }
+
+    public List<Quest> ConvertQuestDTOsToEntity(List<QuestDTO> dtos)
+    {
+        List<Quest> quests = new List<Quest>();
+        quests.AddRange(dtos.Select(quest => new Quest()));
+        return quests;
     }
 }

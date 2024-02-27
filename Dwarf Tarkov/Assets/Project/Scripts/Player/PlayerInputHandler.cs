@@ -42,7 +42,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         playerControls.Player.Mine.performed -= Mine;
         playerControls.Player.Shoot.started -= ShootStarted;

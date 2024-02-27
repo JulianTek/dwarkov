@@ -21,6 +21,7 @@ public class OutpostStorageGridHandler : MonoBehaviour
             slot.SetActive(true);
             slot.GetComponent<OutpostInventorySlotHandler>().SetIsPlayer(false);
         }
+        UpdateInventory();
     }
 
     private void OnDestroy()

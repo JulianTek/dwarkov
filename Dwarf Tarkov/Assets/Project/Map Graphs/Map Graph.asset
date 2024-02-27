@@ -42,7 +42,6 @@ MonoBehaviour:
   - rid: 956839176363049045
   - rid: 956839176363049047
   - rid: 956839176363049054
-  - rid: 956839176363049056
   - rid: 956839176363049065
   - rid: 956839176363049075
   - rid: 334538550927425582
@@ -63,6 +62,7 @@ MonoBehaviour:
   - rid: 334538550927425687
   - rid: 334538550927425706
   - rid: 7546081533871783936
+  - rid: 7546081963842732034
   consumerNodes:
   - rid: 956839079191773184
   - rid: 956839079191773195
@@ -109,11 +109,11 @@ MonoBehaviour:
   - rid: 956839079191773224
   - rid: 956839079191773233
   - rid: 956839176363049054
-  - rid: 956839176363049056
   - rid: 334538550927425616
   - rid: 334538550927425618
   - rid: 334538550927425706
   - rid: 7546081533871783936
+  - rid: 7546081963842732034
   outputNodes: []
   sortedProcessorNodes: []
   inputParameters:
@@ -154,6 +154,10 @@ MonoBehaviour:
       name: Ores
       typeName: InsaneScatterbrain.MapGraph.PrefabSet, InsaneScatterbrain.MapGraph,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - id: fd4198b2-d7bd-4458-a649-c3e425ac0fd8
+      name: PlayerParent
+      typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     orderedIds:
     - 62a8c9ff-a42e-48de-ae0d-d4d5bc21d707
     - ece5503f-a91b-4257-ab45-5dd0441f39d1
@@ -164,6 +168,7 @@ MonoBehaviour:
     - b920c8b8-9994-47fd-a738-9578dcfc7f46
     - cd76746a-12f5-4297-a757-fce70a69738e
     - 9d6123a2-4527-4572-aab1-b8499663c8a3
+    - fd4198b2-d7bd-4458-a649-c3e425ac0fd8
     names: []
     typeNames: []
   outputParameters:
@@ -3011,7 +3016,7 @@ MonoBehaviour:
           typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
           connectedOut:
-            rid: 956839176363049057
+            rid: 7546081963842732035
           isConnectionRequired: 1
         useXzPlaneIn:
           name: Use XZ Plane
@@ -3084,7 +3089,7 @@ MonoBehaviour:
         typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
         connectedOut:
-          rid: 956839176363049057
+          rid: 7546081963842732035
         isConnectionRequired: 1
     - rid: 956839176363049053
       type: {class: InPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
@@ -3123,33 +3128,6 @@ MonoBehaviour:
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts:
         - rid: 956839176363049051
-    - rid: 956839176363049056
-      type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        graph: {fileID: 0}
-        rect:
-          serializedVersion: 2
-          x: 2330
-          y: -399
-          width: 162
-          height: 41
-        note: 
-        id: da64f33f-09ca-427f-b4b1-12eb4f836e2e
-        outPorts:
-        - rid: 956839176363049057
-        inputParameterId: 78f082ce-09a7-4a31-ab5f-676197840d84
-        inputTypeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-    - rid: 956839176363049057
-      type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        name: 
-        owner:
-          rid: 956839176363049056
-        typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-        connectedInPorts:
-        - rid: 956839176363049052
     - rid: 956839176363049065
       type: {class: TextureToMaskNode, ns: InsaneScatterbrain.MapGraph, asm: InsaneScatterbrain.MapGraph}
       data:
@@ -3362,8 +3340,8 @@ MonoBehaviour:
         - rid: 956839176363049045
         - rid: 956839176363049047
         - rid: 956839176363049054
-        - rid: 956839176363049056
         - rid: 956839176363049075
+        - rid: 7546081963842732034
         referenceNodes:
         - rid: 7546081533871783941
         title: Spawn player in random location
@@ -3428,3 +3406,30 @@ MonoBehaviour:
           y: -1989.7852
           width: 2070
           height: 506
+    - rid: 7546081963842732034
+      type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        graph: {fileID: 0}
+        rect:
+          serializedVersion: 2
+          x: 2340
+          y: -377
+          width: 122
+          height: 41
+        note: 
+        id: 330aaf1d-322f-4149-b0c5-c4cd083829cf
+        outPorts:
+        - rid: 7546081963842732035
+        inputParameterId: fd4198b2-d7bd-4458-a649-c3e425ac0fd8
+        inputTypeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    - rid: 7546081963842732035
+      type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        name: 
+        owner:
+          rid: 7546081963842732034
+        typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        connectedInPorts:
+        - rid: 956839176363049052

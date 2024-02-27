@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Data;
 using TMPro;
+using EventSystem;
+using UnityEngine.UI;
 
 public class TitleScreenHandler : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class TitleScreenHandler : MonoBehaviour
             if (data == null)
             {
                 SaveSlots.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().SetText("No data saved!");
+                SaveSlots.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
             }
             else
             {
@@ -53,7 +56,9 @@ public class TitleScreenHandler : MonoBehaviour
 
     private void StartNewGame(int slotNumber)
     {
-        DataSaver<SaveData>.Save(new SaveData(slotNumber), $"save_{slotNumber}");;
+        SaveData data = new SaveData(slotNumber);
+        EventChannels.DataEvents.OnSetSaveData?.Invoke(data);
+        DataSaver<SaveData>.Save(data, $"save_{slotNumber}");
     }
 
     public void StartGame(int slotNumber)
@@ -61,12 +66,18 @@ public class TitleScreenHandler : MonoBehaviour
         SaveData data = LoadData(slotNumber);
         if (data != null)
         {
-            // correctly handle save data
+            EventChannels.DataEvents.OnSetSaveData?.Invoke(data);
         }
         else
         {
             StartNewGame(slotNumber);
         }
         SceneManager.LoadScene(2);
+    }
+
+    public void DeleteSave(int slotNumber)
+    {
+        DataSaver<SaveData>.Delete($"save_{slotNumber}");
+        Start();
     }
 }

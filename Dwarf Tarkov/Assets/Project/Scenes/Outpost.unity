@@ -8405,6 +8405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryCapacity: 30
+  items: []
 --- !u!114 &1315327302
 MonoBehaviour:
   m_ObjectHideFlags: 0

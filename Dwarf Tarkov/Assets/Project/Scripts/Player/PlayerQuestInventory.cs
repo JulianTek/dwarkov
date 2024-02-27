@@ -2,14 +2,22 @@ using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
+using System.Linq;
 
 public class PlayerQuestInventory : MonoBehaviour
 {
     private List<Quest> quests = new List<Quest>();
-    private List<Quest> completedQuests = new List<Quest>();
     // Start is called before the first frame update
     void Start()
     {
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data != null && data.PlayerQuests != null)
+            quests = ConvertDTOsToQuests(data.Quests);
+        else
+            quests = new List<Quest>();
+
+
         EventChannels.NPCEvents.OnPlayerAcceptQuest += AddQuestToInventory;
         EventChannels.NPCEvents.OnPlayerFinishQuest += FinishQuest;
 
@@ -17,6 +25,8 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.UIEvents.OnPlayerCompleteQuest += CompleteQuest;
 
         EventChannels.GameplayEvents.OnGetPlayerQuests += GetQuests;
+
+        EventChannels.DataEvents.OnGetPlayerQuests += GetQuests;
     }
 
     private void OnDisable()
@@ -28,6 +38,8 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.UIEvents.OnPlayerCompleteQuest -= CompleteQuest;
 
         EventChannels.GameplayEvents.OnGetPlayerQuests -= GetQuests;
+
+        EventChannels.DataEvents.OnGetPlayerQuests -= GetQuests;
     }
 
     // Update is called once per frame
@@ -89,6 +101,13 @@ public class PlayerQuestInventory : MonoBehaviour
 
     private List<Quest> GetQuests()
     {
+        return quests;
+    }
+
+    private List<Quest> ConvertDTOsToQuests(List<QuestDTO> dtos)
+    {
+        List<Quest> quests = new List<Quest>();
+        quests.AddRange(dtos.Select(quest => new Quest()));
         return quests;
     }
 } 
