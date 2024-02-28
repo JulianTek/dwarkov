@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
-  m_Name: VT-9
+  m_Name: Dwargiga 14G
   m_EditorClassIdentifier: 
   IsAutoFire: 0
-  RateOfFire: 0.7
-  AmmoSubtypes:
-  - {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
-  IsPrimary: 0
+  RateOfFire: 3
+  AmmoSubtypes: []
+  IsPrimary: 1
   MagCapacity: 8
-  ReloadTime: 2
-  Sprite: {fileID: 21300000, guid: 6784798941bdd434d8cf8f0c664b0b7a, type: 3}
-  WeaponEmptySprite: {fileID: 21300000, guid: af06f3756b33eef47b20f5e71a9168b0, type: 3}
+  ReloadTime: 3
+  Sprite: {fileID: 21300000, guid: 70654e889154ca347aeb17f9b36675bc, type: 3}
+  WeaponEmptySprite: {fileID: 21300000, guid: 47647b7f682b2a4479a8f39e7b892fa9, type: 3}
   MagazineSprite: {fileID: 0}
   CaseSprite: {fileID: 0}
-  BaseSpreadAngle: 6
-  AmountOfBullets: 1
+  BaseSpreadAngle: 20
+  AmountOfBullets: 5
   firingEventName: 
   ammoEmptyFiringEventName: 
   reloadEventName: 
