@@ -12,6 +12,7 @@ public class UIEvents
     public delegate void QuestEvent(Quest quest);
     public delegate void ShopkeepInventoryEvent(ShopkeepInventory inventory);
     public delegate void ItemEvent(ItemData item);
+    public delegate void WeaponSlotEvent(bool isPrimary);
 
     public HealthbarEvent OnUpdateHealthbar;
 
@@ -39,4 +40,6 @@ public class UIEvents
     public UIEvent OnHideSubmenu;
 
     public XPPointsEvent OnSetXPPoints;
+
+    public WeaponSlotEvent OnSwitchWeaponSlotSide;
 }

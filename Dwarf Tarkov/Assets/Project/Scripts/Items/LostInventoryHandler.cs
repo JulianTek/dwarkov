@@ -16,13 +16,18 @@ public class LostInventoryHandler : MonoBehaviour
             gameObject.SetActive(false);
 
         EventChannels.ItemEvents.OnSetLostItems += SetLostItems;
-    }   
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.ItemEvents.OnSetLostItems -= SetLostItems;
+    }
 
     void SetLostItems(List<Item> items)
     {
         this.items = items;
         ItemDataHandler.SaveInventory("items", this.items);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

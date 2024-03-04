@@ -12,13 +12,18 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     private WeaponData secondaryWeapon;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon += SelectPrimary;
         EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon += SelectSecondary;
         EventChannels.DataEvents.OnGetPrimaryWeapon += GetPrimaryWeapon;
         EventChannels.DataEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnGetPrimaryWeapon += GetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
+    }
 
+    private void Start()
+    {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PrimaryWeapon != null && data.SecondaryWeapon != null)
         {
@@ -33,6 +38,10 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon -= SelectPrimary;
         EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon -= SelectSecondary;
+        EventChannels.DataEvents.OnGetPrimaryWeapon -= GetPrimaryWeapon;
+        EventChannels.DataEvents.OnGetSecondaryWeapon -= GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnGetPrimaryWeapon -= GetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnGetWeaponData -= GetSecondaryWeapon;
     }
 
     // Update is called once per frame

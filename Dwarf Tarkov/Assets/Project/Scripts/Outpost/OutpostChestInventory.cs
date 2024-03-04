@@ -13,6 +13,7 @@ public class OutpostChestInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var resources = Resources.FindObjectsOfTypeAll<WeaponData>();
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.OutpostInventory != null)
         {
@@ -22,7 +23,8 @@ public class OutpostChestInventory : MonoBehaviour
         {
             items = new List<Item>()
             {
-                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6.11x54mm Green-tip"), 99)
+                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6.11x54mm Green-tip"), 99),
+                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "14G Buckshot"), 99)
             };
         }
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;

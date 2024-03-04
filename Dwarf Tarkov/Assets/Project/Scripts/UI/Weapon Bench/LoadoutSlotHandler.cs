@@ -12,14 +12,16 @@ public class LoadoutSlotHandler : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        SetWeapon(EventChannels.WeaponEvents.OnGetWeaponData?.Invoke());
+        SetWeapon(EventChannels.WeaponEvents.OnGetPrimaryWeapon?.Invoke());
 
         EventChannels.WeaponEvents.OnSwitchWeapon += SetWeapon;
+        EventChannels.UIEvents.OnSwitchWeaponSlotSide += SwitchSides;
     }
 
     private void OnDestroy()
     {
         EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeapon;
+        EventChannels.UIEvents.OnSwitchWeaponSlotSide -= SwitchSides;
     }
 
     // Update is called once per frame
@@ -38,5 +40,13 @@ public class LoadoutSlotHandler : MonoBehaviour
     {
         slotSprite.sprite = sprite;
         slotSprite.SetNativeSize();
+    }
+
+    void SwitchSides(bool isPrimary)
+    {
+        if (isPrimary)
+            SetWeapon(EventChannels.WeaponEvents.OnGetPrimaryWeapon?.Invoke());
+        else
+            SetWeapon(EventChannels.WeaponEvents.OnGetSecondaryWeapon?.Invoke());
     }
 }

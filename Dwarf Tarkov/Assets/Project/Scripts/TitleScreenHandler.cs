@@ -72,7 +72,7 @@ public class TitleScreenHandler : MonoBehaviour
         {
             StartNewGame(slotNumber);
         }
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     public void DeleteSave(int slotNumber)

@@ -19,6 +19,8 @@ public class WeaponEvents
     public WeaponEvent OnSwitchWeapon;
 
     public WeaponDataEvent OnGetWeaponData;
+    public WeaponDataEvent OnGetPrimaryWeapon;
+    public WeaponDataEvent OnGetSecondaryWeapon;
 
     public WeaponBoolEvent OnSetCanFire;
 }

@@ -37,7 +37,7 @@ public class MineDoorHandler : MonoBehaviour
             return;
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         StartCoroutine(data.Save());
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

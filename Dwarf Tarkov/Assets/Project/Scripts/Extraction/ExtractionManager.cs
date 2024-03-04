@@ -43,6 +43,6 @@ public class ExtractionManager : MonoBehaviour
 
     void Extract()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 }
