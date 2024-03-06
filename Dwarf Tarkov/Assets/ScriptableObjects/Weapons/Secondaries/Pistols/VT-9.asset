@@ -25,9 +25,9 @@ MonoBehaviour:
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 6
   AmountOfBullets: 1
-  firingEventName: 
-  ammoEmptyFiringEventName: 
-  reloadEventName: 
+  firingEventName: Weapon_Fire_VT9
+  ammoEmptyFiringEventName: Weapon_Reload_VT9
+  reloadEventName: Weapon_Empty_VT9
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

@@ -10,7 +10,8 @@ public class Bullet : MonoBehaviour, ICollidable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerInputHandler>() == null)
+
+        if (other.GetComponent<PlayerInputHandler>() == null && other.GetComponent<BulletHandler>() == null)
         {
             Destroy(gameObject);
         }
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour, ICollidable
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.GetComponent<PlayerInputHandler>() == null && other.gameObject.GetComponent<BulletHandler>() == null)
+            Destroy(gameObject);
     }
 }

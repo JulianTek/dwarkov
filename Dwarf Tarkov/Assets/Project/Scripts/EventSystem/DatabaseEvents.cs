@@ -9,10 +9,12 @@ public class DatabaseEvents
     public delegate AmmoSubtype GetSubtypeaEvent(string name);
     public delegate List<WeaponData> GetWeaponDataListEvent();
     public delegate List<ItemData> GetItemDataListEvent();
+    public delegate List<AmmoSubtype> GetSubtypeEventListEvent();
 
     public GetWeaponDataEvent OnGetWeaponData;
     public GetItemDataEvent OnGetItemData;
     public GetSubtypeaEvent OnGetSubtype;
     public GetWeaponDataListEvent OnGetAllWeapons;
     public GetItemDataListEvent OnGetAllItems;
+    public GetSubtypeEventListEvent OnGetAllSubtypes;
 }

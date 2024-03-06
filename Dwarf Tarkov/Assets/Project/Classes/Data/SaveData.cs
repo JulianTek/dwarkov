@@ -70,6 +70,7 @@ namespace Data
         public List<Item> ConvertDTOsToItems(List<ItemDTO> dtos)
         {
             var allItems = EventChannels.DatabaseEvents.OnGetAllItems?.Invoke();
+            allItems.AddRange(EventChannels.DatabaseEvents.OnGetAllSubtypes?.Invoke());
             List<Item> items = new List<Item>();
             foreach (ItemDTO dto in dtos)
             {

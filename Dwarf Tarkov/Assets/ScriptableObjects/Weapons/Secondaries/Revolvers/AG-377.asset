@@ -26,9 +26,9 @@ MonoBehaviour:
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 3
   AmountOfBullets: 1
-  firingEventName: 
-  ammoEmptyFiringEventName: 
-  reloadEventName: 
+  firingEventName: Weapon_Fire_AG377
+  ammoEmptyFiringEventName: Weapon_Empty_AG377
+  reloadEventName: Weapon_Reload_RG377
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

@@ -25,9 +25,9 @@ MonoBehaviour:
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 5
   AmountOfBullets: 1
-  firingEventName: 
-  ammoEmptyFiringEventName: 
-  reloadEventName: 
+  firingEventName: Weapon_Fire_DDA1
+  ammoEmptyFiringEventName: Weapon_Empty_DDA1
+  reloadEventName: Weapon_Reload_DDA1
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

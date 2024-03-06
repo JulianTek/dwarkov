@@ -179,10 +179,24 @@ public class WeaponHandler : MonoBehaviour
             // Spawns a bullet using object pooling
             if (bulletPrefab != null)
             {
-                GameObject bullet = ObjectPoolHandler.SpawnObject(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
-                float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
-                bullet.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0f, 0f, spread) * transform.right * ammoTypeLoaded.BulletSpeed, ForceMode2D.Impulse);
-                bullet.GetComponent<BulletHandler>().ammoType = ammoTypeLoaded;
+                int bulletsPerShot = data.AmountOfBullets; // Get the number of bullets per shot from weapon data
+
+                for (int i = 0; i < bulletsPerShot; i++)
+                {
+                    GameObject bullet = ObjectPoolHandler.SpawnObject(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
+
+                    // Calculate spread for each bullet
+                    float spread = Random.Range(data.BaseSpreadAngle * -1, data.BaseSpreadAngle);
+
+                    // Apply spread to the bullet direction
+                    Vector3 bulletDirection = Quaternion.Euler(0f, 0f, spread) * transform.right;
+
+                    // Add force to the bullet
+                    bullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * ammoTypeLoaded.BulletSpeed, ForceMode2D.Impulse);
+
+                    // Set the ammo type for the bullet
+                    bullet.GetComponent<BulletHandler>().ammoType = ammoTypeLoaded;
+                }
             }
             timeSinceLastShot = 0f;
             currentMagCount--;

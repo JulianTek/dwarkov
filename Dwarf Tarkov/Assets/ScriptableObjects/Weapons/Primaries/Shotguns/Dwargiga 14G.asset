@@ -25,9 +25,9 @@ MonoBehaviour:
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 20
   AmountOfBullets: 5
-  firingEventName: 
-  ammoEmptyFiringEventName: 
-  reloadEventName: 
+  firingEventName: Weapon_Fire_Dwargiga
+  ammoEmptyFiringEventName: Weapon_Empty_Dwargiga
+  reloadEventName: Weapon_Reload_Dwargiga
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

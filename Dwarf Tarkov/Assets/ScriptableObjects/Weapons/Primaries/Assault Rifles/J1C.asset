@@ -24,9 +24,9 @@ MonoBehaviour:
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 15
   AmountOfBullets: 1
-  firingEventName: 
-  ammoEmptyFiringEventName: 
-  reloadEventName: 
+  firingEventName: Weapon_Fire_J1C
+  ammoEmptyFiringEventName: Weapon_Empty_J1C
+  reloadEventName: Weapon_Reload_J1C
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

@@ -20,6 +20,7 @@ namespace Data
             EventChannels.DatabaseEvents.OnGetSubtype += GetSubtype;
             EventChannels.DatabaseEvents.OnGetAllWeapons += GetAllWeapons;
             EventChannels.DatabaseEvents.OnGetAllItems += GetAllItems;
+            EventChannels.DatabaseEvents.OnGetAllSubtypes += GetSubtypes;
         }
 
         private void OnDestroy()
@@ -29,6 +30,7 @@ namespace Data
             EventChannels.DatabaseEvents.OnGetSubtype -= GetSubtype;
             EventChannels.DatabaseEvents.OnGetAllWeapons -= GetAllWeapons;
             EventChannels.DatabaseEvents.OnGetAllItems -= GetAllItems;
+            EventChannels.DatabaseEvents.OnGetAllSubtypes -= GetSubtypes;
         }
 
         public WeaponData GetWeapon(string name)
@@ -54,6 +56,11 @@ namespace Data
         public AmmoSubtype GetSubtype(string name)
         {
             return database.AllAmmoSubtypes.Where(subtype => subtype.Name == name).FirstOrDefault();
+        }
+
+        public List<AmmoSubtype> GetSubtypes()
+        {
+            return database.AllAmmoSubtypes;
         }
     }
 }
