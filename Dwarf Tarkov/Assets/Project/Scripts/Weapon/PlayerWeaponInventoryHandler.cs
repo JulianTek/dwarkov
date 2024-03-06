@@ -20,6 +20,8 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
         EventChannels.DataEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
         EventChannels.WeaponEvents.OnGetPrimaryWeapon += GetPrimaryWeapon;
         EventChannels.WeaponEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnSetPrimaryWeapon += SetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnSetSecondaryWeapon += SetSecondaryWeapon;
     }
 
     private void Start()
@@ -42,6 +44,8 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
         EventChannels.DataEvents.OnGetSecondaryWeapon -= GetSecondaryWeapon;
         EventChannels.WeaponEvents.OnGetPrimaryWeapon -= GetPrimaryWeapon;
         EventChannels.WeaponEvents.OnGetWeaponData -= GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnSetPrimaryWeapon -= SetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnSetSecondaryWeapon -= SetSecondaryWeapon;
     }
 
     // Update is called once per frame
@@ -67,5 +71,15 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     public WeaponData GetSecondaryWeapon()
     {
         return secondaryWeapon;
+    }
+
+    private void SetPrimaryWeapon(WeaponData data)
+    {
+        primaryWeapon = data;
+    }
+
+    private void SetSecondaryWeapon(WeaponData data)
+    {
+        secondaryWeapon = data;
     }
 }

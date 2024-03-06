@@ -14,7 +14,8 @@ public class LoadoutSlotHandler : MonoBehaviour
     {
         SetWeapon(EventChannels.WeaponEvents.OnGetPrimaryWeapon?.Invoke());
 
-        EventChannels.WeaponEvents.OnSwitchWeapon += SetWeapon;
+        EventChannels.WeaponEvents.OnSetPrimaryWeapon += SetWeapon;
+        EventChannels.WeaponEvents.OnSetSecondaryWeapon += SetWeapon;
         EventChannels.UIEvents.OnSwitchWeaponSlotSide += SwitchSides;
     }
 
