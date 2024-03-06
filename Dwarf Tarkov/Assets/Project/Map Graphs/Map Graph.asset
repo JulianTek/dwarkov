@@ -178,17 +178,17 @@ MonoBehaviour:
     typeNames: []
   notes: []
   referenceNodeConnections:
-  - rid: 364207828983087113
-  - rid: 364207828983087114
-  - rid: 364207828983087115
+  - rid: 364207828983087122
+  - rid: 364207828983087123
+  - rid: 364207828983087124
   referenceNodes:
-  - rid: 364207828983087116
-  - rid: 364207828983087117
-  - rid: 364207828983087118
+  - rid: 364207828983087125
+  - rid: 364207828983087126
+  - rid: 364207828983087127
   groupNodes:
-  - rid: 364207828983087119
-  - rid: 364207828983087120
-  - rid: 364207828983087121
+  - rid: 364207828983087128
+  - rid: 364207828983087129
+  - rid: 364207828983087130
   canBeAddedAsNode: 0
   nodePath: Graphs
   serializedCustomPreviewBehaviourType: 
@@ -1273,7 +1273,7 @@ MonoBehaviour:
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts:
         - rid: 334538550927425676
-    - rid: 364207828983087113
+    - rid: 364207828983087122
       type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         inPort:
@@ -1281,8 +1281,8 @@ MonoBehaviour:
         outPort:
           rid: 956839176363049070
         referenceNode:
-          rid: 364207828983087116
-    - rid: 364207828983087114
+          rid: 364207828983087125
+    - rid: 364207828983087123
       type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         inPort:
@@ -1290,8 +1290,8 @@ MonoBehaviour:
         outPort:
           rid: 956839176363049070
         referenceNode:
-          rid: 364207828983087117
-    - rid: 364207828983087115
+          rid: 364207828983087126
+    - rid: 364207828983087124
       type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         inPort:
@@ -1299,8 +1299,8 @@ MonoBehaviour:
         outPort:
           rid: 956839176363049070
         referenceNode:
-          rid: 364207828983087118
-    - rid: 364207828983087116
+          rid: 364207828983087127
+    - rid: 364207828983087125
       type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         position:
@@ -1311,7 +1311,7 @@ MonoBehaviour:
           height: 277
         providerNode:
           rid: 956839176363049065
-    - rid: 364207828983087117
+    - rid: 364207828983087126
       type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         position:
@@ -1322,7 +1322,7 @@ MonoBehaviour:
           height: 277
         providerNode:
           rid: 956839176363049065
-    - rid: 364207828983087118
+    - rid: 364207828983087127
       type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         position:
@@ -1333,7 +1333,7 @@ MonoBehaviour:
           height: 277
         providerNode:
           rid: 956839176363049065
-    - rid: 364207828983087119
+    - rid: 364207828983087128
       type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         nodes:
@@ -1347,7 +1347,7 @@ MonoBehaviour:
         - rid: 956839176363049075
         - rid: 7546081963842732034
         referenceNodes:
-        - rid: 364207828983087116
+        - rid: 364207828983087125
         title: Spawn player in random location
         position:
           serializedVersion: 2
@@ -1355,7 +1355,7 @@ MonoBehaviour:
           y: -598.99994
           width: 1985
           height: 495
-    - rid: 364207828983087120
+    - rid: 364207828983087129
       type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         nodes:
@@ -1388,7 +1388,7 @@ MonoBehaviour:
           y: 8.000046
           width: 4339
           height: 794
-    - rid: 364207828983087121
+    - rid: 364207828983087130
       type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
         nodes:
@@ -1402,7 +1402,7 @@ MonoBehaviour:
         - rid: 334538550927425591
         - rid: 334538550927425620
         referenceNodes:
-        - rid: 364207828983087117
+        - rid: 364207828983087126
         title: Generate Extraction spots
         position:
           serializedVersion: 2

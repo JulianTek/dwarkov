@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using EventSystem;
 
 public class WeaponBenchSlotListHandler : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
     public void UpdateList(bool isPrimary)
     {
         ClearList();
-        var weapons = Resources.FindObjectsOfTypeAll(typeof(WeaponData)) as WeaponData[];
+        var weapons = EventChannels.DatabaseEvents.OnGetAllWeapons?.Invoke();
         foreach (var weapon in weapons)
         {
             if (weapon.IsPrimary == isPrimary)

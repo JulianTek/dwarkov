@@ -12,7 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08eaf810aa415b248a7abe5a0fbaf40c, type: 3}
   m_Name: Database
   m_EditorClassIdentifier: 
-  AllItems: []
-  AllWeapons: []
-  AllCartridges: []
-  AllAmmoSubtypes: []
+  AllItems:
+  - {fileID: 11400000, guid: 2272e009302d1f44e8ded99fe055ea6f, type: 2}
+  - {fileID: 11400000, guid: 001a6dfea4fd9964cb11853b503618da, type: 2}
+  - {fileID: 11400000, guid: bfd67b60dbf45d7489995c8903cdf263, type: 2}
+  - {fileID: 11400000, guid: e165c115eefa8304989ed55edfb3e9f3, type: 2}
+  - {fileID: 11400000, guid: 06709f3c1435f1443b160afe0a7d8e9b, type: 2}
+  - {fileID: 11400000, guid: b63101dcebd912346aafa074542464f6, type: 2}
+  AllWeapons:
+  - {fileID: 11400000, guid: d964d440b4bfc7b4ea83a8f6e67431fa, type: 2}
+  - {fileID: 11400000, guid: 3acfbaa261e8f1b4e969f777e766ec52, type: 2}
+  - {fileID: 11400000, guid: cb1eea9fc60cb2c49be874f257725ebb, type: 2}
+  - {fileID: 11400000, guid: 5166fafcda70f7646b9f18cc882f0480, type: 2}
+  - {fileID: 11400000, guid: a55892edf928ef24e9aad4414c99b674, type: 2}
+  - {fileID: 11400000, guid: 19564c83f0e98754f878ce76d058d5d7, type: 2}
+  - {fileID: 11400000, guid: 7820ba0a2ac085846b6b029422fd37b7, type: 2}
+  AllCartridges:
+  - {fileID: 11400000, guid: 88371131e5e13794d9f95aed111d4b3d, type: 2}
+  - {fileID: 11400000, guid: 1a0385df7a68e23468df2e3e2ed78f06, type: 2}
+  - {fileID: 11400000, guid: 168f300fe0beaac4b8e831a81630bf34, type: 2}
+  - {fileID: 11400000, guid: a70b0e0d94999ef46a6531ec4c71f220, type: 2}
+  - {fileID: 11400000, guid: 6a864038699c1c14cba0e521f4876bef, type: 2}
+  AllAmmoSubtypes:
+  - {fileID: 11400000, guid: ef70df9bd8f6e184b9242c5b3f594bc9, type: 2}
+  - {fileID: 11400000, guid: 5af40b46e436d1740af5cdbc365eff0b, type: 2}
+  - {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
+  - {fileID: 11400000, guid: 49b78bcca3f5af64b9b186c76d104e44, type: 2}
+  - {fileID: 11400000, guid: d9779668d5907ca4fa3b20c37356e6e2, type: 2}
+  - {fileID: 11400000, guid: 818c9c80a27867c4cb506ba6c7906248, type: 2}
+  - {fileID: 11400000, guid: c872c0691a8a96e4dbd0b48fee3fbe35, type: 2}

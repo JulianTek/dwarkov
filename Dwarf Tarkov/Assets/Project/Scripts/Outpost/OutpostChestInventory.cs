@@ -13,9 +13,8 @@ public class OutpostChestInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var resources = Resources.FindObjectsOfTypeAll<WeaponData>();
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null && data.OutpostInventory != null)
+        if (data != null && data.OutpostInventory != null && data.GameStarted != false)
         {
             items = data.ConvertDTOsToItems(data.OutpostInventory);
         }
@@ -23,8 +22,8 @@ public class OutpostChestInventory : MonoBehaviour
         {
             items = new List<Item>()
             {
-                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6.11x54mm Green-tip"), 99),
-                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "14G Buckshot"), 99)
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("6.11x54mm Green-tip"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("14G Buckshot"), 99),
             };
         }
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;
@@ -42,7 +41,7 @@ public class OutpostChestInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void AddItem(ItemData item, int amount)
@@ -113,7 +112,7 @@ public class OutpostChestInventory : MonoBehaviour
         return inventoryCapacity;
     }
 
-    public  List<ItemDTO> GetItemsAsDTOs()
+    public List<ItemDTO> GetItemsAsDTOs()
     {
         List<ItemDTO> dtos = new List<ItemDTO>();
         foreach (Item item in items)

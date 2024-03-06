@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using EventSystem;
 
 namespace Data
 {
@@ -22,7 +23,7 @@ namespace Data
 
         public static Item ConvertDTOToItem(ItemDTO dto)
         {
-            var items = Resources.FindObjectsOfTypeAll(typeof(ItemData)) as ItemData[];
+            var items = EventChannels.DatabaseEvents.OnGetAllItems?.Invoke();
             foreach (var item in items)
             {
                 if (item.Name == dto.Data.Name)

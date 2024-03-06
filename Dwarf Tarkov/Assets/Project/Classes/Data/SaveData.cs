@@ -15,6 +15,9 @@ namespace Data
             SlotNumber = slotNumber;
             LastSaved = DateTime.Now;
         }
+
+        // Boolean checks if the game has saved before, since this happens the first time the player leaves for the mines, this can be used to populate inventories, quests and initial unlocks
+        public bool GameStarted { get; private set; } = false; 
         // Data stuff
         public int SlotNumber { get; private set; }
         public DateTime LastSaved { get; private set; }
@@ -48,6 +51,7 @@ namespace Data
             SetLastSaved();
 
             // Set all data
+            GameStarted = true;
             OutpostInventory = EventChannels.DataEvents.OnGetOutpostInventory?.Invoke();
             PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
@@ -65,7 +69,7 @@ namespace Data
 
         public List<Item> ConvertDTOsToItems(List<ItemDTO> dtos)
         {
-            var allItems  = Resources.FindObjectsOfTypeAll(typeof(ItemData)) as ItemData[];
+            var allItems = EventChannels.DatabaseEvents.OnGetAllItems?.Invoke();
             List<Item> items = new List<Item>();
             foreach (ItemDTO dto in dtos)
             {
@@ -76,7 +80,7 @@ namespace Data
 
         public WeaponData GetWeaponDataFromDTO(WeaponDTO dto)
         {
-            WeaponData[] weapons = Resources.FindObjectsOfTypeAll<WeaponData>();
+            List<WeaponData> weapons = EventChannels.DatabaseEvents.OnGetAllWeapons?.Invoke();
             return weapons.FirstOrDefault<WeaponData>(weapon => weapon.firingEventName == dto.FiringEventName);
         }
 
