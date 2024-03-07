@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using UnityEngine.SceneManagement;
+using Data;
 
 public class ExtractionManager : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class ExtractionManager : MonoBehaviour
 
     void Extract()
     {
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        StartCoroutine(data.SaveFromMines());
         SceneManager.LoadScene(3);
     }
 }

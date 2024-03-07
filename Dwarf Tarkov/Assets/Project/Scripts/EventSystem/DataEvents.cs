@@ -7,11 +7,13 @@ public class DataEvents
 {
     public delegate List<ItemDTO> ItemDTOEvent();
     public delegate int IntEvent();
+    public delegate int IntEventBoolParam(bool param);
     public delegate List<Quest> QuestEvent();
     public delegate void SetIntEvent(int number);
     public delegate SaveData DataEvent();
     public delegate void SaveDataEvent(SaveData saveData);
     public delegate WeaponData WeaponDataEvent();
+    public delegate AmmoSubtype AmmoSubtypeEvent();
 
     public ItemDTOEvent OnGetPlayerInventory;
     public ItemDTOEvent OnGetOutpostInventory;
@@ -32,4 +34,8 @@ public class DataEvents
 
     public WeaponDataEvent OnGetPrimaryWeapon;
     public WeaponDataEvent OnGetSecondaryWeapon;
+
+    public IntEventBoolParam OnGetAmountOfBullets;
+
+    public AmmoSubtypeEvent OnGetCurrentSubtype;
 }
