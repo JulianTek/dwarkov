@@ -278,9 +278,17 @@ public class WeaponHandler : MonoBehaviour
         {
             // Prevent the player from triggering another reload, firing or aiming while the reload is going on
             canReload = false;
-            canFire = false;
             isAiming = false;
-            StartCoroutine(ReloadCoolDown());
+            if (data.ShellReload)
+            {
+                StartCoroutine(ReloadCooldownShell());
+            }
+            else
+            {
+                // This allows interupting the reload of shotguns
+                canFire = false;
+                StartCoroutine(ReloadCoolDown());
+            }
             return;
         }
     }
@@ -325,6 +333,36 @@ public class WeaponHandler : MonoBehaviour
             canFire = true;
             canReload = true;
             Debug.Log(GetCurrentlyLoadedAmmoType());
+        }
+        // Weapon sprite logic
+        EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
+    }
+
+    private IEnumerator ReloadCooldownShell()
+    {
+        // Calculate how much time it takes to reload a shell
+        float reloadTimePerShell = data.ReloadTime / data.MagCapacity;
+        // This event handles sprite logic
+        EventChannels.WeaponEvents.OnWeaponReload?.Invoke();
+        // Gets ammo in inventory, if it's 0 then nothing will happen
+        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(subtypeLoaded);
+        if (ammoInInventory != 0)
+        {
+            // Reload sound events are split into 3, this is so I don't have to make sound events the exact same length as the weapon data's reload
+            FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Start", transform.position);
+            while (currentMagCount < data.MagCapacity && ammoInInventory > 0)
+            {
+                yield return new WaitForSecondsRealtime(reloadTimePerShell);
+                FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Tact");
+                currentMagCount++;
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(subtypeLoaded, 1);
+            }
+            // Make the player aim, be able to fire and trigger the reload mechanic again again
+            isAiming = true;
+            canFire = true;
+            canReload = true;
+            FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Empty");
+
         }
         // Weapon sprite logic
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
@@ -410,6 +448,7 @@ public class WeaponHandler : MonoBehaviour
     {
         data = data.IsPrimary ? EventChannels.WeaponEvents.OnGetPrimaryWeapon?.Invoke() : EventChannels.WeaponEvents.OnGetSecondaryWeapon?.Invoke();
         gunSprite.sprite = data.Sprite;
+        maxMagCount = data.MagCapacity;
     }
 
     private int GetCurrentLoadedBullets(bool isPrimary)

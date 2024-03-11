@@ -19,6 +19,8 @@ public class WeaponData : ScriptableObject
     public int MagCapacity;
     [BoxGroup("Split/Ammo", LabelText = "Ammo Stats")]
     public float ReloadTime;
+    [BoxGroup("Split/Ammo", LabelText = "Ammo Stats")]
+    public bool ShellReload;
     [HorizontalGroup("Split2")]
     [BoxGroup("Split2/Sprites")]
     [PreviewField(50)]
