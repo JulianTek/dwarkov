@@ -163,6 +163,14 @@ public class WeaponHandler : MonoBehaviour
             {
                 if (currentMagCount > 0)
                 {
+                    if (!canReload && data.ShellReload)
+                    {
+                        StopAllCoroutines();
+                        isAiming = true;
+                        canReload = true;
+                        gunSprite.sprite = data.Sprite;
+                    }
+
                     Fire();
                     FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Firing/{data.firingEventName}", transform.position);
                     Physics2D.CircleCast(transform.position, data.firingEventRadius, Vector2.zero, 0f);
