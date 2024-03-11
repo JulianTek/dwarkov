@@ -22,10 +22,7 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
         EventChannels.WeaponEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
         EventChannels.WeaponEvents.OnSetPrimaryWeapon += SetPrimaryWeapon;
         EventChannels.WeaponEvents.OnSetSecondaryWeapon += SetSecondaryWeapon;
-    }
 
-    private void Start()
-    {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PrimaryWeapon != null && data.SecondaryWeapon != null)
         {
@@ -33,7 +30,6 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
             secondaryWeapon = data.GetWeaponDataFromDTO(data.SecondaryWeapon);
 
         }
-        SelectPrimary();
     }
 
     private void OnDestroy()

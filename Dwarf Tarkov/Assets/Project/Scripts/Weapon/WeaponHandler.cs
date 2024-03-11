@@ -38,7 +38,6 @@ public class WeaponHandler : MonoBehaviour
     private void Awake()
     {
         isPaused = false;
-        data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
         EventChannels.PlayerInputEvents.OnPlayerShootStarted += StartShooting;
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
@@ -58,18 +57,14 @@ public class WeaponHandler : MonoBehaviour
 
         EventChannels.WeaponEvents.OnRefreshLoadout += RefreshLoadout;
 
-        maxMagCount = data.MagCapacity;
-        currentMagCount = 0;
-        gunSprite = GetComponentInChildren<SpriteRenderer>();
+        EventChannels.DataEvents.OnGetCurrentSubtype += GetCurrentAmmoType;
+        EventChannels.DataEvents.OnGetAmountOfBullets += GetCurrentLoadedBullets;
 
-        Debug.Log(currentMagCount);
-        Debug.Log(cachedMagCount);
+        gunSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
     {
-        SetIndexAndAmmoType();
-
         var saveData = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (saveData != null && saveData.CurrentlyLoadedSubtype != null)
         {
@@ -77,7 +72,14 @@ public class WeaponHandler : MonoBehaviour
             cachedMagCount = saveData.CurrentBulletsInSecondaryMag;
             subtypeLoaded = EventChannels.DatabaseEvents.OnGetSubtype(saveData.CurrentlyLoadedSubtype.Name);
         }
-
+        else
+        {
+            currentMagCount = 0;
+        }
+        data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
+        maxMagCount = data.MagCapacity;
+        gunSprite.sprite = data.Sprite;
+        SetIndexAndAmmoType();
     }
 
     void OnDestroy()
@@ -100,6 +102,9 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.WeaponEvents.OnSetCanFire -= SetCanFire;
 
         EventChannels.WeaponEvents.OnRefreshLoadout -= RefreshLoadout;
+
+        EventChannels.DataEvents.OnGetCurrentSubtype -= GetCurrentAmmoType;
+        EventChannels.DataEvents.OnGetAmountOfBullets -= GetCurrentLoadedBullets;
     }
 
     public WeaponData GetWeaponData()

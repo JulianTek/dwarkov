@@ -83,6 +83,7 @@ namespace Data
             // Set data that can be accessed in the mines
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
+            PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
             PlayerQuests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
             PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
             SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());
