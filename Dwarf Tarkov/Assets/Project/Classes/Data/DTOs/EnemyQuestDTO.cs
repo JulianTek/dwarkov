@@ -9,6 +9,7 @@ namespace Data
     {
         public string EnemyToKill;
         public int AmountToKill;
+        public int AmountKilled;
 
         public EnemyQuestDTO(EnemyQuest quest)
         {
@@ -22,6 +23,7 @@ namespace Data
             CompletionText = quest.CompletionText;
             EnemyToKill = quest.EnemyToKill;
             AmountToKill = quest.AmountToKill;
+            AmountKilled = quest.AmountKilled;
         }
     }
 }

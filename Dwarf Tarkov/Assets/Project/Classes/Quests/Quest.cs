@@ -1,10 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
+using EventSystem;
 
 [System.Serializable]
 public class Quest
 {
+    public Quest(QuestDTO questDTO)
+    {
+        Name= questDTO.Name;
+        QuestGiverName= questDTO.QuestGiverName;
+        // add rewards
+        UnlockLevel= questDTO.UnlockLevel;
+        ExpReward= questDTO.ExpReward;
+        IntroText = questDTO.IntroText;
+        CompletionText = questDTO.CompletionText;
+    }
+
+    public Quest()
+    {
+
+    }
+
     public string Name;
     public string QuestGiverName;
     public List<Item> Rewards;

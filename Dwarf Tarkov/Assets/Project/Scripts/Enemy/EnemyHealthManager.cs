@@ -1,4 +1,5 @@
 using EventSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class EnemyHealthManager : MonoBehaviour
     {
         enemyCurrentHealth = EnemyMaxHealth;
         EventChannels.EnemyEvents.OnEnemyTakesDamage += TakeDamage;
+        Debug.Log(GetEnemyName());
     }
 
     private void OnDestroy()
@@ -34,7 +36,13 @@ public class EnemyHealthManager : MonoBehaviour
         {
             Destroy(gameObject);
             EventChannels.EnemyEvents.OnEnemyDeath?.Invoke();
+            EventChannels.EnemyEvents.OnEnemyDeathWithName?.Invoke(GetEnemyName());
         }
+    }
+
+    private string GetEnemyName()
+    {
+        return gameObject.name[..^7];
     }
 
     public float GetEnemyHealth()

@@ -12,6 +12,7 @@ public class EnemyEvents
     public delegate void EnemyObjectEvent(GameObject go);
     public delegate void DamageEvent(float damage);
     public delegate bool EnemySpawnEvent();
+    public delegate void EnemyStringEvent(string str);
 
     public StateEvent OnSwitchEnemyState;
 
@@ -24,6 +25,7 @@ public class EnemyEvents
     public DamageEvent OnEnemyTakesDamage;
 
     public EnemyEvent OnEnemyDeath;
+    public EnemyStringEvent OnEnemyDeathWithName;
 
     public EnemySpawnEvent OnSpawnEnemy;
 }

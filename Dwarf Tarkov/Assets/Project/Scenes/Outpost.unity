@@ -6694,7 +6694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - rid: 1518805180274966530
-  - rid: 7546081702975635457
+  - rid: 364208022774349825
   NextQuest:
     Name: 
     QuestGiverName: 
@@ -6706,6 +6706,24 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 364208022774349825
+      type: {class: EnemyQuest, ns: , asm: Assembly-CSharp}
+      data:
+        Name: The Culling
+        QuestGiverName: Torn
+        Rewards:
+        - data: {fileID: 11400000, guid: 2272e009302d1f44e8ded99fe055ea6f, type: 2}
+          amount: 100
+        UnlockLevel: 1
+        ExpReward: 100
+        IntroText:
+        - Sentence: How about using that gun of yours?
+          IsChoice: 0
+        - Sentence: Go in the mines and kill 10 enemies for me
+          IsChoice: 1
+        CompletionText: Good on you, seems you're a good shot as well
+        EnemyToKill: Enemy
+        AmountToKill: 5
     - rid: 1518805180274966530
       type: {class: ItemQuest, ns: , asm: Assembly-CSharp}
       data:
@@ -6727,23 +6745,6 @@ MonoBehaviour:
         RequiredItems:
         - data: {fileID: 11400000, guid: 06709f3c1435f1443b160afe0a7d8e9b, type: 2}
           amount: 3
-    - rid: 7546081702975635457
-      type: {class: EnemyQuest, ns: , asm: Assembly-CSharp}
-      data:
-        Name: The Culling
-        QuestGiverName: Torn
-        Rewards: []
-        UnlockLevel: 2
-        ExpReward: 50
-        IntroText:
-        - Sentence: I've got more work for you, now that I know you're capable of
-            proving yourself
-          IsChoice: 0
-        - Sentence: Go into the mines and kill 10 bugs for me, won't you?
-          IsChoice: 1
-        CompletionText: Good job. Those bugs got it coming
-        EnemyToKill: Bug
-        AmountToKill: 10
 --- !u!1 &948310407
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,8 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.GameplayEvents.OnGetPlayerQuests += GetQuests;
 
         EventChannels.DataEvents.OnGetPlayerQuests += GetQuests;
+
+        EventChannels.EnemyEvents.OnEnemyDeathWithName += TrackEnemyKills;
     }
 
     private void OnDisable()
@@ -40,6 +42,8 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.GameplayEvents.OnGetPlayerQuests -= GetQuests;
 
         EventChannels.DataEvents.OnGetPlayerQuests -= GetQuests;
+
+        EventChannels.EnemyEvents.OnEnemyDeathWithName -= TrackEnemyKills;
     }
 
     // Update is called once per frame
@@ -68,6 +72,9 @@ public class PlayerQuestInventory : MonoBehaviour
                 if (quest is ItemQuest)
                     if (CheckIfItemQuestCompleted(quest as ItemQuest))
                         EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
+                    else if (quest is EnemyQuest)
+                        if (CheckIfEnemyQuestCompleted(quest as EnemyQuest))
+                            EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
             }
         }
     }
@@ -75,6 +82,11 @@ public class PlayerQuestInventory : MonoBehaviour
     private bool CheckIfItemQuestCompleted(ItemQuest quest)
     {
         return (bool)EventChannels.ItemEvents.OnCheckIfItemQuestCompleted?.Invoke(quest.RequiredItems);
+    }
+
+    private bool CheckIfEnemyQuestCompleted(EnemyQuest quest)
+    {
+        return quest.AmountKilled >= quest.AmountToKill;
     }
 
     private void CompleteQuest(Quest quest)
@@ -107,7 +119,28 @@ public class PlayerQuestInventory : MonoBehaviour
     private List<Quest> ConvertDTOsToQuests(List<QuestDTO> dtos)
     {
         List<Quest> quests = new List<Quest>();
-        quests.AddRange(dtos.Select(quest => new Quest()));
+        foreach (QuestDTO questDTO in dtos)
+        {
+            if (questDTO is EnemyQuestDTO)
+                quests.Add(new EnemyQuest(questDTO as EnemyQuestDTO));
+            else if (questDTO is ItemQuestDTO)
+                quests.Add(new ItemQuest(questDTO as ItemQuestDTO));
+        }
         return quests;
+    }
+
+    private void TrackEnemyKills(string enemyName)
+    {
+        foreach (Quest quest in quests)
+        {
+            if (quest is EnemyQuest)
+            {
+                var questToCheck = quest as EnemyQuest;
+                if (questToCheck.EnemyToKill == enemyName)
+                {
+                    questToCheck.IncreaseAmountKilled();
+                }
+            }
+        }
     }
 } 
