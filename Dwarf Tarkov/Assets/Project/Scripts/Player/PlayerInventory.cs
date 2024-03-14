@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        LoadItems();
+
         EventChannels.ItemEvents.OnAddItemToInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromInventory += RemoveItem;
         EventChannels.ExtractionEvents.OnGetInventoryValue += ReturnInventoryValue;
@@ -41,6 +41,11 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnRemoveFromStack -= RemoveSpecificItem;
         EventChannels.PlayerEvents.OnPlayerDeath -= SetLostItems;
         EventChannels.DataEvents.OnGetPlayerInventory -= GetItemsAsDtos;
+    }
+
+    private void Start()
+    {
+        LoadItems();
     }
 
     // Update is called once per frame
@@ -318,14 +323,37 @@ public class PlayerInventory : MonoBehaviour
 
     void LoadItems()
     {
+        // Tries to get data, and loads dev data if none can be found
         var data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null && data.PlayerInventory != null && data.PlayerInventory.Count > 0)
+        if (data == null)
         {
-            inventory = data.ConvertDTOsToItems(data.PlayerInventory);
+            // if data is null, that means no instance of datahandler was found, meaning the scene was loaded from the editor, load dev data
+            data = DataSaver<SaveData>.Load("dev");
+            if (data != null && data.PlayerInventory != null)
+            {
+                inventory = data.ConvertDTOsToItems(data.PlayerInventory);
+            }
+            else
+            {
+                // if no data exists, create a new instance
+                data = new SaveData();
+                AddItem(EventChannels.DatabaseEvents.OnGetItemData?.Invoke("Credit"), 99);
+                AddItem(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("6.11x54mm Green-tip"), 99);
+                AddItem(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("14G Buckshot"), 99);
+                AddItem(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("9.22 DWS FMJ"), 99);
+                StartCoroutine(data.SaveDevData(inventory));
+            }
         }
         else
         {
-            inventory = new List<Item>(GetCapacity());
+            if (data.PlayerInventory != null && data.PlayerInventory.Count > 0)
+            {
+                inventory = data.ConvertDTOsToItems(data.PlayerInventory);
+            }
+            else
+            {
+                inventory = new List<Item>(GetCapacity());
+            }
         }
     }
 }

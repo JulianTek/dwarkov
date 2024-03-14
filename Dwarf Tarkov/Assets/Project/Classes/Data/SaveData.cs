@@ -16,6 +16,12 @@ namespace Data
             LastSaved = DateTime.Now;
         }
 
+        // use empty ctor to create dev data
+        public SaveData()
+        {
+            LastSaved = DateTime.Now;
+        }
+
         // Boolean checks if the game has saved before, since this happens the first time the player leaves for the mines, this can be used to populate inventories, quests and initial unlocks
         public bool GameStarted { get; private set; } = false;
         // Data stuff
@@ -72,6 +78,29 @@ namespace Data
             CurrentlyLoadedSubtype = ConvertSubtypeToDTO(EventChannels.DataEvents.OnGetCurrentSubtype?.Invoke());
             // Save all data
             DataSaver<SaveData>.Save(this, $"save_{SlotNumber}");
+            yield return new WaitForEndOfFrame();
+        }
+
+        public IEnumerator SaveDevData(List<Item> inventory)
+        {
+            // Set last saved to now
+            SetLastSaved();
+
+            // implement quest logic later
+
+            // Convert items to DTOs
+            PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
+            OutpostInventory = EventChannels.DataEvents.OnGetOutpostInventory?.Invoke();
+
+            PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
+            PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
+
+            PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
+            SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());
+            CurrentBulletsInPrimaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(true);
+            CurrentBulletsInSecondaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(false);
+            CurrentlyLoadedSubtype = ConvertSubtypeToDTO(EventChannels.DataEvents.OnGetCurrentSubtype?.Invoke());
+            DataSaver<SaveData>.Save(this, "dev");
             yield return new WaitForEndOfFrame();
         }
 

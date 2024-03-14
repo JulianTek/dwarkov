@@ -11,9 +11,25 @@ namespace Data
         [SerializeField]
         private Database database;
 
+        public static DatabaseHandler instance;
+
+
+        private void Awake()
+        {
+            // If the instance doesn't exist, set it to this object
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                // If an instance already exists, destroy this object
+                Destroy(gameObject);
+            }
+        }
         private void Start()
         {
-            DontDestroyOnLoad(gameObject);
 
             EventChannels.DatabaseEvents.OnGetItemData += GetItem;
             EventChannels.DatabaseEvents.OnGetWeaponData += GetWeapon;
@@ -61,6 +77,11 @@ namespace Data
         public List<AmmoSubtype> GetSubtypes()
         {
             return database.AllAmmoSubtypes;
+        }
+
+        public void SetDatabase(Database database)
+        {
+            this.database = database;
         }
     }
 }
