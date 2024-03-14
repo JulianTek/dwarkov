@@ -18,6 +18,12 @@ public class EnemyQuest : Quest
         AmountToKill = dto.AmountToKill;
         AmountKilled = dto.AmountKilled;
     }
+
+    public EnemyQuest()
+    {
+
+    }
+
     public string EnemyToKill;
     public int AmountToKill;
     public int AmountKilled { get; private set; }

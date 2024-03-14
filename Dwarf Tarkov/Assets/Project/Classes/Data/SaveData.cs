@@ -117,7 +117,13 @@ namespace Data
         public List<QuestDTO> ConvertQuestsToDTOs(List<Quest> quests)
         {
             List<QuestDTO> dtos = new List<QuestDTO>();
-            dtos.AddRange(quests.Select(dto => new QuestDTO()));
+            foreach (Quest quest in quests)
+            {
+                if (quest is ItemQuest)
+                    dtos.Add(new ItemQuestDTO(quest as ItemQuest));
+                else if (quest is EnemyQuest)
+                    dtos.Add(new EnemyQuestDTO(quest as EnemyQuest));
+            }
             return dtos;
         }
 

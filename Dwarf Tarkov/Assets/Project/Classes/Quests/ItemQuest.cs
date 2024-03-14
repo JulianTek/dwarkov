@@ -18,6 +18,11 @@ public class ItemQuest : Quest
         CompletionText = dto.CompletionText;
         //Add required items
     }
+
+    public ItemQuest()
+    {
+
+    }
     // please use "amount" to denote how many of an item the player should retrieve
     public List<Item> RequiredItems = new List<Item>();
 }
