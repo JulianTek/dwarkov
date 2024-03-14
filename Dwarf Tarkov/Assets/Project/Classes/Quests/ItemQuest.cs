@@ -11,6 +11,7 @@ public class ItemQuest : Quest
     {
         Name = dto.Name;
         QuestGiverName = dto.QuestGiverName;
+        MenuDescription = dto.MenuDescription;
         // add rewards
         UnlockLevel = dto.UnlockLevel;
         ExpReward = dto.ExpReward;

@@ -11,6 +11,7 @@ public class Quest
     {
         Name= questDTO.Name;
         QuestGiverName= questDTO.QuestGiverName;
+        MenuDescription= questDTO.MenuDescription;
         // add rewards
         UnlockLevel= questDTO.UnlockLevel;
         ExpReward= questDTO.ExpReward;
@@ -25,6 +26,8 @@ public class Quest
 
     public string Name;
     public string QuestGiverName;
+    [TextArea(3, 10)]
+    public string MenuDescription;
     public List<Item> Rewards;
     public int UnlockLevel;
     public float ExpReward;

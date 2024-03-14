@@ -7,6 +7,8 @@ public class PauseMenuHandler : MonoBehaviour
 {
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject questsButton;
 
     private bool isPaused;
     // Start is called before the first frame update
@@ -35,6 +37,12 @@ public class PauseMenuHandler : MonoBehaviour
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
         isPaused = true;
+
+        if (EventChannels.DataEvents.OnGetSaveData?.Invoke().PlayerQuests.Count > 0)
+            questsButton.SetActive(true);
+
+        else
+            questsButton.SetActive(false);
     }
 
     public void ResumeGame()

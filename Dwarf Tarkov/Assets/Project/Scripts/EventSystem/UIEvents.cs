@@ -13,6 +13,7 @@ public class UIEvents
     public delegate void ShopkeepInventoryEvent(ShopkeepInventory inventory);
     public delegate void ItemEvent(ItemData item);
     public delegate void WeaponSlotEvent(bool isPrimary);
+    public delegate void StringUIEvent(string str);
 
     public HealthbarEvent OnUpdateHealthbar;
 
@@ -42,4 +43,7 @@ public class UIEvents
     public XPPointsEvent OnSetXPPoints;
 
     public WeaponSlotEvent OnSwitchWeaponSlotSide;
+
+    public StringUIEvent OnSetQuestInfoTitle;
+    public StringUIEvent OnSetQuestInfoDescription;
 }
