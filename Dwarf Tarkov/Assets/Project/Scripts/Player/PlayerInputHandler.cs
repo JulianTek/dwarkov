@@ -77,7 +77,9 @@ public class PlayerInputHandler : MonoBehaviour
             Vector2 aimVector = playerControls.Player.Aim.ReadValue<Vector2>();
             EventChannels.PlayerInputEvents.OnPlayerAim?.Invoke(aimVector);
             EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(movementVector);
+            Debug.Log("schmooving");
         }
+        Debug.Log($"the game is paused {isPaused}");
     }
 
     void ShootStarted(InputAction.CallbackContext ctx)
@@ -183,6 +185,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void ResumeGame()
     {
-        isPaused = false;
+        DisableHUDInput();
+        Debug.Log(playerControls.Player.enabled);
     }
 }
