@@ -8,7 +8,11 @@ public static class DTOConverter
 {
     public static ItemData ConvertItemDataDTOToItemData(ItemDataDTO dto)
     {
-        return EventChannels.DatabaseEvents.OnGetItemData?.Invoke(dto.Name);
+        var item = EventChannels.DatabaseEvents.OnGetItemData?.Invoke(dto.Name);
+        if (item != null)
+            return item;
+        else
+            return EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(dto.Name);
     }
 
     public static ItemDataDTO ConvertItemDataToDTO(ItemData data)
@@ -38,7 +42,7 @@ public static class DTOConverter
 
     public static Item ConvertItemDTOToItem(ItemDTO dto)
     {
-        return new Item(EventChannels.DatabaseEvents.OnGetItemData?.Invoke(dto.Data.Name), dto.Amount);
+        return new Item(ConvertItemDataDTOToItemData(dto.Data), dto.Amount);
     }
 
     public static ItemDTO ConvertItemToDTO(Item data)
@@ -94,11 +98,6 @@ public static class DTOConverter
             dtos.Add(ConvertQuestToQuestDTO(quest));
         }
         return dtos;
-    }
-
-    public static AmmoSubtype ConvertSubtypeDTOToSubtype(AmmoSubtypeDTO dto)
-    {
-        return EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(dto.Name);
     }
 
     public static AmmoSubtypeDTO ConvertSubtypeToDTO(AmmoSubtype subtype)

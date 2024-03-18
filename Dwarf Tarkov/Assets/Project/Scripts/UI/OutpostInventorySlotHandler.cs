@@ -73,6 +73,7 @@ public class OutpostInventorySlotHandler : MonoBehaviour
             }
             EventChannels.ItemEvents.OnUpdateOutpostInventory?.Invoke();
         }
+
     }
 
     public void SetIsPlayer(bool boolean)

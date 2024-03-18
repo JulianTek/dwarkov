@@ -14,18 +14,27 @@ public class OutpostChestInventory : MonoBehaviour
     void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null && data.OutpostInventory != null && data.GameStarted != false)
+        if (data != null && data.OutpostInventory != null && data.GameStarted)
         {
             items = DTOConverter.ConvertItemDTOListToItemList(data.OutpostInventory);
         }
         else
         {
-            items = new List<Item>()
+            data = DataSaver<SaveData>.Load("dev");
+            if (data != null && data.OutpostInventory != null && data.GameStarted)
+            {
+                items = DTOConverter.ConvertItemDTOListToItemList(data.OutpostInventory);
+            }
+            else
+            {
+                items = new List<Item>()
             {
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("6.11x54mm Green-tip"), 99),
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("14G Buckshot"), 99),
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("9.22 DWS FMJ"), 99)
             };
+            }
+
         }
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory += RemoveItem;
