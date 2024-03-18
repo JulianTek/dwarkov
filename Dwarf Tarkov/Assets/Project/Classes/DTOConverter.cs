@@ -6,30 +6,60 @@ using EventSystem;
 
 public static class DTOConverter
 {
-    public static ItemData ConvertItemDTOToItem(ItemDataDTO dto)
+    public static ItemData ConvertItemDataDTOToItemData(ItemDataDTO dto)
     {
         return EventChannels.DatabaseEvents.OnGetItemData?.Invoke(dto.Name);
     }
 
-    public static ItemDataDTO ConvertItemToDTO(ItemData data)
+    public static ItemDataDTO ConvertItemDataToDTO(ItemData data)
     {
         return new ItemDataDTO(data);
     }
 
-    public static List<ItemData> ConvertItemDTOListToItemList(List<ItemDataDTO> dtos)
+    public static List<ItemData> ConvertItemDataDTOListToItemDataList(List<ItemDataDTO> dtos)
     {
         List<ItemData> items = new List<ItemData>();
         foreach (ItemDataDTO dto in dtos)
+        {
+            items.Add(ConvertItemDataDTOToItemData(dto));
+        }
+        return items;
+    }
+
+    public static List<ItemDataDTO> ConvertItemDataListToDataDTOList(List<ItemData> items)
+    {
+        List<ItemDataDTO> dtos = new List<ItemDataDTO>();
+        foreach (ItemData item in items)
+        {
+            dtos.Add(ConvertItemDataToDTO(item));
+        }
+        return dtos;
+    }
+
+    public static Item ConvertItemDTOToItem(ItemDTO dto)
+    {
+        return new Item(EventChannels.DatabaseEvents.OnGetItemData?.Invoke(dto.Data.Name), dto.Amount);
+    }
+
+    public static ItemDTO ConvertItemToDTO(Item data)
+    {
+        return new ItemDTO(data);
+    }
+
+    public static List<Item> ConvertItemDTOListToItemList(List<ItemDTO> dtos)
+    {
+        List<Item> items = new List<Item>();
+        foreach (ItemDTO dto in dtos)
         {
             items.Add(ConvertItemDTOToItem(dto));
         }
         return items;
     }
 
-    public static List<ItemDataDTO> ConvertItemListToDTOList(List<ItemData> items)
+    public static List<ItemDTO> ConvertItemListToDTOList(List<Item> items)
     {
-        List<ItemDataDTO> dtos = new List<ItemDataDTO>();
-        foreach (ItemData item in items)
+        List<ItemDTO> dtos = new List<ItemDTO>();
+        foreach (Item item in items)
         {
             dtos.Add(ConvertItemToDTO(item));
         }
@@ -64,5 +94,15 @@ public static class DTOConverter
             dtos.Add(ConvertQuestToQuestDTO(quest));
         }
         return dtos;
+    }
+
+    public static AmmoSubtype ConvertSubtypeDTOToSubtype(AmmoSubtypeDTO dto)
+    {
+        return EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(dto.Name);
+    }
+
+    public static AmmoSubtypeDTO ConvertSubtypeToDTO(AmmoSubtype subtype)
+    {
+        return new AmmoSubtypeDTO(subtype);
     }
 }

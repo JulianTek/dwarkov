@@ -13,7 +13,7 @@ public class PlayerQuestInventory : MonoBehaviour
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PlayerQuests != null)
-            quests = ConvertDTOsToQuests(data.Quests);
+            quests = DTOConverter.ConvertQuestDTOListToQuestList(data.PlayerQuests);
         else
             quests = new List<Quest>();
 
@@ -113,19 +113,6 @@ public class PlayerQuestInventory : MonoBehaviour
 
     private List<Quest> GetQuests()
     {
-        return quests;
-    }
-
-    private List<Quest> ConvertDTOsToQuests(List<QuestDTO> dtos)
-    {
-        List<Quest> quests = new List<Quest>();
-        foreach (QuestDTO questDTO in dtos)
-        {
-            if (questDTO is EnemyQuestDTO)
-                quests.Add(new EnemyQuest(questDTO as EnemyQuestDTO));
-            else if (questDTO is ItemQuestDTO)
-                quests.Add(new ItemQuest(questDTO as ItemQuestDTO));
-        }
         return quests;
     }
 

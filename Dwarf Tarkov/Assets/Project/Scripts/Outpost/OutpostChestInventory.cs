@@ -16,7 +16,7 @@ public class OutpostChestInventory : MonoBehaviour
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.OutpostInventory != null && data.GameStarted != false)
         {
-            items = data.ConvertDTOsToItems(data.OutpostInventory);
+            items = DTOConverter.ConvertItemDTOListToItemList(data.OutpostInventory);
         }
         else
         {

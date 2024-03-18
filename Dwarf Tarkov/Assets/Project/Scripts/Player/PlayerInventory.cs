@@ -331,7 +331,7 @@ public class PlayerInventory : MonoBehaviour
             data = DataSaver<SaveData>.Load("dev");
             if (data != null && data.PlayerInventory != null)
             {
-                inventory = data.ConvertDTOsToItems(data.PlayerInventory);
+                inventory = DTOConverter.ConvertItemDTOListToItemList(data.PlayerInventory);
             }
             else
             {
@@ -348,7 +348,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (data.PlayerInventory != null && data.PlayerInventory.Count > 0)
             {
-                inventory = data.ConvertDTOsToItems(data.PlayerInventory);
+                inventory = DTOConverter.ConvertItemDTOListToItemList(data.PlayerInventory);
             }
             else
             {
