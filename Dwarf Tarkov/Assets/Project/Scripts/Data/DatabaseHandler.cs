@@ -27,10 +27,6 @@ namespace Data
                 // If an instance already exists, destroy this object
                 Destroy(gameObject);
             }
-        }
-        private void Start()
-        {
-
             EventChannels.DatabaseEvents.OnGetItemData += GetItem;
             EventChannels.DatabaseEvents.OnGetWeaponData += GetWeapon;
             EventChannels.DatabaseEvents.OnGetSubtype += GetSubtype;
@@ -38,7 +34,6 @@ namespace Data
             EventChannels.DatabaseEvents.OnGetAllItems += GetAllItems;
             EventChannels.DatabaseEvents.OnGetAllSubtypes += GetSubtypes;
         }
-
         private void OnDestroy()
         {
             EventChannels.DatabaseEvents.OnGetItemData -= GetItem;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using Data;
+using UnityEngine.UI;
 
 public class PauseMenuQuestUIHandler : MonoBehaviour
 {
@@ -16,11 +17,17 @@ public class PauseMenuQuestUIHandler : MonoBehaviour
     void OnEnable()
     {
         ShowList();
-        var data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        foreach (QuestDTO dto in data.PlayerQuests)
+        var data = EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke();
+        if (data != null)
         {
-            var go = Instantiate(QuestButtonPrefab, transform);
-            go.GetComponent<PauseMenuQuestButtonHandler>().SetQuest(new Quest(dto));
+            foreach (Quest quest in data)
+            {
+                var go = Instantiate(QuestButtonPrefab, QuestButtons.transform);
+                go.GetComponent<PauseMenuQuestButtonHandler>().SetQuest(quest);
+                go.GetComponentInChildren<TMPro.TextMeshProUGUI>().SetText(quest.Name);
+                go.GetComponent<Button>().onClick.AddListener(ShowInfo);
+                go.GetComponent<Button>().onClick.AddListener(() => SetQuestInfo(quest));
+            }
         }
     }
 
@@ -34,5 +41,17 @@ public class PauseMenuQuestUIHandler : MonoBehaviour
     {
         QuestInfo.SetActive(false);
         QuestButtons.SetActive(true);
+    }
+    
+    public void ShowInfo()
+    {
+        QuestInfo.SetActive(true);
+        QuestButtons.SetActive(false);
+    }
+
+    private void SetQuestInfo(Quest quest)
+    {
+        EventChannels.UIEvents.OnSetQuestInfoTitle?.Invoke(quest.Name);
+        EventChannels.UIEvents.OnSetQuestInfoDescription?.Invoke(quest.MenuDescription);
     }
 }

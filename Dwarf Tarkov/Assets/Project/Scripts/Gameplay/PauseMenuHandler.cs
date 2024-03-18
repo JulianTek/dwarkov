@@ -10,6 +10,12 @@ public class PauseMenuHandler : MonoBehaviour
     [SerializeField]
     private GameObject questsButton;
 
+    [Header("Menus")]
+    [SerializeField]
+    private GameObject mainButtons;
+    [SerializeField]
+    private GameObject questMenu;
+
     private bool isPaused;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +23,7 @@ public class PauseMenuHandler : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         isPaused = false;
         pauseMenu.SetActive(false);
-
+        questMenu.SetActive(false);
         EventChannels.PlayerInputEvents.OnPlayerPauses += HandleInput;
     }
 
@@ -38,7 +44,7 @@ public class PauseMenuHandler : MonoBehaviour
         pauseMenu.SetActive(true);
         isPaused = true;
 
-        if (EventChannels.DataEvents.OnGetSaveData?.Invoke().PlayerQuests.Count > 0)
+        if (EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke().Count > 0)
             questsButton.SetActive(true);
 
         else
@@ -61,8 +67,19 @@ public class PauseMenuHandler : MonoBehaviour
             ResumeGame();
     }
 
+    public void ShowQuestMenu()
+    {
+        ToggleMainButtons(false);
+        questMenu.SetActive(true);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void ToggleMainButtons(bool isVisible)
+    {
+        mainButtons.SetActive(isVisible);
     }
 }
