@@ -10,17 +10,21 @@ public class QuestInfoUIHandler : MonoBehaviour
     public TextMeshProUGUI titleText;
     [SerializeField]
     private TextMeshProUGUI contentText;
+    [SerializeField]
+    private TextMeshProUGUI progresstText;
 
     private void Start()
     {
         EventChannels.UIEvents.OnSetQuestInfoTitle += SetTitle;
         EventChannels.UIEvents.OnSetQuestInfoDescription += SetContent;
+        EventChannels.UIEvents.OnSetQuestInfoProgress += SetProgress;
     }
 
     private void OnDestroy()
     {
         EventChannels.UIEvents.OnSetQuestInfoTitle -= SetTitle;
         EventChannels.UIEvents.OnSetQuestInfoDescription -= SetContent;
+        EventChannels.UIEvents.OnSetQuestInfoProgress -= SetProgress;
     }
 
     private void SetTitle(string text)
@@ -31,5 +35,10 @@ public class QuestInfoUIHandler : MonoBehaviour
     private void SetContent(string text)
     {
         contentText.SetText(text);
+    }
+
+    private void SetProgress(string text)
+    {
+        progresstText.SetText(text);
     }
 }

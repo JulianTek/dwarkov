@@ -34,4 +34,9 @@ public class Quest
     public DialogueLine[] IntroText;
     [TextArea(3, 10)]
     public string CompletionText;
+    
+    public virtual string GetProgress()
+    {
+        return "Quest progress:";
+    }
 }

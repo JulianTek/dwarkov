@@ -19,9 +19,9 @@ public class NPCQuestInventory : MonoBehaviour
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.Quests != null && data.Quests.Count > 0)
         {
-            completedQuests = ConvertQuestDTOsToEntity(data.CompletedQuests);
-            quests = ConvertQuestDTOsToEntity(data.Quests);
-            unlockedQuests = ConvertQuestDTOsToEntity(data.UnlockedQuests);
+            completedQuests = DTOConverter.ConvertQuestDTOListToQuestList(data.CompletedQuests);
+            quests = DTOConverter.ConvertQuestDTOListToQuestList(data.Quests);
+            unlockedQuests = DTOConverter.ConvertQuestDTOListToQuestList(data.UnlockedQuests);
         }
         RefreshQuests();
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;
@@ -88,12 +88,5 @@ public class NPCQuestInventory : MonoBehaviour
     public List<Quest> GetUnlockedQuests()
     {
         return unlockedQuests;
-    }
-
-    public List<Quest> ConvertQuestDTOsToEntity(List<QuestDTO> dtos)
-    {
-        List<Quest> quests = new List<Quest>();
-        quests.AddRange(dtos.Select(quest => new Quest()));
-        return quests;
     }
 }

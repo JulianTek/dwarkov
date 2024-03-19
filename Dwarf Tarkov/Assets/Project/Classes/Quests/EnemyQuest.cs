@@ -33,4 +33,11 @@ public class EnemyQuest : Quest
     {
         AmountKilled++;
     }
+
+    public override string GetProgress()
+    {
+        string text = $"Must kill {EnemyToKill}";
+        text += $"\nAmount killed: {AmountKilled}/{AmountToKill}";
+        return text;
+    }
 }

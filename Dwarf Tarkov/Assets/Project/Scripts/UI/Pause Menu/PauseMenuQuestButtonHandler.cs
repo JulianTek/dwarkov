@@ -20,5 +20,6 @@ public class PauseMenuQuestButtonHandler : MonoBehaviour
     {
         EventChannels.UIEvents.OnSetQuestInfoTitle?.Invoke(quest.Name);
         EventChannels.UIEvents.OnSetQuestInfoDescription?.Invoke(quest.MenuDescription);
+        EventChannels.UIEvents.OnSetQuestInfoProgress?.Invoke(quest.GetProgress());
     }
 }

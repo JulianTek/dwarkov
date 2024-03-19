@@ -26,6 +26,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnRemoveFromStack += RemoveSpecificItem;
         EventChannels.PlayerEvents.OnPlayerDeath += SetLostItems;
         EventChannels.DataEvents.OnGetPlayerInventory += GetItemsAsDtos;
+        EventChannels.ItemEvents.OnGetItemCount += GetAmountOfItem;
     }
 
     private void OnDestroy()
@@ -41,6 +42,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnRemoveFromStack -= RemoveSpecificItem;
         EventChannels.PlayerEvents.OnPlayerDeath -= SetLostItems;
         EventChannels.DataEvents.OnGetPlayerInventory -= GetItemsAsDtos;
+        EventChannels.ItemEvents.OnGetItemCount -= GetAmountOfItem;
     }
 
     private void Start()

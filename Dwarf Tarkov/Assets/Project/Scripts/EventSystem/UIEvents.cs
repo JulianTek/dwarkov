@@ -46,4 +46,5 @@ public class UIEvents
 
     public StringUIEvent OnSetQuestInfoTitle;
     public StringUIEvent OnSetQuestInfoDescription;
+    public StringUIEvent OnSetQuestInfoProgress;
 }
