@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d39cb5020e3d0e45935fcfeb2d36603, type: 3}
-  m_Name: RubyOre
+  m_Name: LilyOfTheMines
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 75ba192928cc7da4ba5264d66bda71cf, type: 3}
-  Name: Ruby Ore
+  Sprite: {fileID: 21300000, guid: 4a22a7e5ad01efb4eac186c438cbb0f0, type: 3}
+  Name: Lily of the Mines
   SellPrice: 0
   Type: 1
   IsStackable: 0
   MaxStackAmount: 0
   Description: 
-  ItemYielded: {fileID: 11400000, guid: 06709f3c1435f1443b160afe0a7d8e9b, type: 2}
-  ExperienceGainedOnMine: 4
-  MineAmount: 3
-  Stage2Sprite: {fileID: 21300000, guid: ddaba3e292aec9640a033ffb37e15164, type: 3}
-  Stage3Sprite: {fileID: 21300000, guid: ba4742666cdc88440887303cbe6eb4a9, type: 3}
+  ItemYielded: {fileID: 11400000, guid: 8cfe6606f6c5d6441b1b26072e9af517, type: 2}
+  ExperienceGainedOnMine: 20
+  MineAmount: 1
+  Stage2Sprite: {fileID: 21300000, guid: 4a22a7e5ad01efb4eac186c438cbb0f0, type: 3}
+  Stage3Sprite: {fileID: 21300000, guid: 4a22a7e5ad01efb4eac186c438cbb0f0, type: 3}

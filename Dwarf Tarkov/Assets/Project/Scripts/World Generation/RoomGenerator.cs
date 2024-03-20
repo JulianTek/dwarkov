@@ -77,7 +77,6 @@ namespace WorldGeneration
             tileMapVisualizer.PaintFloorTiles(floorPositions);
             WallGenerator.PaintWallTiles(tileMapVisualizer, floorPositions);
             FindPlayerLocation(startPosition, floorPositions, WallGenerator.FindWallPositions(floorPositions, Direction.Directions));
-            oreGenerator.GenerateOres(floorPositions);
             GenerateExtractionZones(floorPositions);
         }
 

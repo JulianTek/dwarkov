@@ -8,9 +8,10 @@ public class Mineable : ItemData
 {
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public ItemData ItemYielded;
-    public float ItemAppearChanceMin;
-    public float ItemAppearChanceMax;
+    [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public int ExperienceGainedOnMine;
+    [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
+    public int MineAmount;
     [HorizontalGroup("Sprites")]
     [BoxGroup("Sprites/SpriteInfo", LabelText = "Sprite Info")]
     [PreviewField]
