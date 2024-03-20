@@ -7103,7 +7103,7 @@ MonoBehaviour:
         ExpReward: 200
         IntroText:
         - Sentence: Being part of the mountainhome is being part of the union. And
-            the union pays their union dues
+            the dwaarves in the union pays their union dues
           IsChoice: 0
         - Sentence: You need to pay 500 credits
           IsChoice: 1
@@ -7120,10 +7120,18 @@ MonoBehaviour:
           his lovely lady!
         Rewards:
         - data: {fileID: 11400000, guid: 2272e009302d1f44e8ded99fe055ea6f, type: 2}
-          amount: 100
+          amount: 400
         UnlockLevel: 2
         ExpReward: 100
-        IntroText: []
+        IntroText:
+        - Sentence: Hey buddy, look.. I need your help.. This goes under the radar
+          IsChoice: 0
+        - Sentence: Courting day is coming up, and.. Well.. I forgot to get my wife
+            something
+          IsChoice: 0
+        - Sentence: Can you get me a boquet of Beardflowers? They grow in the mines,
+            I'll pay a premium for them
+          IsChoice: 1
         CompletionText: You're a livesaver, buddy. The King will hear of your good
           deed today
         RequiredItems:
