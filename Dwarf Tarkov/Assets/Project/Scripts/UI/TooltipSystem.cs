@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TooltipSystem : MonoBehaviour
 {
-    private static TooltipSystem instance;
+    public static TooltipSystem instance;
 
     public TooltipInstance tooltip;
 

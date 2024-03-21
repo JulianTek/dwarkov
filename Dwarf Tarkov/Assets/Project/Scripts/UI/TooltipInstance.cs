@@ -40,6 +40,15 @@ public class TooltipInstance : MonoBehaviour
         float posX = mousePos.x / Screen.width;
         float posY = mousePos.y / Screen.height;
 
+        if (mousePos.x > Screen.width / 2)
+        {
+            posX += 0.5f;
+        }
+        else // Mouse is on the left side
+        {
+            posX -= 0.5f;
+        }
+
         rectTransform.pivot = new Vector2(posX, posY);
         transform.position = mousePos;
     }

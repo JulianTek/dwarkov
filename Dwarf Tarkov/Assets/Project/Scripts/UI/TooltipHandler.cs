@@ -17,4 +17,10 @@ public class TooltipHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         TooltipSystem.Hide();
     }
+
+    public void SetText(string headerText, string descText)
+    {
+        header = headerText;
+        desc = descText;
+    }
 }
