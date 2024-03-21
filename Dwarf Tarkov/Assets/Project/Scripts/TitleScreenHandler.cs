@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public class TitleScreenHandler : MonoBehaviour
 {
     [SerializeField]
+    private GameObject MainButtons;
+    [SerializeField]
     private GameObject Options;
     [SerializeField]
     private GameObject SaveSlots;
@@ -31,14 +33,22 @@ public class TitleScreenHandler : MonoBehaviour
         }
     }
 
+    public void ShowSlots()
+    {
+        SaveSlots.SetActive(true);
+        MainButtons.SetActive(false);
+    }
+
     public void ShowOptions()
     {
-
+        Options.SetActive(true);
+        MainButtons.SetActive(false);
     }
 
     public void HideOptions()
     {
-
+        Options.SetActive(false);
+        MainButtons.SetActive(true);
     }
 
     public void QuitGame()
