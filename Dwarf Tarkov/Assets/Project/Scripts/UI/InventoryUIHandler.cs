@@ -11,6 +11,7 @@ public class InventoryUIHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnInventoryOpened += ShowInventory;
         EventChannels.PlayerInputEvents.OnInventoryClosed += HideInventory;
         gameObject.SetActive(false);
+        DontDestroyOnLoad(transform.parent.gameObject);
     }
 
     private void OnDestroy()

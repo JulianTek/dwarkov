@@ -134,6 +134,7 @@ public class PlayerInputHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
         EventChannels.OutpostEvents.OnHideOutpostInventory?.Invoke();
         EventChannels.OutpostEvents.OnHideWeaponBench?.Invoke();
+        TooltipSystem.Hide();
     }
 
     private void EnableStackSplit(InputAction.CallbackContext ctx)

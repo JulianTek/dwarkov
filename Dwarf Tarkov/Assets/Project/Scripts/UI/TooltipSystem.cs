@@ -16,6 +16,7 @@ public class TooltipSystem : MonoBehaviour
         }
         instance = this;
         tooltip.gameObject.SetActive(false);
+        DontDestroyOnLoad(gameObject);
     }
 
     public static void Show(string header, string desc)
