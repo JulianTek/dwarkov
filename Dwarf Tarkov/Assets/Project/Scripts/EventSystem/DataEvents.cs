@@ -5,7 +5,7 @@ using Data;
 
 public class DataEvents
 {
-    public delegate List<ItemDTO> ItemDTOEvent();
+    public delegate List<Item> ItemEventvent();
     public delegate int IntEvent();
     public delegate int IntEventBoolParam(bool param);
     public delegate List<Quest> QuestEvent();
@@ -15,8 +15,8 @@ public class DataEvents
     public delegate WeaponData WeaponDataEvent();
     public delegate AmmoSubtype AmmoSubtypeEvent();
 
-    public ItemDTOEvent OnGetPlayerInventory;
-    public ItemDTOEvent OnGetOutpostInventory;
+    public ItemEventvent OnGetPlayerInventory;
+    public ItemEventvent OnGetOutpostInventory;
 
     public IntEvent OnGetPlayerLevel;
     public IntEvent OnGetPlayerExperience;

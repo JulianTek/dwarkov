@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class ShopkeepInventory : MonoBehaviour
 {
-    public List<ShopKeepItem> inventory = new List<ShopKeepItem>();
+    [SerializeField]
+    private List<ShopKeepItem> inventory = new List<ShopKeepItem>();
+    [HideInInspector]
+    public List<ShopKeepItem> unlockedItems = new List<ShopKeepItem>();
     // Start is called before the first frame update
     void Start()
     {
         EventChannels.UIEvents.OnPlayerSelectsItemToBuy += BuyItem;
+        UnlockItems();
     }
 
     private void OnDestroy()
@@ -41,7 +45,7 @@ public class ShopkeepInventory : MonoBehaviour
 
     public ShopKeepItem FindShopKeepItemInList(ItemData data)
     {
-        foreach (ShopKeepItem item in inventory)
+        foreach (ShopKeepItem item in unlockedItems)
         {
             if (item.Data == data)
             {
@@ -56,5 +60,16 @@ public class ShopkeepInventory : MonoBehaviour
         EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item.Data, 1);
         EventChannels.BarteringEvents.OnPlayerBuysItem?.Invoke(item.CostPerItem);
         EventChannels.UIEvents.OnCloseBarteringMenu?.Invoke();
+    }
+
+    public void UnlockItems()
+    {
+        unlockedItems.Clear();
+
+        foreach (ShopKeepItem item in inventory)
+        {
+            if (EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke() >= item.UnlockLevel)
+                unlockedItems.Add(item);
+        }
     }
 }

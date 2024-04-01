@@ -38,14 +38,12 @@ public class OutpostChestInventory : MonoBehaviour
         }
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory += RemoveItem;
-        EventChannels.DataEvents.OnGetOutpostInventory += GetItemsAsDTOs;
     }
 
     private void OnDestroy()
     {
         EventChannels.ItemEvents.OnAddItemToOutpostInventory -= AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory -= RemoveItem;
-        EventChannels.DataEvents.OnGetOutpostInventory -= GetItemsAsDTOs;
     }
 
     // Update is called once per frame
@@ -120,15 +118,5 @@ public class OutpostChestInventory : MonoBehaviour
     public int GetCapacity()
     {
         return inventoryCapacity;
-    }
-
-    public List<ItemDTO> GetItemsAsDTOs()
-    {
-        List<ItemDTO> dtos = new List<ItemDTO>();
-        foreach (Item item in items)
-        {
-            dtos.Add(new ItemDTO(item));
-        }
-        return dtos;
     }
 }

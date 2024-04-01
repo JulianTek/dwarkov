@@ -15,6 +15,8 @@ public class ItemEvents
     public delegate AmmoSubtype GetAmmoTypeEvent();
     public delegate List<AmmoSubtype> GetAmmoListEvent();
     public delegate int GetItemCountEvent(ItemData data);
+    public delegate int GetIntEvent();
+    public delegate List<Item> GetItemsEvent();
 
     public ItemQuantityEvent OnAddItemToInventory;
     public ItemQuantityEvent OnRemoveItemFromInventory;
@@ -41,4 +43,7 @@ public class ItemEvents
     public ItemListEvent OnSetLostItems;
 
     public GetItemCountEvent OnGetItemCount;
+    public GetIntEvent OnGetInventoryCapacity;
+
+    public GetItemsEvent OnGetPlayerInventory;
 }

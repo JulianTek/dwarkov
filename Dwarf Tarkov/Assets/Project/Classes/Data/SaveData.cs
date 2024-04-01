@@ -63,8 +63,8 @@ namespace Data
 
             // Set all data
             GameStarted = true;
-            OutpostInventory = EventChannels.DataEvents.OnGetOutpostInventory?.Invoke();
-            PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
+            OutpostInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetOutpostInventory?.Invoke());
+            PlayerInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetPlayerInventory?.Invoke());
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
             PlayerQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
@@ -89,8 +89,8 @@ namespace Data
             // implement quest logic later
 
             // Convert items to DTOs
-            PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
-            OutpostInventory = EventChannels.DataEvents.OnGetOutpostInventory?.Invoke();
+            PlayerInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetPlayerInventory?.Invoke());
+            OutpostInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetOutpostInventory?.Invoke());
 
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
@@ -112,7 +112,7 @@ namespace Data
             // Set data that can be accessed in the mines
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
-            PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
+            PlayerInventory = DTOConverter.ConvertItemListToDTOList((EventChannels.DataEvents.OnGetPlayerInventory?.Invoke()));
             PlayerQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
             PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
             SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());

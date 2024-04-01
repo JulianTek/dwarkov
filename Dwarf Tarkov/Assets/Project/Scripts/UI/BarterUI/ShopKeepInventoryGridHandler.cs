@@ -35,7 +35,7 @@ public class ShopKeepInventoryGridHandler : MonoBehaviour
     {
         if (slots.Count > 0)
             ClearSlots();
-        foreach (ShopKeepItem item in currentShopKeep.inventory)
+        foreach (ShopKeepItem item in currentShopKeep.unlockedItems)
         {
             GameObject itemSlot = Instantiate(slot, transform);
             itemSlot.GetComponent<ShopKeepInventorySlotHandler>().SetSlot(item);
