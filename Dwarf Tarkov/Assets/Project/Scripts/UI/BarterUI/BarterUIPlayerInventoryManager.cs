@@ -16,6 +16,8 @@ public class BarterUIPlayerInventoryManager : MonoBehaviour
             GameObject slot = Instantiate(inventorySlot, transform);
             inventorySlots.Add(slot);
             slot.SetActive(true);
+            // really sloppy way to force the inventory to update at the beginning of the game
+            UpdateInventory(new ShopkeepInventory());
         }
     }
 

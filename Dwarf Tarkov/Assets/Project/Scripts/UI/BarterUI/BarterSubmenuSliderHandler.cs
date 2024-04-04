@@ -35,7 +35,11 @@ public class BarterSubmenuSliderHandler : MonoBehaviour
     {
         EventChannels.BarteringEvents.OnPlayerMovesQuantityToSellbox?.Invoke(item, (int)slider.value);
         EventChannels.UIEvents.OnHideSubmenu?.Invoke();
+        // i know that if you have multiple stacks of the same item it will just remove it from the first stack. i will probably fix it sometime
         EventChannels.ItemEvents.OnRemoveItemFromInventory(item, (int)slider.value);
+        // really sloppy way to do this, "opens" the bartering menu which will in turn also update the numbers in the player inventory. might improve someday
+        EventChannels.UIEvents.OnOpenBarteringMenu?.Invoke(new ShopkeepInventory());
+        ResetSlider();
     }
 
     public void SetText()
@@ -43,5 +47,10 @@ public class BarterSubmenuSliderHandler : MonoBehaviour
         if (!amountText.enabled)
             amountText.enabled = true;
         amountText.SetText(slider.value.ToString());
+    }
+
+    private void ResetSlider()
+    {
+        slider.value = 0;
     }
 }
