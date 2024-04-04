@@ -5,10 +5,17 @@ using EventSystem;
 
 public class OutpostStorageGridHandler : MonoBehaviour
 {
+
     [SerializeField]
     private GameObject inventorySlot;
     private List<GameObject> inventorySlots = new List<GameObject>();
     private OutpostChestInventory inventory;
+
+    private void Awake()
+    {
+        EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateInventory;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

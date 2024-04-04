@@ -25,7 +25,10 @@ public static class DTOConverter
         List<ItemData> items = new List<ItemData>();
         foreach (ItemDataDTO dto in dtos)
         {
-            items.Add(ConvertItemDataDTOToItemData(dto));
+            if (dto is AmmoSubtypeDTO)
+                items.Add(ConvertSubtypeDTOToSubtype(dto as AmmoSubtypeDTO));
+            else
+                items.Add(ConvertItemDataDTOToItemData(dto));
         }
         return items;
     }
@@ -35,7 +38,10 @@ public static class DTOConverter
         List<ItemDataDTO> dtos = new List<ItemDataDTO>();
         foreach (ItemData item in items)
         {
-            dtos.Add(ConvertItemDataToDTO(item));
+            if (item is AmmoSubtype)
+                dtos.Add(ConvertSubtypeToDTO(item as AmmoSubtype));
+            else
+                dtos.Add(ConvertItemDataToDTO(item));
         }
         return dtos;
     }
@@ -103,5 +109,10 @@ public static class DTOConverter
     public static AmmoSubtypeDTO ConvertSubtypeToDTO(AmmoSubtype subtype)
     {
         return new AmmoSubtypeDTO(subtype);
+    }
+
+    public static AmmoSubtype ConvertSubtypeDTOToSubtype(AmmoSubtypeDTO dto)
+    {
+        return EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(dto.Name);
     }
 }

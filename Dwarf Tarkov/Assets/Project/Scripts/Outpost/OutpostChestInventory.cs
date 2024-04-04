@@ -10,6 +10,12 @@ public class OutpostChestInventory : MonoBehaviour
     private int inventoryCapacity = 30;
     [SerializeField]
     private List<Item> items;
+
+    private void Awake()
+    {
+        EventChannels.DataEvents.OnGetOutpostInventory += GetItems;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +50,7 @@ public class OutpostChestInventory : MonoBehaviour
     {
         EventChannels.ItemEvents.OnAddItemToOutpostInventory -= AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory -= RemoveItem;
+        EventChannels.DataEvents.OnGetOutpostInventory -= GetItems;
     }
 
     // Update is called once per frame
