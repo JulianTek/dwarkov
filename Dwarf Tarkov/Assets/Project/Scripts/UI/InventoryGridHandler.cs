@@ -11,9 +11,10 @@ public class InventoryGridHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        FindInventory();
         EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
         EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
+        EventChannels.ItemEvents.OnFindPlayerInventory += FindInventory;
 
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
@@ -28,6 +29,7 @@ public class InventoryGridHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnInventoryOpened -= UpdateInventory;
         EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
         EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
+        EventChannels.ItemEvents.OnFindPlayerInventory -= FindInventory;
     }
     void UpdateInventory()
     {
@@ -49,5 +51,10 @@ public class InventoryGridHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void FindInventory()
+    {
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
     }
 }

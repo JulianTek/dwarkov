@@ -46,4 +46,6 @@ public class ItemEvents
     public GetIntEvent OnGetInventoryCapacity;
 
     public GetItemsEvent OnGetPlayerInventory;
+
+    public InventoryEvent OnFindPlayerInventory;
 }
