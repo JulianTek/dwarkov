@@ -31,10 +31,4 @@ public class SellboxSlotHandler : MonoBehaviour
     {
         return item;
     }
-
-    public void RemoveItem()
-    {
-        EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item.data, item.amount);
-        ClearSlot();
-    }
 }

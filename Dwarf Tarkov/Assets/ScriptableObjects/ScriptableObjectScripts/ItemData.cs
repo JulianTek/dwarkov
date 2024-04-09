@@ -13,6 +13,8 @@ public class ItemData : ScriptableObject
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public string Name;
     [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
+    public int BuyPrice;
+    [BoxGroup("Split/BasicInfo", LabelText = "Basic Info")]
     public int SellPrice;
     [BoxGroup("Split/TypeInfo", LabelText = "Type info")]
     [EnumPaging]

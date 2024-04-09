@@ -13,10 +13,12 @@ public class ShopKeepInventoryGridHandler : MonoBehaviour
     private ShopkeepInventory currentShopKeep;
     [SerializeField]
     private GameObject UI;
+    private bool slotsInitialized;
 
     private void Start()
     {
         EventChannels.UIEvents.OnOpenBarteringMenu += OpenShop;
+        slotsInitialized = false;
     }
 
     private void OnDestroy()
@@ -26,8 +28,10 @@ public class ShopKeepInventoryGridHandler : MonoBehaviour
 
     void OpenShop(ShopkeepInventory inventory)
     {
-        currentShopKeep = inventory;
         UI.SetActive(true);
+        if (slotsInitialized)
+            return;
+        currentShopKeep = inventory;
         InitSlots();
     }
 
@@ -41,13 +45,14 @@ public class ShopKeepInventoryGridHandler : MonoBehaviour
             itemSlot.GetComponent<ShopKeepInventorySlotHandler>().SetSlot(item);
             slots.Add(itemSlot); 
         }
+        slotsInitialized = true;
     }
 
     private void ClearSlots()
     {
         foreach (GameObject slot in slots)
         {
-            GameObject.Destroy(slot);
+            Destroy(slot);
         }
         slots.Clear();
     }

@@ -67,18 +67,22 @@ public class SellboxHandler : MonoBehaviour
     {
         // Get the item from the slot the player clicked
         Item item = slot.GetComponent<SellboxSlotHandler>().GetItem();
-        // safeguarding, if the itemsinbox list contains the item
-        if (itemsInBox.Contains(item))
+        // safeguarding, if item isnt null
+        if (item != null)
         {
             // clear the slot
             slots[slots.IndexOf(slot)].GetComponent<SellboxSlotHandler>().ClearSlot();
             // remove the item from the list
             itemsInBox.Remove(item);
+            // add the item back to the player's inventory
+            EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item.data, item.amount);
             currentAmountInBox--;
             // lower value
             value -= item.data.SellPrice * item.amount;
             // update the value text
             valueText.text = $"Value: {value} credits";
+            // force the player's inventory UI to update
+            EventChannels.UIEvents.OnOpenBarteringMenu?.Invoke(new ShopkeepInventory()) ;
         }
 
     }
@@ -112,5 +116,23 @@ public class SellboxHandler : MonoBehaviour
         }
         valueText.text = $"Value: 0 credits";
         EventChannels.UIEvents.OnCloseBarteringMenu?.Invoke();
+    }
+
+    public void ClearSellbox()
+    {
+        foreach (GameObject slot in slots)
+        {
+            RemoveItemFromBox(slot);
+        }
+    }
+
+    public bool CheckIfItemInList(ItemData data)
+    {
+        foreach (Item item in itemsInBox)
+        {
+            if (data == item.data)
+                return true;
+        }
+        return false;
     }
 }

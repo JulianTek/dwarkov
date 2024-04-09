@@ -37,8 +37,10 @@ public class UIEvents
     public UIEvent OnShowNoAmmoTypes;
     public UIEvent OnHideNoAmmoTypes;
 
-    public UIEvent OnShowSubmenu;
-    public UIEvent OnHideSubmenu;
+    public UIEvent OnShowSellSubmenu;
+    public UIEvent OnHideSellSubmenu;
+    public UIEvent OnShowBuySubmenu;
+    public UIEvent OnHideBuySubmenu;
 
     public XPPointsEvent OnSetXPPoints;
 

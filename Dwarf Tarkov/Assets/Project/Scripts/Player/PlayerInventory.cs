@@ -29,6 +29,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnGetItemCount += GetAmountOfItem;
         EventChannels.ItemEvents.OnGetPlayerInventory += GetItems;
         EventChannels.ItemEvents.OnGetInventoryCapacity += GetCapacity;
+        EventChannels.BarteringEvents.OnPlayerBuysItem += BuyItem;
     }
 
     private void OnDestroy()
@@ -47,6 +48,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnGetItemCount -= GetAmountOfItem;
         EventChannels.ItemEvents.OnGetPlayerInventory -= GetItems;
         EventChannels.ItemEvents.OnGetInventoryCapacity -= GetCapacity;
+        EventChannels.BarteringEvents.OnPlayerBuysItem -= BuyItem;
     }
 
     private void Start()
@@ -79,7 +81,7 @@ public class PlayerInventory : MonoBehaviour
                     if (item == itemInInventory.data)
                     {
                         // if the adding the amount does not exceed the max stack amount, add it to the stack
-                        if (itemInInventory.amount + amount < item.MaxStackAmount)
+                        if (itemInInventory.amount + amount <= item.MaxStackAmount)
                         {
                             itemInInventory.amount += amount;
                         }
