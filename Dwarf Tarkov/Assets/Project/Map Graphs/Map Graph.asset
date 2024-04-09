@@ -178,17 +178,17 @@ MonoBehaviour:
     typeNames: []
   notes: []
   referenceNodeConnections:
-  - rid: 364207828983087122
-  - rid: 364207828983087123
-  - rid: 364207828983087124
+  - rid: 4853075224508235785
+  - rid: 4853075224508235786
+  - rid: 4853075224508235787
   referenceNodes:
-  - rid: 364207828983087125
-  - rid: 364207828983087126
-  - rid: 364207828983087127
+  - rid: 4853075224508235788
+  - rid: 4853075224508235789
+  - rid: 4853075224508235790
   groupNodes:
-  - rid: 364207828983087128
-  - rid: 364207828983087129
-  - rid: 364207828983087130
+  - rid: 4853075224508235791
+  - rid: 4853075224508235792
+  - rid: 4853075224508235793
   canBeAddedAsNode: 0
   nodePath: Graphs
   serializedCustomPreviewBehaviourType: 
@@ -1273,143 +1273,6 @@ MonoBehaviour:
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts:
         - rid: 334538550927425676
-    - rid: 364207828983087122
-      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        inPort:
-          rid: 956839176363049033
-        outPort:
-          rid: 956839176363049070
-        referenceNode:
-          rid: 364207828983087125
-    - rid: 364207828983087123
-      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        inPort:
-          rid: 334538550927425595
-        outPort:
-          rid: 956839176363049070
-        referenceNode:
-          rid: 364207828983087126
-    - rid: 364207828983087124
-      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        inPort:
-          rid: 334538550927425692
-        outPort:
-          rid: 956839176363049070
-        referenceNode:
-          rid: 364207828983087127
-    - rid: 364207828983087125
-      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        position:
-          serializedVersion: 2
-          x: 1537
-          y: -440
-          width: 208
-          height: 277
-        providerNode:
-          rid: 956839176363049065
-    - rid: 364207828983087126
-      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        position:
-          serializedVersion: 2
-          x: 1282
-          y: -1786
-          width: 208
-          height: 277
-        providerNode:
-          rid: 956839176363049065
-    - rid: 364207828983087127
-      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        position:
-          serializedVersion: 2
-          x: 1282
-          y: -1085
-          width: 208
-          height: 277
-        providerNode:
-          rid: 956839176363049065
-    - rid: 364207828983087128
-      type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        nodes:
-        - rid: 956839176363049022
-        - rid: 956839176363049029
-        - rid: 956839176363049041
-        - rid: 956839176363049043
-        - rid: 956839176363049045
-        - rid: 956839176363049047
-        - rid: 956839176363049054
-        - rid: 956839176363049075
-        - rid: 7546081963842732034
-        referenceNodes:
-        - rid: 364207828983087125
-        title: Spawn player in random location
-        position:
-          serializedVersion: 2
-          x: 797
-          y: -598.99994
-          width: 1985
-          height: 495
-    - rid: 364207828983087129
-      type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        nodes:
-        - rid: 956839079191773184
-        - rid: 956839079191773191
-        - rid: 956839079191773195
-        - rid: 956839079191773207
-        - rid: 956839079191773213
-        - rid: 956839079191773215
-        - rid: 956839079191773224
-        - rid: 956839079191773226
-        - rid: 956839079191773233
-        - rid: 956839131447558209
-        - rid: 956839131447558217
-        - rid: 956839131447558219
-        - rid: 956839131447558231
-        - rid: 956839131447558241
-        - rid: 956839131447558243
-        - rid: 956839131447558257
-        - rid: 956839131447558267
-        - rid: 956839131447558272
-        - rid: 956839131447558280
-        - rid: 956839176363049065
-        - rid: 956839131447558239
-        referenceNodes: []
-        title: Generate map
-        position:
-          serializedVersion: 2
-          x: 818.9999
-          y: 8.000046
-          width: 4339
-          height: 794
-    - rid: 364207828983087130
-      type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        nodes:
-        - rid: 334538550927425582
-        - rid: 334538550927425589
-        - rid: 334538550927425607
-        - rid: 334538550927425609
-        - rid: 334538550927425616
-        - rid: 334538550927425618
-        - rid: 334538550927425605
-        - rid: 334538550927425591
-        - rid: 334538550927425620
-        referenceNodes:
-        - rid: 364207828983087126
-        title: Generate Extraction spots
-        position:
-          serializedVersion: 2
-          x: 727.1715
-          y: -1989.7852
-          width: 2070
-          height: 506
     - rid: 956839079191773184
       type: {class: EmptyTextureNode, ns: InsaneScatterbrain.MapGraph, asm: InsaneScatterbrain.MapGraph}
       data:
@@ -3379,6 +3242,143 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
         connectedInPorts:
         - rid: 956839176363049025
+    - rid: 4853075224508235785
+      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        inPort:
+          rid: 956839176363049033
+        outPort:
+          rid: 956839176363049070
+        referenceNode:
+          rid: 4853075224508235788
+    - rid: 4853075224508235786
+      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        inPort:
+          rid: 334538550927425595
+        outPort:
+          rid: 956839176363049070
+        referenceNode:
+          rid: 4853075224508235789
+    - rid: 4853075224508235787
+      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        inPort:
+          rid: 334538550927425692
+        outPort:
+          rid: 956839176363049070
+        referenceNode:
+          rid: 4853075224508235790
+    - rid: 4853075224508235788
+      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        position:
+          serializedVersion: 2
+          x: 1537
+          y: -440
+          width: 208
+          height: 277
+        providerNode:
+          rid: 956839176363049065
+    - rid: 4853075224508235789
+      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        position:
+          serializedVersion: 2
+          x: 1282
+          y: -1786
+          width: 208
+          height: 277
+        providerNode:
+          rid: 956839176363049065
+    - rid: 4853075224508235790
+      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        position:
+          serializedVersion: 2
+          x: 1282
+          y: -1085
+          width: 208
+          height: 277
+        providerNode:
+          rid: 956839176363049065
+    - rid: 4853075224508235791
+      type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        nodes:
+        - rid: 956839176363049022
+        - rid: 956839176363049029
+        - rid: 956839176363049041
+        - rid: 956839176363049043
+        - rid: 956839176363049045
+        - rid: 956839176363049047
+        - rid: 956839176363049054
+        - rid: 956839176363049075
+        - rid: 7546081963842732034
+        referenceNodes:
+        - rid: 4853075224508235788
+        title: Spawn player in random location
+        position:
+          serializedVersion: 2
+          x: 797
+          y: -598.99994
+          width: 1985
+          height: 495
+    - rid: 4853075224508235792
+      type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        nodes:
+        - rid: 956839079191773184
+        - rid: 956839079191773191
+        - rid: 956839079191773195
+        - rid: 956839079191773207
+        - rid: 956839079191773213
+        - rid: 956839079191773215
+        - rid: 956839079191773224
+        - rid: 956839079191773226
+        - rid: 956839079191773233
+        - rid: 956839131447558209
+        - rid: 956839131447558217
+        - rid: 956839131447558219
+        - rid: 956839131447558231
+        - rid: 956839131447558241
+        - rid: 956839131447558243
+        - rid: 956839131447558257
+        - rid: 956839131447558267
+        - rid: 956839131447558272
+        - rid: 956839131447558280
+        - rid: 956839176363049065
+        - rid: 956839131447558239
+        referenceNodes: []
+        title: Generate map
+        position:
+          serializedVersion: 2
+          x: 818.9999
+          y: 8.000046
+          width: 4339
+          height: 794
+    - rid: 4853075224508235793
+      type: {class: GroupNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        nodes:
+        - rid: 334538550927425582
+        - rid: 334538550927425589
+        - rid: 334538550927425607
+        - rid: 334538550927425609
+        - rid: 334538550927425616
+        - rid: 334538550927425618
+        - rid: 334538550927425605
+        - rid: 334538550927425591
+        - rid: 334538550927425620
+        referenceNodes:
+        - rid: 4853075224508235789
+        title: Generate Extraction spots
+        position:
+          serializedVersion: 2
+          x: 727.1715
+          y: -1989.7852
+          width: 2070
+          height: 506
     - rid: 7546081533871783936
       type: {class: InputNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
       data:
