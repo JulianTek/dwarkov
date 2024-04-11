@@ -10,6 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField]
     private InputActionAsset _actionAsset;
     private bool isPaused;
+    private Vector2 moveIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,16 +34,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void Update()
     {
-
+        if (!isPaused)
+            EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(moveIndex);
     }
 
     public void Move(InputAction.CallbackContext ctx)
     {
-        if (!isPaused)
-        {
-            Vector2 movementVector = ctx.ReadValue<Vector2>();
-            EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(movementVector);
-        }
+       moveIndex = ctx.ReadValue<Vector2>();
     }
 
     public void Aim(InputAction.CallbackContext ctx)

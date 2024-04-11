@@ -16,6 +16,14 @@ public class TitleScreenHandler : MonoBehaviour
     [SerializeField]
     private GameObject SaveSlots;
 
+    [SerializeField]
+    private GameObject VideoOptions;
+    [SerializeField]
+    private GameObject InputOptions;
+    [SerializeField]
+    private GameObject VideoOptionsButton;
+    [SerializeField]
+    private GameObject InputOptionsButton;
     private void Start()
     {
         for (int i = 0; i < SaveSlots.transform.childCount; i++)
@@ -49,6 +57,8 @@ public class TitleScreenHandler : MonoBehaviour
     {
         Options.SetActive(false);
         MainButtons.SetActive(true);
+        VideoOptions.SetActive(false);
+        InputOptions.SetActive(false);
     }
 
     public void QuitGame()
@@ -89,5 +99,27 @@ public class TitleScreenHandler : MonoBehaviour
     {
         DataSaver<SaveData>.Delete($"save_{slotNumber}");
         Start();
+    }
+
+    public void ShowVideoSettings()
+    {
+        VideoOptions.SetActive(true);
+    }
+
+    public void ShowInputSettings()
+    {
+        InputOptions.SetActive(true);
+    }
+
+    public void HideOptionButtons()
+    {
+        VideoOptionsButton.SetActive(false);
+        InputOptionsButton.SetActive(false);
+    }
+
+    public void ShowOptionButtons()
+    {
+        VideoOptionsButton.SetActive(true);
+        InputOptionsButton.SetActive(true);
     }
 }
