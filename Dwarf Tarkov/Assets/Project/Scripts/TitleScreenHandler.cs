@@ -24,6 +24,9 @@ public class TitleScreenHandler : MonoBehaviour
     private GameObject VideoOptionsButton;
     [SerializeField]
     private GameObject InputOptionsButton;
+
+    [SerializeField]
+    private GameObject Credits;
     private void Start()
     {
         for (int i = 0; i < SaveSlots.transform.childCount; i++)
@@ -121,5 +124,17 @@ public class TitleScreenHandler : MonoBehaviour
     {
         VideoOptionsButton.SetActive(true);
         InputOptionsButton.SetActive(true);
+    }
+
+    public void ShowCredits()
+    {
+        MainButtons.SetActive(false);
+        Credits.SetActive(true);
+    }
+
+    public void HideCredits()
+    {
+        MainButtons.SetActive(true);
+        Credits.SetActive(false);
     }
 }
