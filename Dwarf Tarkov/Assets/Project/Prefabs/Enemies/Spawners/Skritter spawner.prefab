@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3237358657703799789}
   - component: {fileID: 1134106589741468832}
   m_Layer: 0
-  m_Name: Enemy Spawner
+  m_Name: Skritter spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dfb1ddfb537464bba575968216d1e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 4615416272692253855, guid: d030f1160e251b645aa30d713eae6bda,
+  enemyToSpawn: {fileID: 4615416272692253855, guid: fcd6764ed7c0ed7449e1334de2a9c797,
     type: 3}
   maxInterval: 10
   cooldownTimer: 5
