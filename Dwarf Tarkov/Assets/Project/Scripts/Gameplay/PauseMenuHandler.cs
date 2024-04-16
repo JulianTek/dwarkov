@@ -15,6 +15,19 @@ public class PauseMenuHandler : MonoBehaviour
     private GameObject mainButtons;
     [SerializeField]
     private GameObject questMenu;
+    [SerializeField]
+    private GameObject options;
+
+    [Header("Options")]
+    [SerializeField]
+    private GameObject inputSettings;
+    [SerializeField]
+    private GameObject videoSettings;
+    [SerializeField]
+    private GameObject inputSettingsButton;
+    [SerializeField]
+    private GameObject videoSettingsButton;
+
 
     private bool isPaused;
     // Start is called before the first frame update
@@ -81,5 +94,44 @@ public class PauseMenuHandler : MonoBehaviour
     private void ToggleMainButtons(bool isVisible)
     {
         mainButtons.SetActive(isVisible);
+    }
+
+    public void ShowOptions()
+    {
+        options.SetActive(true);
+        ToggleMainButtons(false);
+        ShowButtons();
+    }
+
+    public void HideOptions()
+    {
+        options.SetActive(false);
+        videoSettings.SetActive(false);
+        inputSettings.SetActive(false);
+        ToggleMainButtons(true);
+    }
+
+    public void ShowInputSettings()
+    {
+        inputSettings.SetActive(true);
+        HideButtons();
+    }
+
+    public void ShowVideoSettings()
+    {
+        videoSettings.SetActive(true);
+        HideButtons();
+    }
+
+    public void HideButtons()
+    {
+        inputSettingsButton.SetActive(false);
+        videoSettingsButton.SetActive(false);
+    }
+
+    void ShowButtons()
+    {
+        inputSettingsButton.SetActive(true);
+        videoSettingsButton.SetActive(true);
     }
 }
