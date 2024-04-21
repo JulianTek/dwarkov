@@ -20,15 +20,16 @@ MonoBehaviour:
   IsPrimary: 0
   MagCapacity: 6
   ReloadTime: 2
+  ShellReload: 0
   Sprite: {fileID: 21300000, guid: 1ea6a23c0be663f4da3933fffc6ec7cf, type: 3}
   WeaponEmptySprite: {fileID: 21300000, guid: d882569994140694ba0f456f2ff70fc1, type: 3}
   MagazineSprite: {fileID: 0}
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 3
   AmountOfBullets: 1
-  firingEventName: Weapon_Fire_AG377
-  ammoEmptyFiringEventName: Weapon_Empty_AG377
-  reloadEventName: Weapon_Reload_RG377
+  firingEventName: Weap_Fire_AG377
+  ammoEmptyFiringEventName: Weap_Empty_AG377
+  reloadEventName: Weap_Reload_RG377
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

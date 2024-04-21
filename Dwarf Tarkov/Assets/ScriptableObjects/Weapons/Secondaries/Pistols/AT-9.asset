@@ -19,15 +19,16 @@ MonoBehaviour:
   IsPrimary: 0
   MagCapacity: 20
   ReloadTime: 2
+  ShellReload: 0
   Sprite: {fileID: 21300000, guid: 5811c9271a7742f4e9ceb2eb16d247ed, type: 3}
   WeaponEmptySprite: {fileID: 21300000, guid: 1c10006eec9624d4d97f7d879dc9db50, type: 3}
   MagazineSprite: {fileID: 0}
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 6
   AmountOfBullets: 1
-  firingEventName: Weapon_Fire_AT-9
-  ammoEmptyFiringEventName: Weapon_Empty_AT9
-  reloadEventName: Weapon_Empty_AT9
+  firingEventName: Weap_Fire_AT9
+  ammoEmptyFiringEventName: Weap_Empty_AT9
+  reloadEventName: Weap_Reload_AT9
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

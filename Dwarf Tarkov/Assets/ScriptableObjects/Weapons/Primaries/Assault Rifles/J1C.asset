@@ -20,15 +20,16 @@ MonoBehaviour:
   IsPrimary: 1
   MagCapacity: 25
   ReloadTime: 2
+  ShellReload: 0
   Sprite: {fileID: 21300000, guid: bb8d46c22e548a34386eb8d63a556ac8, type: 3}
   WeaponEmptySprite: {fileID: 21300000, guid: 39e44f287e1452649b3abcf0ef3ca386, type: 3}
   MagazineSprite: {fileID: 21300000, guid: 6eedc7ffa976efb4f9f436a6e3afdb59, type: 3}
   CaseSprite: {fileID: 0}
   BaseSpreadAngle: 15
   AmountOfBullets: 1
-  firingEventName: Weapon_Fire_J1C
-  ammoEmptyFiringEventName: Weapon_Empty_J1C
-  reloadEventName: Weapon_Reload_J1C
+  firingEventName: Weap_Fire_J1C
+  ammoEmptyFiringEventName: Weap_Empty_J1C
+  reloadEventName: Weap_Reload_J1C
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0
