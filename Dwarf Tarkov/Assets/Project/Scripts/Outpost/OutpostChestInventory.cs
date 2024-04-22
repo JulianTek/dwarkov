@@ -37,7 +37,9 @@ public class OutpostChestInventory : MonoBehaviour
             {
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("6.11x54mm Green-tip"), 99),
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("14G Buckshot"), 99),
-                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("9.22 DWS FMJ"), 99)
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("9.22 DWS FMJ"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("8.75x20 FMJ"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(".377 FMJ"), 99)
             };
             }
 

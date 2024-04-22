@@ -29,7 +29,7 @@ MonoBehaviour:
   AmountOfBullets: 1
   firingEventName: Weap_Fire_AG377
   ammoEmptyFiringEventName: Weap_Empty_AG377
-  reloadEventName: Weap_Reload_RG377
+  reloadEventName: Weap_Reload_AG377
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0
