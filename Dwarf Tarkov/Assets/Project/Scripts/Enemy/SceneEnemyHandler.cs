@@ -35,7 +35,7 @@ public class SceneEnemyHandler : MonoBehaviour
         currentAmountOfEnemies++;
     }
 
-    void RemoveFromCounter()
+    void RemoveFromCounter(GameObject go)
     {
         currentAmountOfEnemies--;
         EventChannels.EnemyEvents.OnEnemyDeath -= RemoveFromCounter;

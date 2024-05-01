@@ -22,6 +22,7 @@ public class EnemyAttackHandler : MonoBehaviour
     {
         if (other.GetComponent<PlayerInputHandler>())
         {
+            EventChannels.EnemyEvents.OnEnemyAttack?.Invoke(10f);
             transform.parent.GetComponent<EnemyStateMachine>().SwitchState<AttackState>(transform.parent.gameObject);
         }
     }

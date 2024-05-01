@@ -24,7 +24,7 @@ public class EnemyEvents
     public DamageEvent OnEnemyAttack;
     public DamageEvent OnEnemyTakesDamage;
 
-    public EnemyEvent OnEnemyDeath;
+    public EnemyObjectEvent OnEnemyDeath;
     public EnemyStringEvent OnEnemyDeathWithName;
 
     public EnemySpawnEvent OnSpawnEnemy;
