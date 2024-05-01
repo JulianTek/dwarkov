@@ -27,8 +27,8 @@ MonoBehaviour:
   BaseSpreadAngle: 6
   AmountOfBullets: 1
   firingEventName: Weap_Fire_VT9
-  ammoEmptyFiringEventName: Weap_Reload_VT9
-  reloadEventName: Weap_Empty_VT9
+  ammoEmptyFiringEventName: Weap_Empty_VT9
+  reloadEventName: Weap_Reload_VT9
   firingEventRadius: 0
   ammoEmptyEventRadius: 0
   reloadEventRadius: 0

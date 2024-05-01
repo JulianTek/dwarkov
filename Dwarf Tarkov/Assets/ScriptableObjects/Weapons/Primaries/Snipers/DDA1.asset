@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DDA1
   m_EditorClassIdentifier: 
   IsAutoFire: 0
-  RateOfFire: 4
+  RateOfFire: 6
   AmmoSubtypes:
-  - {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
+  - {fileID: 11400000, guid: 49b78bcca3f5af64b9b186c76d104e44, type: 2}
   IsPrimary: 1
   MagCapacity: 5
   ReloadTime: 4.2

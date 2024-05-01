@@ -40,7 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void Move(InputAction.CallbackContext ctx)
     {
-       moveIndex = ctx.ReadValue<Vector2>();
+        moveIndex = ctx.ReadValue<Vector2>();
     }
 
     public void Aim(InputAction.CallbackContext ctx)
@@ -71,7 +71,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void Mine(InputAction.CallbackContext ctx)
     {
-        EventChannels.PlayerInputEvents.OnPlayerMine?.Invoke();
+        if (ctx.started)
+            EventChannels.PlayerInputEvents.OnPlayerMine?.Invoke();
     }
 
     public void Sprint(InputAction.CallbackContext ctx)

@@ -21,11 +21,14 @@ MonoBehaviour:
     elements:
     - id: c2985746-f5d5-4f40-8cae-6d9912486edd
       name: Enemy Spawner
-      isWeightEnabled: 0
+      isWeightEnabled: 1
       totalWeight: 1
       prefabs:
-      - weight: 1
+      - weight: 0.5
         prefab: {fileID: 9200375584068903498, guid: 3e26e0c8c970dc048976cba5b85cd51c,
+          type: 3}
+      - weight: 0.5
+        prefab: {fileID: 9200375584068903498, guid: d2578687c8075ac45b2ec02d62dc5cd2,
           type: 3}
     orderedIds:
     - c2985746-f5d5-4f40-8cae-6d9912486edd
