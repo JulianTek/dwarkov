@@ -70,25 +70,33 @@ public class EnemyFieldOfView : MonoBehaviour
         {
             Vector3 vertex;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, GetVectorFromAngle(angle), viewDistance, layerMask);
-
+            var currentState = GetCurrentState();
             if (!hit.collider)
             {
                 vertex = transform.localPosition + GetVectorFromAngle(angle) * viewDistance;
+                if (currentState.GetType() == typeof(AttackState)) 
+                {
+                    transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>();
+                }
             }
             else
             {
                 if (hit.transform.gameObject.GetComponent<PlayerInputHandler>())
                 {
-                    var currentState = GetComponentInParent<EnemyStateMachine>().GetGameState().GetType();
-                    if (currentState == typeof(SpottedPlayerState) || currentState == typeof(WanderState))
+                    if (currentState.GetType() == typeof(SpottedPlayerState) || currentState.GetType() == typeof(WanderState))
                     {
-                        transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(transform.parent.gameObject);
+                        transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>();
                     }
                     EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point, transform.parent.gameObject);
                 }
                 vertex = hit.point.normalized;
             }
         }
+    }
+
+    private GameState GetCurrentState()
+    {
+        return GetComponentInParent<EnemyStateMachine>().GetGameState();
     }
 
     public float GetAngleFromVectorFloat(Vector3 dir)

@@ -16,6 +16,7 @@ namespace AI
         public override void Start()
         {
             timeLeft = spotCooldown;
+            Debug.Log(owner);
         }
 
         public override void Stop()
@@ -28,6 +29,7 @@ namespace AI
             timeLeft -= Time.deltaTime;
             if (timeLeft > 0)
                 return;
+            EventChannels.EnemyEvents.OnEnemyLoseInterest?.Invoke(owner);
         }
     }
 }

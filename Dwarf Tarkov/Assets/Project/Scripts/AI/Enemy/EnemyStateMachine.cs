@@ -10,7 +10,8 @@ namespace AI
     {
         public void Start()
         {
-            currentState = new WanderState(gameObject);
+            owner = gameObject;
+            currentState = new WanderState(owner);
         }
     }
 }

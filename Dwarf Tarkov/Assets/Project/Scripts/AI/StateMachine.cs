@@ -10,13 +10,14 @@ namespace AI
         protected GameState currentState;
         protected GameState nextState;
         protected bool exitStateNextFrame;
+        protected GameObject owner;
 
         private void SwitchState(GameState state)
         {
             exitStateNextFrame = true;
             nextState = state;
         }
-        public void SwitchState<T>(GameObject owner) where T : GameState
+        public void SwitchState<T>() where T : GameState
         {
             // Switches state to a new state. Use new <x>() where <x> is one of the GameState classes
             SwitchState((T)Activator.CreateInstance(typeof(T), owner));

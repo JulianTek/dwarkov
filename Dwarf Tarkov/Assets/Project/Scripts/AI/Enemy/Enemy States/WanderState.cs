@@ -14,6 +14,7 @@ namespace AI
 
         public override void Start()
         {
+            Debug.Log(owner);
             wanderCooldown = Random.Range(1f, 7f);
         }
 

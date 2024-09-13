@@ -28,4 +28,6 @@ public class EnemyEvents
     public EnemyStringEvent OnEnemyDeathWithName;
 
     public EnemySpawnEvent OnSpawnEnemy;
+
+    public EnemyObjectEvent OnEnemyLoseInterest;
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using UnityEngine.AI;
+using AI;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -17,16 +18,18 @@ public class EnemyMovement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         fieldOfView = GetComponentInChildren<EnemyFieldOfView>();
-        agent.updateRotation = false; 
+        agent.updateRotation = false;
         agent.updateUpAxis = false;
         EventChannels.EnemyEvents.OnPlayerSpotted += MoveToPosition;
         EventChannels.EnemyEvents.OnEnemyWander += Wander;
+        EventChannels.EnemyEvents.OnEnemyLoseInterest += LoseInterest;
     }
 
     private void OnDestroy()
     {
         EventChannels.EnemyEvents.OnPlayerSpotted -= MoveToPosition;
         EventChannels.EnemyEvents.OnEnemyWander -= Wander;
+        EventChannels.EnemyEvents.OnEnemyLoseInterest -= LoseInterest;
     }
 
     // Update is called once per frame
@@ -68,6 +71,15 @@ public class EnemyMovement : MonoBehaviour
 
             fieldOfView.SetAimDirection(GetAimDir());
             fieldOfView.SetOrigin(transform.position);
+        }
+    }
+
+    void LoseInterest(GameObject go)
+    {
+        if (gameObject == go)
+        {
+            var stateMachine = transform.GetComponentInParent<EnemyStateMachine>();
+            stateMachine.SwitchState<WanderState>();
         }
     }
 
