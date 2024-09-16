@@ -8,6 +8,13 @@ namespace AI
 {
     public class EnemyStateMachine : StateMachine
     {
+        public void SwitchState<T>(Vector2 playerPos) where T: GameState, new()
+        {
+            GameState state = new SpottedPlayerState(playerPos);
+            state.SetOwner(owner);
+            SwitchState(state);
+        } 
+
         public void Start()
         {
             owner = gameObject;

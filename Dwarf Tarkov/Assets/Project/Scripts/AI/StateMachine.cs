@@ -12,15 +12,17 @@ namespace AI
         protected bool exitStateNextFrame;
         protected GameObject owner;
 
-        private void SwitchState(GameState state)
+        protected void SwitchState(GameState state)
         {
             exitStateNextFrame = true;
             nextState = state;
         }
-        public void SwitchState<T>() where T : GameState
+        public void SwitchState<T>() where T : GameState, new()
         {
             // Switches state to a new state. Use new <x>() where <x> is one of the GameState classes
-            SwitchState((T)Activator.CreateInstance(typeof(T), owner));
+            GameState state = new T();
+            state.SetOwner(owner);
+            SwitchState(state);
         }
 
         // This is the same as a monobehaviour's start/update/stop loop. Every state also has their own start/update/stop function which will be called at appropriate times

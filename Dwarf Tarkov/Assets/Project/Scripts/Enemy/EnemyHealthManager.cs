@@ -14,7 +14,6 @@ public class EnemyHealthManager : MonoBehaviour
     {
         enemyCurrentHealth = EnemyMaxHealth;
         EventChannels.EnemyEvents.OnEnemyTakesDamage += TakeDamage;
-        Debug.Log(GetEnemyName());
     }
 
     private void OnDestroy()
@@ -31,7 +30,6 @@ public class EnemyHealthManager : MonoBehaviour
     public void TakeDamage(float value)
     {
         enemyCurrentHealth -= value;
-        Debug.Log(enemyCurrentHealth);
         if (enemyCurrentHealth <= 0)
         {
             Destroy(gameObject);

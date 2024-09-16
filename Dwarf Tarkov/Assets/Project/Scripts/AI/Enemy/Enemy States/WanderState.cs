@@ -14,8 +14,8 @@ namespace AI
 
         public override void Start()
         {
-            Debug.Log(owner);
             wanderCooldown = Random.Range(1f, 7f);
+            Debug.Log($"{owner} entered wander state");
         }
 
         public override void Stop()
@@ -29,7 +29,7 @@ namespace AI
             if (wanderCooldown > 0)
                 return;
 
-            EventChannels.EnemyEvents.OnEnemyWander?.Invoke(this.owner);
+            EventChannels.EnemyEvents.OnEnemyWander?.Invoke(owner);
             wanderCooldown = Random.Range(1f, 7f);
         }
 

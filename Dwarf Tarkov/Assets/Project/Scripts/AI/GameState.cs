@@ -21,5 +21,10 @@ namespace AI
         public GameObject GetOwner() {
             return owner;
         }
+
+        public void SetOwner(GameObject owner)
+        {
+            this.owner = owner;
+        }
     }
 }

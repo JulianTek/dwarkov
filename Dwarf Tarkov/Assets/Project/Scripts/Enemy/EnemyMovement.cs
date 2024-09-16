@@ -57,6 +57,8 @@ public class EnemyMovement : MonoBehaviour
     void StopMoving()
     {
         agent.isStopped = true;
+        if (transform.GetComponentInParent<EnemyStateMachine>().GetGameState().GetType() == typeof(SpottedPlayerState))
+            LoseInterest(gameObject);
     }
 
     void Wander(GameObject go)
