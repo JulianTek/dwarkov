@@ -37,8 +37,9 @@ public class EnemyMovement : MonoBehaviour
     {
         if (positionToMoveTo != null)
         {
-            if (Vector3.Distance(transform.position, positionToMoveTo) < distanceThreshold)
+            if (transform.GetComponentInParent<EnemyStateMachine>().GetGameState().GetType() == typeof(SpottedPlayerState) && Vector3.Distance(transform.position, positionToMoveTo) < distanceThreshold)
             {
+                Debug.Log("not moving");
                 EventChannels.EnemyEvents.OnEnemyStopMoving?.Invoke();
                 StopMoving();
             }
@@ -63,6 +64,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Wander(GameObject go)
     {
+        Debug.Log(go);
         if (gameObject == go)
         {
             float xOffset = Random.Range(-2f, 2f);
@@ -70,7 +72,8 @@ public class EnemyMovement : MonoBehaviour
             Vector3 endPoint = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset);
             lastMoveDir = (transform.position - endPoint).normalized;
             agent.SetDestination(endPoint);
-
+            Debug.Log(endPoint);
+            Debug.Log(transform.position);
             fieldOfView.SetAimDirection(GetAimDir());
             fieldOfView.SetOrigin(transform.position);
         }
@@ -81,7 +84,7 @@ public class EnemyMovement : MonoBehaviour
         if (gameObject == go)
         {
             var stateMachine = transform.GetComponentInParent<EnemyStateMachine>();
-            stateMachine.SwitchState<WanderState>();
+            stateMachine.SwitchState<WanderState>(); 
         }
     }
 

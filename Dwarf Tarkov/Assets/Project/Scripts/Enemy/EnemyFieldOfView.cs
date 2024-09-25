@@ -74,10 +74,6 @@ public class EnemyFieldOfView : MonoBehaviour
             if (!hit.collider)
             {
                 vertex = transform.localPosition + GetVectorFromAngle(angle) * viewDistance;
-                if (currentState.GetType() == typeof(AttackState)) 
-                {
-                    transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>();
-                }
             }
             else
             {
