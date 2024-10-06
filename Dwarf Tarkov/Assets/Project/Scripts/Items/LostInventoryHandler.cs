@@ -27,7 +27,6 @@ public class LostInventoryHandler : MonoBehaviour
     {
         this.items = items;
         ItemDataHandler.SaveInventory("items", this.items);
-        SceneManager.LoadScene(4);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

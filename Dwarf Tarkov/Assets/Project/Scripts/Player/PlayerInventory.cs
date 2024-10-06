@@ -4,6 +4,7 @@ using UnityEngine;
 using EventSystem;
 using System;
 using Data;
+using UnityEngine.SceneManagement;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -371,6 +372,9 @@ public class PlayerInventory : MonoBehaviour
     private void SetLostItems()
     {
         EventChannels.ItemEvents.OnSetLostItems?.Invoke(inventory);
+        inventory.Clear();
+        ClearEmptySlots();
+        SceneManager.LoadScene(4);
     }
 
     /// <summary>

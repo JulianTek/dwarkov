@@ -18,6 +18,7 @@ public class SceneEnemyHandler : MonoBehaviour
     private void OnDestroy()
     {
         EventChannels.EnemyEvents.OnSpawnEnemy -= CheckIfEnemyCanSpawn;
+        EventChannels.EnemyEvents.OnEnemyDeath -= RemoveFromCounter;
     }
 
     bool CheckIfEnemyCanSpawn()
@@ -25,6 +26,7 @@ public class SceneEnemyHandler : MonoBehaviour
         if (currentAmountOfEnemies < maxAmountOfEnemies)
         {
             AddToCounter();
+            Debug.Log("can spawn");
             return true;
         }
         return false;
@@ -38,6 +40,5 @@ public class SceneEnemyHandler : MonoBehaviour
     void RemoveFromCounter(GameObject go)
     {
         currentAmountOfEnemies--;
-        EventChannels.EnemyEvents.OnEnemyDeath -= RemoveFromCounter;
     }
 }
