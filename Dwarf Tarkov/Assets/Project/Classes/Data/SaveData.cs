@@ -130,6 +130,11 @@ namespace Data
             List<WeaponData> weapons = EventChannels.DatabaseEvents.OnGetAllWeapons?.Invoke();
             return weapons.FirstOrDefault<WeaponData>(weapon => weapon.firingEventName == dto.FiringEventName);
         }
+
+        public void ClearInventory()
+        {
+            PlayerInventory.Clear();
+        }
     }
 
 }

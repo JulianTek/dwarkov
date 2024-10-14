@@ -374,6 +374,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnSetLostItems?.Invoke(inventory);
         inventory.Clear();
         ClearEmptySlots();
+        ItemDataHandler.DeleteInventory();
         SceneManager.LoadScene(4);
     }
 

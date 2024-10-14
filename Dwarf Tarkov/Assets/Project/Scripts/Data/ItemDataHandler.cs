@@ -39,6 +39,15 @@ namespace Data
             }
             return null;
         }
+
+        public static void DeleteInventory()
+        {
+            SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+            if (data != null)
+            {
+                data.ClearInventory();
+            }
+        }
     }
 }
 
