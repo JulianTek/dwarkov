@@ -27,9 +27,11 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
         if (data != null && data.PrimaryWeapon != null && data.SecondaryWeapon != null)
         {
             primaryWeapon = data.GetWeaponDataFromDTO(data.PrimaryWeapon);
+            Debug.Log(primaryWeapon);
             secondaryWeapon = data.GetWeaponDataFromDTO(data.SecondaryWeapon);
 
         }
+
     }
 
     private void OnDestroy()

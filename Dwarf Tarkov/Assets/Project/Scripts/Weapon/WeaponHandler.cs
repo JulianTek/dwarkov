@@ -61,6 +61,7 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.DataEvents.OnGetAmountOfBullets += GetCurrentLoadedBullets;
 
         gunSprite = GetComponentInChildren<SpriteRenderer>();
+        data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
     }
 
     private void Start()
@@ -76,7 +77,7 @@ public class WeaponHandler : MonoBehaviour
         {
             currentMagCount = 0;
         }
-        data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
+
         maxMagCount = data.MagCapacity;
         gunSprite.sprite = data.Sprite;
         SetIndexAndAmmoType();

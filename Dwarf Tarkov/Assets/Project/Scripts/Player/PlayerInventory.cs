@@ -31,6 +31,7 @@ public class PlayerInventory : MonoBehaviour
         EventChannels.ItemEvents.OnGetPlayerInventory += GetItems;
         EventChannels.ItemEvents.OnGetInventoryCapacity += GetCapacity;
         EventChannels.BarteringEvents.OnPlayerBuysItem += BuyItem;
+        EventChannels.ItemEvents.OnGetInventory?.Invoke(this);
     }
 
     private void OnDestroy()

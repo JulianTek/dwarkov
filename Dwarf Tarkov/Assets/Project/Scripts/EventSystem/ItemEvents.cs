@@ -17,6 +17,7 @@ public class ItemEvents
     public delegate int GetItemCountEvent(ItemData data);
     public delegate int GetIntEvent();
     public delegate List<Item> GetItemsEvent();
+    public delegate void GetInventoryEvent(PlayerInventory inventory);
 
     public ItemQuantityEvent OnAddItemToInventory;
     public ItemQuantityEvent OnRemoveItemFromInventory;
@@ -48,4 +49,6 @@ public class ItemEvents
     public GetItemsEvent OnGetPlayerInventory;
 
     public InventoryEvent OnFindPlayerInventory;
+
+    public GetInventoryEvent OnGetInventory;
 }

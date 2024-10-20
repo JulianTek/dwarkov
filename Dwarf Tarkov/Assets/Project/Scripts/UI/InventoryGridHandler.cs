@@ -11,17 +11,9 @@ public class InventoryGridHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindInventory();
         EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
         EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
-        EventChannels.ItemEvents.OnFindPlayerInventory += FindInventory;
-
-        for (int i = 0; i < inventory.GetCapacity(); i++)
-        {
-            GameObject slot = Instantiate(inventorySlot, transform);
-            inventorySlots.Add(slot);
-            slot.SetActive(true);
-        }
+        EventChannels.ItemEvents.OnGetInventory += SetInventory;
     }
 
     private void OnDestroy()
@@ -29,7 +21,7 @@ public class InventoryGridHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnInventoryOpened -= UpdateInventory;
         EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
         EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
-        EventChannels.ItemEvents.OnFindPlayerInventory -= FindInventory;
+        EventChannels.ItemEvents.OnGetInventory -= SetInventory;
     }
     void UpdateInventory()
     {
@@ -53,8 +45,14 @@ public class InventoryGridHandler : MonoBehaviour
         }
     }
 
-    private void FindInventory()
+    private void SetInventory(PlayerInventory inventory)
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        this.inventory = inventory;
+        for (int i = 0; i < inventory.GetCapacity(); i++)
+        {
+            GameObject slot = Instantiate(inventorySlot, transform);
+            inventorySlots.Add(slot);
+            slot.SetActive(true);
+        }
     }
 }
