@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 28384334062574490}
   - component: {fileID: 9144040405343126580}
   - component: {fileID: 734923728197272427}
-  - component: {fileID: 8574581242396699320}
+  - component: {fileID: 2337645415804609156}
   m_Layer: 5
   m_Name: QuestButton
   m_TagString: Untagged
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8574581242396699320}
+      - m_Target: {fileID: 2337645415804609156}
         m_TargetAssemblyTypeName: PauseMenuQuestButtonHandler, Assembly-CSharp
         m_MethodName: SetQuestInfo
         m_Mode: 1
@@ -134,19 +134,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenuQuestUIHandler, Assembly-CSharp
-        m_MethodName: ShowInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8574581242396699320
+--- !u!114 &2337645415804609156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

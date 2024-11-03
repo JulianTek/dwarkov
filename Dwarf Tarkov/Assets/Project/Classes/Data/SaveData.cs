@@ -115,6 +115,7 @@ namespace Data
             PlayerInventory = DTOConverter.ConvertItemListToDTOList((EventChannels.DataEvents.OnGetPlayerInventory?.Invoke()));
             PlayerQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
             PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
+            Debug.Log(PrimaryWeapon);
             SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());
             CurrentBulletsInPrimaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(true);
             CurrentBulletsInSecondaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(false);
