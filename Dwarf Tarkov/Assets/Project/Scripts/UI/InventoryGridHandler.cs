@@ -9,7 +9,7 @@ public class InventoryGridHandler : MonoBehaviour
     private List<GameObject> inventorySlots = new List<GameObject>();
     private PlayerInventory inventory;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
         EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
@@ -48,6 +48,9 @@ public class InventoryGridHandler : MonoBehaviour
     private void SetInventory(PlayerInventory inventory)
     {
         this.inventory = inventory;
+        if (inventorySlots.Count >= inventory.GetCapacity())
+            return;
+
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);
