@@ -13,6 +13,7 @@ public class PauseMenuQuestUIHandler : MonoBehaviour
     private GameObject QuestInfo;
     [SerializeField]
     private GameObject QuestButtonPrefab;
+    private List<Quest> questsInList = new List<Quest>();
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -22,11 +23,14 @@ public class PauseMenuQuestUIHandler : MonoBehaviour
         {
             foreach (Quest quest in data)
             {
+                if(questsInList.Contains(quest))
+                    continue;
                 var go = Instantiate(QuestButtonPrefab, QuestButtons.transform);
                 go.GetComponent<PauseMenuQuestButtonHandler>().SetQuest(quest);
                 go.GetComponentInChildren<TMPro.TextMeshProUGUI>().SetText(quest.Name);
                 go.GetComponent<Button>().onClick.AddListener(ShowInfo);
                 go.GetComponent<Button>().onClick.AddListener(() => SetQuestInfo(quest));
+                questsInList.Add(quest);
             }
         }
     }

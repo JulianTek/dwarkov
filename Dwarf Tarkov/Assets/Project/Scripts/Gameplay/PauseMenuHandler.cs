@@ -70,6 +70,9 @@ public class PauseMenuHandler : MonoBehaviour
         pauseMenu.SetActive(false);
         isPaused = false;
         EventChannels.GameplayEvents.OnPlayerResumesGame?.Invoke();
+        questMenu.SetActive(false);
+        options.SetActive(false);
+        mainButtons.SetActive(true);
     }
 
     void HandleInput()
