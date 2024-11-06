@@ -75,6 +75,7 @@ public class BarterSubmenuSliderHandler : MonoBehaviour
         if (!buyAmountText.enabled)
             buyAmountText.enabled = true;
         buyAmountText.SetText(buySlider.value.ToString());
+        sellAmountText.SetText(sellSlider.value.ToString());
     }
 
     private void ResetSlider()
