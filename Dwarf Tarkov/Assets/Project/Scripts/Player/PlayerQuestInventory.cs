@@ -54,6 +54,7 @@ public class PlayerQuestInventory : MonoBehaviour
 
     private void AddQuestToInventory(Quest quest)
     {
+        var a_type = quest.GetType();
         quests.Add(quest);
         Debug.Log(quest.Name);
     }
@@ -65,17 +66,20 @@ public class PlayerQuestInventory : MonoBehaviour
     
     private void CheckIfQuestsCompleted(string name)
     {
-        foreach (Quest quest in quests)
+        foreach (var quest in quests)
         {
-            if (quest.QuestGiverName == name)
+            if (quest.QuestGiverName != name)
             {
-                if (quest is ItemQuest)
-                    if (CheckIfItemQuestCompleted(quest as ItemQuest))
-                        EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
-                    else if (quest is EnemyQuest)
-                        if (CheckIfEnemyQuestCompleted(quest as EnemyQuest))
-                            EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
+                continue;
             }
+            if (quest is ItemQuest itemQuest)
+                if (CheckIfItemQuestCompleted(itemQuest))
+                {
+                    EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
+                }
+                else if (quest is EnemyQuest enemyQuest) && 
+
+                        EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
         }
     }
 

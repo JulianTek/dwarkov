@@ -44,10 +44,13 @@ public class NPCQuestInventory : MonoBehaviour
 
     void ConfirmQuest()
     {
+        var a_type = NextQuest.GetType();
         EventChannels.NPCEvents.OnPlayerAcceptQuest?.Invoke(NextQuest);
-        unlockedQuests.Remove(NextQuest);
+        unlockedQuests.RemoveAt(0);
         if (unlockedQuests.Count > 0)
+        {
             NextQuest = unlockedQuests[0];
+        }
         else
         {
             NextQuest = null;
@@ -59,6 +62,8 @@ public class NPCQuestInventory : MonoBehaviour
         int playerLevel = (int)EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke();
         foreach (Quest quest in quests)
         {
+            // This is still the correct type, but its subclass probably gets lost when adding to list, so i have to force it to get the subclass
+            var a_type = quest.GetType();
             if (playerLevel >= quest.UnlockLevel && !unlockedQuests.Contains(quest) && !completedQuests.Contains(quest) && (bool)!EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke().Contains(quest))
                 unlockedQuests.Add(quest);
         }
