@@ -49,7 +49,7 @@ public class PlayerQuestInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void AddQuestToInventory(Quest quest)
@@ -63,23 +63,21 @@ public class PlayerQuestInventory : MonoBehaviour
     {
         quests.Remove(quest);
     }
-    
+
     private void CheckIfQuestsCompleted(string name)
     {
         foreach (var quest in quests)
         {
             if (quest.QuestGiverName != name)
-            {
                 continue;
-            }
-            if (quest is ItemQuest itemQuest)
-                if (CheckIfItemQuestCompleted(itemQuest))
-                {
-                    EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
-                }
-                else if (quest is EnemyQuest enemyQuest) && 
+            
+            if (quest is ItemQuest)
+                // some code
 
-                        EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
+            if (quest is ItemQuest itemQuest && CheckIfItemQuestCompleted(itemQuest))
+                    EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
+                else if (quest is EnemyQuest enemyQuest && CheckIfEnemyQuestCompleted(enemyQuest))
+                    EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
         }
     }
 
@@ -104,7 +102,7 @@ public class PlayerQuestInventory : MonoBehaviour
         {
             EventChannels.ItemEvents.OnAddItemToInventory(item.data, item.amount);
         }
-        EventChannels.GameplayEvents.OnCompleteQuest?.Invoke(quest);  
+        EventChannels.GameplayEvents.OnCompleteQuest?.Invoke(quest);
     }
 
     private void CompleteItemQuest(List<Item> items)
@@ -134,4 +132,4 @@ public class PlayerQuestInventory : MonoBehaviour
             }
         }
     }
-} 
+}

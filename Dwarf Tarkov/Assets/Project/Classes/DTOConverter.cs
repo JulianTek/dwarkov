@@ -78,11 +78,25 @@ public static class DTOConverter
 
     public static Quest ConvertQuestDTOToQuest(QuestDTO dto)
     {
+        switch(dto)
+        {
+            case ItemQuestDTO:
+                return new ItemQuest(dto as ItemQuestDTO);
+            case EnemyQuestDTO:
+                return new EnemyQuest(dto as EnemyQuestDTO);
+        }
         return new Quest(dto);
     }
 
     public static QuestDTO ConvertQuestToQuestDTO(Quest quest)
     {
+        switch (quest) 
+        {
+            case ItemQuest:
+                return new ItemQuestDTO(quest as ItemQuest);
+            case EnemyQuest:
+                return new EnemyQuestDTO(quest as EnemyQuest);
+        }
         return new QuestDTO(quest);
     }
 

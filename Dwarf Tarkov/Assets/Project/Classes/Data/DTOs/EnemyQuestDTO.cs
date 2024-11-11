@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Data
 {
+    [System.Serializable]
     public class EnemyQuestDTO : QuestDTO
     {
         public string EnemyToKill;
