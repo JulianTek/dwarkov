@@ -62,7 +62,6 @@ public class NPCQuestInventory : MonoBehaviour
         int playerLevel = (int)EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke();
         foreach (Quest quest in quests)
         {
-            // This is still the correct type, but its subclass probably gets lost when adding to list, so i have to force it to get the subclass
             var a_type = quest.GetType();
             if (playerLevel >= quest.UnlockLevel && !unlockedQuests.Contains(quest) && !completedQuests.Contains(quest) && (bool)!EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke().Contains(quest))
                 unlockedQuests.Add(quest);

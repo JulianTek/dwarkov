@@ -9,7 +9,7 @@ public class PlayerQuestInventory : MonoBehaviour
 {
     private List<Quest> quests = new List<Quest>();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PlayerQuests != null)

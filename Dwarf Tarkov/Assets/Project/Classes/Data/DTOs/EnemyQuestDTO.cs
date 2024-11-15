@@ -17,8 +17,7 @@ namespace Data
             Name = quest.Name;
             QuestGiverName = quest.QuestGiverName;
             MenuDescription = quest.MenuDescription;
-            Rewards = new List<ItemDTO>();
-            Rewards.AddRange(quest.Rewards.Select(dto => new ItemDTO()));
+            Rewards = DTOConverter.ConvertItemListToDTOList(quest.Rewards);
             UnlockLevel = quest.UnlockLevel;
             ExpReward = quest.ExpReward;
             IntroText = quest.IntroText;

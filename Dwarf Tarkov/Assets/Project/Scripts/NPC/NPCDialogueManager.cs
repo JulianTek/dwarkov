@@ -28,8 +28,6 @@ public class NPCDialogueManager : MonoBehaviour
 
     public void InitDialogue()
     {
-        Debug.Log(questInventory.NextQuest);
-        Debug.Log(questInventory.unlockedQuests.Count);
         EventChannels.NPCEvents.OnStartDialogue?.Invoke(npcName);
         if (questInventory.unlockedQuests.Count > 0)
         {

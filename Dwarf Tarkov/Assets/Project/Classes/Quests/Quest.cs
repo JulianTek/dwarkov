@@ -12,8 +12,9 @@ public class Quest
         Name= questDTO.Name;
         QuestGiverName= questDTO.QuestGiverName;
         MenuDescription= questDTO.MenuDescription;
-        Rewards = DTOConverter.ConvertItemDTOListToItemList(questDTO.Rewards);
-        UnlockLevel= questDTO.UnlockLevel;
+        Rewards = new List<Item>();
+        Rewards.AddRange(DTOConverter.ConvertItemDTOListToItemList(questDTO.Rewards));
+        UnlockLevel = questDTO.UnlockLevel;
         ExpReward= questDTO.ExpReward;
         IntroText = questDTO.IntroText;
         CompletionText = questDTO.CompletionText;

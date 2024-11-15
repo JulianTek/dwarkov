@@ -10,7 +10,7 @@ public class EnemyQuest : Quest
         Name = dto.Name;
         QuestGiverName = dto.QuestGiverName;
         MenuDescription = dto.MenuDescription;
-        // add rewards
+        Rewards = DTOConverter.ConvertItemDTOListToItemList(dto.Rewards);
         UnlockLevel = dto.UnlockLevel;
         ExpReward = dto.ExpReward;
         IntroText = dto.IntroText;
