@@ -70,9 +70,6 @@ public class PlayerQuestInventory : MonoBehaviour
         {
             if (quest.QuestGiverName != name)
                 continue;
-            
-            if (quest is ItemQuest)
-                // some code
 
             if (quest is ItemQuest itemQuest && CheckIfItemQuestCompleted(itemQuest))
                     EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
