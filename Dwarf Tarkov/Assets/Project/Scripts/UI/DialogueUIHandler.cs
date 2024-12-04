@@ -21,13 +21,19 @@ public class DialogueUIHandler : MonoBehaviour
     [BoxGroup("fields/Buttons", LabelText = "Buttons")]
     [SerializeField]
     private Button continueButton, confirmChoiceButton, denyChoiceButton, completeQuestButton;
-    private void Start()
+    private void Awake()
     {
         EventChannels.UIEvents.OnInitiateDialogue += InitiateDialogue;
         EventChannels.NPCEvents.OnStartDialogue += SetName;
         confirmChoiceButton.gameObject.SetActive(false);
         denyChoiceButton.gameObject.SetActive(false);
         completeQuestButton.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.UIEvents.OnInitiateDialogue -= InitiateDialogue;
+        EventChannels.NPCEvents.OnStartDialogue -= SetName;
     }
 
     void InitiateDialogue(DialogueLine[] lines)

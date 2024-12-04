@@ -771,8 +771,8 @@ GameObject:
   - component: {fileID: 6540999507937789347}
   - component: {fileID: 5926092960432619520}
   - component: {fileID: 341774270484623201}
-  - component: {fileID: 3253231600128238625}
   - component: {fileID: 4676978079866006359}
+  - component: {fileID: 9142342327471610865}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -955,7 +955,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experiencePoints: 0
   xpNeededToLevelUp: 100
---- !u!114 &3253231600128238625
+--- !u!114 &4676978079866006359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066289266865289177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe41333b70618194fb7c8dc1b2051352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _actionAsset: {fileID: -944628639613478452, guid: bb2ee036b5d66784490643a482eb482f,
+    type: 3}
+--- !u!114 &9142342327471610865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1210,20 +1224,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4676978079866006359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4066289266865289177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe41333b70618194fb7c8dc1b2051352, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _actionAsset: {fileID: -944628639613478452, guid: bb2ee036b5d66784490643a482eb482f,
-    type: 3}
 --- !u!1 &4066289267353384818
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,8 @@ public class ExtractionTimerManager : MonoBehaviour
             {
                 timerStarted = false;
                 EventChannels.ExtractionEvents.OnExtractionTimerFinished?.Invoke();
-                timeLeft = float.MaxValue;
+                StopTimer();
+                return;
             }
         }
     }

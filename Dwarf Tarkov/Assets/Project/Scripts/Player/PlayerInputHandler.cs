@@ -104,6 +104,7 @@ public class PlayerInputHandler : MonoBehaviour
         EventChannels.OutpostEvents.OnHideOutpostInventory?.Invoke();
         EventChannels.OutpostEvents.OnHideWeaponBench?.Invoke();
         TooltipSystem.Hide();
+        ResumeGame();
     }
 
     public void StackSplit(InputAction.CallbackContext ctx)
@@ -152,5 +153,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void ResumeGame()
     {
         DisableHUDInput();
+        EventChannels.GameplayEvents.OnPlayerResumesGame?.Invoke();
     }
 }

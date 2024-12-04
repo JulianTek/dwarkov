@@ -46,6 +46,6 @@ public class ExtractionManager : MonoBehaviour
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         StartCoroutine(data.SaveFromMines());
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 }
