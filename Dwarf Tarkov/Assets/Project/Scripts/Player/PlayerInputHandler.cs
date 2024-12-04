@@ -14,11 +14,9 @@ public class PlayerInputHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        isPaused = false;
         EventChannels.PlayerInputEvents.OnDisableHUDControls += DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls += EnableHUDInput;
-
-        EventChannels.GameplayEvents.OnPlayerResumesGame += ResumeGame;
     }
 
 
@@ -27,8 +25,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         EventChannels.PlayerInputEvents.OnDisableHUDControls -= DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls -= EnableHUDInput;
-
-        EventChannels.GameplayEvents.OnPlayerResumesGame -= ResumeGame;
     }
 
 

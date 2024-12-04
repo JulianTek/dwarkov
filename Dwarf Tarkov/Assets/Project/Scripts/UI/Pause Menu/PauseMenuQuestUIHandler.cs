@@ -13,24 +13,36 @@ public class PauseMenuQuestUIHandler : MonoBehaviour
     private GameObject QuestInfo;
     [SerializeField]
     private GameObject QuestButtonPrefab;
-    private List<Quest> questsInList = new List<Quest>();
+    private List<GameObject> questsInList = new List<GameObject>();
     // Start is called before the first frame update
     void OnEnable()
     {
         ShowList();
+        // Remove completed quests
+        var completedQuests = EventChannels.GameplayEvents.OnGetCompletedQuests?.Invoke();
+        for (int i = 0; i < completedQuests.Count; i++)
+        {
+            Quest quest = completedQuests[i];
+            if (!CheckIfQuestInList(quest))
+                continue;
+            questsInList.RemoveAt(i);
+
+        }
+
+        // Add new quests
         var data = EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke();
         if (data != null)
         {
             foreach (Quest quest in data)
             {
-                if(questsInList.Contains(quest))
+                if(CheckIfQuestInList(quest))
                     continue;
                 var go = Instantiate(QuestButtonPrefab, QuestButtons.transform);
                 go.GetComponent<PauseMenuQuestButtonHandler>().SetQuest(quest);
                 go.GetComponentInChildren<TMPro.TextMeshProUGUI>().SetText(quest.Name);
                 go.GetComponent<Button>().onClick.AddListener(ShowInfo);
                 go.GetComponent<Button>().onClick.AddListener(() => SetQuestInfo(quest));
-                questsInList.Add(quest);
+                questsInList.Add(go);
             }
         }
     }
@@ -39,6 +51,16 @@ public class PauseMenuQuestUIHandler : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private bool CheckIfQuestInList(Quest quest)
+    {
+        foreach (GameObject go in questsInList)
+        {
+            if (go.GetComponent<PauseMenuQuestButtonHandler>().GetQuest().Name == quest.Name)
+                return true;
+        }
+        return false;
     }
 
     public void ShowList()
