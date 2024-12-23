@@ -15,6 +15,15 @@ namespace Data
             SlotNumber = slotNumber;
             LastSaved = DateTime.Now;
         }
+
+        // use empty ctor to create dev data
+        public SaveData()
+        {
+            LastSaved = DateTime.Now;
+        }
+
+        // Boolean checks if the game has saved before, since this happens the first time the player leaves for the mines, this can be used to populate inventories, quests and initial unlocks
+        public bool GameStarted { get; private set; } = false;
         // Data stuff
         public int SlotNumber { get; private set; }
         public DateTime LastSaved { get; private set; }
@@ -37,55 +46,94 @@ namespace Data
         public WeaponDTO PrimaryWeapon { get; private set; }
         public WeaponDTO SecondaryWeapon { get; private set; }
 
+        // Weapon stats
+        public int CurrentBulletsInPrimaryMag { get; private set; }
+        public int CurrentBulletsInSecondaryMag { get; private set; }
+        public AmmoSubtypeDTO CurrentlyLoadedSubtype { get; private set; }
+
         public void SetLastSaved()
         {
             LastSaved = DateTime.Now;
         }
 
-        public IEnumerator Save()
+        public IEnumerator SaveFromOutpost()
         {
             // Set last saved to now
             SetLastSaved();
 
             // Set all data
-            OutpostInventory = EventChannels.DataEvents.OnGetOutpostInventory?.Invoke();
-            PlayerInventory = EventChannels.DataEvents.OnGetPlayerInventory?.Invoke();
+            GameStarted = true;
+            OutpostInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetOutpostInventory?.Invoke());
+            PlayerInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetPlayerInventory?.Invoke());
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
-            PlayerQuests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
-            Quests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetAllQuests?.Invoke());
-            UnlockedQuests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetUnlockedQuests?.Invoke());
-            CompletedQuests = ConvertQuestsToDTOs(EventChannels.DataEvents.OnGetCompletedQuests?.Invoke());
+            PlayerQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
+            Quests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetAllQuests?.Invoke());
+            UnlockedQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetUnlockedQuests?.Invoke());
+            CompletedQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetCompletedQuests?.Invoke());
             PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
-            SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke()); 
+            SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());
+            CurrentBulletsInPrimaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(true);
+            CurrentBulletsInSecondaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(false);
+            CurrentlyLoadedSubtype = DTOConverter.ConvertSubtypeToDTO(EventChannels.DataEvents.OnGetCurrentSubtype?.Invoke());
             // Save all data
             DataSaver<SaveData>.Save(this, $"save_{SlotNumber}");
             yield return new WaitForEndOfFrame();
         }
 
-        public List<Item> ConvertDTOsToItems(List<ItemDTO> dtos)
+        public IEnumerator SaveDevData(List<Item> inventory)
         {
-            var allItems  = Resources.FindObjectsOfTypeAll(typeof(ItemData)) as ItemData[];
-            List<Item> items = new List<Item>();
-            foreach (ItemDTO dto in dtos)
-            {
-                items.Add(new Item(allItems.FirstOrDefault(item => item.Name == dto.Data.Name), dto.Amount));
-            }
-            return items;
+            // Set last saved to now
+            SetLastSaved();
+
+            // implement quest logic later
+
+            // Convert items to DTOs
+            PlayerInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetPlayerInventory?.Invoke());
+            OutpostInventory = DTOConverter.ConvertItemListToDTOList(EventChannels.DataEvents.OnGetOutpostInventory?.Invoke());
+
+            PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
+            PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
+
+            PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
+            SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());
+            CurrentBulletsInPrimaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(true);
+            CurrentBulletsInSecondaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(false);
+            CurrentlyLoadedSubtype = DTOConverter.ConvertSubtypeToDTO(EventChannels.DataEvents.OnGetCurrentSubtype?.Invoke());
+            DataSaver<SaveData>.Save(this, "dev");
+            yield return new WaitForEndOfFrame();
+        }
+
+        public IEnumerator SaveFromMines()
+        {
+            // Set last saved to now
+            SetLastSaved();
+
+            // Set data that can be accessed in the mines
+            PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
+            PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
+            PlayerInventory = DTOConverter.ConvertItemListToDTOList((EventChannels.DataEvents.OnGetPlayerInventory?.Invoke()));
+            PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
+            SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());
+            CurrentBulletsInPrimaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(true);
+            CurrentBulletsInSecondaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(false);
+            CurrentlyLoadedSubtype = DTOConverter.ConvertSubtypeToDTO(EventChannels.DataEvents.OnGetCurrentSubtype?.Invoke());
+
+            // Save all data
+            DataSaver<SaveData>.Save(this, $"save_{SlotNumber}");
+            yield return new WaitForEndOfFrame();
         }
 
         public WeaponData GetWeaponDataFromDTO(WeaponDTO dto)
         {
-            WeaponData[] weapons = Resources.FindObjectsOfTypeAll<WeaponData>();
+            List<WeaponData> weapons = EventChannels.DatabaseEvents.OnGetAllWeapons?.Invoke();
             return weapons.FirstOrDefault<WeaponData>(weapon => weapon.firingEventName == dto.FiringEventName);
         }
 
-        public List<QuestDTO> ConvertQuestsToDTOs(List<Quest> quests)
+        public void ClearInventory()
         {
-            List<QuestDTO> dtos = new List<QuestDTO>();
-            dtos.AddRange(quests.Select(dto => new QuestDTO()));
-            return dtos;
+            PlayerInventory.Clear();
         }
     }
- 
+
 }

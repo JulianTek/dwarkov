@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TooltipSystem : MonoBehaviour
 {
-    private static TooltipSystem instance;
+    public static TooltipSystem instance;
 
     public TooltipInstance tooltip;
 
@@ -16,6 +16,7 @@ public class TooltipSystem : MonoBehaviour
         }
         instance = this;
         tooltip.gameObject.SetActive(false);
+        DontDestroyOnLoad(gameObject);
     }
 
     public static void Show(string header, string desc)

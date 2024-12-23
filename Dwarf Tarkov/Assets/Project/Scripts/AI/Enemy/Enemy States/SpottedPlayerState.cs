@@ -9,13 +9,19 @@ namespace AI
     {
         private float spotCooldown = 7f;
         private float timeLeft;
+        private Vector2 playerPos;
 
         public SpottedPlayerState() : base() { }
-        public SpottedPlayerState(GameObject owner) : base(owner) { }
+        public SpottedPlayerState(Vector2 playerPos)
+        { 
+            this.playerPos = playerPos;
+        }
 
         public override void Start()
         {
+            Debug.Log($"{owner} entered player spotted state and is chasing {playerPos}"); 
             timeLeft = spotCooldown;
+            EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(playerPos, owner);
         }
 
         public override void Stop()
@@ -26,8 +32,9 @@ namespace AI
         public override void Update()
         {
             timeLeft -= Time.deltaTime;
-            if (timeLeft > 0)
+            if (timeLeft > 0 || Vector2.Distance(owner.transform.position, playerPos) >= 0.5f)
                 return;
+            EventChannels.EnemyEvents.OnEnemyLoseInterest?.Invoke(owner);
         }
     }
 }

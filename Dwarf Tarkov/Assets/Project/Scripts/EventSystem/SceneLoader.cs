@@ -12,7 +12,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadOutpostScene()
     {
-        LoadScene(2);
+        LoadScene(1);
     }
 
     private void LoadScene(int index)

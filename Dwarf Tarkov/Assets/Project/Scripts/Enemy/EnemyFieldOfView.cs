@@ -70,7 +70,7 @@ public class EnemyFieldOfView : MonoBehaviour
         {
             Vector3 vertex;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, GetVectorFromAngle(angle), viewDistance, layerMask);
-            Debug.DrawRay(transform.position, GetVectorFromAngle(angle), Color.green);
+            var currentState = GetCurrentState();
             if (!hit.collider)
             {
                 vertex = transform.localPosition + GetVectorFromAngle(angle) * viewDistance;
@@ -79,33 +79,19 @@ public class EnemyFieldOfView : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<PlayerInputHandler>())
                 {
-                    var currentState = GetComponentInParent<EnemyStateMachine>().GetGameState().GetType();
-                    if (currentState == typeof(SpottedPlayerState) || currentState == typeof(WanderState))
+                    if (currentState.GetType() == typeof(WanderState))
                     {
-                        transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(transform.parent.gameObject);
+                        transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(hit.point);
                     }
-                    EventChannels.EnemyEvents.OnPlayerSpotted?.Invoke(hit.point, transform.parent.gameObject);
                 }
                 vertex = hit.point.normalized;
             }
-            vertices[vertexIndex] = vertex;
-
-            if (i > 0)
-            {
-                triangles[triangleIndex] = 0;
-                triangles[triangleIndex + 1] = vertexIndex - 1;
-                triangles[triangleIndex + 2] = vertexIndex;
-
-                triangleIndex += 3;
-            }
-            vertexIndex++;
-            angle -= angleIncrease;
-
         }
+    }
 
-        mesh.vertices = vertices;
-        mesh.uv = uv;
-        mesh.triangles = triangles;
+    private GameState GetCurrentState()
+    {
+        return GetComponentInParent<EnemyStateMachine>().GetGameState();
     }
 
     public float GetAngleFromVectorFloat(Vector3 dir)

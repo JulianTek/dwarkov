@@ -37,6 +37,12 @@ public class ShopKeepInventorySlotHandler : MonoBehaviour
 
     public void BuyItem()
     {
-        EventChannels.UIEvents.OnPlayerSelectsItemToBuy?.Invoke(item.Data);
+        if (item.Data.IsStackable)
+        {
+            EventChannels.BarteringEvents.OnSetItemInSubmenu?.Invoke(new Item(item.Data, item.Data.MaxStackAmount));
+            EventChannels.UIEvents.OnShowBuySubmenu?.Invoke();
+        }
+        else
+            EventChannels.UIEvents.OnPlayerSelectsItemToBuy?.Invoke(item.Data);
     }
-} 
+}

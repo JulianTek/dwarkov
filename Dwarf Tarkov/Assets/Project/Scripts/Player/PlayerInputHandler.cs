@@ -7,182 +7,148 @@ using System;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerControls playerControls;
+    [SerializeField]
+    private InputActionAsset _actionAsset;
     private bool isPaused;
+    private Vector2 moveIndex;
     // Start is called before the first frame update
     void Start()
     {
-        playerControls = new PlayerControls();
-        playerControls.Player.Enable();
-
         isPaused = false;
-
-        playerControls.Player.Mine.performed += Mine;
-        playerControls.Player.Shoot.started += ShootStarted;
-        playerControls.Player.Shoot.canceled += ShootEnded;
-        playerControls.Player.Reload.performed += Reload;
-        playerControls.Player.Sprint.started += Sprint;
-        playerControls.Player.Sprint.canceled += StopSprint;
-        playerControls.Player.OpenInventory.performed += OpenInventory;
-        playerControls.Player.Interact.performed += Interact;
-        playerControls.Player.ToggleAmmoTypes.performed += ToggleAmmoTypes;
-        playerControls.Player.SelectPrimaryWeapon.performed += SelectPrimaryWeapon;
-        playerControls.Player.SelectSecondaryWeapon.performed += SelectSecondaryWeapon;
-
-        playerControls.HUD.Close.performed += CloseInventory;
-        playerControls.HUD.SplitStack.started += EnableStackSplit;
-        playerControls.HUD.SplitStack.canceled += DisableStackSplit;
-
-        playerControls.Player.Pause.performed += PauseGame;
-
         EventChannels.PlayerInputEvents.OnDisableHUDControls += DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls += EnableHUDInput;
-
-        EventChannels.GameplayEvents.OnPlayerResumesGame += ResumeGame;
     }
 
 
-    private void OnDisable()
+    public void OnDisable()
     {
-        playerControls.Player.Mine.performed -= Mine;
-        playerControls.Player.Shoot.started -= ShootStarted;
-        playerControls.Player.Shoot.canceled -= ShootEnded;
-        playerControls.Player.Reload.performed -= Reload;
-        playerControls.Player.Sprint.started -= Sprint;
-        playerControls.Player.Sprint.canceled -= StopSprint;
-        playerControls.Player.OpenInventory.performed -= OpenInventory;
-        playerControls.Player.Interact.performed -= Interact;
-        playerControls.Player.ToggleAmmoTypes.performed -= ToggleAmmoTypes;
-        playerControls.Player.SelectPrimaryWeapon.performed -= SelectPrimaryWeapon;
-        playerControls.Player.SelectSecondaryWeapon.performed -= SelectSecondaryWeapon;
-
-        playerControls.HUD.Close.performed -= CloseInventory;
-        playerControls.HUD.SplitStack.started -= EnableStackSplit;
-        playerControls.HUD.SplitStack.canceled -= DisableStackSplit;
-
-        playerControls.Player.Pause.performed -= PauseGame;
 
         EventChannels.PlayerInputEvents.OnDisableHUDControls -= DisableHUDInput;
         EventChannels.PlayerInputEvents.OnEnableHUDControls -= EnableHUDInput;
-
-        EventChannels.GameplayEvents.OnPlayerResumesGame -= ResumeGame;
     }
 
 
-    private void Update()
+    public void Update()
+    {
+        if (!isPaused)
+            EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(moveIndex);
+    }
+
+    public void Move(InputAction.CallbackContext ctx)
+    {
+        moveIndex = ctx.ReadValue<Vector2>();
+    }
+
+    public void Aim(InputAction.CallbackContext ctx)
     {
         if (!isPaused)
         {
-            Vector2 movementVector = playerControls.Player.Movement.ReadValue<Vector2>();
-            Vector2 aimVector = playerControls.Player.Aim.ReadValue<Vector2>();
+            Vector2 aimVector = ctx.ReadValue<Vector2>();
             EventChannels.PlayerInputEvents.OnPlayerAim?.Invoke(aimVector);
-            EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(movementVector);
         }
     }
 
-    void ShootStarted(InputAction.CallbackContext ctx)
+    public void Shoot(InputAction.CallbackContext ctx)
     {
-        EventChannels.PlayerInputEvents.OnPlayerShootStarted?.Invoke();
+        if (ctx.started)
+            EventChannels.PlayerInputEvents.OnPlayerShootStarted?.Invoke();
+        else if (ctx.canceled)
+            EventChannels.PlayerInputEvents.OnPlayerShootFinished?.Invoke();
     }
 
-    void ShootEnded(InputAction.CallbackContext ctx)
-    {
-        EventChannels.PlayerInputEvents.OnPlayerShootFinished?.Invoke();
-    }
-
-    private void SelectPrimaryWeapon(InputAction.CallbackContext obj)
+    public void SelectPrimaryWeapon(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon?.Invoke();
     }
-    private void SelectSecondaryWeapon(InputAction.CallbackContext obj)
+    public void SelectSecondaryWeapon(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon?.Invoke();
     }
 
-    void Mine(InputAction.CallbackContext ctx)
+    public void Mine(InputAction.CallbackContext ctx)
     {
-        EventChannels.PlayerInputEvents.OnPlayerMine?.Invoke();
+        if (ctx.started)
+            EventChannels.PlayerInputEvents.OnPlayerMine?.Invoke();
     }
 
-    void Sprint(InputAction.CallbackContext ctx)
+    public void Sprint(InputAction.CallbackContext ctx)
     {
-        ToggleSprint(true);
+        if (ctx.started)
+            ToggleSprint(true);
+        else if (ctx.canceled)
+            ToggleSprint(false);
     }
 
-    void StopSprint(InputAction.CallbackContext ctx)
-    {
-        ToggleSprint(false);
-    }
-
-    private void ToggleSprint(bool isSprinting)
+    public void ToggleSprint(bool isSprinting)
     {
         EventChannels.PlayerInputEvents.OnPlayerSprint?.Invoke(isSprinting);
     }
 
-    private void OpenInventory(InputAction.CallbackContext ctx)
+    public void OpenInventory(InputAction.CallbackContext ctx)
     {
-        playerControls.Player.Disable();
-        playerControls.HUD.Enable();
+        _actionAsset.FindActionMap("Player").Disable();
+        _actionAsset.FindActionMap("HUD").Enable();
         EventChannels.PlayerInputEvents.OnInventoryOpened?.Invoke();
     }
 
-    private void CloseInventory(InputAction.CallbackContext ctx)
+    public void CloseInventory(InputAction.CallbackContext ctx)
     {
-        playerControls.Player.Enable();
-        playerControls.HUD.Disable();
+        _actionAsset.FindActionMap("Player").Enable();
+        _actionAsset.FindActionMap("HUD").Disable();
         EventChannels.PlayerInputEvents.OnInventoryClosed?.Invoke();
         EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
         EventChannels.OutpostEvents.OnHideOutpostInventory?.Invoke();
         EventChannels.OutpostEvents.OnHideWeaponBench?.Invoke();
+        TooltipSystem.Hide();
+        ResumeGame();
     }
 
-    private void EnableStackSplit(InputAction.CallbackContext ctx)
+    public void StackSplit(InputAction.CallbackContext ctx)
     {
-        EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(true);
+        if (ctx.started)
+            EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(true);
+        else if (ctx.canceled)
+            EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
     }
 
-    private void DisableStackSplit(InputAction.CallbackContext ctx)
-    {
-        EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
-    }
-
-    private void Reload(InputAction.CallbackContext ctx)
+    public void Reload(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnPlayerReload?.Invoke();
     }
 
 
-    private void Interact(InputAction.CallbackContext ctx)
+    public void Interact(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnInteract?.Invoke();
     }
 
-    private void EnableHUDInput()
+    public void EnableHUDInput()
     {
-        playerControls.Player.Disable();
-        playerControls.HUD.Enable();
+        _actionAsset.FindActionMap("Player").Disable();
+        _actionAsset.FindActionMap("HUD").Enable();
     }
 
-    private void DisableHUDInput()
+    public void DisableHUDInput()
     {
-        playerControls.Player.Enable();
-        playerControls.HUD.Disable();
+        _actionAsset.FindActionMap("Player").Enable();
+        _actionAsset.FindActionMap("HUD").Disable();
     }
 
-    private void ToggleAmmoTypes(InputAction.CallbackContext ctx)
+    public void ToggleAmmoTypes(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnToggleAmmoTypes?.Invoke();
     }
 
 
-    private void PauseGame(InputAction.CallbackContext obj)
+    public void PauseGame(InputAction.CallbackContext ctx)
     {
         EventChannels.PlayerInputEvents.OnPlayerPauses?.Invoke();
         isPaused = !isPaused;
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
-        isPaused = false;
+        DisableHUDInput();
+        EventChannels.GameplayEvents.OnPlayerResumesGame?.Invoke();
     }
 }

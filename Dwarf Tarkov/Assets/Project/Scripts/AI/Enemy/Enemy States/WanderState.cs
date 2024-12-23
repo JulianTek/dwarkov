@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
+using UnityEngine.AI;
 
 namespace AI
 {
@@ -14,7 +15,9 @@ namespace AI
 
         public override void Start()
         {
+            owner.GetComponent<NavMeshAgent>().isStopped = false;
             wanderCooldown = Random.Range(1f, 7f);
+            Debug.Log($"{owner} entered wander state");
         }
 
         public override void Stop()
@@ -28,7 +31,8 @@ namespace AI
             if (wanderCooldown > 0)
                 return;
 
-            EventChannels.EnemyEvents.OnEnemyWander?.Invoke(this.owner);
+            Debug.Log(owner);
+            EventChannels.EnemyEvents.OnEnemyWander?.Invoke(owner);
             wanderCooldown = Random.Range(1f, 7f);
         }
 

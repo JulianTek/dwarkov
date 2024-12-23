@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Data
 {
+    [System.Serializable]
     public class ItemQuestDTO : QuestDTO
     {
 
@@ -14,14 +15,13 @@ namespace Data
         {
             Name = quest.Name;
             QuestGiverName = quest.QuestGiverName;
-            Rewards = new List<ItemDTO>();
-            Rewards.AddRange(quest.Rewards.Select(dto => new ItemDTO()));
+            MenuDescription = quest.MenuDescription;
+            Rewards = DTOConverter.ConvertItemListToDTOList(quest.Rewards);
             UnlockLevel = quest.UnlockLevel;
             ExpReward = quest.ExpReward;
             IntroText = quest.IntroText;
             CompletionText = quest.CompletionText;
-            RequiredItems = new List<ItemDTO>();
-            RequiredItems.AddRange(quest.RequiredItems.Select(dto => new ItemDTO()));
+            RequiredItems = DTOConverter.ConvertItemListToDTOList(quest.RequiredItems);
         }
     }
 }

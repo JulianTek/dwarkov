@@ -10,6 +10,13 @@ public class BarteringMenuUIHandler : MonoBehaviour
     {
         gameObject.SetActive(false);
         EventChannels.UIEvents.OnCloseBarteringMenu += CloseMenu;
+        EventChannels.PlayerInputEvents.OnInventoryClosed += CloseMenu;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.UIEvents.OnCloseBarteringMenu -= CloseMenu;
+        EventChannels.PlayerInputEvents.OnInventoryClosed -= CloseMenu;
     }
 
     void CloseMenu()

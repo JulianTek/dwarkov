@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
+  m_Name: AT-9
+  m_EditorClassIdentifier: 
+  IsAutoFire: 1
+  RateOfFire: 0.2
+  AmmoSubtypes:
+  - {fileID: 11400000, guid: 49b78bcca3f5af64b9b186c76d104e44, type: 2}
+  IsPrimary: 0
+  MagCapacity: 20
+  ReloadTime: 2
+  ShellReload: 0
+  Sprite: {fileID: 21300000, guid: 5811c9271a7742f4e9ceb2eb16d247ed, type: 3}
+  WeaponEmptySprite: {fileID: 21300000, guid: 1c10006eec9624d4d97f7d879dc9db50, type: 3}
+  MagazineSprite: {fileID: 0}
+  CaseSprite: {fileID: 0}
+  BaseSpreadAngle: 6
+  AmountOfBullets: 1
+  firingEventName: Weap_Fire_AT9
+  ammoEmptyFiringEventName: Weap_Empty_AT9
+  reloadEventName: Weap_Reload_AT9
+  firingEventRadius: 0
+  ammoEmptyEventRadius: 0
+  reloadEventRadius: 0

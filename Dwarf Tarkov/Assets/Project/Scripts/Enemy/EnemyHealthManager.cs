@@ -1,4 +1,5 @@
 using EventSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,12 +30,17 @@ public class EnemyHealthManager : MonoBehaviour
     public void TakeDamage(float value)
     {
         enemyCurrentHealth -= value;
-        Debug.Log(enemyCurrentHealth);
         if (enemyCurrentHealth <= 0)
         {
             Destroy(gameObject);
-            EventChannels.EnemyEvents.OnEnemyDeath?.Invoke();
+            EventChannels.EnemyEvents.OnEnemyDeath?.Invoke(gameObject);
+            EventChannels.EnemyEvents.OnEnemyDeathWithName?.Invoke(GetEnemyName());
         }
+    }
+
+    private string GetEnemyName()
+    {
+        return gameObject.name[..^7];
     }
 
     public float GetEnemyHealth()

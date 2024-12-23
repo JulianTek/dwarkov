@@ -18,4 +18,6 @@ public enum ItemType
     Ammunition,
     [Description("Valuable")]
     Valuable,
+    [Description("Flower")]
+    Flower,
 }

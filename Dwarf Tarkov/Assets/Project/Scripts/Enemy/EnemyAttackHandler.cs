@@ -22,7 +22,8 @@ public class EnemyAttackHandler : MonoBehaviour
     {
         if (other.GetComponent<PlayerInputHandler>())
         {
-            transform.parent.GetComponent<EnemyStateMachine>().SwitchState<AttackState>(transform.parent.gameObject);
+            EventChannels.EnemyEvents.OnEnemyAttack?.Invoke(25f);
+            transform.parent.GetComponent<EnemyStateMachine>().SwitchState<AttackState>();
         }
     }
 
@@ -30,7 +31,7 @@ public class EnemyAttackHandler : MonoBehaviour
     {   
         if (other.GetComponent<PlayerInputHandler>())
         {
-            transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(transform.parent.gameObject);
+            transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(other.transform.position);
         }
     }
 }

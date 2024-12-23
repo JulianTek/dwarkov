@@ -19,11 +19,12 @@ public class NPCQuestInventory : MonoBehaviour
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.Quests != null && data.Quests.Count > 0)
         {
-            completedQuests = ConvertQuestDTOsToEntity(data.CompletedQuests);
-            quests = ConvertQuestDTOsToEntity(data.Quests);
-            unlockedQuests = ConvertQuestDTOsToEntity(data.UnlockedQuests);
+            completedQuests = DTOConverter.ConvertQuestDTOListToQuestList(data.CompletedQuests);
+            quests = DTOConverter.ConvertQuestDTOListToQuestList(data.Quests);
+            unlockedQuests = DTOConverter.ConvertQuestDTOListToQuestList(data.UnlockedQuests);
         }
         RefreshQuests();
+
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;
         EventChannels.GameplayEvents.OnCompleteQuest += CompleteQuest;
 
@@ -44,10 +45,13 @@ public class NPCQuestInventory : MonoBehaviour
 
     void ConfirmQuest()
     {
+        var a_type = NextQuest.GetType();
         EventChannels.NPCEvents.OnPlayerAcceptQuest?.Invoke(NextQuest);
-        unlockedQuests.Remove(NextQuest);
+        unlockedQuests.RemoveAt(0);
         if (unlockedQuests.Count > 0)
+        {
             NextQuest = unlockedQuests[0];
+        }
         else
         {
             NextQuest = null;
@@ -59,6 +63,7 @@ public class NPCQuestInventory : MonoBehaviour
         int playerLevel = (int)EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke();
         foreach (Quest quest in quests)
         {
+            var a_type = quest.GetType();
             if (playerLevel >= quest.UnlockLevel && !unlockedQuests.Contains(quest) && !completedQuests.Contains(quest) && (bool)!EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke().Contains(quest))
                 unlockedQuests.Add(quest);
         }
@@ -88,12 +93,5 @@ public class NPCQuestInventory : MonoBehaviour
     public List<Quest> GetUnlockedQuests()
     {
         return unlockedQuests;
-    }
-
-    public List<Quest> ConvertQuestDTOsToEntity(List<QuestDTO> dtos)
-    {
-        List<Quest> quests = new List<Quest>();
-        quests.AddRange(dtos.Select(quest => new Quest()));
-        return quests;
     }
 }

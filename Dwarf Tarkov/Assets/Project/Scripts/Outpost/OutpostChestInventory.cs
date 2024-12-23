@@ -10,37 +10,55 @@ public class OutpostChestInventory : MonoBehaviour
     private int inventoryCapacity = 30;
     [SerializeField]
     private List<Item> items;
+
+    private void Awake()
+    {
+        EventChannels.DataEvents.OnGetOutpostInventory += GetItems;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data != null && data.OutpostInventory != null)
+        if (data != null && data.OutpostInventory != null && data.GameStarted)
         {
-            items = data.ConvertDTOsToItems(data.OutpostInventory);
+            items = DTOConverter.ConvertItemDTOListToItemList(data.OutpostInventory);
         }
         else
         {
-            items = new List<Item>()
+            data = DataSaver<SaveData>.Load("dev");
+            if (data != null && data.OutpostInventory != null && data.GameStarted)
             {
-                new Item(Resources.FindObjectsOfTypeAll<ItemData>().FirstOrDefault(item => item.Name == "6.11x54mm Green-tip"), 99)
+                items = DTOConverter.ConvertItemDTOListToItemList(data.OutpostInventory);
+            }
+            else
+            {
+                items = new List<Item>()
+            {
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("6.11x54mm Green-tip"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("14G Buckshot"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("9.22 DWS FMJ"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("8.75x20 FMJ"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(".377 FMJ"), 99)
             };
+            }
+
         }
         EventChannels.ItemEvents.OnAddItemToOutpostInventory += AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory += RemoveItem;
-        EventChannels.DataEvents.OnGetOutpostInventory += GetItemsAsDTOs;
     }
 
     private void OnDestroy()
     {
         EventChannels.ItemEvents.OnAddItemToOutpostInventory -= AddItem;
         EventChannels.ItemEvents.OnRemoveItemFromOutpostInventory -= RemoveItem;
-        EventChannels.DataEvents.OnGetOutpostInventory -= GetItemsAsDTOs;
+        EventChannels.DataEvents.OnGetOutpostInventory -= GetItems;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void AddItem(ItemData item, int amount)
@@ -109,15 +127,5 @@ public class OutpostChestInventory : MonoBehaviour
     public int GetCapacity()
     {
         return inventoryCapacity;
-    }
-
-    public  List<ItemDTO> GetItemsAsDTOs()
-    {
-        List<ItemDTO> dtos = new List<ItemDTO>();
-        foreach (Item item in items)
-        {
-            dtos.Add(new ItemDTO(item));
-        }
-        return dtos;
     }
 }

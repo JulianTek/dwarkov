@@ -29,6 +29,7 @@ public class WeaponSpriteHandler : MonoBehaviour
 
     void Reload()
     {
+        Debug.Log(spriteRenderer);
         spriteRenderer.sprite = weaponData.WeaponEmptySprite;
     }
 

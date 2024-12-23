@@ -12,27 +12,38 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     private WeaponData secondaryWeapon;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon += SelectPrimary;
         EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon += SelectSecondary;
         EventChannels.DataEvents.OnGetPrimaryWeapon += GetPrimaryWeapon;
         EventChannels.DataEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnGetPrimaryWeapon += GetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnGetSecondaryWeapon += GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnSetPrimaryWeapon += SetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnSetSecondaryWeapon += SetSecondaryWeapon;
 
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PrimaryWeapon != null && data.SecondaryWeapon != null)
         {
             primaryWeapon = data.GetWeaponDataFromDTO(data.PrimaryWeapon);
+            Debug.Log(primaryWeapon);
             secondaryWeapon = data.GetWeaponDataFromDTO(data.SecondaryWeapon);
 
         }
-        SelectPrimary();
+
     }
 
     private void OnDestroy()
     {
         EventChannels.PlayerInputEvents.OnPlayerSelectPrimaryWeapon -= SelectPrimary;
         EventChannels.PlayerInputEvents.OnPlayerSelectSecondaryWeapon -= SelectSecondary;
+        EventChannels.DataEvents.OnGetPrimaryWeapon -= GetPrimaryWeapon;
+        EventChannels.DataEvents.OnGetSecondaryWeapon -= GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnGetPrimaryWeapon -= GetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnGetWeaponData -= GetSecondaryWeapon;
+        EventChannels.WeaponEvents.OnSetPrimaryWeapon -= SetPrimaryWeapon;
+        EventChannels.WeaponEvents.OnSetSecondaryWeapon -= SetSecondaryWeapon;
     }
 
     // Update is called once per frame
@@ -58,5 +69,15 @@ public class PlayerWeaponInventoryHandler : MonoBehaviour
     public WeaponData GetSecondaryWeapon()
     {
         return secondaryWeapon;
+    }
+
+    private void SetPrimaryWeapon(WeaponData data)
+    {
+        primaryWeapon = data;
+    }
+
+    private void SetSecondaryWeapon(WeaponData data)
+    {
+        secondaryWeapon = data;
     }
 }

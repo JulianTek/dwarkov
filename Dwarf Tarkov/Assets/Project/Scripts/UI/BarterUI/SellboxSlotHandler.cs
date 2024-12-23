@@ -31,9 +31,4 @@ public class SellboxSlotHandler : MonoBehaviour
     {
         return item;
     }
-
-    public void RemoveItem()
-    {
-        EventChannels.BarteringEvents.OnPlayerMovesItemFromSellBox?.Invoke(gameObject);
-    }
 }

@@ -9,11 +9,11 @@ public class PlayerQuestInventory : MonoBehaviour
 {
     private List<Quest> quests = new List<Quest>();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PlayerQuests != null)
-            quests = ConvertDTOsToQuests(data.Quests);
+            quests = DTOConverter.ConvertQuestDTOListToQuestList(data.PlayerQuests);
         else
             quests = new List<Quest>();
 
@@ -27,6 +27,8 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.GameplayEvents.OnGetPlayerQuests += GetQuests;
 
         EventChannels.DataEvents.OnGetPlayerQuests += GetQuests;
+
+        EventChannels.EnemyEvents.OnEnemyDeathWithName += TrackEnemyKills;
     }
 
     private void OnDisable()
@@ -40,16 +42,19 @@ public class PlayerQuestInventory : MonoBehaviour
         EventChannels.GameplayEvents.OnGetPlayerQuests -= GetQuests;
 
         EventChannels.DataEvents.OnGetPlayerQuests -= GetQuests;
+
+        EventChannels.EnemyEvents.OnEnemyDeathWithName -= TrackEnemyKills;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void AddQuestToInventory(Quest quest)
     {
+        var a_type = quest.GetType();
         quests.Add(quest);
         Debug.Log(quest.Name);
     }
@@ -58,23 +63,29 @@ public class PlayerQuestInventory : MonoBehaviour
     {
         quests.Remove(quest);
     }
-    
+
     private void CheckIfQuestsCompleted(string name)
     {
-        foreach (Quest quest in quests)
+        foreach (var quest in quests)
         {
-            if (quest.QuestGiverName == name)
-            {
-                if (quest is ItemQuest)
-                    if (CheckIfItemQuestCompleted(quest as ItemQuest))
-                        EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
-            }
+            if (quest.QuestGiverName != name)
+                continue;
+
+            if (quest is ItemQuest itemQuest && CheckIfItemQuestCompleted(itemQuest))
+                    EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
+                else if (quest is EnemyQuest enemyQuest && CheckIfEnemyQuestCompleted(enemyQuest))
+                    EventChannels.UIEvents.OnPlayerCompleteQuest?.Invoke(quest);
         }
     }
 
     private bool CheckIfItemQuestCompleted(ItemQuest quest)
     {
         return (bool)EventChannels.ItemEvents.OnCheckIfItemQuestCompleted?.Invoke(quest.RequiredItems);
+    }
+
+    private bool CheckIfEnemyQuestCompleted(EnemyQuest quest)
+    {
+        return quest.AmountKilled >= quest.AmountToKill;
     }
 
     private void CompleteQuest(Quest quest)
@@ -88,7 +99,7 @@ public class PlayerQuestInventory : MonoBehaviour
         {
             EventChannels.ItemEvents.OnAddItemToInventory(item.data, item.amount);
         }
-        EventChannels.GameplayEvents.OnCompleteQuest?.Invoke(quest);  
+        EventChannels.GameplayEvents.OnCompleteQuest?.Invoke(quest);
     }
 
     private void CompleteItemQuest(List<Item> items)
@@ -104,10 +115,18 @@ public class PlayerQuestInventory : MonoBehaviour
         return quests;
     }
 
-    private List<Quest> ConvertDTOsToQuests(List<QuestDTO> dtos)
+    private void TrackEnemyKills(string enemyName)
     {
-        List<Quest> quests = new List<Quest>();
-        quests.AddRange(dtos.Select(quest => new Quest()));
-        return quests;
+        foreach (Quest quest in quests)
+        {
+            if (quest is EnemyQuest)
+            {
+                var questToCheck = quest as EnemyQuest;
+                if (questToCheck.EnemyToKill == enemyName)
+                {
+                    questToCheck.IncreaseAmountKilled();
+                }
+            }
+        }
     }
-} 
+}

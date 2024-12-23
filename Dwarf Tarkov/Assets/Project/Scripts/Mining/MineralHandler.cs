@@ -8,7 +8,6 @@ public class MineralHandler : MonoBehaviour
     public Mineable materialData;
     private bool playerIsInTrigger;
 
-    [SerializeField]
     private int amountMineable;
     [SerializeField]
     private int amountPerMine;
@@ -20,6 +19,7 @@ public class MineralHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        amountMineable = materialData.MineAmount;
         EventChannels.PlayerInputEvents.OnPlayerMine += Mine;
         spriteHandler = GetComponentInChildren<OreSpriteHandler>();
     }

@@ -13,4 +13,5 @@ public class GameplayEvents
 
     public QuestListEvent OnGetPlayerQuests;
     public QuestEvent OnCompleteQuest;
+    public QuestListEvent OnGetCompletedQuests;
 }

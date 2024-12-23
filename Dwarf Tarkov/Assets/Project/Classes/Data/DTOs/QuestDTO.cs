@@ -12,8 +12,9 @@ namespace Data
         {
             Name = quest.Name;
             QuestGiverName = quest.QuestGiverName;
+            MenuDescription = quest.MenuDescription;
             Rewards = new List<ItemDTO>();
-            Rewards.AddRange(quest.Rewards.Select(dto => new ItemDTO()));
+            Rewards.AddRange(DTOConverter.ConvertItemListToDTOList(quest.Rewards));
             UnlockLevel = quest.UnlockLevel;
             ExpReward = quest.ExpReward;
             IntroText = quest.IntroText;
@@ -27,6 +28,7 @@ namespace Data
 
         public string Name;
         public string QuestGiverName;
+        public string MenuDescription;
         public List<ItemDTO> Rewards;
         public int UnlockLevel;
         public float ExpReward;

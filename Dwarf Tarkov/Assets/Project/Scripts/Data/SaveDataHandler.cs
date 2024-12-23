@@ -13,12 +13,14 @@ public class SaveDataHandler : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         EventChannels.DataEvents.OnGetSaveData += GetData;
         EventChannels.DataEvents.OnSetSaveData += SetData;
+        EventChannels.GameplayEvents.OnGetCompletedQuests += GetCompletedQuests;
     }
 
     private void OnDestroy()
     {
         EventChannels.DataEvents.OnGetSaveData -= GetData;
         EventChannels.DataEvents.OnSetSaveData -= SetData;
+        EventChannels.GameplayEvents.OnGetCompletedQuests -= GetCompletedQuests;
     }
 
     // Update is called once per frame
@@ -40,5 +42,10 @@ public class SaveDataHandler : MonoBehaviour
     void SetData(SaveData data)
     {
         this.data = data;
+    }
+
+    private List<Quest> GetCompletedQuests()
+    {
+        return DTOConverter.ConvertQuestDTOListToQuestList(data.CompletedQuests);
     }
 }

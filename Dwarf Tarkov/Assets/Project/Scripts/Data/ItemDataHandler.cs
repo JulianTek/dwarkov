@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using EventSystem;
 
 namespace Data
 {
@@ -17,28 +18,12 @@ namespace Data
         public static Item LoadItem(string name)
         {
             ItemDTO dto = DataSaver<ItemDTO>.Load(name);
-            return ConvertDTOToItem(dto);
+            return DTOConverter.ConvertItemDTOToItem(dto);
         }
 
-        public static Item ConvertDTOToItem(ItemDTO dto)
+        public static void SaveInventory(string name, List<Item> inventory)
         {
-            var items = Resources.FindObjectsOfTypeAll(typeof(ItemData)) as ItemData[];
-            foreach (var item in items)
-            {
-                if (item.Name == dto.Data.Name)
-                    return new Item(item, dto.Amount);
-            }
-            return null;
-        }
-
-        public static void SaveInventory(string name, List<Item> iventory)
-        {
-            List<ItemDTO> itemDTOs = new List<ItemDTO>();
-            foreach (Item item in iventory)
-            {
-                itemDTOs.Add(new ItemDTO(item));
-            }
-            DataSaver<List<ItemDTO>>.Save(itemDTOs, name);
+            DataSaver<List<ItemDTO>>.Save(DTOConverter.ConvertItemListToDTOList(inventory), name);
         }
 
         public static List<Item> LoadInventory(string name)
@@ -50,13 +35,18 @@ namespace Data
                 List<Item> items = new List<Item>();
                 if (dtosList == null || dtosList.Count == 0)
                     return null;
-                foreach (ItemDTO itemDTO in dtosList)
-                {
-                    items.Add(ConvertDTOToItem(itemDTO));
-                }
-                return items;
+                return DTOConverter.ConvertItemDTOListToItemList(dtosList);
             }
             return null;
+        }
+
+        public static void DeleteInventory()
+        {
+            SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+            if (data != null)
+            {
+                data.ClearInventory();
+            }
         }
     }
 }

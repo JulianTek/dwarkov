@@ -34,6 +34,10 @@ public class WeaponBenchSlotHandler : MonoBehaviour
 
     public void SetWeapon()
     {
-        EventChannels.WeaponEvents.OnSwitchWeapon?.Invoke(weaponData);
+        if (weaponData.IsPrimary)
+            EventChannels.WeaponEvents.OnSetPrimaryWeapon?.Invoke(weaponData);
+        else
+            EventChannels.WeaponEvents.OnSetSecondaryWeapon?.Invoke(weaponData);
+        EventChannels.WeaponEvents.OnRefreshLoadout?.Invoke();
     }
 }

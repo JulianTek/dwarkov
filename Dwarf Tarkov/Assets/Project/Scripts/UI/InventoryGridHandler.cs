@@ -9,18 +9,11 @@ public class InventoryGridHandler : MonoBehaviour
     private List<GameObject> inventorySlots = new List<GameObject>();
     private PlayerInventory inventory;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         EventChannels.ItemEvents.OnUpdateInventory += UpdateInventory;
         EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
-        EventChannels.UIEvents.OnOpenBarteringMenu += UpdateInventory;
-        for (int i = 0; i < inventory.GetCapacity(); i++)
-        {
-            GameObject slot = Instantiate(inventorySlot, transform);
-            inventorySlots.Add(slot);
-            slot.SetActive(true);
-        }
+        EventChannels.ItemEvents.OnGetInventory += SetInventory;
     }
 
     private void OnDestroy()
@@ -28,7 +21,7 @@ public class InventoryGridHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnInventoryOpened -= UpdateInventory;
         EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
         EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
-        EventChannels.UIEvents.OnOpenBarteringMenu -= UpdateInventory;
+        EventChannels.ItemEvents.OnGetInventory -= SetInventory;
     }
     void UpdateInventory()
     {
@@ -52,25 +45,17 @@ public class InventoryGridHandler : MonoBehaviour
         }
     }
 
-    void UpdateInventory(ShopkeepInventory shop)
+    private void SetInventory(PlayerInventory inventory)
     {
-        List<Item> items = inventory.GetItems();
-        if (items.Count > 0)
+        this.inventory = inventory;
+        if (inventorySlots.Count >= inventory.GetCapacity())
+            return;
+
+        for (int i = 0; i < inventory.GetCapacity(); i++)
         {
-            for (int i = 0; i < inventorySlots.Count; i++)
-            {
-                GameObject slot = inventorySlots[i];
-                if (i < items.Count)
-                {
-                    Item item = items[i];
-                    slot.GetComponent<PlayerBarterSlotHandler>().SetSlot(item);
-                }
-                else
-                {
-                    // Clear the slot if there is no corresponding item
-                    slot.GetComponent<PlayerBarterSlotHandler>().ClearSlot();
-                }
-            }
+            GameObject slot = Instantiate(inventorySlot, transform);
+            inventorySlots.Add(slot);
+            slot.SetActive(true);
         }
     }
 }

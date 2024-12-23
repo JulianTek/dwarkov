@@ -34,6 +34,7 @@ public class InventorySlotHandler : MonoBehaviour
                 stackText.enabled = true;
             }
             this.item = item;
+            GetComponent<TooltipHandler>().SetText(item.data.Name, item.data.Description);
         }
     }
     private void SetSprite(Sprite sprite)

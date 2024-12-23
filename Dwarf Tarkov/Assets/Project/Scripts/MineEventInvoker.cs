@@ -8,5 +8,6 @@ public class MineEventInvoker : MonoBehaviour
     void Start()
     {
         EventChannels.WeaponEvents.OnSetCanFire?.Invoke(true);
+        EventChannels.ItemEvents.OnFindPlayerInventory?.Invoke();
     }
 }

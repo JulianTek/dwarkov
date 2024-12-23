@@ -12,7 +12,6 @@ public class OutpostInventoryGridHandler : MonoBehaviour
     void Awake()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-        EventChannels.PlayerInputEvents.OnInventoryOpened += UpdateInventory;
         EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
         EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
@@ -26,7 +25,6 @@ public class OutpostInventoryGridHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventChannels.PlayerInputEvents.OnInventoryOpened -= UpdateInventory;
         EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
         EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
     }

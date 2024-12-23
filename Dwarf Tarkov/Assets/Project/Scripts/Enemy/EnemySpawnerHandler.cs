@@ -46,7 +46,7 @@ public class EnemySpawnerHandler : MonoBehaviour
             else if (cooldownTimerStarted)
             {
                 timerElapsed += Time.deltaTime;
-                if (timerElapsed >= maxInterval)
+                if (timerElapsed >= cooldownTimer)
                 {
                     SetTimer(true);
                 }
@@ -72,5 +72,6 @@ public class EnemySpawnerHandler : MonoBehaviour
     {
         timerStarted = isStart;
         cooldownTimerStarted = !isStart;
+        timerElapsed = 0f;
     }
 }

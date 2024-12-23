@@ -14,7 +14,12 @@ public class EnemyExperienceHandler : MonoBehaviour
         EventChannels.EnemyEvents.OnEnemyDeath += AwardExperience;
     }
 
-    private void AwardExperience()
+    private void OnDestroy()
+    {
+        EventChannels.EnemyEvents.OnEnemyDeath -= AwardExperience;
+    }
+
+    private void AwardExperience(GameObject go)
     {
         EventChannels.PlayerEvents.OnExperienceGained?.Invoke(experienceGainedOnDeath);
     }

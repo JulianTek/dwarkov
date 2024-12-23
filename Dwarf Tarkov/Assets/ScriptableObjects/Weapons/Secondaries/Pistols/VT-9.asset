@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33567b96fe9770f48b9a9c952042af85, type: 3}
+  m_Name: VT-9
+  m_EditorClassIdentifier: 
+  IsAutoFire: 0
+  RateOfFire: 0.7
+  AmmoSubtypes:
+  - {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
+  IsPrimary: 0
+  MagCapacity: 8
+  ReloadTime: 2
+  ShellReload: 0
+  Sprite: {fileID: 21300000, guid: 6784798941bdd434d8cf8f0c664b0b7a, type: 3}
+  WeaponEmptySprite: {fileID: 21300000, guid: af06f3756b33eef47b20f5e71a9168b0, type: 3}
+  MagazineSprite: {fileID: 0}
+  CaseSprite: {fileID: 0}
+  BaseSpreadAngle: 6
+  AmountOfBullets: 1
+  firingEventName: Weap_Fire_VT9
+  ammoEmptyFiringEventName: Weap_Empty_VT9
+  reloadEventName: Weap_Reload_VT9
+  firingEventRadius: 0
+  ammoEmptyEventRadius: 0
+  reloadEventRadius: 0
