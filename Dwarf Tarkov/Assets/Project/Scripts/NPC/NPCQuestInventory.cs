@@ -23,8 +23,7 @@ public class NPCQuestInventory : MonoBehaviour
             quests = DTOConverter.ConvertQuestDTOListToQuestList(data.Quests);
             unlockedQuests = DTOConverter.ConvertQuestDTOListToQuestList(data.UnlockedQuests);
         }
-        else
-            RefreshQuests();
+        RefreshQuests();
 
         EventChannels.UIEvents.OnPlayerPressConfirm += ConfirmQuest;
         EventChannels.GameplayEvents.OnCompleteQuest += CompleteQuest;
