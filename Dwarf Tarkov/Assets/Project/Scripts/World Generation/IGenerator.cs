@@ -6,7 +6,7 @@ namespace WorldGeneration
 {
     public interface IGenerator
     {
-        public HashSet<Vector2Int> Generate(Vector2Int startPosition, int length);
+        public IEnumerable<Vector2Int> Generate(Vector2Int startPosition, int length);
     }
 }
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d39cb5020e3d0e45935fcfeb2d36603, type: 3}
+  m_Name: BeardFlower
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: c69b3c4eadd82af41a62cfe2efc1c548, type: 3}
+  Name: Beard Flower
+  SellPrice: 0
+  Type: 1
+  IsStackable: 0
+  MaxStackAmount: 0
+  Description: 
+  ItemYielded: {fileID: 11400000, guid: 4cdbdf2ca1363cb45b05787625e78fb8, type: 2}
+  ExperienceGainedOnMine: 5
+  MineAmount: 1
+  Stage2Sprite: {fileID: 21300000, guid: c69b3c4eadd82af41a62cfe2efc1c548, type: 3}
+  Stage3Sprite: {fileID: 21300000, guid: c69b3c4eadd82af41a62cfe2efc1c548, type: 3}
