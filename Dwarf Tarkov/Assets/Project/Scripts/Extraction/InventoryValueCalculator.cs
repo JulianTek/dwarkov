@@ -8,12 +8,16 @@ public class InventoryValueCalculator : MonoBehaviour
 {
     private TextMeshProUGUI valueText;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         valueText = GetComponent<TextMeshProUGUI>();
         EventChannels.ExtractionEvents.OnSetInventoryValue += SetInventoryValue;
-        EventChannels.ExtractionEvents.OnGetInventoryValue?.Invoke();
 
+    }
+
+    private void Start()
+    {
+        EventChannels.ExtractionEvents.OnGetInventoryValue?.Invoke();
     }
 
     // Update is called once per frame
