@@ -23,6 +23,7 @@ public class PlayerMovementHandler : MonoBehaviour
     private void OnDestroy()
     {
         EventChannels.PlayerInputEvents.OnPlayerMove -= Move;
+        EventChannels.PlayerInputEvents.OnPlayerSprint -= SetIsSprinting;
     }
 
     void SetIsSprinting(bool sprinting)
