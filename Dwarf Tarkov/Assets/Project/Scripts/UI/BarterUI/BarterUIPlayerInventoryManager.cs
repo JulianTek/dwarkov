@@ -17,7 +17,7 @@ public class BarterUIPlayerInventoryManager : MonoBehaviour
             inventorySlots.Add(slot);
             slot.SetActive(true);
             // really sloppy way to force the inventory to update at the beginning of the game
-            UpdateInventory(new ShopkeepInventory());
+            UpdateInventory(EventChannels.OutpostEvents.OnGetShopInventory?.Invoke());
         }
     }
 
@@ -25,24 +25,22 @@ public class BarterUIPlayerInventoryManager : MonoBehaviour
     {
         EventChannels.UIEvents.OnOpenBarteringMenu -= UpdateInventory;
     }
+
     void UpdateInventory(ShopkeepInventory shop)
     {
         List<Item> items = EventChannels.ItemEvents.OnGetPlayerInventory?.Invoke();
-        if (items.Count > 0)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
-            for (int i = 0; i < inventorySlots.Count; i++)
+            GameObject slot = inventorySlots[i];
+            if (i < items.Count)
             {
-                GameObject slot = inventorySlots[i];
-                if (i < items.Count)
-                {
-                    Item item = items[i];
-                    slot.GetComponent<PlayerBarterSlotHandler>().SetSlot(item);
-                }
-                else
-                {
-                    // Clear the slot if there is no corresponding item
-                    slot.GetComponent<PlayerBarterSlotHandler>().ClearSlot();
-                }
+                Item item = items[i];
+                slot.GetComponent<PlayerBarterSlotHandler>().SetSlot(item);
+            }
+            else
+            {
+                // Clear the slot if there is no corresponding item
+                slot.GetComponent<PlayerBarterSlotHandler>().ClearSlot();
             }
         }
     }

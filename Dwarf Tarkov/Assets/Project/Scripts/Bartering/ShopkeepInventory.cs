@@ -1,5 +1,4 @@
 using EventSystem;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +8,17 @@ public class ShopkeepInventory : MonoBehaviour
     private List<ShopKeepItem> inventory = new List<ShopKeepItem>();
     [HideInInspector]
     public List<ShopKeepItem> unlockedItems = new List<ShopKeepItem>();
+
+    private void Awake()
+    {
+        EventChannels.OutpostEvents.OnGetShopInventory += GetShopInventory;
+    }
+
+    private ShopkeepInventory GetShopInventory()
+    {
+        return this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +29,7 @@ public class ShopkeepInventory : MonoBehaviour
     private void OnDestroy()
     {
         EventChannels.UIEvents.OnPlayerSelectsItemToBuy -= CanBuyItem;
+        EventChannels.OutpostEvents.OnGetShopInventory -= GetShopInventory;
     }
 
     // Update is called once per frame

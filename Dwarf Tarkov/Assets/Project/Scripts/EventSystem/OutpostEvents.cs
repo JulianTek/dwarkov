@@ -6,6 +6,7 @@ public class OutpostEvents
 {
     public delegate void ItemEvent(ItemData item, int amount);
     public delegate void OutpostEvent();
+    public delegate ShopkeepInventory ShopInventoryEvent();
 
     public ItemEvent OnAddItemToOutpostInventory;
     public ItemEvent OnRemoveItemFromOutpostInventory;
@@ -17,4 +18,6 @@ public class OutpostEvents
 
     public OutpostEvent OnShowWeaponBench;
     public OutpostEvent OnHideWeaponBench;
+
+    public ShopInventoryEvent OnGetShopInventory;
 }
