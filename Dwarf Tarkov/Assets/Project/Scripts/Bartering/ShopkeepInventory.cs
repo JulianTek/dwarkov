@@ -22,8 +22,9 @@ public class ShopkeepInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventChannels.UIEvents.OnPlayerSelectsItemToBuy += CanBuyItem;
         UnlockItems();
+        EventChannels.OutpostEvents.OnGetShopInventory += GetShopInventory;
+        EventChannels.UIEvents.OnPlayerSelectsItemToBuy += CanBuyItem;
     }
 
     private void OnDestroy()
@@ -96,10 +97,10 @@ public class ShopkeepInventory : MonoBehaviour
     public void UnlockItems()
     {
         unlockedItems.Clear();
-
+        int playerLevel = (int)EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke();
         foreach (ShopKeepItem item in inventory)
         {
-            if (EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke() >= item.UnlockLevel)
+            if ( playerLevel>= item.UnlockLevel)
                 unlockedItems.Add(item);
         }
     }
