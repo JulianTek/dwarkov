@@ -27,13 +27,13 @@ public class PlayerExperienceHandler : MonoBehaviour
             playerLevel = 1;
             experiencePoints = 0;
         }
+        EventChannels.PlayerEvents.OnGetPlayerLevel += GetPlayerLevel;
+        EventChannels.DataEvents.OnGetPlayerLevel += GetPlayerLevel;
     }
     // Start is called before the first frame update
     void Start()
     {
         EventChannels.PlayerEvents.OnExperienceGiven += AddExperience;
-        EventChannels.PlayerEvents.OnGetPlayerLevel += GetPlayerLevel;
-        EventChannels.DataEvents.OnGetPlayerLevel += GetPlayerLevel;
         EventChannels.DataEvents.OnGetPlayerExperience += GetExperience;
     }
 
