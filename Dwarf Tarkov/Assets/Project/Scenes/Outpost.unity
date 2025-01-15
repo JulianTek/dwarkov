@@ -5176,6 +5176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465d5a1bc62f29949ab1b4893ce96df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableLogging: 0
   slot: {fileID: 5147771961530239582, guid: dba9030bb1b74eb4786840d9e71a67f5, type: 3}
   UI: {fileID: 1578586554}
 --- !u!114 &430407609
@@ -7557,6 +7558,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1279571924, guid: e994e0e712a2c69429b0af734df372b8, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1965555291970818275, guid: e994e0e712a2c69429b0af734df372b8,
         type: 3}
       propertyPath: primaryWeapon
@@ -7633,6 +7638,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9096302989177468593, guid: e994e0e712a2c69429b0af734df372b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

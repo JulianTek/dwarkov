@@ -1,5 +1,4 @@
 using EventSystem;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,16 +8,29 @@ public class ShopkeepInventory : MonoBehaviour
     private List<ShopKeepItem> inventory = new List<ShopKeepItem>();
     [HideInInspector]
     public List<ShopKeepItem> unlockedItems = new List<ShopKeepItem>();
+
+    private void Awake()
+    {
+        EventChannels.OutpostEvents.OnGetShopInventory += GetShopInventory;
+    }
+
+    private ShopkeepInventory GetShopInventory()
+    {
+        return this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        EventChannels.UIEvents.OnPlayerSelectsItemToBuy += CanBuyItem;
         UnlockItems();
+        EventChannels.OutpostEvents.OnGetShopInventory += GetShopInventory;
+        EventChannels.UIEvents.OnPlayerSelectsItemToBuy += CanBuyItem;
     }
 
     private void OnDestroy()
     {
         EventChannels.UIEvents.OnPlayerSelectsItemToBuy -= CanBuyItem;
+        EventChannels.OutpostEvents.OnGetShopInventory -= GetShopInventory;
     }
 
     // Update is called once per frame
@@ -85,10 +97,10 @@ public class ShopkeepInventory : MonoBehaviour
     public void UnlockItems()
     {
         unlockedItems.Clear();
-
+        int playerLevel = (int)EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke();
         foreach (ShopKeepItem item in inventory)
         {
-            if (EventChannels.PlayerEvents.OnGetPlayerLevel?.Invoke() >= item.UnlockLevel)
+            if ( playerLevel>= item.UnlockLevel)
                 unlockedItems.Add(item);
         }
     }
