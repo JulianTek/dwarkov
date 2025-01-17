@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using UnityEngine.SceneManagement;
-
+using Data;
 public class PlayerHealthManager : MonoBehaviour
 {
-    [SerializeField]
-    private float playerHealth = 100f;
+    private float maxHealth = 100f;
+    private float playerHealth;
+
+    private void Awake()
+    {
+        SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (data == null)
+        {
+            playerHealth = maxHealth;
+            return;
+        }
+        playerHealth = data.PlayerHealth;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +37,11 @@ public class PlayerHealthManager : MonoBehaviour
         
     }
 
+    public float GetHealth()
+    {
+        return playerHealth;
+    }
+
     void TakeDamage(float damage)
     {
         playerHealth -= damage;
@@ -39,5 +56,10 @@ public class PlayerHealthManager : MonoBehaviour
     void Die()
     {
         EventChannels.PlayerEvents.OnPlayerDeath?.Invoke();
+    }
+
+    void Heal(float healValue)
+    {
+        playerHealth = Mathf.Clamp(playerHealth + healValue, .1f, maxHealth);
     }
 }
