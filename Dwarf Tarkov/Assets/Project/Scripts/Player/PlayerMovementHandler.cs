@@ -35,11 +35,11 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         if (isSprinting)
         {
-            rb.MovePosition(rb.position + movementVector * sprintSpeed * Time.deltaTime);
+            rb.MovePosition(rb.position + (movementVector * sprintSpeed * Time.deltaTime));
         }
         else
         {
-            rb.MovePosition(rb.position + movementVector * movementSpeed * Time.deltaTime);
+            rb.MovePosition(rb.position + (movementVector * movementSpeed * Time.deltaTime));
         }
     }
 }

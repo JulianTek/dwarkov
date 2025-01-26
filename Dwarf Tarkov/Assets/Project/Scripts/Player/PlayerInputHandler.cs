@@ -28,7 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    public void Update()
+    void FixedUpdate()
     {
         if (!isPaused)
             EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(moveIndex);
