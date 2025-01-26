@@ -14879,7 +14879,22 @@ MonoBehaviour:
     UnlockLevel: 0
   - Data: {fileID: 11400000, guid: 5af40b46e436d1740af5cdbc365eff0b, type: 2}
     CostPerItem: 3
-    UnlockLevel: 2
+    UnlockLevel: 4
+  - Data: {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
+    CostPerItem: 2
+    UnlockLevel: 1
+  - Data: {fileID: 11400000, guid: 49b78bcca3f5af64b9b186c76d104e44, type: 2}
+    CostPerItem: 2
+    UnlockLevel: 1
+  - Data: {fileID: 11400000, guid: d9779668d5907ca4fa3b20c37356e6e2, type: 2}
+    CostPerItem: 2
+    UnlockLevel: 1
+  - Data: {fileID: 11400000, guid: 818c9c80a27867c4cb506ba6c7906248, type: 2}
+    CostPerItem: 2
+    UnlockLevel: 1
+  - Data: {fileID: 11400000, guid: c872c0691a8a96e4dbd0b48fee3fbe35, type: 2}
+    CostPerItem: 3
+    UnlockLevel: 4
   unlockedItems: []
 --- !u!1 &2087774247
 GameObject:
