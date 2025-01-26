@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e491b55c0f2f28ab07a9e25d453e03, type: 3}
+  m_Name: EB
+  m_EditorClassIdentifier: 
+  serializedObjectVersion:
+    version: 1.24.3
+  openTileset:
+    elements:
+    - id: 46bd9f38-0c56-4188-b541-6de1e201b149
+      name: Wall
+      isWeightEnabled: 0
+      totalWeight: 1
+      tiles:
+      - weight: 1
+        tile: {fileID: 11400000, guid: 88c2741c7a35f1247a23b889382d2ca5, type: 2}
+    - id: 5bd61854-4a97-48ff-b50e-8d3a83755d55
+      name: GameplayMech
+      isWeightEnabled: 0
+      totalWeight: 1
+      tiles:
+      - weight: 1
+        tile: {fileID: 11400000, guid: 46c675e2f52239b4b9610ffe10d5a9ef, type: 2}
+    orderedIds:
+    - 46bd9f38-0c56-4188-b541-6de1e201b149
+    - 5bd61854-4a97-48ff-b50e-8d3a83755d55
+  tileTypes: []
