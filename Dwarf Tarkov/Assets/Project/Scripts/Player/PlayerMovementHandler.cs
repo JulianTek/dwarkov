@@ -12,11 +12,13 @@ public class PlayerMovementHandler : MonoBehaviour
     private float sprintSpeed;
 
     private bool isSprinting;
+    private bool canMove = true;
     // Start is called before the first frame update
     void Start()
     {
         EventChannels.PlayerInputEvents.OnPlayerMove += Move;
         EventChannels.PlayerInputEvents.OnPlayerSprint += SetIsSprinting;
+        EventChannels.PlayerInputEvents.OnSetMovement += SetMovement;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -24,6 +26,7 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         EventChannels.PlayerInputEvents.OnPlayerMove -= Move;
         EventChannels.PlayerInputEvents.OnPlayerSprint -= SetIsSprinting;
+        EventChannels.PlayerInputEvents.OnSetMovement -= SetMovement;
     }
 
     void SetIsSprinting(bool sprinting)
@@ -31,8 +34,15 @@ public class PlayerMovementHandler : MonoBehaviour
         isSprinting = sprinting;
     }
 
+    void SetMovement(bool canMove)
+    {
+        this.canMove = canMove;
+    }
+
     void Move(Vector2 movementVector)
     {
+        if (!canMove)
+            return;
         if (isSprinting)
         {
             rb.MovePosition(rb.position + movementVector * sprintSpeed * Time.deltaTime);
