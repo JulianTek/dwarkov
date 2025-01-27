@@ -25,12 +25,14 @@ public class PlayerHealthManager : MonoBehaviour
     void Start()
     {
         EventChannels.EnemyEvents.OnEnemyAttack += TakeDamage;
+        EventChannels.PlayerEvents.OnPlayerHeal += InvokeHealing;
     }
 
     private void OnDestroy()
     {
         EventChannels.DataEvents.OnGetPlayerHealth -= GetHealth;
         EventChannels.EnemyEvents.OnEnemyAttack -= TakeDamage;
+        EventChannels.PlayerEvents.OnPlayerHeal -= InvokeHealing;
     }
 
     // Update is called once per frame
@@ -87,7 +89,7 @@ public class PlayerHealthManager : MonoBehaviour
         while (elapsedTime < timeToHeal)
         {
             elapsedTime += Time.deltaTime;
-            playerHealth += Mathf.Lerp(startHealth, target, elapsedTime / timeToHeal);
+            playerHealth = Mathf.Lerp(startHealth, target, elapsedTime / timeToHeal);
             EventChannels.UIEvents.OnUpdateHealthbar?.Invoke(playerHealth);
             yield return null;
         }

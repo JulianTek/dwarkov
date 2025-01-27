@@ -7,6 +7,7 @@ public class PlayerEvents
     public delegate void PlayerEvent();
     public delegate void ExperienceEvent(int experience);
     public delegate int PlayerLevelEvent();
+    public delegate void HealEvent(float healValue, float timeToHeal, bool healOverTime);
 
     public PlayerEvent OnPlayerDeath;
     
@@ -16,4 +17,5 @@ public class PlayerEvents
     public ExperienceEvent OnExperienceGiven;
 
     public PlayerLevelEvent OnGetPlayerLevel;
+    public HealEvent OnPlayerHeal;
 }
