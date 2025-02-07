@@ -39,7 +39,9 @@ public class OutpostChestInventory : MonoBehaviour
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("14G Buckshot"), 99),
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("9.22 DWS FMJ"), 99),
                 new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke("8.75x20 FMJ"), 99),
-                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(".377 FMJ"), 99)
+                new Item(EventChannels.DatabaseEvents.OnGetSubtype?.Invoke(".377 FMJ"), 99),
+                new Item(EventChannels.DatabaseEvents.OnGetItemData?.Invoke("Bandages"), 20),
+                new Item(EventChannels.DatabaseEvents.OnGetItemData?.Invoke("Healthkit"), 5)
             };
             }
 

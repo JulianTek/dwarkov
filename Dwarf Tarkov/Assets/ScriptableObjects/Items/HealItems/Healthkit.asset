@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c4644ebba2ea54f922e7ac6dfb5530, type: 3}
   m_Name: Healthkit
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: dd6b83abeb8e91b4fbca9b9a879cce33, type: 3}
   Name: Healthkit
-  BuyPrice: 0
-  SellPrice: 0
+  BuyPrice: 100
+  SellPrice: 30
   Type: 7
-  IsStackable: 0
-  MaxStackAmount: 0
-  Description: 
+  IsStackable: 1
+  MaxStackAmount: 5
+  Description: Standard dwarven first aid kit. Takes longer, but instantly heals
+    a larger amount
   HealOverTime: 0
-  HealTime: 0
-  HealValue: 0
+  HealTime: 10
+  HealValue: 70
