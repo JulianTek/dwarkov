@@ -14,6 +14,7 @@ public class DataEvents
     public delegate void SaveDataEvent(SaveData saveData);
     public delegate WeaponData WeaponDataEvent();
     public delegate AmmoSubtype AmmoSubtypeEvent();
+    public delegate float FloatEvent();
 
     public ItemEventvent OnGetPlayerInventory;
     public ItemEventvent OnGetOutpostInventory;
@@ -38,4 +39,6 @@ public class DataEvents
     public IntEventBoolParam OnGetAmountOfBullets;
 
     public AmmoSubtypeEvent OnGetCurrentSubtype;
+
+    public FloatEvent OnGetPlayerHealth;
 }

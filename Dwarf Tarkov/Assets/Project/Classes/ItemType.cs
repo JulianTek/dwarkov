@@ -20,4 +20,6 @@ public enum ItemType
     Valuable,
     [Description("Flower")]
     Flower,
+    [Description("Healing item")]
+    HealItem,
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Dwarkov/Create new item")]
-public class ItemData : ScriptableObject
+public class ItemData : ScriptableObject, IItemInteractor
 {
     [HideLabel]
     [PreviewField(50)]
@@ -25,4 +25,9 @@ public class ItemData : ScriptableObject
     public int MaxStackAmount;
     [TextArea]
     public string Description;
+
+    public virtual void UseItem()
+    {
+        throw new System.NotImplementedException();
+    }
 }
