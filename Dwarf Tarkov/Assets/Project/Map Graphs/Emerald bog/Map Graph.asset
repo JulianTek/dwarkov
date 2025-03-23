@@ -1865,7 +1865,7 @@ MonoBehaviour:
         - rid: 5832214902000058437
         constTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-        serializedVal: 15
+        serializedVal: 25
         serializedObj: {fileID: 0}
     - rid: 5832214902000058437
       type: {class: OutPort, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}

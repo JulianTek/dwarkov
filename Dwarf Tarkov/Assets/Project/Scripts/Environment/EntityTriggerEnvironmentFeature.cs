@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using AI;
+using EventSystem;
 using UnityEngine;
 
 public class EntityTriggerEnvironmentFeature : MonoBehaviour, IEnvironmentFeature
@@ -10,24 +11,30 @@ public class EntityTriggerEnvironmentFeature : MonoBehaviour, IEnvironmentFeatur
 
     [SerializeField]
     private float timeInterval;
-    private float timePassed;
+    private float timePassed = 0f;
 
     // Update is called once per frame
     void Update()
     {
-        while (entityInTrigger != null)
+        if (entityInTrigger != null)
         {
             InteractWithEnvironment();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (GetComponent<PlayerInputHandler>()  != null || GetComponent<EnemyStateMachine>() != null)
+        if (other.GetComponent<PlayerInputHandler>()  != null || other.GetComponent<EnemyStateMachine>() != null)
         {
             entityInTrigger = other.gameObject;
-            playerInTrigger = GetComponent<PlayerInputHandler>() != null ? true : false;
+            playerInTrigger = other.GetComponent<PlayerInputHandler>() != null ? true : false;
         }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        timePassed = 0f;
+        entityInTrigger = null;
     }
 
     public virtual void EnvironmentInteraction()
@@ -41,5 +48,6 @@ public class EntityTriggerEnvironmentFeature : MonoBehaviour, IEnvironmentFeatur
         if (timePassed < timeInterval)
             return;
         EnvironmentInteraction();
+        timePassed = 0f;
     }
 }
