@@ -37,10 +37,7 @@ public class EntityTriggerEnvironmentFeature : MonoBehaviour, IEnvironmentFeatur
         entityInTrigger = null;
     }
 
-    public virtual void EnvironmentInteraction()
-    {
-        // do nothing, let subclasses handle this
-    }
+    public virtual void EnvironmentInteraction() {}
 
     public void InteractWithEnvironment()
     {
