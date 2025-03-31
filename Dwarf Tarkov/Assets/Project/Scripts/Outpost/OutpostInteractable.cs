@@ -1,10 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using EventSystem;
 using UnityEngine;
 
 public class OutpostInteractable : MonoBehaviour, IOutpostInteractable
 {
-    private bool playerInTrigger = false;
+    protected void Start()
+    {
+        EventChannels.PlayerInputEvents.OnInteract += Interact;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.PlayerInputEvents.OnInteract -= Interact;
+    }
+
+    protected bool playerInTrigger = false;
     public void Interact()
     {
         if (playerInTrigger)
@@ -12,22 +23,16 @@ public class OutpostInteractable : MonoBehaviour, IOutpostInteractable
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerInputHandler>() != null)
+        if (other.GetComponentInParent<PlayerInputHandler>())
             playerInTrigger = true;
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected void OnTriggerExit2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerInputHandler>() != null && playerInTrigger)
+        if (other.GetComponentInParent<PlayerInputHandler>() && playerInTrigger)
             playerInTrigger = false;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

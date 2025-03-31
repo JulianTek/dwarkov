@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EventSystem;
 using UnityEngine;
 
 public class OutpostUIOpenInteractable : OutpostInteractable
@@ -7,9 +8,10 @@ public class OutpostUIOpenInteractable : OutpostInteractable
     [SerializeField]
     private GameObject uiToOpen;
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
-        uiToOpen.SetActive(false);
+        base.Start();
+        CloseMenu();
     }
 
     // Update is called once per frame
@@ -20,6 +22,13 @@ public class OutpostUIOpenInteractable : OutpostInteractable
 
     public override void RunInteraction()
     {
-        uiToOpen?.SetActive(true);
+        EventChannels.PlayerInputEvents.OnEnableHUDControls?.Invoke();
+        uiToOpen.SetActive(true);
+    }
+
+    protected void CloseMenu()
+    {
+        EventChannels.PlayerInputEvents.OnDisableHUDControls?.Invoke();
+        uiToOpen.SetActive(false);
     }
 }

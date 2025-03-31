@@ -99,6 +99,7 @@ public class PlayerInputHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
         EventChannels.OutpostEvents.OnHideOutpostInventory?.Invoke();
         EventChannels.OutpostEvents.OnHideWeaponBench?.Invoke();
+        EventChannels.UIEvents.OnHideBiomeSelector?.Invoke();
         TooltipSystem.Hide();
         ResumeGame();
     }

@@ -4,19 +4,27 @@ using System.Linq;
 using UnityEngine;
 using EventSystem;
 
-public class BiomeSelector : OutpostUIOpenInteractable
+public class BiomeSelector : UIWithButtonsHandler
 {
-    [SerializeField]
-    private GameObject biomeButton;
     [SerializeField]
     [Tooltip("The index value has to be the scene index")]
     private List<BiomeIndex> biomes = new();
     private int currentlySelectedScene;
+    private bool uiLoaded = false;
     // Start is called before the first frame update
-    void Start()
+    public new void Start()
     {
+        base.Start();
         EventChannels.OutpostEvents.OnSelectBiome += SetSelectedBiome;
         EventChannels.OutpostEvents.OnGetSelectedScene += GetSelectedScene;
+        EventChannels.UIEvents.OnHideBiomeSelector += CloseMenu;
+    }
+
+    private void OnDestroy()
+    {
+        EventChannels.OutpostEvents.OnSelectBiome -= SetSelectedBiome;
+        EventChannels.OutpostEvents.OnGetSelectedScene -= GetSelectedScene;
+        EventChannels.UIEvents.OnHideBiomeSelector -= CloseMenu;
     }
 
     // Update is called once per frame
@@ -38,9 +46,13 @@ public class BiomeSelector : OutpostUIOpenInteractable
     public override void RunInteraction()
     {
         base.RunInteraction();
+        if (uiLoaded)
+            return;
         foreach (var biome in biomes)
         {
-            // todo: instantiate a button for each biome and run logic
+            GameObject button = Instantiate(buttonToSpawn, parent.transform);
+            button.GetComponent<BiomeUIButtonHandler>().SetBiome(biome.BiomeName);
         }
+        uiLoaded = true;
     }
 }
