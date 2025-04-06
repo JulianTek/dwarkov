@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d39cb5020e3d0e45935fcfeb2d36603, type: 3}
+  m_Name: EmeraldOre
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: 219dd9f2e48797449b8547c708919f33, type: 3}
+  Name: Emerald Ore
+  BuyPrice: 0
+  SellPrice: 0
+  Type: 0
+  IsStackable: 0
+  MaxStackAmount: 0
+  Description: 
+  ItemYielded: {fileID: 11400000, guid: cc068459a4ed9fd48a820b13c3af6ef3, type: 2}
+  ExperienceGainedOnMine: 3
+  MineAmount: 6
+  Stage2Sprite: {fileID: 21300000, guid: 39e46864974191a4a8f2fb3f31516f9b, type: 3}
+  Stage3Sprite: {fileID: 21300000, guid: 7e49c026639479140997ec16a9221e18, type: 3}
