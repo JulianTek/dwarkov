@@ -4,11 +4,11 @@ using System.Linq;
 using EventSystem;
 using UnityEngine;
 
-public class BiomeDescriptionHandler : MonoBehaviour
+public class BiomeTitleDescriptionHandler : MonoBehaviour
 {
     [SerializeField]
     private List<BiomeNameDescription> biomeDescriptions = new();
-    private void Start()
+    private void Awake()
     {
         EventChannels.OutpostEvents.OnGetDescription += GetDescription;
     }

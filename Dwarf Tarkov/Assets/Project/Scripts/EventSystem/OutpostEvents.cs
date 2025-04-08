@@ -27,4 +27,5 @@ public class OutpostEvents
     public GetIntOutpostEvent OnGetSelectedScene;
     public StringOutpostEvent OnSetDescription;
     public ReturnStringEvent OnGetDescription;
+    public StringOutpostEvent OnSetTitle;
 }

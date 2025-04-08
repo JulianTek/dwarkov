@@ -16,6 +16,7 @@ public class BiomeUIButtonHandler : MonoBehaviour
 
     public void SelectBiome()
     {
+        EventChannels.OutpostEvents.OnSetTitle?.Invoke(biomeName);
         EventChannels.OutpostEvents.OnSelectBiome?.Invoke(biomeName);
         SetDescription();
     }
