@@ -36,11 +36,23 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 4286291051
+    - id: d34aa847-d6f2-4776-99e0-25a65dc1894c
+      name: Extraction spot
+      color:
+        serializedVersion: 2
+        rgba: 4291073716
+    - id: 3fff3238-c1de-4648-9d1a-f75bb0565f7d
+      name: LostInventory
+      color:
+        serializedVersion: 2
+        rgba: 4282577068
     orderedIds:
     - 3a16b72e-fa39-4e91-a9bf-682a94328063
     - a2e3b500-68b3-4829-8cde-61fbf54b1088
     - 6101f2f1-2511-4888-885f-670e88cae864
     - a9f266b0-9939-46da-8b8f-1b00a80bc070
+    - d34aa847-d6f2-4776-99e0-25a65dc1894c
+    - 3fff3238-c1de-4648-9d1a-f75bb0565f7d
   serializedNames: []
   serializedColors: []
   serializedLinkedSets: []

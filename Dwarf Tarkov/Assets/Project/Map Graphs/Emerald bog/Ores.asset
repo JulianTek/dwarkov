@@ -22,7 +22,7 @@ MonoBehaviour:
     - id: 5d62049e-7850-4179-9f26-c397a3bf175f
       name: Ores
       isWeightEnabled: 1
-      totalWeight: 1.41
+      totalWeight: 2.4099998
       prefabs:
       - weight: 1
         prefab: {fileID: 1509367041237378575, guid: a2f939ad5b3ca9e4f90df633f6fb7282,
@@ -32,6 +32,9 @@ MonoBehaviour:
           type: 3}
       - weight: 0.01
         prefab: {fileID: 1509367041237378575, guid: 46beafdca06495b43be53e0deab171b5,
+          type: 3}
+      - weight: 1
+        prefab: {fileID: 1509367041237378575, guid: a30e53001eecb554195b516f93bca287,
           type: 3}
     orderedIds:
     - 5d62049e-7850-4179-9f26-c397a3bf175f
