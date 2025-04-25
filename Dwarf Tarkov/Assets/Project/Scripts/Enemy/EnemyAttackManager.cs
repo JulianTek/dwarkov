@@ -4,7 +4,7 @@ using UnityEngine;
 using EventSystem;
 using AI;
 
-public class EnemyAttackHandler : MonoBehaviour
+public class EnemyAttackManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

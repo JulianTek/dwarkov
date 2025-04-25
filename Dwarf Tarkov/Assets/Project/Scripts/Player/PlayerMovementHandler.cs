@@ -21,6 +21,7 @@ public class PlayerMovementHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerMove += Move;
         EventChannels.PlayerInputEvents.OnPlayerSprint += SetIsSprinting;
         EventChannels.PlayerEvents.OnPlayerChangeMoveSpeed += ChangeMoveSpeed;
+        EventChannels.PlayerEvents.OnGetPlayerPosition += GetPlayerPosition;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -29,6 +30,7 @@ public class PlayerMovementHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerMove -= Move;
         EventChannels.PlayerInputEvents.OnPlayerSprint -= SetIsSprinting;
         EventChannels.PlayerEvents.OnPlayerChangeMoveSpeed -= ChangeMoveSpeed;
+        EventChannels.PlayerEvents.OnGetPlayerPosition -= GetPlayerPosition;
     }
 
     void SetIsSprinting(bool sprinting)
@@ -51,5 +53,10 @@ public class PlayerMovementHandler : MonoBehaviour
     private void ChangeMoveSpeed(float speed)
     {
         moveMultiplier = speed;
+    }
+
+    private Transform GetPlayerPosition()
+    {
+        return transform;
     }
 }
