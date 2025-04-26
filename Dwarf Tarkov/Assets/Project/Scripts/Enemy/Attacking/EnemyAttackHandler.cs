@@ -16,7 +16,11 @@ public class EnemyAttackHandler : MonoBehaviour, IEnemyAttackHandler
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<PlayerInputHandler>())
+        {
+            Attack();
             playerInTrigger = true;
+        }
+
     }
 
     public void OnTriggerExit2D(Collider2D other)

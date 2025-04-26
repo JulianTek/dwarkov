@@ -7,8 +7,6 @@ public class RangedAttackHandler : EnemyAttackHandler
 {
     [SerializeField]
     private GameObject projectile;
-    [SerializeField]
-    private float projectileSpeed;
 
     private void Update()
     {
@@ -30,8 +28,10 @@ public class RangedAttackHandler : EnemyAttackHandler
 
     void FireProjectile(float damage)
     {
-        GameObject go = ObjectPoolHandler.SpawnObject(projectile, transform.position, Quaternion.identity);
-        go.transform.LookAt(EventChannels.PlayerEvents.OnGetPlayerPosition?.Invoke());
-        go.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed)
+        GameObject go = ObjectPoolHandler.SpawnObject(projectile, transform.position, transform.rotation);
+        EnemyProjectileHandler enemyProjectileHandler = go.GetComponent<EnemyProjectileHandler>();
+        enemyProjectileHandler.SetDamage(damage);
+        enemyProjectileHandler.SetOrigin(transform);
+
     }
 }
