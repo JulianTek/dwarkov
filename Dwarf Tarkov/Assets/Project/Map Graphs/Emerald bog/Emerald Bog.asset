@@ -46,6 +46,11 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 4282577068
+    - id: 36eb6963-4de7-45f1-913b-27ee60836b6d
+      name: EnemySpawner
+      color:
+        serializedVersion: 2
+        rgba: 4286042790
     orderedIds:
     - 3a16b72e-fa39-4e91-a9bf-682a94328063
     - a2e3b500-68b3-4829-8cde-61fbf54b1088
@@ -53,6 +58,7 @@ MonoBehaviour:
     - a9f266b0-9939-46da-8b8f-1b00a80bc070
     - d34aa847-d6f2-4776-99e0-25a65dc1894c
     - 3fff3238-c1de-4648-9d1a-f75bb0565f7d
+    - 36eb6963-4de7-45f1-913b-27ee60836b6d
   serializedNames: []
   serializedColors: []
   serializedLinkedSets: []
