@@ -13,6 +13,11 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private float distanceThreshold;
     private EnemyFieldOfView fieldOfView;
+
+    private float baseSpeed;
+    private float movementMultiplier = 1f;
+  
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +28,8 @@ public class EnemyMovement : MonoBehaviour
         EventChannels.EnemyEvents.OnPlayerSpotted += MoveToPosition;
         EventChannels.EnemyEvents.OnEnemyWander += Wander;
         EventChannels.EnemyEvents.OnEnemyLoseInterest += LoseInterest;
+        EventChannels.EnemyEvents.OnChangeEnemyMovementSpeed += ChangeMovementSpeed;
+        baseSpeed = agent.speed;
     }
 
     private void OnDestroy()
@@ -30,6 +37,7 @@ public class EnemyMovement : MonoBehaviour
         EventChannels.EnemyEvents.OnPlayerSpotted -= MoveToPosition;
         EventChannels.EnemyEvents.OnEnemyWander -= Wander;
         EventChannels.EnemyEvents.OnEnemyLoseInterest -= LoseInterest;
+        EventChannels.EnemyEvents.OnChangeEnemyMovementSpeed -= ChangeMovementSpeed;
     }
 
     // Update is called once per frame
@@ -91,5 +99,13 @@ public class EnemyMovement : MonoBehaviour
     Vector3 GetAimDir()
     {
         return lastMoveDir;
+    }
+
+    private void ChangeMovementSpeed(float value)
+    {
+        if (value == 1f)
+            agent.speed = baseSpeed;
+        else
+            agent.speed = value;
     }
 }

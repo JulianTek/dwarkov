@@ -28,7 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    public void Update()
+    void FixedUpdate()
     {
         if (!isPaused)
             EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(moveIndex);
@@ -99,6 +99,7 @@ public class PlayerInputHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnToggleStackSplit?.Invoke(false);
         EventChannels.OutpostEvents.OnHideOutpostInventory?.Invoke();
         EventChannels.OutpostEvents.OnHideWeaponBench?.Invoke();
+        EventChannels.UIEvents.OnHideBiomeSelector?.Invoke();
         TooltipSystem.Hide();
         ResumeGame();
     }

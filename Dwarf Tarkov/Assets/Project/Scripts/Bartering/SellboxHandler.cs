@@ -115,6 +115,7 @@ public class SellboxHandler : MonoBehaviour
             slots[i].GetComponent<SellboxSlotHandler>().ClearSlot();
         }
         valueText.text = $"Value: 0 credits";
+        value = 0;
         EventChannels.UIEvents.OnCloseBarteringMenu?.Invoke();
     }
 

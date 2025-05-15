@@ -33,6 +33,8 @@ public class LoadoutSlotHandler : MonoBehaviour
 
     void SetWeapon(WeaponData data)
     {
+        if (data == null)
+            return;
         this.data = data;
         SetSprite(data.Sprite);
     }
