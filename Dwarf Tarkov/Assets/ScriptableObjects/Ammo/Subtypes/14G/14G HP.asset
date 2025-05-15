@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37accbad2dac5c24988edf7f4c6b44e5, type: 3}
-  m_Name: Ammo Subtype
+  m_Name: 14G HP
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Name: 
-  BuyPrice: 0
-  SellPrice: 0
-  Type: 0
-  IsStackable: 0
-  MaxStackAmount: 0
-  Description: 
-  BulletSpeed: 0
-  Damage: 0
+  Sprite: {fileID: 21300000, guid: 329f46796959448428f06506c8ef2a83, type: 3}
+  Name: 14G HP Ammo
+  BuyPrice: 5
+  SellPrice: 2
+  Type: 4
+  IsStackable: 1
+  MaxStackAmount: 99
+  Description: A slower, more powerful variant of 14G ammo for shotguns
+  BulletSpeed: 8
+  Damage: 15

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37accbad2dac5c24988edf7f4c6b44e5, type: 3}
-  m_Name: Ammo Subtype
+  m_Name: 8.75by20 RIPPER
   m_EditorClassIdentifier: 
   Sprite: {fileID: 0}
-  Name: 
-  BuyPrice: 0
-  SellPrice: 0
-  Type: 0
-  IsStackable: 0
-  MaxStackAmount: 0
-  Description: 
-  BulletSpeed: 0
-  Damage: 0
+  Name: 8.75x20 RIPPER
+  BuyPrice: 15
+  SellPrice: 5
+  Type: 4
+  IsStackable: 1
+  MaxStackAmount: 99
+  Description: Rips right through skin, but very expensive
+  BulletSpeed: 20
+  Damage: 20

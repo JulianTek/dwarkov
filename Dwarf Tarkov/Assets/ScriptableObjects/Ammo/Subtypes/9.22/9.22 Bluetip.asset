@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37accbad2dac5c24988edf7f4c6b44e5, type: 3}
   m_Name: 9.22 Bluetip
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Name: 
-  BuyPrice: 0
-  SellPrice: 0
-  Type: 0
-  IsStackable: 0
-  MaxStackAmount: 0
-  Description: 
-  BulletSpeed: 0
-  Damage: 0
+  Sprite: {fileID: 21300000, guid: bed5ab0aae1d06248aa856cbe1568ac2, type: 3}
+  Name: 9.22 DWS Blue Tip
+  BuyPrice: 6
+  SellPrice: 3
+  Type: 4
+  IsStackable: 1
+  MaxStackAmount: 99
+  Description: An improvement over the standard cartridges that come at a premium
+  BulletSpeed: 40
+  Damage: 60

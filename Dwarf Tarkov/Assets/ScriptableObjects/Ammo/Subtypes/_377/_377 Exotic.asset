@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37accbad2dac5c24988edf7f4c6b44e5, type: 3}
   m_Name: _377 Exotic
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Name: 
-  BuyPrice: 0
-  SellPrice: 0
-  Type: 0
-  IsStackable: 0
-  MaxStackAmount: 0
-  Description: 
-  BulletSpeed: 0
-  Damage: 0
+  Sprite: {fileID: 21300000, guid: 5f3ab859f8745d74c8efd726a94a330f, type: 3}
+  Name: .377 Exotic Ammo
+  BuyPrice: 10
+  SellPrice: 5
+  Type: 4
+  IsStackable: 1
+  MaxStackAmount: 99
+  Description: An expensive pistol cartridge that deals heavy damage to targets
+  BulletSpeed: 12
+  Damage: 25

@@ -49,7 +49,7 @@ public class ShopkeepInventory : MonoBehaviour
         if (item != null)
         {
             // if this item is not null, check if the player has enough credits
-            if (EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits(item.CostPerItem))
+            if (EventChannels.BarteringEvents.OnCheckIfPlayerHasEnoughCredits(item.Data.BuyPrice))
             {
                 // buy the item if the player has enough credits
                 BuyItem(item);
@@ -87,7 +87,7 @@ public class ShopkeepInventory : MonoBehaviour
     {
         // This adds 1 of the given item and removes the amount of credits the item costs, then closes the bartering menu
         EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(item.Data, 1);
-        EventChannels.BarteringEvents.OnPlayerBuysItem?.Invoke(item.CostPerItem);
+        EventChannels.BarteringEvents.OnPlayerBuysItem?.Invoke(item.Data.BuyPrice);
         EventChannels.UIEvents.OnCloseBarteringMenu?.Invoke();
     }
 
