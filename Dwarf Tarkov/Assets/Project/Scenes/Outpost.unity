@@ -5291,7 +5291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddedc10b1ec84804f96f8bcbb2848d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionText: {fileID: 1656421874}
+  descriptionText: {fileID: 0}
 --- !u!114 &426536754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7384,7 +7384,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1656421873}
   - {fileID: 1305307236}
   - {fileID: 1104435463}
   m_Father: {fileID: 426536752}
@@ -15211,6 +15210,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory:
+  - Data: {fileID: 11400000, guid: 0b11da5d39c88a245a856f2117282824, type: 2}
+    UnlockLevel: 1
+  - Data: {fileID: 11400000, guid: 3f153567c4aef0c4a98799052c4748fa, type: 2}
+    UnlockLevel: 1
   - Data: {fileID: 11400000, guid: ef70df9bd8f6e184b9242c5b3f594bc9, type: 2}
     UnlockLevel: 1
   - Data: {fileID: 11400000, guid: 5af40b46e436d1740af5cdbc365eff0b, type: 2}
