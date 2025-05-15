@@ -13,8 +13,8 @@ public class PlayerExperienceHandler : MonoBehaviour
     [SerializeField]
     [Header("Amount of experience for first level up")]
     private int xpNeededToLevelUp;
-
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
         if (data != null && data.PlayerLevel != 1 && data.PlayerExperience != 0)
@@ -27,13 +27,9 @@ public class PlayerExperienceHandler : MonoBehaviour
             playerLevel = 1;
             experiencePoints = 0;
         }
+        EventChannels.PlayerEvents.OnExperienceGiven += AddExperience;
         EventChannels.PlayerEvents.OnGetPlayerLevel += GetPlayerLevel;
         EventChannels.DataEvents.OnGetPlayerLevel += GetPlayerLevel;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        EventChannels.PlayerEvents.OnExperienceGiven += AddExperience;
         EventChannels.DataEvents.OnGetPlayerExperience += GetExperience;
     }
 

@@ -32,9 +32,9 @@ public class EnemyHealthManager : MonoBehaviour
         enemyCurrentHealth -= value;
         if (enemyCurrentHealth <= 0)
         {
+            Destroy(gameObject);
             EventChannels.EnemyEvents.OnEnemyDeath?.Invoke(gameObject);
             EventChannels.EnemyEvents.OnEnemyDeathWithName?.Invoke(GetEnemyName());
-            Destroy(gameObject);
         }
     }
 

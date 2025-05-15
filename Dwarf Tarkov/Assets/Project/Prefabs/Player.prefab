@@ -330,7 +330,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 7164038243177157252}
   m_HandleRect: {fileID: 0}
@@ -813,8 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630895194f35ff94b8f6d7dd5d7733f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
-  sprintSpeed: 5
+  movementSpeed: 10
+  sprintSpeed: 7
 --- !u!61 &4066289266865289181
 BoxCollider2D:
   m_ObjectHideFlags: 0

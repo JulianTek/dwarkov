@@ -22,7 +22,7 @@ public class PlayerBarterSlotHandler : MonoBehaviour
         isTaken = true;
         if (item.data.IsStackable)
         {
-            amountText.gameObject.SetActive(true);
+            amountText.enabled = true;
             amountText.SetText(item.amount.ToString());
         }
     }
@@ -33,7 +33,7 @@ public class PlayerBarterSlotHandler : MonoBehaviour
         image.sprite = null;
         image.enabled = false;
         isTaken = false;
-        amountText.gameObject.SetActive(false);
+        amountText.enabled = false;
     }
 
     public void SellItem()

@@ -30,6 +30,4 @@ public class EnemyEvents
     public EnemySpawnEvent OnSpawnEnemy;
 
     public EnemyObjectEvent OnEnemyLoseInterest;
-
-    public DamageEvent OnChangeEnemyMovementSpeed;
 }

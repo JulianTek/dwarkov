@@ -7,8 +7,6 @@ public class PlayerEvents
     public delegate void PlayerEvent();
     public delegate void ExperienceEvent(int experience);
     public delegate int PlayerLevelEvent();
-    public delegate void PlayerFloatEvent(float value);
-    public delegate Transform PlayerPositionEvent();
 
     public PlayerEvent OnPlayerDeath;
     
@@ -18,8 +16,4 @@ public class PlayerEvents
     public ExperienceEvent OnExperienceGiven;
 
     public PlayerLevelEvent OnGetPlayerLevel;
-
-    public PlayerFloatEvent OnPlayerChangeMoveSpeed;
-
-    public PlayerPositionEvent OnGetPlayerPosition;
 }

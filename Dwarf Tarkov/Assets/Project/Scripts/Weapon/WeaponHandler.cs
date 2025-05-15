@@ -137,6 +137,30 @@ public class WeaponHandler : MonoBehaviour
         magText.text = $"{currentMagCount}/{maxMagCount}";
         if (!isPaused)
         {
+            if (isAiming)
+            {
+                // Translate mouse position to on-screen point and turn weapon to there
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
+                mousePos.z = 0f;
+                Vector3 direction = (mousePos - transform.position).normalized;
+
+                // Calculate the angle between player's forward vector and the aiming direction
+                float angle = Vector3.Angle(Vector3.right, direction);
+
+                // Check if the mouse is above or below the player
+                if (direction.y < 0)
+                {
+                    angle = 360f - angle; // Adjust the angle for the correct rotation
+                }
+
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                // Flip gun sprite if aiming left of center
+                gunSprite.flipY = (mousePos.x < transform.position.x);
+                // Sets position depending on if the sprite is flipped
+                gunSprite.transform.localPosition = gunSprite.flipY ? new Vector3(0f, 0.15f, 0f) : new Vector3(0f, -0.1f, 0f);
+            }
+
             // Weapon firing logic
             if (isFiring)
             {
@@ -172,32 +196,6 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (isAiming)
-        {
-            // Translate mouse position to on-screen point and turn weapon to there
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
-            mousePos.z = 0f;
-            Vector3 direction = (mousePos - transform.position).normalized;
-
-            // Calculate the angle between player's forward vector and the aiming direction
-            float angle = Vector3.Angle(Vector3.right, direction);
-
-            // Check if the mouse is above or below the player
-            if (direction.y < 0)
-            {
-                angle = 360f - angle; // Adjust the angle for the correct rotation
-            }
-
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            // Flip gun sprite if aiming left of center
-            gunSprite.flipY = (mousePos.x < transform.position.x);
-            // Sets position depending on if the sprite is flipped
-            gunSprite.transform.localPosition = gunSprite.flipY ? new Vector3(0f, 0.15f, 0f) : new Vector3(0f, -0.1f, 0f);
-        }
-    }
     void Fire()
     {
 

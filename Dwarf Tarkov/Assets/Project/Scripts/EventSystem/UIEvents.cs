@@ -36,7 +36,6 @@ public class UIEvents
     public UIEvent OnHideAmmoTypes;
     public UIEvent OnShowNoAmmoTypes;
     public UIEvent OnHideNoAmmoTypes;
-    public UIEvent OnHideBiomeSelector;
 
     public UIEvent OnShowSellSubmenu;
     public UIEvent OnHideSellSubmenu;

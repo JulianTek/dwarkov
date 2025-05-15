@@ -20,7 +20,6 @@ MonoBehaviour:
   IsPrimary: 1
   MagCapacity: 30
   ReloadTime: 3
-  ShellReload: 0
   Sprite: {fileID: 21300000, guid: 6cafc837ec39b024baafef5f63de162f, type: 3}
   WeaponEmptySprite: {fileID: 21300000, guid: 1bd91a3f57099b1439975f6acfefa549, type: 3}
   MagazineSprite: {fileID: 21300000, guid: 742e1d2920700c5419dfa731a2691b1a, type: 3}
