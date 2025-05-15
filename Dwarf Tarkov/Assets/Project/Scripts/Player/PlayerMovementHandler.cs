@@ -12,6 +12,9 @@ public class PlayerMovementHandler : MonoBehaviour
     private float sprintSpeed;
 
     private bool isSprinting;
+
+    private float moveMultiplier = 1f;
+
     private bool canMove = true;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,8 @@ public class PlayerMovementHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerMove += Move;
         EventChannels.PlayerInputEvents.OnPlayerSprint += SetIsSprinting;
         EventChannels.PlayerInputEvents.OnSetMovement += SetMovement;
+        EventChannels.PlayerEvents.OnPlayerChangeMoveSpeed += ChangeMoveSpeed;
+        EventChannels.PlayerEvents.OnGetPlayerPosition += GetPlayerPosition;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -27,6 +32,8 @@ public class PlayerMovementHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerMove -= Move;
         EventChannels.PlayerInputEvents.OnPlayerSprint -= SetIsSprinting;
         EventChannels.PlayerInputEvents.OnSetMovement -= SetMovement;
+        EventChannels.PlayerEvents.OnPlayerChangeMoveSpeed -= ChangeMoveSpeed;
+        EventChannels.PlayerEvents.OnGetPlayerPosition -= GetPlayerPosition;
     }
 
     void SetIsSprinting(bool sprinting)
@@ -45,11 +52,21 @@ public class PlayerMovementHandler : MonoBehaviour
             return;
         if (isSprinting)
         {
-            rb.MovePosition(rb.position + movementVector * sprintSpeed * Time.deltaTime);
+            rb.MovePosition(rb.position + (movementVector * (sprintSpeed * moveMultiplier) * Time.deltaTime));
         }
         else
         {
-            rb.MovePosition(rb.position + movementVector * movementSpeed * Time.deltaTime);
+            rb.MovePosition(rb.position + (movementVector * (movementSpeed * moveMultiplier) * Time.deltaTime));
         }
+    }
+
+    private void ChangeMoveSpeed(float speed)
+    {
+        moveMultiplier = speed;
+    }
+
+    private Transform GetPlayerPosition()
+    {
+        return transform;
     }
 }

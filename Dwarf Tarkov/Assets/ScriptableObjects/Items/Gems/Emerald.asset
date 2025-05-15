@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e4cb906b4852a489b3c43465ce4239, type: 3}
+  m_Name: Emerald
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: 1a0f96fde32d7254fbfc334df39e19a6, type: 3}
+  Name: Emerald
+  BuyPrice: 0
+  SellPrice: 30
+  Type: 2
+  IsStackable: 1
+  MaxStackAmount: 10
+  Description: To some, these are worth a whole lot of credits. To others it can't
+    even buy you a carrot
