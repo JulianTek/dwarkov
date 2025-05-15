@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37accbad2dac5c24988edf7f4c6b44e5, type: 3}
+  m_Name: _377 Exotic
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: 5f3ab859f8745d74c8efd726a94a330f, type: 3}
+  Name: .377 Exotic Ammo
+  BuyPrice: 10
+  SellPrice: 5
+  Type: 4
+  IsStackable: 1
+  MaxStackAmount: 99
+  Description: An expensive pistol cartridge that deals heavy damage to targets
+  BulletSpeed: 12
+  Damage: 25
