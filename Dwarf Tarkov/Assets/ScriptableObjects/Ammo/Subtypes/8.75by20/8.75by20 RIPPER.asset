@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37accbad2dac5c24988edf7f4c6b44e5, type: 3}
   m_Name: 8.75by20 RIPPER
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: d2071de75a17bc34da8665cb48d23779, type: 3}
   Name: 8.75x20 RIPPER
   BuyPrice: 15
   SellPrice: 5
