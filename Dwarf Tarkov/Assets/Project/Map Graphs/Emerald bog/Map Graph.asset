@@ -243,15 +243,15 @@ MonoBehaviour:
     typeNames: []
   notes: []
   referenceNodeConnections:
-  - rid: 6038984207562178610
-  - rid: 6038984207562178627
-  - rid: 6038984616211906606
-  - rid: 230697667532423175
+  - rid: 230697678469595174
+  - rid: 230697678469595175
+  - rid: 230697678469595176
+  - rid: 230697678469595177
   referenceNodes:
-  - rid: 6038984207562178569
-  - rid: 6038984207562178625
-  - rid: 6038984616211906593
-  - rid: 230697667532423176
+  - rid: 230697678469595178
+  - rid: 230697678469595179
+  - rid: 230697678469595180
+  - rid: 230697678469595181
   groupNodes: []
   canBeAddedAsNode: 0
   nodePath: Graphs
@@ -401,26 +401,6 @@ MonoBehaviour:
           PublicKeyToken=b77a5c561934e089
         serializedVal: 100
         serializedObj: {fileID: 0}
-    - rid: 230697667532423175
-      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        inPort:
-          rid: 230697667532423180
-        outPort:
-          rid: 6038984207562178615
-        referenceNode:
-          rid: 230697667532423176
-    - rid: 230697667532423176
-      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        position:
-          serializedVersion: 2
-          x: 1317
-          y: 2584
-          width: 162
-          height: 77
-        providerNode:
-          rid: 6038984207562178609
     - rid: 230697667532423177
       type: {class: ProcessorNode/ProcessorProviderNode, ns: InsaneScatterbrain.ScriptGraph,
         asm: InsaneScatterbrain.ScriptGraph}
@@ -733,6 +713,86 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
         connectedInPorts:
         - rid: 230697667532423197
+    - rid: 230697678469595174
+      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        inPort:
+          rid: 6038984207562178613
+        outPort:
+          rid: 5832214902000058490
+        referenceNode:
+          rid: 230697678469595178
+    - rid: 230697678469595175
+      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        inPort:
+          rid: 6038984207562178630
+        outPort:
+          rid: 3309458823767392439
+        referenceNode:
+          rid: 230697678469595179
+    - rid: 230697678469595176
+      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        inPort:
+          rid: 6038984616211906598
+        outPort:
+          rid: 6038984207562178615
+        referenceNode:
+          rid: 230697678469595180
+    - rid: 230697678469595177
+      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        inPort:
+          rid: 230697667532423180
+        outPort:
+          rid: 6038984207562178615
+        referenceNode:
+          rid: 230697678469595181
+    - rid: 230697678469595178
+      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        position:
+          serializedVersion: 2
+          x: 388
+          y: 1547
+          width: 208
+          height: 277
+        providerNode:
+          rid: 5832214902000058485
+    - rid: 230697678469595179
+      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        position:
+          serializedVersion: 2
+          x: 9
+          y: 1804
+          width: 208
+          height: 301
+        providerNode:
+          rid: 3309458823767392434
+    - rid: 230697678469595180
+      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        position:
+          serializedVersion: 2
+          x: 1320
+          y: 2095
+          width: 162
+          height: 77
+        providerNode:
+          rid: 6038984207562178609
+    - rid: 230697678469595181
+      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
+      data:
+        position:
+          serializedVersion: 2
+          x: 1317
+          y: 2584
+          width: 162
+          height: 77
+        providerNode:
+          rid: 6038984207562178609
     - rid: 3309458823767392266
       type: {class: ExtractAreasNode, ns: InsaneScatterbrain.MapGraph, asm: InsaneScatterbrain.MapGraph}
       data:
@@ -3649,17 +3709,6 @@ MonoBehaviour:
           PublicKeyToken=null
         connectedInPorts:
         - rid: 6038984207562178564
-    - rid: 6038984207562178569
-      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        position:
-          serializedVersion: 2
-          x: 388
-          y: 1547
-          width: 208
-          height: 277
-        providerNode:
-          rid: 5832214902000058485
     - rid: 6038984207562178570
       type: {class: EmptyTextureNode, ns: InsaneScatterbrain.MapGraph, asm: InsaneScatterbrain.MapGraph}
       data:
@@ -4128,15 +4177,6 @@ MonoBehaviour:
           rid: 6038984207562178614
         maskOut:
           rid: 6038984207562178615
-    - rid: 6038984207562178610
-      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        inPort:
-          rid: 6038984207562178613
-        outPort:
-          rid: 5832214902000058490
-        referenceNode:
-          rid: 6038984207562178569
     - rid: 6038984207562178611
       type: {class: ProcessorNode/ProcessorProviderNode, ns: InsaneScatterbrain.ScriptGraph,
         asm: InsaneScatterbrain.ScriptGraph}
@@ -4312,17 +4352,6 @@ MonoBehaviour:
         typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         connectedInPorts:
         - rid: 6038984207562178584
-    - rid: 6038984207562178625
-      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        position:
-          serializedVersion: 2
-          x: 9
-          y: 1804
-          width: 208
-          height: 301
-        providerNode:
-          rid: 3309458823767392434
     - rid: 6038984207562178626
       type: {class: TextureToMaskNode, ns: InsaneScatterbrain.MapGraph, asm: InsaneScatterbrain.MapGraph}
       data:
@@ -4345,15 +4374,6 @@ MonoBehaviour:
           rid: 6038984207562178631
         maskOut:
           rid: 6038984207562178632
-    - rid: 6038984207562178627
-      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        inPort:
-          rid: 6038984207562178630
-        outPort:
-          rid: 3309458823767392439
-        referenceNode:
-          rid: 6038984207562178625
     - rid: 6038984207562178628
       type: {class: ProcessorNode/ProcessorProviderNode, ns: InsaneScatterbrain.ScriptGraph,
         asm: InsaneScatterbrain.ScriptGraph}
@@ -4841,17 +4861,6 @@ MonoBehaviour:
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         connectedInPorts:
         - rid: 6038984616211906582
-    - rid: 6038984616211906593
-      type: {class: ReferenceNode, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        position:
-          serializedVersion: 2
-          x: 1320
-          y: 2095
-          width: 162
-          height: 77
-        providerNode:
-          rid: 6038984207562178609
     - rid: 6038984616211906594
       type: {class: RandomlyFillTextureNode, ns: InsaneScatterbrain.MapGraph, asm: InsaneScatterbrain.MapGraph}
       data:
@@ -5014,15 +5023,6 @@ MonoBehaviour:
         typeName: UnityEngine.Vector2Int[], UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
         connectedInPorts: []
-    - rid: 6038984616211906606
-      type: {class: ReferenceNodeConnection, ns: InsaneScatterbrain.ScriptGraph, asm: InsaneScatterbrain.ScriptGraph}
-      data:
-        inPort:
-          rid: 6038984616211906598
-        outPort:
-          rid: 6038984207562178615
-        referenceNode:
-          rid: 6038984616211906593
     - rid: 6038984616211906607
       type: {class: TextureToChildGameObjectsNode, ns: InsaneScatterbrain.MapGraph,
         asm: InsaneScatterbrain.MapGraph}

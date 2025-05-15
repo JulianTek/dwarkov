@@ -47,4 +47,4 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 4615416272692253855, guid: b51687e8fccf7f24fb77427289d2cf77,
     type: 3}
   maxInterval: 10
-  cooldownTimer: 5
+  cooldownTimer: 2
