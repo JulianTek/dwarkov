@@ -14,6 +14,8 @@ public class UIEvents
     public delegate void ItemEvent(ItemData item);
     public delegate void WeaponSlotEvent(bool isPrimary);
     public delegate void StringUIEvent(string str);
+    public delegate int GetIntEWvent();
+    public delegate float GetFloatEvent();
 
     public HealthbarEvent OnUpdateHealthbar;
 
@@ -50,4 +52,7 @@ public class UIEvents
     public StringUIEvent OnSetQuestInfoTitle;
     public StringUIEvent OnSetQuestInfoDescription;
     public StringUIEvent OnSetQuestInfoProgress;
+
+    public GetIntEWvent OnGetHealingCost;
+    public GetFloatEvent OnGetHealingAmount;
 }

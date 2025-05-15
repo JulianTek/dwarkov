@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using EventSystem;
 
 public class InventorySlotHandler : MonoBehaviour
 {
@@ -19,6 +20,14 @@ public class InventorySlotHandler : MonoBehaviour
     private void Start()
     {
         tooltip = GetComponent<TooltipHandler>();
+    }
+
+    public void UseItem()
+    {
+        EventChannels.ItemEvents.OnRemoveItemFromInventory(item.data, 1);
+        item.data.UseItem();
+        EventChannels.PlayerInputEvents.OnInventoryClosed?.Invoke();
+        TooltipSystem.Hide();
     }
 
     public void SetSlot(Item item)

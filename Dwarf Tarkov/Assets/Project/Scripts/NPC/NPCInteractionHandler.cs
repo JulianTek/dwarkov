@@ -39,7 +39,13 @@ public class NPCInteractionHandler : MonoBehaviour
     {
         if (playerIsInTrigger)
         {
-            GetComponentInParent<NPCDialogueManager>().InitDialogue();
+            var questGiverDialogMan = GetComponentInParent<QuestGiverDialogueManager>();
+            if (questGiverDialogMan != null)
+                questGiverDialogMan.InitDialogue();
+            else
+            {
+                GetComponentInParent<HealerDialogueManager>().InitDialogue();
+            }
         }
     }
 

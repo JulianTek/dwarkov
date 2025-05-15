@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     private InputActionAsset _actionAsset;
     private bool isPaused;
     private Vector2 moveIndex;
+    private bool canMove = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isPaused)
+        if (!isPaused && canMove)
             EventChannels.PlayerInputEvents.OnPlayerMove?.Invoke(moveIndex);
     }
 

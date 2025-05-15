@@ -38,6 +38,8 @@ namespace EventSystem
         public ButtonEvent OnToggleAmmoTypes;
 
         public ButtonEvent OnPlayerPauses;
+
+        public BoolEvent OnSetMovement;
     }
 }
 

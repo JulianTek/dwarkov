@@ -36,6 +36,7 @@ namespace Data
         public int PlayerLevel { get; private set; }
         public int PlayerExperience { get; private set; }
         public List<QuestDTO> PlayerQuests { get; private set; }
+        public float PlayerHealth { get; private set; }
 
         // Quest stuff
         public List<QuestDTO> Quests { get; private set; } = new List<QuestDTO>();
@@ -68,6 +69,7 @@ namespace Data
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
             PlayerQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetPlayerQuests?.Invoke());
+            PlayerHealth = (float)EventChannels.DataEvents.OnGetPlayerHealth?.Invoke();
             Quests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetAllQuests?.Invoke());
             UnlockedQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetUnlockedQuests?.Invoke());
             CompletedQuests = DTOConverter.ConvertQuestListToQuestDTOList(EventChannels.DataEvents.OnGetCompletedQuests?.Invoke());
@@ -113,6 +115,7 @@ namespace Data
             PlayerLevel = (int)EventChannels.DataEvents.OnGetPlayerLevel?.Invoke();
             PlayerExperience = (int)EventChannels.DataEvents.OnGetPlayerExperience?.Invoke();
             PlayerInventory = DTOConverter.ConvertItemListToDTOList((EventChannels.DataEvents.OnGetPlayerInventory?.Invoke()));
+            PlayerHealth = (float)EventChannels.DataEvents.OnGetPlayerHealth?.Invoke();
             PrimaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetPrimaryWeapon?.Invoke());
             SecondaryWeapon = new WeaponDTO(EventChannels.DataEvents.OnGetSecondaryWeapon?.Invoke());
             CurrentBulletsInPrimaryMag = (int)EventChannels.DataEvents.OnGetAmountOfBullets?.Invoke(true);

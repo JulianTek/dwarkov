@@ -9,6 +9,7 @@ public class PlayerEvents
     public delegate int PlayerLevelEvent();
     public delegate void PlayerFloatEvent(float value);
     public delegate Transform PlayerPositionEvent();
+    public delegate void HealEvent(float healValue, float timeToHeal, bool healOverTime);
 
     public PlayerEvent OnPlayerDeath;
     
@@ -22,4 +23,5 @@ public class PlayerEvents
     public PlayerFloatEvent OnPlayerChangeMoveSpeed;
 
     public PlayerPositionEvent OnGetPlayerPosition;
+    public HealEvent OnPlayerHeal;
 }
