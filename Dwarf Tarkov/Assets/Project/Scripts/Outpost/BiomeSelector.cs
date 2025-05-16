@@ -18,6 +18,7 @@ public class BiomeSelector : UIWithButtonsHandler
         EventChannels.OutpostEvents.OnSelectBiome += SetSelectedBiome;
         EventChannels.OutpostEvents.OnGetSelectedScene += GetSelectedScene;
         EventChannels.UIEvents.OnHideBiomeSelector += CloseMenu;
+        SetSelectedBiome("Surface Depths");
     }
 
     private void OnDestroy()
@@ -35,7 +36,9 @@ public class BiomeSelector : UIWithButtonsHandler
 
     void SetSelectedBiome(string biomeName)
     {
-        currentlySelectedScene = biomes.FirstOrDefault(x => x.BiomeName == biomeName).Index;
+        currentlySelectedScene = biomes.FirstOrDefault(x => x.BiomeName == biomeName).BiomeNumber;
+        Debug.Log(biomes.FirstOrDefault(x => x.BiomeName == biomeName));
+        Debug.Log(biomes.FirstOrDefault(x => x.BiomeName == biomeName).BiomeNumber);
     }
 
     int GetSelectedScene()

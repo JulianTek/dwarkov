@@ -6,6 +6,6 @@ using System;
 [Serializable]
 public class BiomeIndex
 {
-    public int Index;
+    public int  BiomeNumber;
     public string BiomeName;
 }
