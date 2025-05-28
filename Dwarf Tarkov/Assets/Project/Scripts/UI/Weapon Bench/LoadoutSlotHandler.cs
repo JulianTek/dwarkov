@@ -21,7 +21,8 @@ public class LoadoutSlotHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeapon;
+        EventChannels.WeaponEvents.OnSetPrimaryWeapon -= SetWeapon;
+        EventChannels.WeaponEvents.OnSetSecondaryWeapon -= SetWeapon;
         EventChannels.UIEvents.OnSwitchWeaponSlotSide -= SwitchSides;
     }
 

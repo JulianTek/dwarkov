@@ -22,7 +22,10 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
 
     public void UpdateList(bool isPrimary)
     {
-        ClearList();
+        if (transform.childCount != 0)
+        {
+            return;
+        }
         var weapons = EventChannels.DatabaseEvents.OnGetAllWeapons?.Invoke();
         foreach (var weapon in weapons)
         {
@@ -31,14 +34,6 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
                 GameObject weaponSlot = Instantiate(slot, gameObject.transform);
                 weaponSlot.GetComponent<WeaponBenchSlotHandler>().SetWeaponData(weapon);
             }
-        }
-    }
-
-    void ClearList()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject);
         }
     }
 }
