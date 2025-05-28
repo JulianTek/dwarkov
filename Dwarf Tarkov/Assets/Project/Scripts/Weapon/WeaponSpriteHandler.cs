@@ -38,7 +38,7 @@ public class WeaponSpriteHandler : MonoBehaviour
         spriteRenderer.sprite = weaponData.Sprite;
     }
 
-    void SetWeaponData(WeaponData weaponData)
+    public void SetWeaponData(WeaponData weaponData)
     {
         this.weaponData = weaponData;
     }

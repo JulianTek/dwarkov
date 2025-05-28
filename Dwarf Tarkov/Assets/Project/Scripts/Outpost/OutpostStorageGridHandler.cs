@@ -19,8 +19,8 @@ public class OutpostStorageGridHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inventorySlots.Clear();
         inventory = GameObject.FindGameObjectWithTag("OutpostChest").GetComponent<OutpostChestInventory>();
-        EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateInventory;
         for (int i = 0; i < inventory.GetCapacity(); i++)
         {
             GameObject slot = Instantiate(inventorySlot, transform);

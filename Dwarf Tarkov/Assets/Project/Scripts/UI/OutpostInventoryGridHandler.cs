@@ -11,6 +11,7 @@ public class OutpostInventoryGridHandler : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        inventorySlots.Clear();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         EventChannels.OutpostEvents.OnShowOutpostInventory += UpdateInventory;
         EventChannels.ItemEvents.OnUpdateOutpostInventory += UpdateInventory;
@@ -26,7 +27,7 @@ public class OutpostInventoryGridHandler : MonoBehaviour
     private void OnDestroy()
     {
         EventChannels.OutpostEvents.OnShowOutpostInventory -= UpdateInventory;
-        EventChannels.ItemEvents.OnUpdateInventory -= UpdateInventory;
+        EventChannels.ItemEvents.OnUpdateOutpostInventory -= UpdateInventory;
     }
     void UpdateInventory()
     {
