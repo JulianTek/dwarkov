@@ -64,7 +64,7 @@ public class NPCQuestInventory : MonoBehaviour
         foreach (Quest quest in quests)
         {
             var a_type = quest.GetType();
-            if (playerLevel >= quest.UnlockLevel && !unlockedQuests.Contains(quest) && !completedQuests.Contains(quest) && (bool)!EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke().Contains(quest))
+            if (playerLevel >= quest.UnlockLevel && !QuestIsUnlockedOrCompleted(quest))
                 unlockedQuests.Add(quest);
         }
         if (unlockedQuests.Count > 0)
@@ -93,5 +93,11 @@ public class NPCQuestInventory : MonoBehaviour
     public List<Quest> GetUnlockedQuests()
     {
         return unlockedQuests;
+    }
+
+    private bool QuestIsUnlockedOrCompleted(Quest quest)
+    {
+        var playerQuests = EventChannels.GameplayEvents.OnGetPlayerQuests?.Invoke();
+        return unlockedQuests.Any(q => quest.Name == q.Name) || completedQuests.Any(q => quest.Name == q.Name) || playerQuests.Any(q => quest.Name == q.Name);
     }
 }
