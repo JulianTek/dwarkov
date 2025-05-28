@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using Data;
 public class PlayerHealthManager : MonoBehaviour
 {
+    [SerializeField]
     private float maxHealth = 100f;
     private float playerHealth;
 
@@ -13,7 +14,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         EventChannels.DataEvents.OnGetPlayerHealth += GetHealth;
         SaveData data = EventChannels.DataEvents.OnGetSaveData?.Invoke();
-        if (data == null)
+        if (data == null || data.PlayerHealth == 0)
         {
             playerHealth = maxHealth;
             return;
