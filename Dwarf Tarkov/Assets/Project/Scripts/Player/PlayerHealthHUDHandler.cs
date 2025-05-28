@@ -12,6 +12,9 @@ public class PlayerHealthHUDHandler : MonoBehaviour
     void Start()
     {
         healthBar = GetComponent<Slider>();
+        var saveData = EventChannels.DataEvents.OnGetSaveData?.Invoke();
+        if (saveData != null && saveData.PlayerHealth > 0f)
+            healthBar.value = saveData.PlayerHealth;
         EventChannels.UIEvents.OnUpdateHealthbar += UpdateHealthbar;
     }
 
