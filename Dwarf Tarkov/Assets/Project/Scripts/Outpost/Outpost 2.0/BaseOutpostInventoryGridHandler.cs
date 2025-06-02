@@ -39,20 +39,13 @@ public class BaseOutpostInventoryGridHandler : MonoBehaviour
             {
                 GameObject slot = inventorySlots[i];
                 OutpostInventorySlotHandler slotHandler = slot.GetComponent<OutpostInventorySlotHandler>();
+                slotHandler.ClearSlot();
                 if (i < items.Count)
                 {
-                    if (items[i] == null && slotHandler.GetIsTaken())
-                    {
-                        slotHandler.ClearSlot();
-                    }
                     Item item = items[i];
                     slotHandler.SetSlot(item);
                 }
-                else
-                {
-                    // Clear the slot if there is no corresponding item
-                    slotHandler.ClearSlot();
-                }
+
             }
         }
         else
