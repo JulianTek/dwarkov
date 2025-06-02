@@ -7,17 +7,20 @@ public class OutpostUIOpenInteractable : OutpostInteractable
 {
     [SerializeField]
     private GameObject uiToOpen;
+    [SerializeField]
+    private bool closeMenuOnStart = true;
     // Start is called before the first frame update
     protected new void Start()
     {
         base.Start();
-        CloseMenu();
+        if (closeMenuOnStart)
+            CloseMenu();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public override void RunInteraction()
