@@ -19,6 +19,8 @@ public class EnemyFieldOfView : MonoBehaviour
     private float angleIncrease;
     [SerializeField]
     private float viewDistance = 5f;
+    [SerializeField]
+    private float peripheralDistance = 0.2f;
     private Vector3 origin;
     private float startingAngle;
 
@@ -32,6 +34,11 @@ public class EnemyFieldOfView : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
         origin = Vector3.zero;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, peripheralDistance);
     }
 
     private Vector3 GetVectorFromAngle(float angle)
@@ -70,8 +77,9 @@ public class EnemyFieldOfView : MonoBehaviour
         {
             Vector3 vertex;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, GetVectorFromAngle(angle), viewDistance, layerMask);
+            Collider2D colliderHit = Physics2D.OverlapCircle(transform.position, peripheralDistance);
             var currentState = GetCurrentState();
-            if (!hit.collider)
+            if (!hit.collider || !colliderHit)
             {
                 vertex = transform.localPosition + GetVectorFromAngle(angle) * viewDistance;
             }
@@ -83,8 +91,16 @@ public class EnemyFieldOfView : MonoBehaviour
                     {
                         transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(hit.point);
                     }
+                    vertex = hit.point.normalized;
                 }
-                vertex = hit.point.normalized;
+                else if (colliderHit.gameObject.GetComponent<PlayerInputHandler>())
+                {
+                    if (currentState.GetType() == typeof(WanderState))
+                    {
+                        transform.parent.GetComponent<EnemyStateMachine>().SwitchState<SpottedPlayerState>(colliderHit.transform.position);
+                    }
+                    vertex = (colliderHit.transform.position - transform.position).normalized * peripheralDistance + transform.localPosition;
+                }
             }
         }
     }
