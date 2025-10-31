@@ -11,6 +11,7 @@ public class WeaponEvents
     public delegate void WeaponBoolEvent(bool boolean);
 
     public WeaponActionEvent OnWeaponFired;
+    public WeaponActionEvent OnStopFiring;
     public WeaponActionEvent OnWeaponReload;
     public WeaponActionEvent OnWeaponReloaded;
 

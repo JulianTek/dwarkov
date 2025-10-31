@@ -3,7 +3,7 @@ guid: 4d7fa8aa062cd834eac325efff5df067
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -33,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 1
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -111,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -6301,303 +6307,302 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spr_outpost_216: -1880260135
-      spr_outpost_42: -960567970
-      spr_outpost_211: -163542626
-      spr_outpost_39: -1475974895
-      spr_outpost_245: -1496004238
-      spr_outpost_23: -1171515001
-      spr_outpost_170: 1324576049
-      spr_outpost_228: -1519662246
-      spr_outpost_275: 621617894
-      spr_outpost_293: -1112666808
-      spr_outpost_77: -43670252
-      spr_outpost_209: -1596070421
-      spr_outpost_256: -410833844
-      spr_outpost_5: -833856324
-      spr_outpost_99: -1054162493
-      spr_outpost_68: -456874125
-      spr_outpost_189: 56592040
-      spr_outpost_112: -553389897
-      spr_outpost_266: -1537202576
-      spr_outpost_279: 631390565
-      spr_outpost_129: 211299233
-      spr_outpost_178: 1635781059
-      spr_outpost_6: 1599748504
-      spr_outpost_213: 1934822016
-      spr_outpost_231: -1794255078
-      spr_outpost_98: -498031434
-      spr_outpost_113: -748333969
-      spr_outpost_26: -1270597054
-      spr_outpost_73: 1589085149
-      spr_outpost_130: -76173461
-      spr_outpost_204: -610819626
-      spr_outpost_161: -1235473001
-      spr_outpost_260: 965608299
-      spr_outpost_67: 1327414776
-      spr_outpost_282: 495951384
-      spr_outpost_146: 983902993
-      spr_outpost_55: 1583759798
-      spr_outpost_175: 454425348
-      spr_outpost_89: -1267748903
-      spr_outpost_265: 1908613529
-      spr_outpost_172: 913761207
-      spr_outpost_273: -1180808788
-      spr_outpost_20: -192302870
-      spr_outpost_3: -291499407
-      spr_outpost_90: 1108916168
-      spr_outpost_220: 220869843
-      spr_outpost_100: 1594959295
-      spr_outpost_240: -1684693631
-      spr_outpost_7: -267614455
-      spr_outpost_143: 768031170
-      spr_outpost_183: 1530735790
-      spr_outpost_21: -495517525
-      spr_outpost_132: 398654926
-      spr_outpost_147: 1840711091
-      spr_outpost_292: -128553547
-      spr_outpost_136: 2095463049
-      spr_outpost_86: 2085969326
-      spr_outpost_58: 578119674
-      spr_outpost_75: 1615519684
-      spr_outpost_81: 758542556
-      spr_outpost_24: 1373118062
-      spr_outpost_83: -849816249
-      spr_outpost_171: 1370334353
-      spr_outpost_242: 1597319957
-      spr_outpost_79: 957069525
-      spr_outpost_286: 501538097
-      spr_outpost_119: -2005465479
-      spr_outpost_126: 457176845
-      spr_outpost_263: -150897829
-      spr_outpost_208: -819864701
-      spr_outpost_250: 1803356746
-      spr_outpost_115: 2057977615
-      spr_outpost_176: 1672648414
-      spr_outpost_141: 1916533553
-      spr_outpost_104: 1634049942
-      spr_outpost_190: -1451751990
-      spr_outpost_159: -654249996
-      spr_outpost_253: 1769794247
-      spr_outpost_272: -1035316594
-      spr_outpost_177: -1117634411
-      spr_outpost_156: 1961620675
-      spr_outpost_31: 739337527
-      spr_outpost_123: 2032620729
-      spr_outpost_152: -1674091372
-      spr_outpost_34: 1243211357
-      spr_outpost_109: 1105138715
-      spr_outpost_217: -984235496
-      spr_outpost_140: 827049023
-      spr_outpost_69: -316775638
-      spr_outpost_103: -1695145096
-      spr_outpost_25: -459858038
-      spr_outpost_224: 1657500041
-      spr_outpost_237: -342606052
-      spr_outpost_80: 1913981577
-      spr_outpost_169: -1902825831
-      spr_outpost_33: -533558071
-      spr_outpost_154: -1345878365
-      spr_outpost_37: 160352781
-      spr_outpost_43: 12503324
-      spr_outpost_214: 1138110680
-      spr_outpost_53: 758841239
-      spr_outpost_247: -156523963
-      spr_outpost_223: 1476534783
-      spr_outpost_12: -865685862
-      spr_outpost_44: 1301822856
-      spr_outpost_61: -941080847
-      spr_outpost_145: 271703017
-      spr_outpost_155: -648273091
-      spr_outpost_135: 1407788711
-      spr_outpost_122: 933520738
-      spr_outpost_289: 263462586
-      spr_outpost_226: 1213676891
-      spr_outpost_150: 808586924
-      spr_outpost_246: 1523780452
       spr_outpost_0: -1478044410
-      spr_outpost_241: 551230611
-      spr_outpost_137: -1278630113
-      spr_outpost_60: 1664402670
-      spr_outpost_160: 856299676
-      spr_outpost_11: 801383374
-      spr_outpost_107: 707153991
-      spr_outpost_134: 176968797
-      spr_outpost_210: -712192011
-      spr_outpost_118: -1297517687
-      spr_outpost_62: -1144373116
-      spr_outpost_254: 1295613279
-      spr_outpost_193: 1392523958
-      spr_outpost_138: 828179220
-      spr_outpost_219: 1375501717
-      spr_outpost_102: -1891898967
-      spr_outpost_56: -1381480225
-      spr_outpost_36: -2026668374
-      spr_outpost_110: 1596199837
-      spr_outpost_188: -1544946737
-      spr_outpost_167: -281757295
-      spr_outpost_194: -35253984
-      spr_outpost_65: 1124798425
-      spr_outpost_290: 1309505860
-      spr_outpost_54: -1920566497
-      spr_outpost_35: -1988748920
-      spr_outpost_106: -385507496
-      spr_outpost_16: 991132179
-      spr_outpost_198: -1826993281
-      spr_outpost_149: -187982913
-      spr_outpost_187: -841638908
-      spr_outpost_258: 2060147217
-      spr_outpost_131: 634242942
-      spr_outpost_63: -1560226805
-      spr_outpost_215: -1812654054
-      spr_outpost_257: 31577199
-      spr_outpost_278: -1726756268
-      spr_outpost_114: 1387892818
-      spr_outpost_168: -1190999665
-      spr_outpost_91: -806124386
-      spr_outpost_200: 543618265
-      spr_outpost_287: -1597505737
-      spr_outpost_148: -1313597367
-      spr_outpost_233: 57445490
-      spr_outpost_46: 928042392
-      spr_outpost_291: -596574946
-      spr_outpost_82: -2108657852
-      spr_outpost_195: 900513568
-      spr_outpost_281: 424664695
-      spr_outpost_196: 1767944636
-      spr_outpost_236: 1805676536
-      spr_outpost_72: -1872068284
-      spr_outpost_57: 1859548095
-      spr_outpost_284: 1305489136
-      spr_outpost_97: 361303486
-      spr_outpost_153: -1843640817
-      spr_outpost_45: 1425699122
-      spr_outpost_255: 472680717
-      spr_outpost_18: -1295288151
-      spr_outpost_41: -1302298981
-      spr_outpost_162: -100522026
-      spr_outpost_105: -41410115
-      spr_outpost_239: 1220856447
-      spr_outpost_201: -1105729445
       spr_outpost_1: -889270558
-      spr_outpost_87: 796649161
-      spr_outpost_120: -1825669648
-      spr_outpost_144: 645037024
-      spr_outpost_261: -1793597139
-      spr_outpost_158: 286875142
-      spr_outpost_206: -1213714190
-      spr_outpost_93: 2100165145
-      spr_outpost_280: -939442196
-      spr_outpost_184: 507411940
-      spr_outpost_238: -2056936200
-      spr_outpost_199: -1628391191
-      spr_outpost_182: -222744122
-      spr_outpost_17: -1154183635
-      spr_outpost_92: -1188831646
-      spr_outpost_94: -387633872
-      spr_outpost_244: -1858037751
-      spr_outpost_164: -1104894930
-      spr_outpost_249: -1662425321
-      spr_outpost_285: 320908914
-      spr_outpost_28: 1112433504
-      spr_outpost_66: -599621504
-      spr_outpost_27: -1344078520
-      spr_outpost_222: 737209048
-      spr_outpost_262: 1334065310
-      spr_outpost_179: 37904500
-      spr_outpost_283: 1017000383
-      spr_outpost_121: -1850620972
-      spr_outpost_71: 2022500350
-      spr_outpost_243: -2072670904
-      spr_outpost_15: -1711352901
-      spr_outpost_51: -1525422376
-      spr_outpost_173: -523512195
-      spr_outpost_64: -1928265550
-      spr_outpost_40: 293038446
-      spr_outpost_48: -1681823885
-      spr_outpost_186: 1314476382
-      spr_outpost_221: 1481522397
-      spr_outpost_229: -274870181
-      spr_outpost_267: 2099291002
-      spr_outpost_251: -331663208
-      spr_outpost_74: 431091788
-      spr_outpost_50: -676187596
-      spr_outpost_9: 200685352
-      spr_outpost_38: 236109677
-      spr_outpost_108: -1942293445
-      spr_outpost_225: -1199377428
-      spr_outpost_205: 1179630229
-      spr_outpost_30: 1417718171
-      spr_outpost_84: 802718190
-      spr_outpost_268: -1702503667
-      spr_outpost_274: -521541615
-      spr_outpost_288: 168122251
-      spr_outpost_52: -273352696
-      spr_outpost_157: -1965454280
-      spr_outpost_218: 1693527384
-      spr_outpost_85: -156205129
-      spr_outpost_151: 971575283
-      spr_outpost_181: 1547644191
-      spr_outpost_191: -733402579
-      spr_outpost_271: 1596116814
-      spr_outpost_47: -1684310999
-      spr_outpost_96: -124864945
-      spr_outpost_124: 1732426322
-      spr_outpost_277: 568733814
-      spr_outpost_192: 265899201
-      spr_outpost_252: 457875283
-      spr_outpost_76: -1482449347
-      spr_outpost_125: -5043113
-      spr_outpost_133: -132877145
-      spr_outpost_270: 977957356
-      spr_outpost_117: -1340477417
-      spr_outpost_180: -183169548
-      spr_outpost_212: 13741250
-      spr_outpost_19: 1166247974
-      spr_outpost_185: -1728801891
-      spr_outpost_276: -768378218
-      spr_outpost_88: 503085278
-      spr_outpost_139: 1163645677
-      spr_outpost_202: 750978921
-      spr_outpost_78: 327152618
-      spr_outpost_264: -937663677
-      spr_outpost_269: 560073931
-      spr_outpost_207: -2019407210
-      spr_outpost_14: 1140309943
-      spr_outpost_248: -1891564824
-      spr_outpost_116: -1824525858
-      spr_outpost_142: 1854551728
-      spr_outpost_101: -1186781695
-      spr_outpost_197: -1213690361
-      spr_outpost_29: 284470621
-      spr_outpost_111: 465249624
-      spr_outpost_32: 1646677407
-      spr_outpost_8: 1641876411
-      spr_outpost_13: 340255329
       spr_outpost_10: 1456559262
-      spr_outpost_166: -1632613679
-      spr_outpost_49: -1459821779
-      spr_outpost_165: 1881506271
-      spr_outpost_174: 311682195
-      spr_outpost_4: 295097718
-      spr_outpost_227: -13110575
-      spr_outpost_232: -1229447228
-      spr_outpost_235: 818367857
-      spr_outpost_230: -1416905335
-      spr_outpost_234: -632681906
-      spr_outpost_59: 1823497214
-      spr_outpost_70: 486413504
-      spr_outpost_95: 350991618
-      spr_outpost_259: 1756211721
-      spr_outpost_163: -1437427534
+      spr_outpost_100: 1594959295
+      spr_outpost_101: -1186781695
+      spr_outpost_102: -1891898967
+      spr_outpost_103: -1695145096
+      spr_outpost_104: 1634049942
+      spr_outpost_105: -41410115
+      spr_outpost_106: -385507496
+      spr_outpost_107: 707153991
+      spr_outpost_108: -1942293445
+      spr_outpost_109: 1105138715
+      spr_outpost_11: 801383374
+      spr_outpost_110: 1596199837
+      spr_outpost_111: 465249624
+      spr_outpost_112: -553389897
+      spr_outpost_113: -748333969
+      spr_outpost_114: 1387892818
+      spr_outpost_115: 2057977615
+      spr_outpost_116: -1824525858
+      spr_outpost_117: -1340477417
+      spr_outpost_118: -1297517687
+      spr_outpost_119: -2005465479
+      spr_outpost_12: -865685862
+      spr_outpost_120: -1825669648
+      spr_outpost_121: -1850620972
+      spr_outpost_122: 933520738
+      spr_outpost_123: 2032620729
+      spr_outpost_124: 1732426322
+      spr_outpost_125: -5043113
+      spr_outpost_126: 457176845
       spr_outpost_127: 852178698
-      spr_outpost_22: 85241434
       spr_outpost_128: -2004754635
+      spr_outpost_129: 211299233
+      spr_outpost_13: 340255329
+      spr_outpost_130: -76173461
+      spr_outpost_131: 634242942
+      spr_outpost_132: 398654926
+      spr_outpost_133: -132877145
+      spr_outpost_134: 176968797
+      spr_outpost_135: 1407788711
+      spr_outpost_136: 2095463049
+      spr_outpost_137: -1278630113
+      spr_outpost_138: 828179220
+      spr_outpost_139: 1163645677
+      spr_outpost_14: 1140309943
+      spr_outpost_140: 827049023
+      spr_outpost_141: 1916533553
+      spr_outpost_142: 1854551728
+      spr_outpost_143: 768031170
+      spr_outpost_144: 645037024
+      spr_outpost_145: 271703017
+      spr_outpost_146: 983902993
+      spr_outpost_147: 1840711091
+      spr_outpost_148: -1313597367
+      spr_outpost_149: -187982913
+      spr_outpost_15: -1711352901
+      spr_outpost_150: 808586924
+      spr_outpost_151: 971575283
+      spr_outpost_152: -1674091372
+      spr_outpost_153: -1843640817
+      spr_outpost_154: -1345878365
+      spr_outpost_155: -648273091
+      spr_outpost_156: 1961620675
+      spr_outpost_157: -1965454280
+      spr_outpost_158: 286875142
+      spr_outpost_159: -654249996
+      spr_outpost_16: 991132179
+      spr_outpost_160: 856299676
+      spr_outpost_161: -1235473001
+      spr_outpost_162: -100522026
+      spr_outpost_163: -1437427534
+      spr_outpost_164: -1104894930
+      spr_outpost_165: 1881506271
+      spr_outpost_166: -1632613679
+      spr_outpost_167: -281757295
+      spr_outpost_168: -1190999665
+      spr_outpost_169: -1902825831
+      spr_outpost_17: -1154183635
+      spr_outpost_170: 1324576049
+      spr_outpost_171: 1370334353
+      spr_outpost_172: 913761207
+      spr_outpost_173: -523512195
+      spr_outpost_174: 311682195
+      spr_outpost_175: 454425348
+      spr_outpost_176: 1672648414
+      spr_outpost_177: -1117634411
+      spr_outpost_178: 1635781059
+      spr_outpost_179: 37904500
+      spr_outpost_18: -1295288151
+      spr_outpost_180: -183169548
+      spr_outpost_181: 1547644191
+      spr_outpost_182: -222744122
+      spr_outpost_183: 1530735790
+      spr_outpost_184: 507411940
+      spr_outpost_185: -1728801891
+      spr_outpost_186: 1314476382
+      spr_outpost_187: -841638908
+      spr_outpost_188: -1544946737
+      spr_outpost_189: 56592040
+      spr_outpost_19: 1166247974
+      spr_outpost_190: -1451751990
+      spr_outpost_191: -733402579
+      spr_outpost_192: 265899201
+      spr_outpost_193: 1392523958
+      spr_outpost_194: -35253984
+      spr_outpost_195: 900513568
+      spr_outpost_196: 1767944636
+      spr_outpost_197: -1213690361
+      spr_outpost_198: -1826993281
+      spr_outpost_199: -1628391191
       spr_outpost_2: 1441786119
+      spr_outpost_20: -192302870
+      spr_outpost_200: 543618265
+      spr_outpost_201: -1105729445
+      spr_outpost_202: 750978921
       spr_outpost_203: 1188429829
-  spritePackingTag: 
+      spr_outpost_204: -610819626
+      spr_outpost_205: 1179630229
+      spr_outpost_206: -1213714190
+      spr_outpost_207: -2019407210
+      spr_outpost_208: -819864701
+      spr_outpost_209: -1596070421
+      spr_outpost_21: -495517525
+      spr_outpost_210: -712192011
+      spr_outpost_211: -163542626
+      spr_outpost_212: 13741250
+      spr_outpost_213: 1934822016
+      spr_outpost_214: 1138110680
+      spr_outpost_215: -1812654054
+      spr_outpost_216: -1880260135
+      spr_outpost_217: -984235496
+      spr_outpost_218: 1693527384
+      spr_outpost_219: 1375501717
+      spr_outpost_22: 85241434
+      spr_outpost_220: 220869843
+      spr_outpost_221: 1481522397
+      spr_outpost_222: 737209048
+      spr_outpost_223: 1476534783
+      spr_outpost_224: 1657500041
+      spr_outpost_225: -1199377428
+      spr_outpost_226: 1213676891
+      spr_outpost_227: -13110575
+      spr_outpost_228: -1519662246
+      spr_outpost_229: -274870181
+      spr_outpost_23: -1171515001
+      spr_outpost_230: -1416905335
+      spr_outpost_231: -1794255078
+      spr_outpost_232: -1229447228
+      spr_outpost_233: 57445490
+      spr_outpost_234: -632681906
+      spr_outpost_235: 818367857
+      spr_outpost_236: 1805676536
+      spr_outpost_237: -342606052
+      spr_outpost_238: -2056936200
+      spr_outpost_239: 1220856447
+      spr_outpost_24: 1373118062
+      spr_outpost_240: -1684693631
+      spr_outpost_241: 551230611
+      spr_outpost_242: 1597319957
+      spr_outpost_243: -2072670904
+      spr_outpost_244: -1858037751
+      spr_outpost_245: -1496004238
+      spr_outpost_246: 1523780452
+      spr_outpost_247: -156523963
+      spr_outpost_248: -1891564824
+      spr_outpost_249: -1662425321
+      spr_outpost_25: -459858038
+      spr_outpost_250: 1803356746
+      spr_outpost_251: -331663208
+      spr_outpost_252: 457875283
+      spr_outpost_253: 1769794247
+      spr_outpost_254: 1295613279
+      spr_outpost_255: 472680717
+      spr_outpost_256: -410833844
+      spr_outpost_257: 31577199
+      spr_outpost_258: 2060147217
+      spr_outpost_259: 1756211721
+      spr_outpost_26: -1270597054
+      spr_outpost_260: 965608299
+      spr_outpost_261: -1793597139
+      spr_outpost_262: 1334065310
+      spr_outpost_263: -150897829
+      spr_outpost_264: -937663677
+      spr_outpost_265: 1908613529
+      spr_outpost_266: -1537202576
+      spr_outpost_267: 2099291002
+      spr_outpost_268: -1702503667
+      spr_outpost_269: 560073931
+      spr_outpost_27: -1344078520
+      spr_outpost_270: 977957356
+      spr_outpost_271: 1596116814
+      spr_outpost_272: -1035316594
+      spr_outpost_273: -1180808788
+      spr_outpost_274: -521541615
+      spr_outpost_275: 621617894
+      spr_outpost_276: -768378218
+      spr_outpost_277: 568733814
+      spr_outpost_278: -1726756268
+      spr_outpost_279: 631390565
+      spr_outpost_28: 1112433504
+      spr_outpost_280: -939442196
+      spr_outpost_281: 424664695
+      spr_outpost_282: 495951384
+      spr_outpost_283: 1017000383
+      spr_outpost_284: 1305489136
+      spr_outpost_285: 320908914
+      spr_outpost_286: 501538097
+      spr_outpost_287: -1597505737
+      spr_outpost_288: 168122251
+      spr_outpost_289: 263462586
+      spr_outpost_29: 284470621
+      spr_outpost_290: 1309505860
+      spr_outpost_291: -596574946
+      spr_outpost_292: -128553547
+      spr_outpost_293: -1112666808
+      spr_outpost_3: -291499407
+      spr_outpost_30: 1417718171
+      spr_outpost_31: 739337527
+      spr_outpost_32: 1646677407
+      spr_outpost_33: -533558071
+      spr_outpost_34: 1243211357
+      spr_outpost_35: -1988748920
+      spr_outpost_36: -2026668374
+      spr_outpost_37: 160352781
+      spr_outpost_38: 236109677
+      spr_outpost_39: -1475974895
+      spr_outpost_4: 295097718
+      spr_outpost_40: 293038446
+      spr_outpost_41: -1302298981
+      spr_outpost_42: -960567970
+      spr_outpost_43: 12503324
+      spr_outpost_44: 1301822856
+      spr_outpost_45: 1425699122
+      spr_outpost_46: 928042392
+      spr_outpost_47: -1684310999
+      spr_outpost_48: -1681823885
+      spr_outpost_49: -1459821779
+      spr_outpost_5: -833856324
+      spr_outpost_50: -676187596
+      spr_outpost_51: -1525422376
+      spr_outpost_52: -273352696
+      spr_outpost_53: 758841239
+      spr_outpost_54: -1920566497
+      spr_outpost_55: 1583759798
+      spr_outpost_56: -1381480225
+      spr_outpost_57: 1859548095
+      spr_outpost_58: 578119674
+      spr_outpost_59: 1823497214
+      spr_outpost_6: 1599748504
+      spr_outpost_60: 1664402670
+      spr_outpost_61: -941080847
+      spr_outpost_62: -1144373116
+      spr_outpost_63: -1560226805
+      spr_outpost_64: -1928265550
+      spr_outpost_65: 1124798425
+      spr_outpost_66: -599621504
+      spr_outpost_67: 1327414776
+      spr_outpost_68: -456874125
+      spr_outpost_69: -316775638
+      spr_outpost_7: -267614455
+      spr_outpost_70: 486413504
+      spr_outpost_71: 2022500350
+      spr_outpost_72: -1872068284
+      spr_outpost_73: 1589085149
+      spr_outpost_74: 431091788
+      spr_outpost_75: 1615519684
+      spr_outpost_76: -1482449347
+      spr_outpost_77: -43670252
+      spr_outpost_78: 327152618
+      spr_outpost_79: 957069525
+      spr_outpost_8: 1641876411
+      spr_outpost_80: 1913981577
+      spr_outpost_81: 758542556
+      spr_outpost_82: -2108657852
+      spr_outpost_83: -849816249
+      spr_outpost_84: 802718190
+      spr_outpost_85: -156205129
+      spr_outpost_86: 2085969326
+      spr_outpost_87: 796649161
+      spr_outpost_88: 503085278
+      spr_outpost_89: -1267748903
+      spr_outpost_9: 200685352
+      spr_outpost_90: 1108916168
+      spr_outpost_91: -806124386
+      spr_outpost_92: -1188831646
+      spr_outpost_93: 2100165145
+      spr_outpost_94: -387633872
+      spr_outpost_95: 350991618
+      spr_outpost_96: -124864945
+      spr_outpost_97: 361303486
+      spr_outpost_98: -498031434
+      spr_outpost_99: -1054162493
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

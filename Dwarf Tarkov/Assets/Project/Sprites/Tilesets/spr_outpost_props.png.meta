@@ -3,7 +3,7 @@ guid: 232ed8236fd297743babc79080a0d3be
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -33,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -111,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -4201,203 +4207,202 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Props_38: 1872461087
-      Props_90: 1627385245
-      Props_162: 1256963479
-      Props_105: -1652113158
-      Props_89: 2048722182
-      Props_128: 877188844
-      Props_132: -1003313192
-      Props_109: 1326813026
-      Props_127: 1545229664
-      Props_182: -669432611
-      Props_65: -968158199
-      Props_43: -600933374
-      Props_52: 1692347540
-      Props_42: -1399466130
-      Props_17: -707437939
-      Props_111: 1740743034
-      Props_44: -1758754563
-      Props_6: -826433363
-      Props_156: -663677847
-      Props_72: -251903494
-      Props_93: -116125408
-      Props_28: 1656664741
-      Props_149: 539495694
-      Props_144: 1918083572
-      Props_71: 50356980
-      Props_126: 1282864129
-      Props_29: 1840160757
-      Props_191: 416258200
-      Props_102: -1747875198
-      Props_142: 1373533312
-      Props_13: 770082981
-      Props_51: -1162096324
-      Props_181: 490297128
-      Props_46: -1382195164
-      Props_178: 398422643
-      Props_47: -981942476
-      Props_68: 547144210
-      Props_8: -465246546
-      Props_92: 485565775
-      Props_4: 1509351074
-      Props_61: 1371147849
-      Props_66: -699458758
-      Props_14: 1273379071
-      Props_86: 327608327
-      Props_35: 112498431
-      Props_9: -1382544117
-      Props_79: -1369303292
-      Props_91: 526421952
-      Props_99: 1541527830
-      Props_184: 117578769
-      Props_56: 374200947
-      Props_80: -111776046
-      Props_70: -1025276303
-      Props_98: -2050866074
-      Props_164: 1575926527
-      Props_73: -1216779595
-      Props_145: 275339811
-      Props_121: 744544528
-      Props_130: 1546173012
-      Props_94: 1397587315
-      Props_122: -1787912160
-      Props_124: -455193452
-      Props_165: 2064877342
-      Props_40: 1780920459
-      Props_148: 1194501704
-      Props_63: 179577717
-      Props_110: 236065261
-      Props_116: -1836196538
-      Props_158: 2144112720
-      Props_1: -1175967518
-      Props_59: 323367179
-      Props_32: 1004599503
-      Props_76: 1627073943
-      Props_134: -757479996
-      Props_37: -566760719
-      Props_189: -94521264
-      Props_36: 515214790
-      Props_7: -1988519582
-      Props_166: 283851035
-      Props_67: -1310423319
-      Props_141: 93552318
-      Props_27: -486533358
-      Props_57: -2138141653
-      Props_95: -1387595998
-      Props_74: -2131495338
-      Props_190: -177581283
-      Props_160: 1958573928
-      Props_167: -827756453
-      Props_107: -580922017
-      Props_48: 955491085
-      Props_33: 1748288531
-      Props_100: 1354784815
-      Props_55: 109508312
-      Props_101: -2061220909
-      Props_143: -1256895968
-      Props_171: 156556181
-      Props_135: 1678283123
-      Props_75: 88696104
-      Props_153: 2123425402
-      Props_170: 739684582
-      Props_147: 1664900976
-      Props_10: -32551503
-      Props_136: -1035303109
-      Props_50: 1349753969
-      Props_120: -1927676128
-      Props_25: -445821090
-      Props_114: -127396463
-      Props_69: 601920127
-      Props_45: 1768922360
-      Props_187: -192608636
-      Props_186: -1731563412
-      Props_159: -137067046
-      Props_129: -571796700
-      Props_174: 1160477019
-      Props_172: -330035797
-      Props_15: 1304544726
-      Props_155: 449943893
-      Props_12: -164044394
-      Props_185: 114550432
-      Props_85: -1707617587
-      Props_18: 1100815562
       Props_0: 209898144
-      Props_151: -497421614
-      Props_154: 846419098
-      Props_24: 938041359
-      Props_34: -860462947
-      Props_180: -1355418918
-      Props_20: 1538170964
-      Props_146: 1129086920
-      Props_88: 1069250760
-      Props_31: 2003859942
-      Props_119: 2099605525
-      Props_23: 788054195
-      Props_175: -1123876118
-      Props_137: 1411128597
-      Props_118: -133980071
-      Props_138: 1175347948
-      Props_123: 994404381
-      Props_163: 910335603
-      Props_21: 1172395036
-      Props_84: -460153913
-      Props_97: 1752383794
-      Props_26: 1500310001
-      Props_2: 1064080527
-      Props_131: 706165993
-      Props_87: -1438210103
-      Props_53: -401625008
-      Props_176: -1617460875
-      Props_96: 1584514234
-      Props_133: 1146744801
-      Props_58: -1870612635
-      Props_60: -2087892735
-      Props_64: 1442991614
-      Props_161: -1409537463
+      Props_1: -1175967518
+      Props_10: -32551503
+      Props_100: 1354784815
+      Props_101: -2061220909
+      Props_102: -1747875198
       Props_103: 1470924978
-      Props_39: 782097628
-      Props_139: -1723114186
-      Props_183: -513381269
-      Props_179: 1914439620
-      Props_140: -1630525092
-      Props_77: 747436010
-      Props_152: -235115685
-      Props_112: 558162106
-      Props_78: 310311570
-      Props_157: 57897156
-      Props_49: 1252366894
-      Props_54: 1894693755
       Props_104: 1156882311
-      Props_193: -1408947777
-      Props_108: -1553182715
+      Props_105: -1652113158
       Props_106: 434729613
-      Props_117: 1401320626
-      Props_5: -89458501
-      Props_62: -30860609
-      Props_173: -623429083
-      Props_192: -1178941241
-      Props_19: -865292481
-      Props_113: 619382310
-      Props_81: 223570666
-      Props_41: 1338478578
-      Props_22: 454916430
-      Props_115: 1774447516
-      Props_125: 1046933698
-      Props_82: -454857438
-      Props_3: 682771276
-      Props_16: 867907877
-      Props_30: 1627928401
-      Props_83: -85450736
+      Props_107: -580922017
+      Props_108: -1553182715
+      Props_109: 1326813026
       Props_11: 381405239
-      Props_177: -866811662
-      Props_169: 416831714
-      Props_188: 120838024
-      Props_168: -378953584
+      Props_110: 236065261
+      Props_111: 1740743034
+      Props_112: 558162106
+      Props_113: 619382310
+      Props_114: -127396463
+      Props_115: 1774447516
+      Props_116: -1836196538
+      Props_117: 1401320626
+      Props_118: -133980071
+      Props_119: 2099605525
+      Props_12: -164044394
+      Props_120: -1927676128
+      Props_121: 744544528
+      Props_122: -1787912160
+      Props_123: 994404381
+      Props_124: -455193452
+      Props_125: 1046933698
+      Props_126: 1282864129
+      Props_127: 1545229664
+      Props_128: 877188844
+      Props_129: -571796700
+      Props_13: 770082981
+      Props_130: 1546173012
+      Props_131: 706165993
+      Props_132: -1003313192
+      Props_133: 1146744801
+      Props_134: -757479996
+      Props_135: 1678283123
+      Props_136: -1035303109
+      Props_137: 1411128597
+      Props_138: 1175347948
+      Props_139: -1723114186
+      Props_14: 1273379071
+      Props_140: -1630525092
+      Props_141: 93552318
+      Props_142: 1373533312
+      Props_143: -1256895968
+      Props_144: 1918083572
+      Props_145: 275339811
+      Props_146: 1129086920
+      Props_147: 1664900976
+      Props_148: 1194501704
+      Props_149: 539495694
+      Props_15: 1304544726
       Props_150: 89690729
-  spritePackingTag: 
+      Props_151: -497421614
+      Props_152: -235115685
+      Props_153: 2123425402
+      Props_154: 846419098
+      Props_155: 449943893
+      Props_156: -663677847
+      Props_157: 57897156
+      Props_158: 2144112720
+      Props_159: -137067046
+      Props_16: 867907877
+      Props_160: 1958573928
+      Props_161: -1409537463
+      Props_162: 1256963479
+      Props_163: 910335603
+      Props_164: 1575926527
+      Props_165: 2064877342
+      Props_166: 283851035
+      Props_167: -827756453
+      Props_168: -378953584
+      Props_169: 416831714
+      Props_17: -707437939
+      Props_170: 739684582
+      Props_171: 156556181
+      Props_172: -330035797
+      Props_173: -623429083
+      Props_174: 1160477019
+      Props_175: -1123876118
+      Props_176: -1617460875
+      Props_177: -866811662
+      Props_178: 398422643
+      Props_179: 1914439620
+      Props_18: 1100815562
+      Props_180: -1355418918
+      Props_181: 490297128
+      Props_182: -669432611
+      Props_183: -513381269
+      Props_184: 117578769
+      Props_185: 114550432
+      Props_186: -1731563412
+      Props_187: -192608636
+      Props_188: 120838024
+      Props_189: -94521264
+      Props_19: -865292481
+      Props_190: -177581283
+      Props_191: 416258200
+      Props_192: -1178941241
+      Props_193: -1408947777
+      Props_2: 1064080527
+      Props_20: 1538170964
+      Props_21: 1172395036
+      Props_22: 454916430
+      Props_23: 788054195
+      Props_24: 938041359
+      Props_25: -445821090
+      Props_26: 1500310001
+      Props_27: -486533358
+      Props_28: 1656664741
+      Props_29: 1840160757
+      Props_3: 682771276
+      Props_30: 1627928401
+      Props_31: 2003859942
+      Props_32: 1004599503
+      Props_33: 1748288531
+      Props_34: -860462947
+      Props_35: 112498431
+      Props_36: 515214790
+      Props_37: -566760719
+      Props_38: 1872461087
+      Props_39: 782097628
+      Props_4: 1509351074
+      Props_40: 1780920459
+      Props_41: 1338478578
+      Props_42: -1399466130
+      Props_43: -600933374
+      Props_44: -1758754563
+      Props_45: 1768922360
+      Props_46: -1382195164
+      Props_47: -981942476
+      Props_48: 955491085
+      Props_49: 1252366894
+      Props_5: -89458501
+      Props_50: 1349753969
+      Props_51: -1162096324
+      Props_52: 1692347540
+      Props_53: -401625008
+      Props_54: 1894693755
+      Props_55: 109508312
+      Props_56: 374200947
+      Props_57: -2138141653
+      Props_58: -1870612635
+      Props_59: 323367179
+      Props_6: -826433363
+      Props_60: -2087892735
+      Props_61: 1371147849
+      Props_62: -30860609
+      Props_63: 179577717
+      Props_64: 1442991614
+      Props_65: -968158199
+      Props_66: -699458758
+      Props_67: -1310423319
+      Props_68: 547144210
+      Props_69: 601920127
+      Props_7: -1988519582
+      Props_70: -1025276303
+      Props_71: 50356980
+      Props_72: -251903494
+      Props_73: -1216779595
+      Props_74: -2131495338
+      Props_75: 88696104
+      Props_76: 1627073943
+      Props_77: 747436010
+      Props_78: 310311570
+      Props_79: -1369303292
+      Props_8: -465246546
+      Props_80: -111776046
+      Props_81: 223570666
+      Props_82: -454857438
+      Props_83: -85450736
+      Props_84: -460153913
+      Props_85: -1707617587
+      Props_86: 327608327
+      Props_87: -1438210103
+      Props_88: 1069250760
+      Props_89: 2048722182
+      Props_9: -1382544117
+      Props_90: 1627385245
+      Props_91: 526421952
+      Props_92: 485565775
+      Props_93: -116125408
+      Props_94: 1397587315
+      Props_95: -1387595998
+      Props_96: 1584514234
+      Props_97: 1752383794
+      Props_98: -2050866074
+      Props_99: 1541527830
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
