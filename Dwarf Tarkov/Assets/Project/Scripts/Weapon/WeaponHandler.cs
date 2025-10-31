@@ -197,6 +197,7 @@ public class WeaponHandler : MonoBehaviour
             // Spawns a bullet using object pooling
             if (bulletPrefab != null)
             {
+                EventChannels.WeaponEvents.OnWeaponFired?.Invoke();
                 int bulletsPerShot = data.AmountOfBullets; // Get the number of bullets per shot from weapon data
 
                 for (int i = 0; i < bulletsPerShot; i++)
@@ -237,6 +238,7 @@ public class WeaponHandler : MonoBehaviour
         // When the mouse button is released, this function is called. This therefore will make the click be played again
         // when the mouse is pressed next
         clickPlayed = false;
+        EventChannels.WeaponEvents.OnStopFiring?.Invoke();
     }
 
     void Reload()
