@@ -16,6 +16,7 @@ MonoBehaviour:
   RateOfFire: 0.7
   AmmoSubtypes:
   - {fileID: 11400000, guid: 79a9b34c2e5d46342bcc0e2fcef12575, type: 2}
+  - {fileID: 11400000, guid: 64b7a57506df4064e96dd0efc852fb91, type: 2}
   IsPrimary: 0
   MagCapacity: 8
   ReloadTime: 2
