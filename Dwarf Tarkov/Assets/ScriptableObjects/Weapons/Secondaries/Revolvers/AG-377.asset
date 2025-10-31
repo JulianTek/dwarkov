@@ -17,6 +17,7 @@ MonoBehaviour:
   AmmoSubtypes:
   - {fileID: 11400000, guid: 818c9c80a27867c4cb506ba6c7906248, type: 2}
   - {fileID: 11400000, guid: c872c0691a8a96e4dbd0b48fee3fbe35, type: 2}
+  - {fileID: 11400000, guid: 745ff521362d41b44b9ad903440468b3, type: 2}
   IsPrimary: 0
   MagCapacity: 6
   ReloadTime: 2
