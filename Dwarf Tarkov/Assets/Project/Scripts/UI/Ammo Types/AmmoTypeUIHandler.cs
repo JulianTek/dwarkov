@@ -9,7 +9,6 @@ public class AmmoTypeUIHandler : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI text;
     private List<AmmoSubtype> ammoSubtypes = new List<AmmoSubtype>();
-    private AmmoSubtype currentlyLoadedType;
     private int currentlyLoadedTypeIndex;
 
     // Start is called before the first frame update
@@ -23,6 +22,7 @@ public class AmmoTypeUIHandler : MonoBehaviour
         text.fontSize = 0.1f;
         gameObject.SetActive(false);
         EventChannels.OnGetCurrentlyLoadedSubtypeIndex += GetIndex;
+        EventChannels.WeaponEvents.OnGetAmmoToLoad += GetTypeToLoad;
     }
 
     private void OnDestroy()
@@ -33,6 +33,7 @@ public class AmmoTypeUIHandler : MonoBehaviour
         EventChannels.UIEvents.OnShowNoAmmoTypes -= ShowNoAmmoTypes;
         EventChannels.UIEvents.OnHideAmmoTypes -= HideNoAmmoTypes;
         EventChannels.OnGetCurrentlyLoadedSubtypeIndex -= GetIndex;
+        EventChannels.WeaponEvents.OnGetAmmoToLoad -= GetTypeToLoad;
     }
 
     // Update is called once per frame
@@ -62,7 +63,7 @@ public class AmmoTypeUIHandler : MonoBehaviour
         text.SetText("");
         gameObject.SetActive(true);
         ammoSubtypes = EventChannels.ItemEvents.OnGetSubtypesInInventory();
-        currentlyLoadedType = EventChannels.WeaponEvents.OnGetAmmoType?.Invoke();
+        AmmoSubtype currentlyLoadedType = EventChannels.WeaponEvents.OnGetAmmoType?.Invoke();
         if (currentlyLoadedType != null)
         {
             for (int i = 0; i < ammoSubtypes.Count; i++)
@@ -124,5 +125,10 @@ public class AmmoTypeUIHandler : MonoBehaviour
     private int GetIndex()
     {
         return currentlyLoadedTypeIndex;
+    }
+
+    private AmmoSubtype GetTypeToLoad()
+    {
+        return ammoSubtypes[currentlyLoadedTypeIndex];
     }
 }
