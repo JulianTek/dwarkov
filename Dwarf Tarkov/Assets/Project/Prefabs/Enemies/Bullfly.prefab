@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6746947212159462706}
   - component: {fileID: 3842243093744035429}
   - component: {fileID: 4620596607051883292}
+  - component: {fileID: 5950911923669523921}
   m_Layer: 0
   m_Name: Bullfly
   m_TagString: Untagged
@@ -129,6 +130,7 @@ Transform:
   - {fileID: 9134735020443479930}
   - {fileID: 3926571060774280887}
   - {fileID: 6541951308217056615}
+  - {fileID: 2730001051730060230}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8027963877820213762
@@ -204,6 +206,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceGainedOnDeath: 10
+--- !u!114 &5950911923669523921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615416272692253855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da1e82cc4f04904f951268bfc2e1aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearingRadius: 5
 --- !u!1 &4981784271769945474
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +446,7 @@ MonoBehaviour:
   rayCount: 10
   angle: 0
   viewDistance: 2
-  peripheralDistance: 0.3
+  peripheralDistance: 2
 --- !u!23 &217225717977277382
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -482,3 +497,48 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7848198306447939836}
   m_Mesh: {fileID: 0}
+--- !u!1 &8171716402908789690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2730001051730060230}
+  - component: {fileID: 4890503980068924703}
+  m_Layer: 0
+  m_Name: AudioCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2730001051730060230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171716402908789690}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5947613067768198888}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4890503980068924703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171716402908789690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da1e82cc4f04904f951268bfc2e1aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearingRadius: 5
