@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundHandler : MonoBehaviour
 {
     [SerializeField]
-    private float hearingRadius = 5f;
+    protected float hearingRadius = 5f;
     // Start is called before the first frame update
     public void Start()
     {
@@ -15,7 +15,7 @@ public class SoundHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D heardEvent = Physics2D.OverlapCircle(transform.position, hearingRadius);
+        Collider2D heardEvent = Physics2D.OverlapCircle(transform.position, hearingRadius, LayerMask.GetMask("Sound"));
         if (heardEvent != null)
         {
             if (heardEvent.gameObject.GetComponent<SoundEmitter>())

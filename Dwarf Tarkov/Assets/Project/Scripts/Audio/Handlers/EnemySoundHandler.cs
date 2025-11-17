@@ -9,7 +9,7 @@ public class EnemySoundHandler : SoundHandler
 
     public new void Start()
     {
-        enemyStateMachine = GetComponent<EnemyStateMachine>();
+        enemyStateMachine = GetComponentInParent<EnemyStateMachine>();
     }
 
     protected override void OnHeardEvent(Transform transform)

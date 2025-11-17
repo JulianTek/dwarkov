@@ -20,7 +20,7 @@ public class EnemyFieldOfView : MonoBehaviour
     [SerializeField]
     private float viewDistance = 5f;
     [SerializeField]
-    private float peripheralDistance = 0.2f;
+    private float peripheralDistance = 1f;
     private Vector3 origin;
     private float startingAngle;
 
