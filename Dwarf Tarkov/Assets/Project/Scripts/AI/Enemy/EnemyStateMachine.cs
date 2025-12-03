@@ -15,6 +15,14 @@ namespace AI
             SwitchState(state);
         } 
 
+        public void SwitchState<T>(Transform transform) where T : GameState, new()
+        {
+            Debug.Log($"Going to sound at {transform.position}");
+            GameState state = new InvestigateSoundState(transform);
+            state.SetOwner(owner);
+            SwitchState(state);
+        }
+
         public void Start()
         {
             owner = gameObject;

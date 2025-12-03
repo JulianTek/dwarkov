@@ -6,6 +6,8 @@ using AI;
 
 public class EnemyAttackManager : MonoBehaviour
 {
+    [SerializeField]
+    private float damage = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class EnemyAttackManager : MonoBehaviour
     {
         if (other.GetComponent<PlayerInputHandler>())
         {
-            EventChannels.EnemyEvents.OnEnemyAttack?.Invoke(25f);
+            EventChannels.EnemyEvents.OnEnemyAttack?.Invoke(damage);
             transform.parent.GetComponent<EnemyStateMachine>().SwitchState<AttackState>();
         }
     }
