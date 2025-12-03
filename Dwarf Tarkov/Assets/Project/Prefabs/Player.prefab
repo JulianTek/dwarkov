@@ -900,9 +900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventoryCapacity: 15
-  inventory:
-  - data: {fileID: 11400000, guid: 5af40b46e436d1740af5cdbc365eff0b, type: 2}
-    amount: 99
+  inventory: []
 --- !u!114 &902795952374619672
 MonoBehaviour:
   m_ObjectHideFlags: 0

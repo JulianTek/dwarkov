@@ -55,6 +55,7 @@ public class OutpostInventorySlotHandler : MonoBehaviour
         image.enabled = false;
         stackText.text = null;
         stackText.enabled = false;
+        item = null;
     }
 
     public void SwitchItemBetweenStorage()

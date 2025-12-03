@@ -15,12 +15,13 @@ public class OutpostInteractable : MonoBehaviour, IOutpostInteractable
         EventChannels.PlayerInputEvents.OnInteract -= Interact;
     }
 
-    protected bool playerInTrigger = false;
+    protected bool playerInTrigger;
     public void Interact()
     {
         if (playerInTrigger)
+        {
             RunInteraction();
-
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D other)
@@ -33,12 +34,6 @@ public class OutpostInteractable : MonoBehaviour, IOutpostInteractable
     {
         if (other.GetComponentInParent<PlayerInputHandler>() && playerInTrigger)
             playerInTrigger = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public virtual void RunInteraction() {}
