@@ -9,6 +9,7 @@ public class WeaponEvents
     public delegate AmmoSubtype AmmoSubtypeEvent();
     public delegate WeaponData WeaponDataEvent();
     public delegate void WeaponBoolEvent(bool boolean);
+    public delegate void SetSubtypeEvent(AmmoSubtype subtype);
 
     public WeaponActionEvent OnWeaponFired;
     public WeaponActionEvent OnWeaponReload;
@@ -28,4 +29,7 @@ public class WeaponEvents
     public WeaponEvent OnSetSecondaryWeapon;
 
     public WeaponActionEvent OnRefreshLoadout;
+
+    public AmmoSubtypeEvent OnGetAmmoToLoad;
+    public SetSubtypeEvent OnSetCurrentSubtype;
 }

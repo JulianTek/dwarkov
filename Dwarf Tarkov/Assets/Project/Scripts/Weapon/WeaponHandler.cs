@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using TMPro;
+using System.Linq;
 
 public class WeaponHandler : MonoBehaviour
 {
@@ -15,9 +16,6 @@ public class WeaponHandler : MonoBehaviour
     private TextMeshProUGUI magText;
     private SpriteRenderer gunSprite;
 
-    private AmmoSubtype subtypeLoaded;
-    private int ammoTypeIndex;
-
     private int maxMagCount;
     private int currentMagCount;
 
@@ -28,7 +26,6 @@ public class WeaponHandler : MonoBehaviour
     private bool isFiring = false;
     private bool canFire = true;
     private bool canReload = true;
-    private bool currentlyTogglingAmmoTypes;
     private bool clickPlayed;
 
     private bool isPaused;
@@ -42,10 +39,6 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
-        EventChannels.PlayerInputEvents.OnToggleAmmoTypes += ToggleAmmoTypes;
-        EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo += GetCurrentlyLoadedAmmoType;
-        EventChannels.ItemEvents.OnGetSubtypesInInventory += GetAmmoTypesInInventory;
-        EventChannels.WeaponEvents.OnGetAmmoType += GetCurrentAmmoType;
         EventChannels.WeaponEvents.OnSwitchWeapon += SetWeaponData;
 
         EventChannels.PlayerInputEvents.OnPlayerPauses += PauseGame;
@@ -57,7 +50,6 @@ public class WeaponHandler : MonoBehaviour
 
         EventChannels.WeaponEvents.OnRefreshLoadout += RefreshLoadout;
 
-        EventChannels.DataEvents.OnGetCurrentSubtype += GetCurrentAmmoType;
         EventChannels.DataEvents.OnGetAmountOfBullets += GetCurrentLoadedBullets;
 
         gunSprite = GetComponentInChildren<SpriteRenderer>();
@@ -70,7 +62,6 @@ public class WeaponHandler : MonoBehaviour
         {
             currentMagCount = saveData.CurrentBulletsInPrimaryMag;
             cachedMagCount = saveData.CurrentBulletsInSecondaryMag;
-            subtypeLoaded = EventChannels.DatabaseEvents.OnGetSubtype(saveData.CurrentlyLoadedSubtype.Name);
         }
         else
         {
@@ -80,7 +71,6 @@ public class WeaponHandler : MonoBehaviour
         maxMagCount = data.MagCapacity;
         gunSprite.sprite = data.Sprite;
         GetComponentInChildren<WeaponSpriteHandler>().SetWeaponData(data);
-        SetIndexAndAmmoType();
     }
 
     void OnDestroy()
@@ -89,10 +79,6 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootFinished -= StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload -= Reload;
         EventChannels.PlayerInputEvents.OnPlayerAim -= Aim;
-        EventChannels.PlayerInputEvents.OnToggleAmmoTypes -= ToggleAmmoTypes;
-        EventChannels.ItemEvents.OnGetCurrentlyLoadedAmmo -= GetCurrentlyLoadedAmmoType;
-        EventChannels.ItemEvents.OnGetSubtypesInInventory -= GetAmmoTypesInInventory;
-        EventChannels.WeaponEvents.OnGetAmmoType -= GetCurrentAmmoType;
         EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeaponData;
 
         EventChannels.PlayerInputEvents.OnPlayerPauses -= PauseGame;
@@ -104,7 +90,6 @@ public class WeaponHandler : MonoBehaviour
 
         EventChannels.WeaponEvents.OnRefreshLoadout -= RefreshLoadout;
 
-        EventChannels.DataEvents.OnGetCurrentSubtype -= GetCurrentAmmoType;
         EventChannels.DataEvents.OnGetAmountOfBullets -= GetCurrentLoadedBullets;
     }
 
@@ -123,7 +108,6 @@ public class WeaponHandler : MonoBehaviour
             data = weapon;
             gunSprite.sprite = data.Sprite;
             maxMagCount = data.MagCapacity;
-            SetIndexAndAmmoType();
         }
     }
 
@@ -217,6 +201,7 @@ public class WeaponHandler : MonoBehaviour
 
                 for (int i = 0; i < bulletsPerShot; i++)
                 {
+                    AmmoSubtype subtypeLoaded = EventChannels.DataEvents.OnGetCurrentSubtype?.Invoke();
                     GameObject bullet = ObjectPoolHandler.SpawnObject(bulletPrefab, GetComponentInChildren<SpriteRenderer>().transform.position, transform.rotation);
 
                     // Calculate spread for each bullet
@@ -238,30 +223,6 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    public void SetIndexAndAmmoType()
-    {
-        if (subtypeLoaded != null && data.AmmoSubtypes.Contains(subtypeLoaded))
-            ammoTypeIndex = data.AmmoSubtypes.IndexOf(subtypeLoaded);
-        else
-        {
-            foreach (AmmoSubtype ammoType in data.AmmoSubtypes)
-            {
-                // Checks if ammo subtype looping through is in player inventory
-                if ((bool)(EventChannels.ItemEvents.OnCheckIfItemInInventory?.Invoke(ammoType)))
-                {
-                    subtypeLoaded = ammoType;
-                    ammoTypeIndex = data.AmmoSubtypes.IndexOf(ammoType);
-                    return;
-                }
-            }
-            // Since it is pretty much impossible to create billions of ammo types, this serves as a good way to check in other methods
-            if (subtypeLoaded == null)
-            {
-                ammoTypeIndex = int.MaxValue;
-            }
-        }
-    }
-
     void StartShooting()
     {
         if (canFire)
@@ -280,13 +241,6 @@ public class WeaponHandler : MonoBehaviour
 
     void Reload()
     {
-        // Hides the sub ammo type UI
-        currentlyTogglingAmmoTypes = false;
-        // Gets all subtypes in inventory
-        List<AmmoSubtype> subtypes = GetAmmoTypesInInventory();
-        // If no ammo type is currently loaded, load the first subtype in the list
-        if (subtypeLoaded == null)
-            subtypeLoaded = subtypes[0];
         if (canReload)
         {
             // Prevent the player from triggering another reload, firing or aiming while the reload is going on
@@ -308,11 +262,11 @@ public class WeaponHandler : MonoBehaviour
 
     private IEnumerator ReloadCoolDown()
     {
+        AmmoSubtype subTypeToLoad = ResolveAmmoInReload();
         // This event handles sprite logic
         EventChannels.WeaponEvents.OnWeaponReload?.Invoke();
-        Debug.Log("Reloading");
         // Gets ammo in inventory, if it's 0 then nothing will happen
-        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(subtypeLoaded);
+        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(subTypeToLoad);
         if (ammoInInventory != 0)
         {
             LaunchMag();
@@ -332,20 +286,19 @@ public class WeaponHandler : MonoBehaviour
             // If there is more or the same amount of ammo in the player's inventory as the max mag count no 'complex' calculation has to be done
             if (ammoInInventory >= maxMagCount)
             {
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(subtypeLoaded, maxMagCount - currentMagCount);
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(subTypeToLoad, maxMagCount - currentMagCount);
                 currentMagCount = maxMagCount;
             }
             else if (ammoInInventory > 0)
             {
                 // Otherwise, use up all the ammo
                 currentMagCount = ammoInInventory;
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(subtypeLoaded, ammoInInventory);
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(subTypeToLoad, ammoInInventory);
             }
             // Make the player aim, be able to fire and trigger the reload mechanic again again
             isAiming = true;
             canFire = true;
             canReload = true;
-            Debug.Log(GetCurrentlyLoadedAmmoType());
         }
         // Weapon sprite logic
         EventChannels.WeaponEvents.OnWeaponReloaded?.Invoke();
@@ -353,12 +306,13 @@ public class WeaponHandler : MonoBehaviour
 
     private IEnumerator ReloadCooldownShell()
     {
+        AmmoSubtype subTypeToLoad = ResolveAmmoInReload();
         // Calculate how much time it takes to reload a shell
         float reloadTimePerShell = data.ReloadTime / data.MagCapacity;
         // This event handles sprite logic
         EventChannels.WeaponEvents.OnWeaponReload?.Invoke();
         // Gets ammo in inventory, if it's 0 then nothing will happen
-        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(subtypeLoaded);
+        int ammoInInventory = GetComponentInParent<PlayerInventory>().GetAmountOfItem(subTypeToLoad);
         if (ammoInInventory != 0)
         {
             // Reload sound events are split into 3, this is so I don't have to make sound events the exact same length as the weapon data's reload
@@ -368,7 +322,7 @@ public class WeaponHandler : MonoBehaviour
                 yield return new WaitForSecondsRealtime(reloadTimePerShell);
                 FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Tact");
                 currentMagCount++;
-                EventChannels.ItemEvents.OnRemoveItemFromInventory(subtypeLoaded, 1);
+                EventChannels.ItemEvents.OnRemoveItemFromInventory(subTypeToLoad, 1);
             }
             // Make the player aim, be able to fire and trigger the reload mechanic again again
             isAiming = true;
@@ -387,59 +341,6 @@ public class WeaponHandler : MonoBehaviour
         // Sets the sprite to the weapon data magazine
         mag.GetComponent<MagazineHandler>().SetData(data);
         mag.GetComponent<Rigidbody2D>().AddForce(transform.right * .2f, ForceMode2D.Impulse);
-    }
-
-
-    public void ToggleAmmoTypes()
-    {
-        canFire = false;
-        // If toggling ammo types already, loop between all available ammo types
-        if (currentlyTogglingAmmoTypes)
-        {
-            if (ammoTypeIndex == data.AmmoSubtypes.Count - 1)
-                ammoTypeIndex = 0;
-            else if (ammoTypeIndex > data.AmmoSubtypes.Count)
-                ammoTypeIndex = 1;
-            else
-                ammoTypeIndex++;
-            subtypeLoaded = data.AmmoSubtypes[ammoTypeIndex];
-        }
-        else
-        {
-            // If not toggling ammo types already, open the UI for it
-            if (GetAmmoTypesInInventory().Count != 0)
-            {
-                EventChannels.UIEvents.OnShowAmmoTypes?.Invoke();
-                currentlyTogglingAmmoTypes = true;
-            }
-            else
-            {
-                EventChannels.UIEvents.OnShowNoAmmoTypes?.Invoke();
-            }
-        }
-    }
-
-    public AmmoSubtype GetCurrentlyLoadedAmmoType()
-    {
-        return subtypeLoaded;
-    }
-
-    public List<AmmoSubtype> GetAmmoTypesInInventory()
-    {
-        List<AmmoSubtype> typesInInventory = new List<AmmoSubtype>();
-        foreach (AmmoSubtype ammoSubtype in data.AmmoSubtypes)
-        {
-            if ((bool)EventChannels.ItemEvents.OnCheckIfItemInInventory?.Invoke(ammoSubtype))
-            {
-                typesInInventory.Add(ammoSubtype);
-            }
-        }
-        return typesInInventory;
-    }
-
-    private AmmoSubtype GetCurrentAmmoType()
-    {
-        return subtypeLoaded;
     }
 
     private void PauseGame()
@@ -480,5 +381,19 @@ public class WeaponHandler : MonoBehaviour
             else
                 return currentMagCount;
         }
+    }
+
+    private AmmoSubtype ResolveAmmoInReload()
+    {
+        AmmoSubtype subTypeToLoad = EventChannels.WeaponEvents.OnGetAmmoToLoad?.Invoke();
+        AmmoSubtype currentTypeLoaded = EventChannels.DataEvents.OnGetCurrentSubtype?.Invoke();
+        if (currentTypeLoaded != null && subTypeToLoad.Name != currentTypeLoaded.Name)
+        {
+            EventChannels.ItemEvents.OnAddItemToInventory?.Invoke(currentTypeLoaded, currentMagCount);
+            currentMagCount = 0;
+        }
+        // We return subtype to load so the individual reload methods can handle this for inventory management
+        EventChannels.WeaponEvents.OnSetCurrentSubtype?.Invoke(subTypeToLoad);
+        return subTypeToLoad;
     }
 }

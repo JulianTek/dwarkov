@@ -22,8 +22,10 @@ namespace EventSystem
         public static DatabaseEvents DatabaseEvents = new DatabaseEvents();
 
         public delegate void IntEvent(int index);
+        public delegate int IntEventReturn();
 
         public static IntEvent OnLoadScene;
+        public static IntEventReturn OnGetCurrentlyLoadedSubtypeIndex;
     }
 }
 
