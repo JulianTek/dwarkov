@@ -20,7 +20,7 @@ public class WeaponBenchSlotHandler : MonoBehaviour
         
     }
 
-    void SetSprite(Sprite sprite)
+    protected void SetSprite(Sprite sprite)
     {
         slotSprite.sprite = sprite;
         slotSprite.SetNativeSize();

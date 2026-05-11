@@ -24,7 +24,9 @@ public class WeaponBenchSlotListHandler : MonoBehaviour
     {
         if (transform.childCount != 0)
         {
-            return;
+            for (int i = 0; i < transform.childCount; i++) {
+                Destroy(transform.GetChild(i).gameObject);
+            }
         }
         var weapons = EventChannels.DatabaseEvents.OnGetAllWeapons?.Invoke();
         foreach (var weapon in weapons)
