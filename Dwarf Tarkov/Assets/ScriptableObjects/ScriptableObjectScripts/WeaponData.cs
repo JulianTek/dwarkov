@@ -38,6 +38,13 @@ public class WeaponData : ScriptableObject
     public float BaseSpreadAngle;
     [BoxGroup("Split2/Spread", LabelText = "Spread and other stats")]
     public int AmountOfBullets;
+    [BoxGroup("Split2/Spread", LabelText = "Hand Position")]
+    [Tooltip("Mr. Dwarkov is right handed, so the left hand position will be ignored when one handed is false")]
+    public bool IsOneHanded;
+    [BoxGroup("Split2/Spread", LabelText = "Hand Position")]
+    public Vector2 LeftHandPosition;
+    [BoxGroup("Split2/Spread", LabelText = "Hand Position")]
+    public Vector2 RightHandPosition;
     [HorizontalGroup("Split3")]
     [BoxGroup("Split3/Audio", LabelText = "Audio event information")]
     public string firingEventName;
