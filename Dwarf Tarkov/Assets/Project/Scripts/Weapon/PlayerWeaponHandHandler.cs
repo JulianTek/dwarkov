@@ -16,8 +16,7 @@ public class PlayerWeaponHandHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Transform myParent = transform.parent;
-        weaponData = myParent.GetComponentInParent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
+        weaponData = GetComponentInChildren<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
         rightHandRenderer.sprite = handSprite;
 
         SetHandPositions(weaponData);

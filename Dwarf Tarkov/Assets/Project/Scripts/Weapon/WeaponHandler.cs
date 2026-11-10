@@ -15,6 +15,10 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI magText;
     private SpriteRenderer gunSprite;
+    [SerializeField]
+    private SpriteRenderer rightHand;
+    [SerializeField]
+    private SpriteRenderer leftHand;
 
     private int maxMagCount;
     private int currentMagCount;
@@ -180,6 +184,10 @@ public class WeaponHandler : MonoBehaviour
             gunSprite.flipY = (mousePos.x < transform.position.x);
             // Sets position depending on if the sprite is flipped
             gunSprite.transform.localPosition = gunSprite.flipY ? new Vector3(0f, 0.15f, 0f) : new Vector3(0f, -0.1f, 0f);
+
+            leftHand.flipY = (mousePos.x < transform.position.x);
+            // Sets position depending on if the sprite is flipped
+            leftHand.transform.localPosition = leftHand.flipY ? new Vector3(0f, 0.15f, 0f) : new Vector3(0f, -0.1f, 0f);
         }
     }
     void Fire()
