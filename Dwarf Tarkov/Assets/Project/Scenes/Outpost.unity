@@ -7355,6 +7355,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706989679}
   m_CullTransparentMesh: 1
+--- !u!1 &742422580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4066289266821413188, guid: e994e0e712a2c69429b0af734df372b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 931544093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &742422583 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4066289266821413194, guid: e994e0e712a2c69429b0af734df372b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 931544093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &742422584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742422580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d2d59395b58d4f4bbb1f660bb6de16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunSprite: {fileID: 742422583}
+  leftHand: {fileID: 117056980}
+  rightHand: {fileID: 44006902}
 --- !u!1 &751311178
 GameObject:
   m_ObjectHideFlags: 0
@@ -8208,7 +8235,11 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 2962164415344955714, guid: e994e0e712a2c69429b0af734df372b8, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4066289266821413188, guid: e994e0e712a2c69429b0af734df372b8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 742422584}
   m_SourcePrefab: {fileID: 100100000, guid: e994e0e712a2c69429b0af734df372b8, type: 3}
 --- !u!1 &948310407
 GameObject:

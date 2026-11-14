@@ -19,14 +19,13 @@ public class WeaponHandler : MonoBehaviour
     private SpriteRenderer rightHand;
     [SerializeField]
     private SpriteRenderer leftHand;
+    private PlayerWeaponAimManager aimManager;
 
     private int maxMagCount;
     private int currentMagCount;
 
-    private Vector2 pointer;
     private float timeSinceLastShot = 0f;
 
-    private bool isAiming = true;
     private bool isFiring = false;
     private bool canFire = true;
     private bool canReload = true;
@@ -42,7 +41,6 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootStarted += StartShooting;
         EventChannels.PlayerInputEvents.OnPlayerShootFinished += StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload += Reload;
-        EventChannels.PlayerInputEvents.OnPlayerAim += Aim;
         EventChannels.WeaponEvents.OnSwitchWeapon += SetWeaponData;
 
         EventChannels.PlayerInputEvents.OnPlayerPauses += PauseGame;
@@ -71,6 +69,7 @@ public class WeaponHandler : MonoBehaviour
         {
             currentMagCount = 0;
         }
+        aimManager = GetComponent<PlayerWeaponAimManager>();
         data = GetComponent<PlayerWeaponInventoryHandler>().GetPrimaryWeapon();
         maxMagCount = data.MagCapacity;
         gunSprite.sprite = data.Sprite;
@@ -82,7 +81,6 @@ public class WeaponHandler : MonoBehaviour
         EventChannels.PlayerInputEvents.OnPlayerShootStarted -= StartShooting;
         EventChannels.PlayerInputEvents.OnPlayerShootFinished -= StopShooting;
         EventChannels.PlayerInputEvents.OnPlayerReload -= Reload;
-        EventChannels.PlayerInputEvents.OnPlayerAim -= Aim;
         EventChannels.WeaponEvents.OnSwitchWeapon -= SetWeaponData;
 
         EventChannels.PlayerInputEvents.OnPlayerPauses -= PauseGame;
@@ -115,11 +113,6 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    private void Aim(Vector2 aimVector)
-    {
-        pointer = aimVector;
-    }
-
     private void Update()
     {
         magText.text = $"{currentMagCount}/{maxMagCount}";
@@ -133,7 +126,7 @@ public class WeaponHandler : MonoBehaviour
                     if (!canReload && data.ShellReload)
                     {
                         StopAllCoroutines();
-                        isAiming = true;
+                        aimManager.SetAiming(true);
                         canReload = true;
                         gunSprite.sprite = data.Sprite;
                     }
@@ -157,37 +150,6 @@ public class WeaponHandler : MonoBehaviour
             {
                 timeSinceLastShot = data.RateOfFire;
             }
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (isAiming)
-        {
-            // Translate mouse position to on-screen point and turn weapon to there
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(pointer);
-            mousePos.z = 0f;
-            Vector3 direction = (mousePos - transform.position).normalized;
-
-            // Calculate the angle between player's forward vector and the aiming direction
-            float angle = Vector3.Angle(Vector3.right, direction);
-
-            // Check if the mouse is above or below the player
-            if (direction.y < 0)
-            {
-                angle = 360f - angle; // Adjust the angle for the correct rotation
-            }
-
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            // Flip gun sprite if aiming left of center
-            gunSprite.flipY = (mousePos.x < transform.position.x);
-            // Sets position depending on if the sprite is flipped
-            gunSprite.transform.localPosition = gunSprite.flipY ? new Vector3(0f, 0.15f, 0f) : new Vector3(0f, -0.1f, 0f);
-
-            leftHand.flipY = (mousePos.x < transform.position.x);
-            // Sets position depending on if the sprite is flipped
-            leftHand.transform.localPosition = leftHand.flipY ? new Vector3(0f, 0.15f, 0f) : new Vector3(0f, -0.1f, 0f);
         }
     }
     void Fire()
@@ -255,7 +217,7 @@ public class WeaponHandler : MonoBehaviour
         {
             // Prevent the player from triggering another reload, firing or aiming while the reload is going on
             canReload = false;
-            isAiming = false;
+            aimManager.SetAiming(false);
             if (data.ShellReload)
             {
                 StartCoroutine(ReloadCooldownShell());
@@ -306,7 +268,7 @@ public class WeaponHandler : MonoBehaviour
                 EventChannels.ItemEvents.OnRemoveItemFromInventory(subTypeToLoad, ammoInInventory);
             }
             // Make the player aim, be able to fire and trigger the reload mechanic again again
-            isAiming = true;
+            aimManager.SetAiming(true);
             canFire = true;
             canReload = true;
         }
@@ -335,7 +297,7 @@ public class WeaponHandler : MonoBehaviour
                 EventChannels.ItemEvents.OnRemoveItemFromInventory(subTypeToLoad, 1);
             }
             // Make the player aim, be able to fire and trigger the reload mechanic again again
-            isAiming = true;
+            aimManager.SetAiming(true);
             canFire = true;
             canReload = true;
             FMODUnity.RuntimeManager.PlayOneShot($"event:/PlayerEvents/WeaponEvents/Reload/{data.reloadEventName}_Finish_Empty");
